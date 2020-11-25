@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+
+
+    /* img {
+      width: 100%;
+      height: 100vh;
+    } */
+
+
+
+
+    /* --------------頁首----------- */
+    .firstbox {
+      width: 100%;
+      background-image: url(/03-素材/裝飾/頁首1.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .navbar {
+      text-align: center;
+      width: 100%;
+      height: 100px;
+      /* background-color: aquamarine; */
+      /* background-image: url(/03-素材/裝飾/navbar1.png); */
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: sticky;
+    }
+
+    .titlebuttom_group {
+      width: 90%;
+      height: 100%;
+      /* background-color: #34414E; */
+      display: flex;
+      margin: auto;
+    }
+
+    .tittlebuttom-lr {
+      width: 45%;
+      height: 100%;
+      /* background-color: aquamarine; */
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .titlelogo {
+      width: 10%;
+      height: 100%;
+      /* background-color: brown; */
+
+    }
+
+    .titlelogo img {
+      width: 50%;
+      height: 100%;
+    }
+
+    .titlebuttom {
+      width: 30%;
+      height: 100%;
+      /* background-color: rgb(223, 137, 24); */
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      font-size: 30px;
+      font-weight: bolder;
+    }
+
+    .titlebuttom-p {
+      width: 40px;
+      height: 40px;
+      /* background-color: cornsilk; */
+
+    }
+
+    .titlebuttom-p img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .titlebuttom-t {
+      font-size: 24px;
+      letter-spacing: 5px;
+      text-align: center;
+
+    }
+
+    /* ---------滑動顯示------- */
+    .titlebuttom:hover .hover {
+      display: block;
+    }
+
+    .hover {
+      display: none;
+      /* background-color: antiquewhite; */
+    }
+
+
+    .videobox {
+      /* background-image: url(/03-素材/裝飾/菜單簡介背景4.png); */
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: calc(100vh - 100px);
+    }
+
+    /* .video_bunner {
+      width: 100%;
+      height: 100%;
+      border-radius: 15% 15% 0 0;
+      background-color: rgb(0, 0, 0);
+      background-image: url(/03-素材/天空之城/天空之城4.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      
+    } */
+
+    .video_down {
+
+      width: 100%;
+      /* height: calc(100 - 100px); */
+      border-radius: 15% 15% 0 0;
+
+    }
+
+    /* -----------活動紀錄----------- */
+
+    h1 {
+      padding-top: 20px;
+      margin: 0;
+      text-align: center;
+      font-size: 48px;
+      letter-spacing: 10px;
+    }
+
+    .bottungroup {
+      /* background: cornflowerblue; */
+      width: 30%;
+      padding-top: 30px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      letter-spacing: 5px;
+    }
+
+    .buttunbox {
+      background-color: rgb(230, 231, 255);
+      width: 150px;
+      height: 40px;
+      font-size: 18px;
+      padding-top: 18px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .banner {
+      width: 100%;
+      /* height: 2000px; */
+      height: 100vh;
+      /* background-color: blue; */
+    }
+
+    .igbox {
+
+      width: 25%;
+      margin: 0 50px;
+    }
+
+    .opennessbox {
+      opacity: 1;
+      position: sticky;
+    }
+
+    .photo {
+      background-image: url(/03-素材/裝飾/頁首2.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: sticky;
+    }
+
+    /* --------swiper------ */
+    /* html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      } */
+
+    .swiper-container {
+      width: 100%;
+      height: 80%;
+    }
+
+    .swiper-slide {
+      width: 100%;
+      height: 80vh;
+      text-align: center;
+      font-size: 18px;
+      /* background: #fff; */
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    /* --------swiper------ */
+
+
+
+
+
+
+
+    /* ---------釘牆背景------------- */
+    .parallaxbox {
+      width: 100%;
+      background-color: black;
+    }
+
+
+
+    .sectionTextbox1 {
+      width: 100%;
+      height: 120px;
+      text-align: center;
+      font-size: 18px;
+      padding-top: 18px;
+      letter-spacing: 5px;
+      line-height: 36px;
+      background-color: rgb(2, 59, 14);
+      color: whitesmoke;
+      font-weight: bold;
+
+    }
+
+    .backgroudfixed {
+      width: 100%;
+      height: 100vh;
+
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .sec1 {
+      background-image: url(/03-素材/天空之城/天空之城1.jpg);
+      background-position-y: 70%;
+    }
+
+    .sec2 {
+      background-image: url(/03-素材/天空之城/天空之城2.jpg);
+      background-position-y: 70%;
+    }
+
+    .sec3 {
+      background-image: url(/03-素材/天空之城/天空之城3.jpg);
+    }
+
+    .openness {
+      opacity: 0.7;
+    }
+
+    /* ---------lax------------- */
+
+    .laxbox {
+      width: 100%;
+      height: 3050px;
+      /* background-color: rgb(255, 255, 255); */
+      position: relative;
+      background-image: url(/03-素材/裝飾/背景4500px-01.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    .parallax_window {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgb(0, 0, 0);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+    }
+
+    .effect_box {
+      width: 250px;
+      height: 200px;
+      /* background-color: black; */
+      text-align: center;
+      font-size: 18px;
+      padding-top: 18px;
+      background-image: url(/03-素材/裝飾/天空之城logo白色1.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      z-index: 99;
+
+    }
+
+    .effect_box_black {
+      width: 250px;
+      height: 200px;
+      /* background-color: black; */
+      text-align: center;
+      font-size: 18px;
+      padding-top: 18px;
+      background-image: url(/03-素材/裝飾/天空之城logo黑色1.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      z-index: 99;
+
+    }
+
+
+    .video_box {
+      z-index: 1;
+    }
+
+
+
+
+
+    /* ------------園區簡介-------------------- */
+
+    .Introduction_box {
+      width: 100%;
+      height: 100vh;
+      background-image: url(/03-素材/裝飾/剪影背景.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    .Introductionbox {
+      width: 60%;
+      height: 60vh;
+      background-color: black;
+      margin: auto;
+      display: flex;
+      align-content: center;
+      position: absolute;
+      top: 10%;
+      left: 20%;
+
+    }
+
+    .l-photobox {
+      width: 50%;
+      height: 100%;
+      background-color: #34414E;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo_box {
+      width: 90%;
+      height: 90%;
+      background-color: #1a76d3;
+      display: none;
+    }
+
+    .r-contantbox {
+      width: 50%;
+      height: 100%;
+      background-color: rgb(44, 42, 165);
+    }
+
+    .top-titlebox {
+      width: 100%;
+      height: 40%;
+      background-color: #A79275;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .title_box {
+      width: 50%;
+      height: 50%;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .title_button {
+      width: 50%;
+      height: 80%;
+      background-color: #34414E;
+    }
+
+    .text-box {
+      width: 100%;
+      height: 60%;
+      background-color: #E1E8D7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+
+    .text_article {
+      width: 90%;
+      height: 90%;
+      background-color: #34414E;
+      display: none;
+    }
+
+    /* --------開關顯示---- */
+
+   .active{
+        display: block;
+    }
+
+    .title_button.active{
+        background-color: rgb(214, 30, 30);
+        
+    }
+    
+    
+
+
+
+    /* ----------------菜單------------- */
+    .bunner_box {
+      width: 25%;
+      height: 970px;
+      text-align: center;
+      padding-top: 25%;
+      writing-mode: vertical-lr;
+      margin: auto;
+
+    }
+
+    .hvr-sweep-to-bottom {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      position: relative;
+      -webkit-transition-property: color;
+      transition-property: color;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
+
+    .hvr-sweep-to-bottom:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url(https://img.shoplineapp.com/media/image_clips/5cc821f2c83026001e0aeb23/original.png?1556619760);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      -webkit-transform: scaleY(0);
+      transform: scaleY(0);
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    .hvr-sweep-to-bottom:hover,
+    .hvr-sweep-to-bottom:focus,
+    .hvr-sweep-to-bottom:active {
+      color: white;
+    }
+
+    .hvr-sweep-to-bottom:hover:before,
+    .hvr-sweep-to-bottom:focus:before,
+    .hvr-sweep-to-bottom:active:before {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+
+
+    .box_bg1 {
+      background-image: url(/03-素材/裝飾/菜單簡介背景1.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .box_bg2 {
+      background-image: url(/03-素材/裝飾/菜單簡介背景2.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .box_bg3 {
+      background-image: url(/03-素材/裝飾/菜單簡介背景3.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .box_bg4 {
+      background-image: url(/03-素材/裝飾/菜單簡介背景4.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    /* -----------4菜單簡介------------- */
+    /* ------------鳥VS人-------------------- */
+
+    .foodbody {
+      width: 100%;
+      height: 100vh;
+      background-image: url(/03-素材/菜單/鳥VS人背景.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      padding-top: 18px;
+    }
+
+    .headerbox {
+      width: 160px;
+      height: 160px;
+      background-color: rgba(0, 105, 52, 0.7);
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      /* position: absolute;
+        top:5%; */
+      text-align: center;
+      color: white;
+      flex-wrap: wrap;
+      font-size: 24px;
+      padding: 18px;
+      border-radius: 50%;
+
+    }
+
+    .textbox {
+      font-size: 30px;
+      margin: 0;
+      /* line-height: 0; */
+      padding: 0;
+    }
+
+    .mainbox {
+      width: 90%;
+      height: calc(95vh - 150px);
+      /* background-color: blanchedalmond; */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-content: space-around;
+      margin: auto;
+      padding-top: 15px;
+    }
+
+    .foodbox {
+      width: 26%;
+      height: 45%;
+      /* background-color: black; */
+      /* padding-top: 20px; */
+    }
+
+    .foodcontant {
+      width: 200px;
+      height: 100%;
+      background-color: #C9D1C2;
+      margin: auto;
+      padding-top: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-around;
+      border-radius: 5%;
+
+    }
+
+    .foodphoto {
+      width: 170px;
+      height: 170px;
+
+      margin: auto;
+
+      /* background-color: brown; */
+    }
+
+    .foodtext {
+      width: 170px;
+      height: 50px;
+      background-color: #EEEEEF;
+      margin: auto;
+      font-size: 18px;
+      letter-spacing: 5px;
+      text-align: center;
+      padding-top: 10px;
+      font-weight: bolder;
+      border-radius: 5%;
+
+    }
+
+    .foodphoto img {
+      border-radius: 5%;
+    }
+
+    /* -----------半林秘境------------- */
+
+    .camping {
+      width: 100%;
+      height: 100vh;
+      background-color: rgb(118, 153, 250);
+      background-image: url(/03-素材/裝飾/桌布背景1.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+
+    /* -----------最新消息------------- */
+    .latest_news {
+      width: 100%;
+      height: 100vh;
+      background-color: rgb(187, 56, 56);
+      background-image: url(/03-素材/裝飾/桌布背景2.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+
+
+    }
+
+
+    /* ------------footbox-------------- */
+
+    .footBox {
+      width: 100%;
+      height: 676px;
+      background-image: url(/03-素材/裝飾/footbox.png)
+    }
+
+
+
+    /* -------------測試------------- --- */
+    /* ------------遮罩----------- */
+    .maskbox {
+      background-color: rgb(0, 0, 0);
+
+
+    }
+
+    .mask {
+      margin: auto;
+      width: 50%;
+      height: 90vh;
+      background: url("/03-素材/影片/2.gif") no-repeat top center;
+      background-size: cover;
+      -webkit-mask: url("/03-素材/剪影圖/結婚.png") no-repeat center center;
+      mask: url("/03-素材/剪影圖/結婚.png") no-repeat center center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      /* position: absolute; */
+      top: 80%;
+      left: 40%;
+
+    }
+
+    .overlay {
+      mask: url("/03-素材/剪影圖/結婚.png") no-repeat center center;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    #o1 {
+      position: absolute;
+      top: 5px;
+      width: 100px;
+      height: 230px;
+
+    }
+
+    .overlay img {
+      float: left;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Swiper -->
+  <header class="firstbox">
+    <div class="navbar">
+      <div class="titlebuttom_group">
+        <div class="tittlebuttom-lr">
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/5044.png_860.png" alt="">
+            </div>
+            <div class="titlebuttom-t ">社群紀錄</div>
+          </div>
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/服務員40px.png" alt="">
+            </div>
+            <div class="titlebuttom-t">社群紀錄</div>
+          </div>
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/5044.png_860.png" alt="">
+            </div>
+            <div class="titlebuttom-t">社群紀錄</div>
+          </div>
+        </div>
+        <div class="titlelogo">
+          <img src="/03-素材/裝飾/天空之城彩色logo.png" alt="">
+        </div>
+        <div class="tittlebuttom-lr">
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/5044.png_860.png" alt="">
+            </div>
+            <div class="titlebuttom-t">社群紀錄</div>
+          </div>
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/5044.png_860.png" alt="">
+            </div>
+            <div class="titlebuttom-t">社群紀錄</div>
+          </div>
+          <div class="titlebuttom">
+            <div class="titlebuttom-p hover">
+              <img src="/03-素材/剪影圖/5044.png_860.png" alt="">
+            </div>
+            <div class="titlebuttom-t">社群紀錄</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="videobox">
+      <video class="video_down" autoplay muted loop src="/03-素材/影片/苗栗天空之城空拍4K.mp4"></video>
+    </div>
+
+
+  </header>
+  </div>
+
+
+  <div class="banner photo">
+    <h1>精彩紀錄</h1>
+    <div class="bottungroup">
+      <div class="buttunbox">遊客IG紀錄</div>
+      <div class="buttunbox">婚紗相簿</div>
+    </div>
+    <div class="swiper-container opennessbox">
+      <div class="swiper-wrapper ">
+        <div class="swiper-slide">
+
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+  </div>
+
+  <div class="parallaxbox">
+    <div class="sectionTextbox1 ">
+      <h1>
+        天空之城
+      </h1>
+    </div>
+    <div class="sectionbox backgroudfixed sec1">
+
+    </div>
+    <div class="sectionTextbox1 ">
+      步入天空之城，彷彿置身中古世紀的歐洲，令人有時空錯置的感覺，使人忘卻塵
+      <br>
+      世的喧囂。悠遊在粗曠的奇岩、原木建築中，徜徉層巒綠意間，令人流連忘返。
+    </div>
+
+    <div class="sectionbox backgroudfixed sec2">
+
+    </div>
+    <div class="sectionTextbox1 ">
+      不同一般山林建設突兀於峰巒間，而以渾然天成姿態，巧妙地融入山林之中
+      ，
+      <br>
+      利用舊材砌起的一磚一瓦，均展現化腐朽為神奇的巧思。
+    </div>
+    <div class="sectionbox backgroudfixed sec3 lax"
+      data-lax-opacity="(document.querySelector('.parallaxbox').offsetTop+2300) 1, (document.querySelector('.parallaxbox').offsetTop+2600) 0">
+
+    </div>
+    <div class="sectionTextbox1 lax "
+      data-lax-opacity="(document.querySelector('.parallaxbox').offsetTop+2000) 1, (document.querySelector('.parallaxbox').offsetTop+2500) 1 , (document.querySelector('.parallaxbox').offsetTop+2600) 0">
+      <h3>
+        讓這裡的美，更無可取代更豐富多元，全方位打造一個不用出國，就可以渡假的仙境。
+      </h3>
+
+    </div>
+  </div>
+
+  <!-- <div class="videobox">
+        <video autoplay muted width="100%" height="100%">
+    <source src="/03-素材/影片/2.mp4" type="video/mp4" />
+  </video>
+    </div> -->
+
+
+  <div class="laxbox">
+
+    <div class="parallax_window lax" data-lax-opacity=" (document.querySelector('.laxbox').offsetTop+2300) 1
+                        ,  (document.querySelector('.laxbox').offsetTop+3000) 0">
+      <video class=" video_box lax" autoplay muted loop width="100%" height="100%" data-lax-opacity="(document.querySelector('.laxbox').offsetTop) 0, (document.querySelector('.laxbox').offsetTop+1000) 0,  (document.querySelector('.laxbox').offsetTop+1500) 1 
+            ,  (document.querySelector('.laxbox').offsetTop+2800) 1
+            ,  (document.querySelector('.laxbox').offsetTop+3000) 0">
+        <source src="/03-素材/影片/2.mp4" type="video/mp4" />
+      </video>
+      <div class="effect_box lax"
+        data-lax-opacity="(document.querySelector('.laxbox').offsetTop) 0, (document.querySelector('.laxbox').offsetTop+300) 1,  (document.querySelector('.laxbox').offsetTop+2000) 0"
+        data-lax-scale="(document.querySelector('.laxbox').offsetTop+600) 1, (document.querySelector('.laxbox').offsetTop+2500) 20 ">
+      </div>
+      <div class="effect_box_black lax"
+        data-lax-opacity=" (document.querySelector('.laxbox').offsetTop+1500) 1,  (document.querySelector('.laxbox').offsetTop+1800) 1,  (document.querySelector('.laxbox').offsetTop+2000) 0"
+        data-lax-scale="(document.querySelector('.laxbox').offsetTop+600) 1, (document.querySelector('.laxbox').offsetTop+2500) 20 ">
+      </div>
+    </div>
+
+
+    <!-- <div class="maskbox">
+            <div class="mask"></div>
+        </div> -->
+  </div>
+
+  <div class="Introduction_box lax">
+    <div class="Introductionbox lax"
+      data-lax-opacity="(document.querySelector('.laxbox').offsetTop+2500) 0, (document.querySelector('.laxbox').offsetTop+3000) 1">
+      <div class="l-photobox">
+        <div class="photo_box active">
+          <img src="" alt="">
+        </div>
+        <div class="photo_box">2</div>
+        <div class="photo_box">3</div>
+        <div class="photo_box">4</div>
+      </div>
+      <div class="r-contantbox">
+        <div class="top-titlebox">
+          <div class="title_box">
+            <div class="title_button active"></div>
+          </div>
+          <div class="title_box">
+            <div class="title_button"></div>
+          </div>
+          <div class="title_box">
+            <div class="title_button"></div>
+          </div>
+          <div class="title_box">
+            <div class="title_button"></div>
+          </div>
+        </div>
+        <div class="text-box">
+          <div class="text_article active">1</div>
+          <div class="text_article">2</div>
+          <div class="text_article">3</div>
+          <div class="text_article">4</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="bunner d-flex animate__animated animate__backInDown">
+    <div class="bunner_box box_bg1 hvr-sweep-to-bottom animate__animated animate__backInDown">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+      </button>
+
+
+    </div>
+    <div class="bunner_box box_bg2 hvr-sweep-to-bottom animate__animated animate__backInDown">
+      <a href="https://i.epochtimes.com/assets/uploads/2017/01/GettyImages-56985412.jpg" data-lightbox="image-1"
+        data-title="My caption">
+        Image #1</a>
+    </div>
+    <div class="bunner_box box_bg3 hvr-sweep-to-bottom animate__animated animate__backInDown">
+      <a href="https://s.zimedia.com.tw/s/ZudB5J-4" data-lightbox="image-1" data-title="My caption">
+        Image #1</a>
+    </div>
+    <div class="bunner_box box_bg4 hvr-sweep-to-bottom animate__animated animate__backInDown">
+      <a href="https://fpscdn.yam.com/world/201612/20/a9/583fe821620a9.jpg" data-lightbox="image-1"
+        data-title="My caption">
+        Image #1</a>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+            <div class="foodbody">
+              <div class="headerbox">
+                蔬食餐廳
+                <br>
+                <b class="textbox">鳥VS人</b>
+                精選推薦
+
+              </div>
+              <div class="contantbox">
+                <div class="productbox"></div>
+                <div class="productbox"></div>
+                <div class="productbox"></div>
+                <div class="productbox"></div>
+                <div class="productbox"></div>
+                <div class="productbox"></div>
+              </div>
+
+              <div class="mainbox">
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-01.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      芝士焗烤白菜
+                    </div>
+                  </div>
+
+                </div>
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-02.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      香煎蘿葡糕
+                    </div>
+                  </div>
+                </div>
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-03.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      薏仁絲瓜柱
+                    </div>
+                  </div>
+                </div>
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-04.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      柳松乾煸四季豆
+                    </div>
+                  </div>
+                </div>
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-05.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      蠔油淮山茄香煲
+                    </div>
+                  </div>
+                </div>
+                <div class="foodbox">
+                  <div class="foodcontant">
+                    <div class="foodphoto">
+                      <img src="/03-素材/餐廳/鳥VS人/裁切/鳥VS人餐點-06.png" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <div class="foodtext">
+                      京味醬燒杏菇
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="camping">
+    <h1>半林秘境資訊</h1>
+  </div>
+  <div class="latest_news">
+    <h1>露營資訊</h1>
+  </div>
+
+
+
+  <div class="footBox">
+
+  </div>
+
+  <!-- <video width="480" autoplay muted loop>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay" id="o1">
+      <img
+        src="/03-素材/裝飾/天空之城logo黑.png"
+        width="230">`
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"
+    integrity="sha512-k2GFCTbp9rQU412BStrcD/rlwv1PYec9SNrkbQlo6RZCf75l6KcC3UwDY8H5n5hl4v77IDtIPwOk9Dqjs/mMBQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+
+      loop: true,
+      loopFillGroupWithBlank: true,
+      effect: 'flip',
+      grabCursor: true,
+      centeredSlides: true,
+      // autoplay: {
+      //   delay: 2500,
+      //   disableOnInteraction: false,
+      // },
+
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    console.log(document.querySelector('.laxbox').offsetTop);
+    console.log(document.querySelector('.parallaxbox ').offsetTop);
+
+
+
+    // 模組化 <- 將功能變成零件 當有需要時可以直接放入使用,不需要重頭來過
+        
+    var btns = document.querySelectorAll('.title_button') //nodelist(節點集合)
+        var contents = document.querySelectorAll('.text_article ') //nodelist(節點集合)
+        var photo_boxs = document.querySelectorAll('.photo_box ')
+
+
+        console.log(btns);
+
+        // 點擊按鈕時,先把所有的active移除,再給被點擊的按鈕加上active的class ,同時給"相對應索引值"的content也加上active的class
+
+        for(var i = 0; i < btns.length; i++){
+            // 處理nodelist的最好方法是將其轉化 此處的區域變數宣告是轉化nodelist的資料為正式的HTML標籤
+            const btn = btns[i];
+            const content = contents[i]
+            const photo_box = photo_boxs[i]
+
+            btn.onclick = function() {
+                remove_active()
+
+                btn.classList.add('active');
+                content.classList.add('active');
+                photo_box.classList.add('active')
+            }
+        }
+
+        function remove_active(){
+            for(var i = 0; i < btns.length; i++){
+                const btn = btns[i];
+                const content = contents[i]
+                const photo_box = photo_boxs[i]
+                
+                btn.classList.remove('active')
+                content.classList.remove('active')
+                photo_box.classList.remove('active')
+            }
+        }
+
+
+
+
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+  <script>
+    window.onload = function () {
+      lax.setup() // init
+
+      const updateLax = () => {
+        lax.update(window.scrollY)
+        window.requestAnimationFrame(updateLax)
+      }
+
+      window.requestAnimationFrame(updateLax)
+    } 
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+        }
+
+        .tab {
+            width:600px;
+            margin:auto;
+        }
+
+        .tab_btns{
+            display:flex;
+        }
+        
+        .btn {
+            width:100%;
+            background-color: gray;
+            color: white;
+            text-align: center;
+        }
+
+        .btn.active {
+            border: 1px solid black;
+            border-bottom: 0;
+            background-color: white;
+            color: black;
+        }
+
+        .tab_content {
+            border: 1px solid black;
+        }
+
+        .content {
+            padding: 30px;
+            box-sizing: border-box;
+            display:none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="tab">
+        <div class="tab_btns">
+            <div class="btn active">分頁1</div>
+            <div class="btn ">分頁2</div>
+            <div class="btn">分頁3</div>
+        </div>
+
+        <div class="tab_content">
+            <div class="content active">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus adipisci explicabo, cupiditate sint, dicta illum aliquid labore soluta iusto sunt vitae accusamus illo expedita, aut ipsa culpa laudantium quasi numquam.
+            </div>
+            <div class="content">
+                Lorem ipsum dolor sit amet.
+            </div>
+            <div class="content">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis tempora porro maxime cupiditate dicta nulla vel voluptates, corporis necessitatibus reprehenderit sit earum ex veniam incidunt assumenda esse ullam velit nemo corrupti dolorem recusandae illum ducimus. Velit mollitia culpa autem excepturi atque necessitatibus incidunt amet ipsum pariatur nemo, architecto officia iure ipsa ducimus laborum! Blanditiis sunt quia ducimus beatae. Voluptas, sapiente.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var btns = document.querySelectorAll('.btn')
+        var contents = document.querySelectorAll('.content')
+        // 透過querySelectorAll抓到的結果 不是陣列 是NodeList
+
+        // btns.forEach(function(btn,i){
+        //     const content = contents[i]
+
+        //     btn.onclick = function() {
+        //         remove_active() //先刪除所有的active
+
+        //         btn.classList.add('active'); //被點擊的按鈕加上active
+        //         content.classList.add('active'); //相對應的內容加上active
+        //     }
+        // })
+
+        // function remove_active(){
+
+        //     btns.forEach(function(btn,i){
+        //         const content = contents[i]
+                
+        //         btn.classList.remove('active')
+        //         content.classList.remove('active')
+        //     })
+
+        // }
+
+
+        // // 點擊按鈕時,先把所有的active移除,再給被點擊的按鈕加上active的class ,同時給"相對應索引值"的content也加上active的class
+
+        for(var i = 0; i < btns.length; i++){
+            const btn = btns[i];
+            const content = contents[i]
+
+            btn.onclick = function() {
+                remove_active()
+            
+                btn.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        function remove_active(){
+            for(var i = 0; i < btns.length; i++){
+                const btn = btns[i];
+                const content = contents[i]
+                
+                btn.classList.remove('active')
+                content.classList.remove('active')
+            }
+        }
+
+    </script>
+</body>
+</html>

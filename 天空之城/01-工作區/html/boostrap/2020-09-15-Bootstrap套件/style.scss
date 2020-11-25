@@ -1,0 +1,10 @@
+//佔位符選擇器 = 可以當作正常的CSS去編輯,但是編譯會略過,常和@extend做搭配使用
+%btn {
+    color:red;
+}
+
+
+.btn {
+    @extend %btn;
+}
+

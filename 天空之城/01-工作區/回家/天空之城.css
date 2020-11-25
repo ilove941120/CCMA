@@ -1,0 +1,1076 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+
+
+  /* img {
+    width: 100%;
+    height: 100vh;
+  } */
+
+
+
+
+  /* --------------頁首----------- */
+  .firstbox {
+    width: 100%;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/頁首1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .navbar {
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    /* background-color: aquamarine; */
+    /* background-image: url(/03-素材/裝飾/navbar1.png); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: sticky;
+  }
+
+  .titlebuttom_group {
+    width: 90%;
+    height: 100%;
+    /* background-color: #34414E; */
+    display: flex;
+    margin: auto;
+  }
+
+  .tittlebuttom-lr {
+    width: 45%;
+    height: 100%;
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .titlelogo {
+    width: 10%;
+    height: 100%;
+    /* background-color: brown; */
+
+  }
+
+  .titlelogo img {
+    width: 50%;
+    height: 100%;
+  }
+
+  .titlebuttom {
+    width: 30%;
+    height: 100%;
+    /* background-color: rgb(223, 137, 24); */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
+  .titlebuttom-p {
+    width: 40px;
+    height: 40px;
+    /* background-color: cornsilk; */
+
+  }
+
+  .titlebuttom-p img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .titlebuttom-t {
+    font-size: 24px;
+    letter-spacing: 5px;
+    text-align: center;
+
+  }
+
+  /* ---------滑動顯示------- */
+  .titlebuttom:hover .hover {
+    display: block;
+  }
+
+  .hover {
+    display: none;
+    /* background-color: antiquewhite; */
+  }
+
+
+  .videobox {
+    /* background-image: url(/03-素材/裝飾/菜單簡介背景4.png); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: calc(100vh - 100px);
+  }
+
+  /* .video_bunner {
+    width: 100%;
+    height: 100%;
+    border-radius: 15% 15% 0 0;
+    background-color: rgb(0, 0, 0);
+    background-image: url(/03-素材/天空之城/天空之城4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  } */
+
+  .video_down {
+
+    width: 100%;
+    /* height: calc(100 - 100px); */
+    border-radius: 15% 15% 0 0;
+
+  }
+
+  /* -----------活動紀錄----------- */
+
+  h1 {
+    padding-top: 20px;
+    margin: 0;
+    text-align: center;
+    font-size: 48px;
+    letter-spacing: 10px;
+  }
+
+  .bottungroup {
+    /* background: cornflowerblue; */
+    width: 30%;
+    padding-top: 30px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 5px;
+  }
+
+  .buttunbox {
+    background-color: rgb(230, 231, 255);
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    padding-top: 18px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .banner {
+    width: 100%;
+    /* height: 2000px; */
+    height: 100vh;
+    /* background-color: blue; */
+  }
+
+  .igbox {
+
+    width: 25%;
+    margin: 0 50px;
+  }
+
+  .opennessbox {
+    opacity: 1;
+    position: sticky;
+  }
+
+  .photo {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/頁首2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: sticky;
+  }
+
+  /* --------swiper------ */
+  /* html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    } */
+
+  .swiper-container {
+    width: 100%;
+    height: 80%;
+  }
+
+  .swiper-slide {
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    font-size: 18px;
+    /* background: #fff; */
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  /* --------swiper------ */
+
+
+
+
+
+
+
+  /* ---------釘牆背景------------- */
+  .parallaxbox {
+    width: 100%;
+    background-color: black;
+  }
+
+
+
+  .sectionTextbox1 {
+    width: 100%;
+    height: 120px;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 18px;
+    letter-spacing: 5px;
+    line-height: 36px;
+    background-color: rgb(2, 59, 14);
+    color: whitesmoke;
+    font-weight: bold;
+
+  }
+
+  .backgroudfixed {
+    width: 100%;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  .sec1 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/天空之城/天空之城1.jpg);
+    background-position-y: 70%;
+  }
+
+  .sec2 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/天空之城/天空之城2.jpg);
+    background-position-y: 70%;
+  }
+
+  .sec3 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/天空之城/天空之城3.jpg);
+  }
+
+  .openness {
+    opacity: 0.7;
+  }
+
+  /* ---------lax------------- */
+
+  .laxbox {
+    width: 100%;
+    height: 3050px;
+    /* background-color: rgb(255, 255, 255); */
+    position: relative;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/背景4500px-01.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .parallax_window {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .effect_box {
+    width: 250px;
+    height: 200px;
+    /* background-color: black; */
+    text-align: center;
+    font-size: 18px;
+    padding-top: 18px;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/天空之城logo白色1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    z-index: 99;
+
+  }
+
+  .effect_box_black {
+    width: 250px;
+    height: 200px;
+    /* background-color: black; */
+    text-align: center;
+    font-size: 18px;
+    padding-top: 18px;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/天空之城logo黑色1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    z-index: 99;
+
+  }
+
+
+  .video_box {
+    z-index: 1;
+  }
+
+
+
+
+
+  /* ------------園區簡介-------------------- */
+
+  .Introduction_box {
+    width: 100%;
+    height: 100vh;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/剪影背景.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .Introductionbox {
+    width: 1140px;
+    height: 572px;
+    background-color: black;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+
+  }
+
+  .l-photobox {
+    width: 50%;
+    height: 100%;
+    background-color: #34414E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .photo_box {
+    width: 595px;
+    height: 535px;
+    background-color: #1a76d3;
+    display: none;
+  }
+
+  .r-contantbox {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(44, 42, 165);
+  }
+
+  .top-titlebox {
+    width: 100%;
+    height: 40%;
+    background-color: #A79275;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .title_box {
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .title_button {
+    width: 50%;
+    height: 80%;
+    background-color: #34414E;
+  }
+
+  .text-box {
+    width: 100%;
+    height: 60%;
+    background-color: #E1E8D7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .text_article {
+    width: 90%;
+    height: 90%;
+    background-color: #34414E;
+    display: none;
+  }
+
+  /* --------開關顯示---- */
+
+  .active_b {
+    display: block;
+  }
+
+  .title_button.active_b {
+    background-color: rgb(214, 30, 30);
+
+  }
+
+  .photo_box img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+
+
+  /* ----------------菜單------------- */
+  .bunner_box {
+    width: 25%;
+    height: 970px;
+    text-align: center;
+    padding-top: 25%;
+    writing-mode: vertical-lr;
+    margin: auto;
+
+  }
+
+  .hvr-sweep-to-bottom {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+
+  .hvr-sweep-to-bottom:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(https://img.shoplineapp.com/media/image_clips/5cc821f2c83026001e0aeb23/original.png?1556619760);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+
+  .hvr-sweep-to-bottom:hover,
+  .hvr-sweep-to-bottom:focus,
+  .hvr-sweep-to-bottom:active {
+    color: white;
+  }
+
+  .hvr-sweep-to-bottom:hover:before,
+  .hvr-sweep-to-bottom:focus:before,
+  .hvr-sweep-to-bottom:active:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+
+
+  .box_bg1 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/菜單簡介背景1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .box_bg2 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/菜單簡介背景2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .box_bg3 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/菜單簡介背景3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .box_bg4 {
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/菜單簡介背景4.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  /* -----------4菜單簡介------------- */
+  /* ------------鳥VS人-------------------- */
+
+  .foodbody {
+    width: 100%;
+    height: 100vh;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/菜單/鳥VS人背景.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding-top: 18px;
+  }
+
+  .headerbox {
+    width: 160px;
+    height: 160px;
+    background-color: rgba(0, 105, 52, 0.7);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    /* position: absolute;
+      top:5%; */
+    text-align: center;
+    color: white;
+    flex-wrap: wrap;
+    font-size: 24px;
+    padding: 18px;
+    border-radius: 50%;
+
+  }
+
+  .textbox {
+    font-size: 30px;
+    margin: 0;
+    /* line-height: 0; */
+    padding: 0;
+  }
+
+  .mainbox {
+    width: 90%;
+    height: calc(95vh - 150px);
+    /* background-color: blanchedalmond; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    margin: auto;
+    padding-top: 15px;
+  }
+
+  .foodbox {
+    width: 26%;
+    height: 45%;
+    /* background-color: black; */
+    /* padding-top: 20px; */
+  }
+
+  .foodcontant {
+    width: 200px;
+    height: 100%;
+    background-color: #C9D1C2;
+    margin: auto;
+    padding-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    border-radius: 5%;
+
+  }
+
+  .foodphoto {
+    width: 170px;
+    height: 170px;
+
+    margin: auto;
+
+    /* background-color: brown; */
+  }
+
+  .foodtext {
+    width: 170px;
+    height: 50px;
+    background-color: #EEEEEF;
+    margin: auto;
+    font-size: 18px;
+    letter-spacing: 5px;
+    text-align: center;
+    padding-top: 10px;
+    font-weight: bolder;
+    border-radius: 5%;
+
+  }
+
+  .foodphoto img {
+    border-radius: 5%;
+  }
+
+  /* -----------半林秘境------------- */
+
+  /* -----------------------------露營資訊------------------------------------- */
+
+  .camping {
+    width: 100%;
+    height: 105vh;
+    background-color: rgb(118, 153, 250);
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/桌布背景1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+
+  }
+
+  .cam-titlebox {
+    width: 100%;
+    height: 10vh;
+    /* background-color: cadetblue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    padding-top: 150px;
+  }
+
+  /* -----------------------------電視方塊------------------------------------- */
+
+  .TVbox {
+    width: 920px;
+    height: 690px;
+    /* background-color: #000000; */
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    border-radius: 30px;
+
+  }
+
+  /* ----------上半部----------- */
+
+  .TVbox-t {
+    width: 100%;
+    height: 80%;
+    margin: auto;
+    background-color: #314451;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .TVlistbox {
+    width: 15%;
+    height: 70%;
+    /* margin: 10px; */
+    margin-left: 10px;
+    margin-top: 10px;
+    /* background-color: cadetblue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .themebox {
+    width: 80%;
+    height: 13%;
+    font-size: 18px;
+    line-height: 48px;
+    letter-spacing: 5px;
+    margin: auto;
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+
+  }
+
+  .TVphotobox {
+    width: 75%;
+    height: 90%;
+    /* margin-right: 10px; */
+    /* margin: 10px; */
+    margin-right: 30px;
+    margin-top: 25px;
+    border-radius: 50px;
+    background-color: rgb(75, 216, 56);
+    display: none;
+
+  }
+
+  /* ----------下半部----------- */
+
+
+  .TVbox-b {
+    width: 100%;
+    height: 20%;
+    margin: auto;
+    background-color: #314451;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .TVmainbox {
+    width: 80%;
+    height: 100%;
+    margin-left: 190px;
+
+    /* background-color: burlywood; */
+  }
+
+  .TVtitlebox {
+    width: 95%;
+    height: 35%;
+    /* background-color: brown; */
+    /* margin: auto; */
+    text-align: left;
+    font-size: 24px;
+    letter-spacing: 5px;
+    line-height: 50px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .TVtext-group {
+    width: 100%;
+    height: 60%;
+    /* background-color: cadetblue; */
+    display: flex;
+    flex-wrap: wrap;
+
+
+  }
+
+  .TVtext {
+    width: 100%;
+    height: 40%;
+    /* background-color: coral; */
+    margin: 0px auto;
+    text-align: left;
+    font-size: 18px;
+    letter-spacing: 3px;
+    line-height: 30px;
+    color: white;
+
+
+
+  }
+
+
+
+  .roundedbox {
+    border-radius: 50px;
+  }
+
+  /* ----------------基礎設定----------------- */
+  .active-A {
+    display: block;
+  }
+
+  .themebox.active-A {
+    background-color: rgb(214, 30, 30);
+
+  }
+
+  .bg-red {
+    background-color: red;
+  }
+
+  .bg-blue {
+    background-color: blue;
+  }
+
+  .bg-green {
+    background-color: green;
+  }
+
+  .bg-yellow {
+    background-color: yellow;
+  }
+
+  .img_size {
+    width: 100%;
+    border-radius: 50px;
+  }
+
+
+  /* -----------------------------最新消息------------------------------------- */
+  .latest_news {
+    width: 100%;
+    height: 105vh;
+    background-color: rgb(187, 56, 56);
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/桌布背景2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .titlebox {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    /* background-color: cadetblue; */
+  }
+
+  .newbox-group {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+
+  .newbox {
+    width: 825px;
+    height: 230px;
+    background-color: burlywood;
+    /* display: flex; */
+
+  }
+
+  .newbox-l {
+    width: 825px;
+    height: 230px;
+  }
+
+  .newbox-r {
+    width: 825px;
+    height: 230px;
+    position: relative;
+    bottom: 230px;
+  }
+
+  /* -----------------------左邊照片方塊------------------------------- */
+
+  .photobox-l {
+    width: 825px;
+    height: 230px;
+    background-color: #34424F;
+    clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
+
+  }
+
+  .photobox-l-in {
+    width: 825px;
+    height: 230px;
+    background-color: white;
+    clip-path: polygon(1% 2%, 64% 2%, 49.5% 98%, 1% 98%);
+    background-image: url(/2020-09-21/天空之城專案/03-素材/婚攝/unnamed.jpg);
+  }
+
+  /* -----------------------右邊照片方塊------------------------------- */
+
+  .photobox-r {
+    background-color: #34424F;
+    clip-path: polygon(100% 0, 35% 0, 50% 100%, 100% 100%);
+  }
+
+  .photobox-r-in {
+    width: 825px;
+    height: 230px;
+    background-color: white;
+
+    clip-path: polygon(99% 2%, 36% 2%, 50.5% 98%, 99% 98%);
+  }
+
+
+
+  /* -----------------------右邊文字方塊------------------------------- */
+
+  .textbox-r {
+    background-color: #A69376;
+    clip-path: polygon(100% 0, 65% 0, 50% 100%, 100% 100%);
+  }
+
+  .Main-group-r {
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    margin-left: 535px;
+    /* background-color: tomato; */
+
+  }
+
+  .nb-titlebox-r {
+    width: 100%;
+    height: 20%;
+    font-size: 24px;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+    padding-top: 6px;
+    padding-left: 6px;
+    letter-spacing: 6px;
+    /* background-color: violet; */
+
+  }
+
+  .mainbox-r {
+    width: 100%;
+    height: 60%;
+    font-size: 18px;
+    letter-spacing: 3px;
+    line-height: 30px;
+    padding-top: 5px;
+    color: white;
+    /* background-color: rgb(219, 210, 79); */
+
+  }
+
+  .button-r {
+    width: 30%;
+    height: 20%;
+    background-color: rgba(255, 71, 71, 0.8);
+    border-radius: 20%;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+  }
+
+  /* -----------------------左邊文字方塊------------------------------- */
+
+  .textbox-l {
+    background-color: #A69376;
+    clip-path: polygon(0 0, 35% 0, 50% 100%, 0 100%);
+  }
+
+  .Main-group-l {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .nb-titlebox-l {
+    width: 100%;
+    height: 20%;
+    font-size: 24px;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+    padding-left: 6px;
+    padding-top: 10px;
+    letter-spacing: 6px;
+    /* background-color: violet; */
+  }
+
+  .mainbox-l {
+    width: 100%;
+    height: 60%;
+    font-size: 18px;
+    letter-spacing: 3px;
+    line-height: 30px;
+    padding-top: 10px;
+    margin-left: 10px;
+    color: white;
+    /* background-color: rgb(219, 210, 79); */
+
+  }
+
+  .button-l {
+    width: 30%;
+    height: 20%;
+    border-radius: 20%;
+    margin-left: 250px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    background-color: rgba(255, 71, 71, 0.8);
+
+  }
+
+
+  /* ------------footbox-------------- */
+
+  .footBox {
+    width: 100%;
+    height: 676px;
+    background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/footbox.png)
+  }
+
+
+
+  /* -------------測試------------- --- */
+  /* ------------遮罩----------- */
+  .maskbox {
+    background-color: rgb(0, 0, 0);
+
+
+  }
+
+  .mask {
+    margin: auto;
+    width: 50%;
+    height: 90vh;
+    background: url("/2020-09-21/天空之城專案/03-素材/影片/2.gif") no-repeat top center;
+    background-size: cover;
+    -webkit-mask: url("/2020-09-21/天空之城專案/03-素材/剪影圖/結婚.png") no-repeat center center;
+    mask: url("/2020-09-21/天空之城專案/03-素材/剪影圖/結婚.png") no-repeat center center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    /* position: absolute; */
+    top: 80%;
+    left: 40%;
+
+  }
+
+  .overlay {
+    mask: url("/2020-09-21/天空之城專案/03-素材/剪影圖/結婚.png") no-repeat center center;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  #o1 {
+    position: absolute;
+    top: 5px;
+    width: 100px;
+    height: 230px;
+
+  }
+
+  .overlay img {
+    float: left;
+    padding-top: 10px;
+  }

@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+}
+
+body header {
+  position: relative;
+}
+
+body header .hdBackground {
+  width: 100vw;
+  z-index: 0;
+}
+
+body header .hdLogo {
+  max-width: 24vw;
+  -webkit-box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+body header .hdFresh {
+  max-width: 10vw;
+  position: absolute;
+  top: 30%;
+  left: 67%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+body header .hdInstagramIcon {
+  max-width: 4vw;
+  position: absolute;
+  top: 90%;
+  left: 76%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+body main .navbar .container .row .btn {
+  background-color: #ec1b24;
+  color: wheat;
+  width: 106px;
+  height: 22px;
+  line-height: 10px;
+  border-radius: 10px;
+  font-family: 'Carrois Gothic','Noto Sans TC', sans-serif;
+}
+/*# sourceMappingURL=style.css.map */

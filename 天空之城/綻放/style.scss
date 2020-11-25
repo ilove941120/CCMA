@@ -1,0 +1,82 @@
+@import "./default";
+@import "./mixin";
+
+body{
+    margin: 0;
+    
+
+    header{
+        // background-image: url(./img/header/country-white-bread.jpg);
+        
+        // width: 100vw;
+        // height: 100vh;
+        // background-repeat: no-repeat;
+        position: relative;
+
+
+        .hdBackground{
+            
+            width: 100vw;
+            
+            z-index: 0;
+        }
+        
+        .hdLogo{
+            max-width: 24vw;
+            box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+            
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate( - 50%, - 50%);
+            z-index: 1;
+
+            @include hdLogoST
+                        
+        }
+
+        .hdFresh{
+            max-width: 10vw;
+
+            position: absolute;
+            top: 30%;
+            left: 67%;
+            transform: translate( - 50%, - 50%);
+            z-index: 1;
+        }
+
+        .hdInstagramIcon{
+            max-width: 4vw;
+
+            position: absolute;
+            top: 90%;
+            left: 76%;
+            transform: translate( - 50%, - 50%);
+            z-index: 1;
+        }
+    }
+
+    main{
+
+        .navbar{
+
+            .container{
+
+                .row{
+
+                    .btn{
+                        background-color: $yamazakired;
+                        color: wheat;
+                        width: 106px;
+                        height: 22px;
+                        line-height: 10px;
+                        border-radius: 10px;
+
+                        font-family: 'Carrois Gothic','Noto Sans TC', sans-serif;
+                    }
+                }
+            }
+        }
+    }
+}
+

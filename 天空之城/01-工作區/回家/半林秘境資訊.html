@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* -----------------------------露營資訊------------------------------------- */
+
+        .camping {
+            width: 100%;
+            height: 105vh;
+            background-color: rgb(118, 153, 250);
+            background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/桌布背景1.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center;
+
+        }
+
+        .cam-titlebox {
+            width: 100%;
+            height: 10vh;
+            /* background-color: cadetblue; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            padding-top: 150px;
+        }
+
+        /* -----------------------------電視方塊------------------------------------- */
+
+        .TVbox {
+            width: 920px;
+            height: 690px;
+            /* background-color: #000000; */
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-radius: 30px;
+
+        }
+
+        .TVbox-t {
+            width: 100%;
+            height: 80%;
+            margin: auto;
+            background-color: #314451;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+        }
+
+        .TVlistbox {
+            width: 20%;
+            height: 95%;
+            margin: 10px;
+            /* background-color: cadetblue; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .themebox {
+            width: 70%;
+            height: 10%;
+            font-size: 24px;
+            line-height: 48px;
+            margin: auto;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .TVphotobox {
+            width: 80%;
+            height: 95%;
+            margin: 10px;
+            border-radius: 50px;
+            background-color: rgb(75, 216, 56);
+            display: none;
+
+        }
+
+        .TVbox-b {
+            width: 100%;
+            height: 20%;
+            margin: auto;
+            background-color: #A69376;
+            border-radius: 0 0 30px 30px;
+
+
+        }
+
+        .roundedbox {
+            border-radius: 50px;
+        }
+
+        /* ----------------基礎設定----------------- */
+        .active-A {
+            display: block;
+        }
+
+        .themebox.active-A {
+            background-color: rgb(214, 30, 30);
+
+        }
+
+        .bg-red {
+            background-color: red;
+        }
+
+        .bg-blue {
+            background-color: blue;
+        }
+
+        .bg-green {
+            background-color: green;
+        }
+
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+
+        /* -----------------------------最新消息------------------------------------- */
+        .latest_news {
+            width: 100%;
+            height: 105vh;
+            background-color: rgb(187, 56, 56);
+            background-image: url(/2020-09-21/天空之城專案/03-素材/裝飾/桌布背景2.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .titlebox {
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            /* background-color: cadetblue; */
+        }
+
+        .newbox-group {
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 100px;
+        }
+
+        .newbox {
+            width: 825px;
+            height: 230px;
+            background-color: burlywood;
+            /* display: flex; */
+
+        }
+
+        .newbox-l {
+            width: 825px;
+            height: 230px;
+        }
+
+        .newbox-r {
+            width: 825px;
+            height: 230px;
+            position: relative;
+            bottom: 230px;
+        }
+
+        /* -----------------------左邊照片方塊------------------------------- */
+
+        .photobox-l {
+            width: 825px;
+            height: 230px;
+            background-color: #34424F;
+            clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
+
+        }
+
+        .photobox-l-in {
+            width: 825px;
+            height: 230px;
+            background-color: white;
+            clip-path: polygon(1% 2%, 64% 2%, 49.5% 98%, 1% 98%);
+            background-image: url(/2020-09-21/天空之城專案/03-素材/婚攝/unnamed.jpg);
+        }
+
+        /* -----------------------右邊照片方塊------------------------------- */
+
+        .photobox-r {
+            background-color: #34424F;
+            clip-path: polygon(100% 0, 35% 0, 50% 100%, 100% 100%);
+        }
+
+        .photobox-r-in {
+            width: 825px;
+            height: 230px;
+            background-color: white;
+
+            clip-path: polygon(99% 2%, 36% 2%, 50.5% 98%, 99% 98%);
+        }
+
+
+
+        /* -----------------------右邊文字方塊------------------------------- */
+
+        .textbox-r {
+            background-color: #A69376;
+            clip-path: polygon(100% 0, 65% 0, 50% 100%, 100% 100%);
+        }
+
+        .Main-group-r {
+            width: 35%;
+            height: 100%;
+            position: absolute;
+            margin-left: 535px;
+            /* background-color: tomato; */
+
+        }
+
+        .nb-titlebox-r {
+            width: 100%;
+            height: 20%;
+            font-size: 24px;
+            font-weight: bolder;
+            color: white;
+            text-align: center;
+            padding-top: 6px;
+            padding-left: 6px;
+            letter-spacing: 6px;
+            /* background-color: violet; */
+
+        }
+
+        .mainbox-r {
+            width: 100%;
+            height: 60%;
+            font-size: 18px;
+            letter-spacing: 3px;
+            line-height: 30px;
+            padding-top: 5px;
+            color: white;
+            /* background-color: rgb(219, 210, 79); */
+
+        }
+
+        .button-r {
+            width: 30%;
+            height: 20%;
+            background-color: rgba(255, 71, 71, 0.8);
+            border-radius: 20%;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+        }
+
+        /* -----------------------左邊文字方塊------------------------------- */
+
+        .textbox-l {
+            background-color: #A69376;
+            clip-path: polygon(0 0, 35% 0, 50% 100%, 0 100%);
+        }
+
+        .Main-group-l {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .nb-titlebox-l {
+            width: 100%;
+            height: 20%;
+            font-size: 24px;
+            font-weight: bolder;
+            color: white;
+            text-align: center;
+            padding-left: 6px;
+            padding-top: 10px;
+            letter-spacing: 6px;
+            /* background-color: violet; */
+        }
+
+        .mainbox-l {
+            width: 100%;
+            height: 60%;
+            font-size: 18px;
+            letter-spacing: 3px;
+            line-height: 30px;
+            padding-top: 10px;
+            margin-left: 10px;
+            color: white;
+            /* background-color: rgb(219, 210, 79); */
+
+        }
+
+        .button-l {
+            width: 30%;
+            height: 20%;
+            border-radius: 20%;
+            margin-left: 250px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            background-color: rgba(255, 71, 71, 0.8);
+
+        }
+
+
+        /* ------------------swiper--------------------------- */
+        .swiper-container {
+            width: 100%;
+            height: 80%;
+        }
+
+        .swiper-slide {
+            width: 100%;
+            height: 80vh;
+            text-align: center;
+            font-size: 18px;
+            /* background: #fff; */
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="camping">
+        <div class="cam-titlebox">
+            <h1>露營資訊</h1>
+        </div>
+        <div class="TVbox">
+            <div class="TVbox-t">
+                <div class="TVlistbox">
+                    <div class="themebox active-A">
+                        景色
+                    </div>
+                    <div class="themebox">
+                        AB
+                    </div>
+                    <div class="themebox">
+                        CD
+                    </div>
+                    <div class="themebox">
+                        EF
+                    </div>
+                </div>
+                <div class="TVphotobox bg-red active-A">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner roundedbox">
+                            <div class="carousel-item  active">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/半林秘境1.jpg" class="d-block w-100 " alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營//半林秘境2.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營//半林秘境3.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="TVphotobox bg-blue">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/2人/1_2_A_2b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/2人/1_2_A_4b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/2人/1_2_A_5b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+
+                </div>
+                <div class="TVphotobox bg-green">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人/1_2_B_1b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人/1_2_B_4b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人/1_2_B_5b.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="TVphotobox bg-yellow">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人-4/1_2_C_1b.jpg" class="d-block w-100"
+                                    alt="...">
+
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人-4/1_2_C_3b.jpg" class="d-block w-100"
+                                    alt="...">
+
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/2020-09-21/天空之城專案/03-素材/露營/4人-4/1_2_C_5b.jpg" class="d-block w-100"
+                                    alt="...">
+
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="TVbox-b">
+                <div class="TVmainbox">
+                    <div class="TVtitlebox"></div>
+                    <div class="TVtext-group">
+                        <div class="TVtext"></div>
+                        <div class="TVtext"></div>
+                        <div class="TVtext"></div>
+                        <div class="TVtext"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="latest_news">
+        <div class="titlebox">
+            <h1>半林秘境資訊</h1>
+        </div>
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="newbox-group">
+                        <div class="newbox">
+                            <div class="newbox-l photobox-l">
+                                <div class="photobox-l-in"></div>
+                            </div>
+                            <div class="newbox-r textbox-r">
+                                <div class="Main-group-r">
+                                    <div class="nb-titlebox-r">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-r">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-r">More</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="newbox">
+                            <div class="newbox-l textbox-l">
+                                <div class="Main-group-l">
+                                    <div class="nb-titlebox-l">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-l">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-l">More</div>
+                                </div>
+                            </div>
+                            <div class="newbox-r photobox-r">
+                                <div class="photobox-r-in"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="newbox-group">
+                        <div class="newbox">
+                            <div class="newbox-l photobox-l">
+                                <div class="photobox-l-in"></div>
+                            </div>
+                            <div class="newbox-r textbox-r">
+                                <div class="Main-group-r">
+                                    <div class="nb-titlebox-r">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-r">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-r">More</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="newbox">
+                            <div class="newbox-l textbox-l">
+                                <div class="Main-group-l">
+                                    <div class="nb-titlebox-l">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-l">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-l">More</div>
+                                </div>
+                            </div>
+                            <div class="newbox-r photobox-r">
+                                <div class="photobox-r-in"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="newbox-group">
+                        <div class="newbox">
+                            <div class="newbox-l photobox-l">
+                                <div class="photobox-l-in"></div>
+                            </div>
+                            <div class="newbox-r textbox-r">
+                                <div class="Main-group-r">
+                                    <div class="nb-titlebox-r">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-r">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-r">More</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="newbox">
+                            <div class="newbox-l textbox-l">
+                                <div class="Main-group-l">
+                                    <div class="nb-titlebox-l">
+                                        【加碼父親節大餐】
+                                    </div>
+                                    <div class="mainbox-l">
+                                        持振興券再加碼
+                                        <br>
+                                        活動日期 8月8日
+                                        <br>
+                                        主餐原價$738都適用使用振興券500元+現金138元
+                                    </div>
+                                    <div class="button-l">More</div>
+                                </div>
+                            </div>
+                            <div class="newbox-r photobox-r">
+                                <div class="photobox-r-in"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide"><div class="newbox-group">
+                    <div class="newbox">
+                        <div class="newbox-l photobox-l">
+                            <div class="photobox-l-in"></div>
+                        </div>
+                        <div class="newbox-r textbox-r">
+                            <div class="Main-group-r">
+                                <div class="nb-titlebox-r">
+                                    【加碼父親節大餐】
+                                </div>
+                                <div class="mainbox-r">
+                                    持振興券再加碼
+                                    <br>
+                                    活動日期 8月8日
+                                    <br>
+                                    主餐原價$738都適用使用振興券500元+現金138元
+                                </div>
+                                <div class="button-r">More</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="newbox">
+                        <div class="newbox-l textbox-l">
+                            <div class="Main-group-l">
+                                <div class="nb-titlebox-l">
+                                    【加碼父親節大餐】
+                                </div>
+                                <div class="mainbox-l">
+                                    持振興券再加碼
+                                    <br>
+                                    活動日期 8月8日
+                                    <br>
+                                    主餐原價$738都適用使用振興券500元+現金138元
+                                </div>
+                                <div class="button-l">More</div>
+                            </div>
+                        </div>
+                        <div class="newbox-r photobox-r">
+                            <div class="photobox-r-in"></div>
+                        </div>
+                    </div>
+                </div></div>
+                <div class="swiper-slide"><div class="newbox-group">
+                    <div class="newbox">
+                        <div class="newbox-l photobox-l">
+                            <div class="photobox-l-in"></div>
+                        </div>
+                        <div class="newbox-r textbox-r">
+                            <div class="Main-group-r">
+                                <div class="nb-titlebox-r">
+                                    【加碼父親節大餐】
+                                </div>
+                                <div class="mainbox-r">
+                                    持振興券再加碼
+                                    <br>
+                                    活動日期 8月8日
+                                    <br>
+                                    主餐原價$738都適用使用振興券500元+現金138元
+                                </div>
+                                <div class="button-r">More</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="newbox">
+                        <div class="newbox-l textbox-l">
+                            <div class="Main-group-l">
+                                <div class="nb-titlebox-l">
+                                    【加碼父親節大餐】
+                                </div>
+                                <div class="mainbox-l">
+                                    持振興券再加碼
+                                    <br>
+                                    活動日期 8月8日
+                                    <br>
+                                    主餐原價$738都適用使用振興券500元+現金138元
+                                </div>
+                                <div class="button-l">More</div>
+                            </div>
+                        </div>
+                        <div class="newbox-r photobox-r">
+                            <div class="photobox-r-in"></div>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+
+
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script>
+
+        var swiper = new Swiper('.swiper-container');
+        // 模組化 <- 將功能變成零件 當有需要時可以直接放入使用,不需要重頭來過
+
+        var btns = document.querySelectorAll('.themebox') //nodelist(節點集合)
+        var contents = document.querySelectorAll('.TVphotobox ') //nodelist(節點集合)
+
+        // var photo_boxs = document.querySelectorAll('.photo_box ')
+
+
+        console.log(btns);
+
+        // 點擊按鈕時,先把所有的active移除,再給被點擊的按鈕加上active的class ,同時給"相對應索引值"的content也加上active的class
+
+        for (var i = 0; i < btns.length; i++) {
+            // 處理nodelist的最好方法是將其轉化 此處的區域變數宣告是轉化nodelist的資料為正式的HTML標籤
+            const btn = btns[i];
+            const content = contents[i]
+
+            btn.onclick = function () {
+                remove_active()
+
+                btn.classList.add('active-A');
+                content.classList.add('active-A');
+
+            }
+        }
+
+        function remove_active() {
+            for (var i = 0; i < btns.length; i++) {
+                const btn = btns[i];
+                const content = contents[i]
+
+
+                btn.classList.remove('active-A')
+                content.classList.remove('active-A')
+
+            }
+        }
+
+
+        var swiper = new Swiper('.swiper-container', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

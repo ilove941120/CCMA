@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+
+    /* ------------園區簡介-------------------- */
+    *{
+        box-sizing: border-box;
+    }
+
+    .Introduction_box {
+      width: 100%;
+      height: 100vh;
+      background-image: url(/03-素材/裝飾/剪影背景.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    .Introductionbox {
+      width: 60%;
+      height: 60vh;
+      background-color: black;
+      margin: auto;
+      display: flex;
+      align-content: center;
+      position: absolute;
+      top: 10%;
+      left: 20%;
+
+    }
+
+    .l-photobox {
+      width: 50%;
+      height: 100%;
+      background-color: #34414E;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo_box {
+      width: 90%;
+      height: 90%;
+      background-color: #1a76d3;
+      display: none;
+    }
+
+    .r-contantbox {
+      width: 50%;
+      height: 100%;
+      background-color: rgb(44, 42, 165);
+    }
+
+    .top-titlebox {
+      width: 100%;
+      height: 40%;
+      background-color: #A79275;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .title_box {
+      width: 50%;
+      height: 50%;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .title_button {
+      width: 50%;
+      height: 80%;
+      background-color: #34414E;
+    }
+
+    .text-box {
+      width: 100%;
+      height: 60%;
+      background-color: #83d60f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+
+    .text_article {
+      width: 90%;
+      height: 90%;
+      background-color: #34414E;
+      display: none;
+    }
+
+    /* --------開關顯示---- */
+
+   .active{
+        display: block;
+    }
+
+    .title_button.active{
+        background-color: rgb(214, 30, 30);
+        
+    }
+
+    .bg-red{
+      background-color: red;
+    }
+    .bg-blue{
+      background-color: blue;
+    }
+    .bg-green{
+      background-color: green;
+    }
+    .bg-yellow{
+      background-color: yellow;
+    }
+    
+    
+
+
+
+</style>
+
+<body>
+
+
+    <div class="Introduction_box lax">
+        <div class="Introductionbox lax"
+          data-lax-opacity="(document.querySelector('.laxbox').offsetTop+2500) 0, (document.querySelector('.laxbox').offsetTop+3000) 1">
+          <div class="l-photobox">
+            <div class="photo_box active bg-red">1</div>
+            <div class="photo_box bg-blue">2</div>
+            <div class="photo_box bg-green">3</div>
+            <div class="photo_box bg-yellow">4</div>
+          </div>
+          <div class="r-contantbox">
+            <div class="top-titlebox">
+              <div class="title_box">
+                <div class="title_button active"></div>
+              </div>
+              <div class="title_box">
+                <div class="title_button"></div>
+              </div>
+              <div class="title_box">
+                <div class="title_button"></div>
+              </div>
+              <div class="title_box">
+                <div class="title_button"></div>
+              </div>
+            </div>
+            <div class="text-box">
+              <div class="text_article active bg-red">1</div>
+              <div class="text_article bg-blue">2</div>
+              <div class="text_article bg-green">3</div>
+              <div class="text_article bg-yellow">4</div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    
+
+      <script>
+        // 模組化 <- 將功能變成零件 當有需要時可以直接放入使用,不需要重頭來過
+        
+        var btns = document.querySelectorAll('.title_button') //nodelist(節點集合)
+        var contents = document.querySelectorAll('.text_article ') //nodelist(節點集合)
+        var photo_boxs = document.querySelectorAll('.photo_box ')
+
+
+        console.log(btns);
+
+        // 點擊按鈕時,先把所有的active移除,再給被點擊的按鈕加上active的class ,同時給"相對應索引值"的content也加上active的class
+
+        for(var i = 0; i < btns.length; i++){
+            // 處理nodelist的最好方法是將其轉化 此處的區域變數宣告是轉化nodelist的資料為正式的HTML標籤
+            const btn = btns[i];
+            const content = contents[i]
+            const photo_box = photo_boxs[i]
+
+            btn.onclick = function() {
+                remove_active()
+
+                btn.classList.add('active');
+                content.classList.add('active');
+                photo_box.classList.add('active')
+            }
+        }
+
+        function remove_active(){
+            for(var i = 0; i < btns.length; i++){
+                const btn = btns[i];
+                const content = contents[i]
+                const photo_box = photo_boxs[i]
+                
+                btn.classList.remove('active')
+                content.classList.remove('active')
+                photo_box.classList.remove('active')
+            }
+        }
+
+    </script>
+</body>
+</html>
