@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #backBox1 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(img/青春點點點首頁.jpg);
+            min-width: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 70%;
+            background-attachment: fixed;
+
+
+
+        }
+
+        #backText1-1 {
+            width: 100%;
+            height: 100%;
+
+            position: relative;
+
+        }
+
+        #use {
+            width: 300px;
+            background-color: rgb(7, 7, 7);
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% - 180px);
+            line-height: 10px;
+            letter-spacing: 10px;
+
+
+        }
+
+
+
+        #areaBox {
+            width: calc(100% - 160px);
+            background-color: rgb(182, 141, 88, 0.2);
+            padding: 30px 80px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #backBox2 {
+            width: 100%;
+            height: 350px;
+            background-image: url('img/背景1.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #backText2-1 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #use2 {
+            width: 300px;
+            background-color: rgb(58, 56, 56);
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% - 180px);
+            line-height: 10px;
+            letter-spacing: 10px;
+
+        }
+
+        #areaBox1 {
+            width: calc(100% - 160px);
+            background-color: rgb(182, 141, 88, 0.2);
+            padding: 30px 80px;
+
+
+        }
+
+        #backBox3 {
+            width: 100%;
+            height: 600px;
+            background-image: url('img/歐馬克1.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #areaBox3 {
+            width: calc(100% - 160px);
+            background-color: rgb(182, 141, 88, 0.2);
+            padding: 30px 80px;
+        }
+
+        #backBox4 {
+            width: 100%;
+            height: 1000px;
+            background-image: url('img/瑪麗.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #backBox5 {
+            width: 100%;
+            height: 1000px;
+            background-image: url('img/結束日.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+
+        #backText3-1 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #use3 {
+            width: 300px;
+            background-color: rgb(58, 56, 56);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: calc(90% - 50px);
+            left: calc(50% - 180px);
+            line-height: 10px;
+            letter-spacing: 60px;
+
+
+        }
+
+        #use3 span {
+            margin-left: 60px;
+        }
+
+        nav a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            font-size: 20px;
+            padding: 5px;
+
+        }
+
+        nav a:hover {
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+
+
+        nav>ul {
+            list-style: none;
+            background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+            position: fixed;
+            z-index: 10;
+            width: 100%;
+
+
+        }
+
+        #but-top {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(211, 169, 169);
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+            right: 20px;
+
+            bottom: 20px;
+            position: fixed;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            z-index: 10;
+            color: black;
+            transition: 1s;
+
+        }
+
+        #but-top:hover {
+            background-color: rgb(25, 201, 207);
+            color: rgb(224, 35, 35);
+            padding: 10px;
+            font-size: 30px;
+
+        }
+
+        .warp {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(252, 252, 252);
+            border: 1px solid rgb(0, 0, 0);
+            position: absolute;
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+        }
+
+        .centerpoint {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+        }
+
+        
+        .hour {
+            widows: 7px;
+            height: 5px;
+            background-color: blue;
+            transform-origin: 50% 80%;
+            position: absolute;
+            top: 0px;
+            bottom: 0;
+            left: 0px;
+            right: 0;
+            margin: auto;
+            animation: time 2s infinite linear;
+
+        }
+        
+
+        @keyframes time {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .minute {
+            widows: 1px;
+            height: 5px;
+            background-color: rgb(35, 124, 94);
+            transform-origin: 50% 80%;
+            position: absolute;
+            top: 0px;
+            bottom: 0;
+            left: 0px;
+            right: 0;
+            margin: auto;
+            animation: time 5s infinite linear;
+
+        }
+        .second {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#">
+        <div id="but-top">Top</div>
+    </a>
+
+
+    <nav>
+        <ul class="navbar">
+            <li><a href="#backBox1">首頁</a></li>
+            <li><a href="#areaBox">介紹</a></li>
+            <li><a href="#areaBox1">歐馬克</a></li>
+            <li><a href="#areaBox3">瑪麗</a></li>
+        </ul>
+    </nav>
+
+
+    <div id="backBox1">
+        <div id="backText1-1">
+            <span id="use">青春點點點屁靈魂</span>
+        </div>
+    </div>
+
+    <div id="areaBox">
+        <h1>青春點點點</h1>
+        <p>《青春點點點》是一檔台灣廣播節目，於台北飛碟電台（FM 92.1）播放，2004年10月17日首播，2007年1月23日在原本塊狀節目之外新增帶狀節目，自開播至今，深受學生族群的歡迎，也有不少上班族和夜貓聽眾。
+
+            2017年2月19日為週日《青春點點點》最後一集播出。3月7日為平日《青春點點點》最後一集播出。節目結束後，將「馬克信箱」的傳統延續至YouTube頻道「LWW上班可以聽」，每週一、四上午11點更新（星期一10分鐘，星期四60分鐘）[1]。節目結束後飛碟電台曾經由馬克、瑪麗分開主持平日下午兩點到四點《哥哥妹妹有意思》節目，並於2018年3月5日起再度共同主持。
+        </p>
+    </div>
+
+    <div id="backBox2">
+        <div id="backText2-1">
+            <span id="use2">屁靈魂永不滅</span>
+        </div>
+    </div>
+
+    <div id="areaBox1">
+        <h1>主持人－－鷗馬克</h1>
+        <p>《歐馬克
+            政大外交、政大政治學研究所
+            飛碟聯播網DJ，專業廣告配音員
+            從小熱愛廣播，因此踏上了廣播DJ之路，2001年開始於飛碟電台擔任主持人至今，現主持每週一到五14:00-16:00的哥哥妹妹有意思。
+        </p>
+    </div>
+    <div id="backBox3">
+    </div>
+    <div id="areaBox3">
+        <h1>主持人－－瑪麗</h1>
+        <p>2004年透過徵選加入飛碟電台擔任DJ，主持深夜節目青春點點點），自此展開廣播生涯。其主持風格搞笑、無厘頭，因而擁有不少忠實聽眾。另活躍於專欄創作、綜藝節目、網路直播以及活動主持等領域。目前為《綜藝3國智》的主持人。
+            曾擔任過第30屆金曲獎紅毯主持、第53屆金鐘獎、第54屆金鐘獎紅毯主持。
+            瑪麗主持風格搞笑、無厘頭，但自認口才不好，
+
+            「我不像馬克，她可以舉出A、B、C很多個論點把你辯倒，但我很常說不出來。」
+
+            近期廣播行業萎縮，不少節目走向網路化甚至收攤，面對一畢業就踏入的圈子更加蕭條，
+
+            瑪麗也意識到聽眾數明顯下降，「節目早期call-in電話都打不進來，
+
+            我們甚至可以玩2小時掛聽眾電話，近期最糟可能2小時只接到1或2通電話。」
+
+            聽節目的人越來越少，做廣播13年的瑪麗態度倒很坦然，
+
+            「有電話跟沒電話一樣做一天啊，沒電話就是播歌或是跟馬克聊天，也蠻好的。」
+
+            從未想過轉換跑道，瑪麗依然認為廣播是讓她開心的工作，目前瑪麗較多出現在綜藝節目，
+
+            但因為好玩的演藝風格，擁有許多的支持者。
+        </p>
+    </div>
+    <div id="backBox4">
+    </div>
+    <div id="backBox5">
+        <div id="backText3-1">
+            <div id="use3">
+                <span>謝幕</span></div>
+        </div>
+    </div>
+    <div class="warp">
+        <div class="clock">
+            <div class="centerpoint"></div>
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
