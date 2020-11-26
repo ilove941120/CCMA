@@ -248,13 +248,19 @@
     height: 120px;
     text-align: center;
     font-size: 18px;
-    padding-top: 18px;
+    /* padding-top: 18px; */
     letter-spacing: 5px;
-    line-height: 36px;
+    /* line-height: 36px; */
     background-color: rgb(2, 59, 14);
     color: whitesmoke;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+  }
+  .sectionTextbox1 h1{
+    padding: 0;
   }
 
   .backgroudfixed {
