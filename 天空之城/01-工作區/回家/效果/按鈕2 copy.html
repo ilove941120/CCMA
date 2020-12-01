@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  color: #fff;
+  background: hsl(227, 10%, 10%);
+  font: 300 1em 'Fira Sans', sans-serif;
+  
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+}
+
+        button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+$colors: (
+  fill: #a972cb,
+  pulse: #ef6eae, 
+  close: #ff7f82, 
+  raise: #ffa260, 
+  up: #e4cb58, 
+  slide: #8fc866, 
+  offset: #19bc8b
+);
+
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 45deg)};
+  }
+}
+
+button {  
+  color: var(--color);
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #fff;
+  }
+}
+        .pulse:hover,
+        .pulse:focus {
+            animation: #ef6eae 1s;
+            box-shadow: 0 0 0 2em rgba(#fff, 0);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="buttons">
+        <h1>Simple hover effects with <code>box-shadow</code></h1>
+        <button class="fill">Fill In</button>
+        <button class="pulse">Pulse</button>
+        <button class="close">Close</button>
+        <button class="raise">Raise</button>
+        <button class="up">Fill Up</button>
+        <button class="slide">Slide</button>
+        <button class="offset">Offset</button>
+    </div>
+
+</body>
+
+</html>

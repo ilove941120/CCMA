@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .bodybox{
+            width: 50%;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn1{
+            width: 214px;
+            height: 59px;
+            border: 2px solid rgb(253, 253, 244);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box_out{
+            width: 215px;
+            height: 60px;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box_in{
+            width: 200px;
+            height: 50px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            background-color: rgb(0, 0, 0);
+            color: beige;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .box_in:hover{
+            width: 200px;
+            background-color: rgb(141, 26, 39);
+            color: cornsilk;
+            font-size: 24px;
+            transition: 0.8s;
+
+        }
+        .box_out:hover{
+            background-color: rgb(252, 248, 248);
+            transition: 1.5s;
+            
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="bodybox">
+        <div class="btn1">
+            <div class="box_out">
+                <div class="box_in">
+            Hello world
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

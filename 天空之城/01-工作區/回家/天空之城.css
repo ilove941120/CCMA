@@ -16,7 +16,7 @@
   /* --------------頁首----------- */
   .firstbox {
     width: 100%;
-    background-image: url(../../03-素材/裝飾/頁首1-02.jpg);
+    background-image: url(../../03-素材/裝飾/頁首1-02.png);
     background-repeat: no-repeat;
     background-size: 100%;
   }
@@ -103,7 +103,7 @@
     font-size: 24px;
     letter-spacing: 5px;
     text-align: center;
-    color: #3c3d36;
+    color: #f3f7d0;
     
     /* opacity: 0.8; */
 
@@ -117,6 +117,11 @@
   .hover {
     display: none;
     /* background-color: antiquewhite; */
+  }
+  .titlebuttom-t:hover{
+    color: rgb(187, 56, 56);
+    transition: 0.5s;
+
   }
 
 
@@ -155,16 +160,20 @@
     text-align: center;
     font-size: 48px;
     letter-spacing: 10px;
+    color: #f3f7d0;
+
   }
 
   .bottungroup {
     /* background: cornflowerblue; */
-    width: 30%;
+    width: 40%;
     padding: 10px;
     padding-top: 20px;
     margin: auto;
     display: flex;
     letter-spacing: 5px;
+    display: flex;
+    justify-content: space-around;
   }
 
   .buttunbox {
@@ -209,11 +218,82 @@
     position: sticky;
   }
   .photo {
-    background-image: url(../../03-素材/裝飾/頁首2.png);
+    background-image: url(../../03-素材/裝飾/頁首2.1-01.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: sticky;
   }
+
+
+  /* 網路按鈕 */
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    --c: goldenrod;
+    color: var(--c);
+    font-size: 16px;
+    border: 0.2em double var(--c);
+    border-radius: 0.5em;
+    width: 12em;
+    height: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color: var(--c);
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+
+nav ul li:hover {
+    color: black;
+}
+
+nav ul li:hover span {
+    transform: translateY(0) scale(2);
+}
+
+nav ul li span:nth-child(1) {
+    --n: 1;
+}
+
+nav ul li span:nth-child(2) {
+    --n: 2;
+}
+
+nav ul li span:nth-child(3) {
+    --n: 3;
+}
+
+nav ul li span:nth-child(4) {
+    --n: 4;
+}
 
   /* --------swiper------ */
   .swiper-container {
@@ -264,13 +344,13 @@
 
   .sectionTextbox1 {
     width: 100%;
-    height: 120px;
+    height: 100px;
     text-align: center;
     font-size: 18px;
     /* padding-top: 18px; */
     letter-spacing: 5px;
     /* line-height: 36px; */
-    background-color: rgb(2, 59, 14);
+    background-color: rgb(0, 0, 0);
     color: whitesmoke;
     font-weight: bold;
     display: flex;
@@ -279,7 +359,11 @@
 
   }
   .sectionTextbox1 h1{
+    font-weight: bolder;
     padding: 0;
+  }
+  .sectionTextbox1 img{
+    margin: 0 20px;
   }
 
   .backgroudfixed {
@@ -380,7 +464,10 @@
 
   .Introduction_box {
     width: 100%;
-    height: 100vh;
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url(../../03-素材/裝飾/剪影背景.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -389,20 +476,17 @@
 
   .Introductionbox {
     width: 1140px;
-    height: 572px;
-    background-color: black;
+    height: 517px;
+    /* background-color: rgb(235, 8, 8); */
     margin: auto;
     display: flex;
-    align-content: center;
     position: absolute;
     top: 10%;
-    left: 20%;
-
   }
 
   .l-photobox {
     width: 50%;
-    height: 100%;
+    height: 500px;
     background-color: #34414E;
     display: flex;
     justify-content: center;
@@ -411,9 +495,13 @@
 
   .photo_box {
     width: 595px;
-    height: 535px;
-    background-color: #1a76d3;
+    height: 500px;
     display: none;
+  }
+  .photo_box img{
+    margin: auto;
+    width: 100%;
+    border: 16px solid rgb(0, 0, 0);
   }
 
   .r-contantbox {
@@ -425,7 +513,7 @@
   .top-titlebox {
     width: 100%;
     height: 40%;
-    background-color: #A79275;
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
   }
@@ -441,15 +529,17 @@
   }
 
   .title_button {
-    width: 50%;
+    width: 70%;
     height: 80%;
-    background-color: #34414E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .text-box {
     width: 100%;
     height: 60%;
-    background-color: #E1E8D7;
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -459,8 +549,16 @@
   .text_article {
     width: 90%;
     height: 90%;
+    padding: 20px 40px;
+    font-size: 18px;
+    line-height: 36px;
+    letter-spacing: 8px;
     background-color: #34414E;
+    color: blanchedalmond;
     display: none;
+  }
+  .text_article h3{
+    margin: 10px 0;
   }
 
   /* --------開關顯示---- */
@@ -470,7 +568,10 @@
   }
 
   .title_button.active_b {
-    background-color: rgb(214, 30, 30);
+    /* background-color: rgb(214, 30, 30); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
   }
 
@@ -478,6 +579,71 @@
     max-width: 100%;
     height: auto;
   }
+
+
+
+  /* 自創按鈕 */
+.btn1{
+    width: 100%;
+    height: 80%;
+    border: 2px solid rgb(253, 253, 244);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box_out{
+  width: 100%;
+  height: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box_in{
+    width: 200px;
+    height: 100%;
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: rgb(0, 0, 0);
+    color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.box_in_x{
+  width: 200px;
+    height: 100%;
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: rgb(0, 0, 0);
+    color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.box_in:hover{
+    width: 185px;
+    height: 95%;
+  border: 2px solid rgb(219, 219, 117);
+    color: cornsilk;
+    font-size: 24px;
+    transition: 0.8s;
+
+}
+.box_in_x:hover{
+  width: 185px;
+  height: 95%;
+border: 2px solid rgb(219, 219, 117);
+  color: cornsilk;
+  transition: 0.8s;
+
+}
+.btn1:hover{
+  border: 2px solid rgb(230, 121, 71);
+    transition: 1.5s;
+}
 
 
 
