@@ -16,9 +16,9 @@
   /* --------------頁首----------- */
   .firstbox {
     width: 100%;
-    background-image: url(../../03-素材/裝飾/頁首1.png);
+    background-image: url(../../03-素材/裝飾/頁首1-02.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
   }
 
   .navbar {
@@ -34,23 +34,39 @@
 
   .titlebuttom_group {
     width: 90%;
-    height: 100%;
+    height: 80%;
     /* background-color: #34414E; */
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin: auto;
   }
 
-  .tittlebuttom-lr {
-    width: 45%;
-    height: 100%;
+  .tittlebuttom-l {
+    width: 43%;
+    height: 80%;
+    /* margin: 5px 0 0 0; */
+    /* background-color: red; */
     /* background-color: aquamarine; */
     display: flex;
     justify-content: space-around;
+    align-items: center;
+  }
+  .tittlebuttom-r {
+    width: 43%;
+    height: 80%;
+    padding-left: 50px;
+    /* margin: 5px 0 0 0; */
+    /* background-color: red; */
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .titlelogo {
-    width: 10%;
-    height: 100%;
+    /* width: 1%; */
+    height: 130%;
     /* background-color: brown; */
 
   }
@@ -66,11 +82,10 @@
     /* background-color: rgb(223, 137, 24); */
     display: flex;
     align-items: center;
-    justify-content: space-around;
-
+    /* justify-content: space-around; */
     font-size: 30px;
     font-weight: bolder;
-  }
+  } 
 
   .titlebuttom-p {
     width: 40px;
@@ -80,7 +95,7 @@
   }
 
   .titlebuttom-p img {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
   }
 
@@ -88,6 +103,9 @@
     font-size: 24px;
     letter-spacing: 5px;
     text-align: center;
+    color: #3c3d36;
+    
+    /* opacity: 0.8; */
 
   }
 
@@ -132,7 +150,7 @@
   /* -----------活動紀錄----------- */
 
   h1 {
-    padding-top: 20px;
+    padding-top: 40px;
     margin: 0;
     text-align: center;
     font-size: 48px;
@@ -142,41 +160,54 @@
   .bottungroup {
     /* background: cornflowerblue; */
     width: 30%;
-    padding-top: 30px;
+    padding: 10px;
+    padding-top: 20px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
     letter-spacing: 5px;
   }
 
   .buttunbox {
     background-color: rgb(230, 231, 255);
-    width: 150px;
-    height: 40px;
-    font-size: 18px;
-    padding-top: 18px;
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+    font-size: 24px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .banner {
     width: 100%;
     /* height: 2000px; */
-    height: 100vh;
+    height: 140vh;
     /* background-color: blue; */
   }
-
-  .igbox {
-
-    width: 25%;
-    margin: 0 50px;
+  .banner-title{
+    display: flex;
+    justify-content: center;
+    margin: auto;
   }
+  .banner-title img{
+    width: 15%;
+    height: 5%;
+    padding-top: 60px;
+    margin: 0 20px;
+  }
+
+  .banner h1{
+    font-weight: bolder;
+  }
+  
+  
 
   .opennessbox {
     opacity: 1;
     position: sticky;
   }
-
   .photo {
     background-image: url(../../03-素材/裝飾/頁首2.png);
     background-repeat: no-repeat;
@@ -185,21 +216,6 @@
   }
 
   /* --------swiper------ */
-  /* html,
-    body {
-      position: relative;
-      height: 100%;
-    }
-
-    body {
-      background: #eee;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      color: #000;
-      margin: 0;
-      padding: 0;
-    } */
-
   .swiper-container {
     width: 100%;
     height: 80%;
@@ -207,11 +223,10 @@
 
   .swiper-slide {
     width: 100%;
-    height: 80vh;
+    height: 95%;
     text-align: center;
     font-size: 18px;
     /* background: #fff; */
-
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -225,6 +240,10 @@
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+  }
+  .igbox {
+    width: 25%;
+    margin: 0 50px;
   }
 
   /* --------swiper------ */
