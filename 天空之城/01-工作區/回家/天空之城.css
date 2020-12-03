@@ -468,7 +468,7 @@ nav ul li span:nth-child(4) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../../03-素材/裝飾/剪影背景.png);
+    background-image: url(../../03-素材/裝飾/星空背景.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -502,6 +502,7 @@ nav ul li span:nth-child(4) {
     margin: auto;
     width: 100%;
     border: 16px solid rgb(0, 0, 0);
+    
   }
 
   .r-contantbox {
