@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<style>
+    /* ------------菜單簡介-------------------- */
+
+    .menubody {
+        width: 100%;
+        height: 100vh;
+        /* background-image: url(../../../03-素材/剪裁圖/天堂古堡菜單/天堂古堡菜單-背景.jpg); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        padding-top: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menubox {
+        width: 90%;
+        height: 90%;
+        background-color: rgb(252, 252, 252);
+        display: flex;
+    }
+
+    .menubox-l {
+        width: 42.5%;
+        height: 100%;
+        background-color: burlywood;
+    }
+
+    .menu-photo {
+        width: 100%;
+        display: none;
+    }
+
+    .menubox-r {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+    }
+
+    .menu-main {
+        width: 95%;
+        height: 95%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+    }
+
+    .main_titlebox {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main_titlebox h1 {
+        margin: 0;
+        letter-spacing: 4px;
+        font-weight: bolder;
+    }
+
+    .main_product {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* background-color: black;  */
+    }
+
+    .H-product {
+        /* margin: 10px 0; */
+        font-size: 20px;
+        line-height: 20px;
+        margin-left: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(179, 179, 179);
+    }
+
+    .En_font_size {
+        font-size: 16px;
+    }
+
+    .menu_p_size {
+        width: 100%;
+    }
+
+
+    /* ---------互動mode----- */
+    .modal-bg {
+        background-image: url(../../../03-素材/裝飾/木頭桌4.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: brown;
+    }
+
+
+    /* ------網路跳度動畫------ */
+
+    .mark {
+        background-color: unset;
+    }
+
+    .mark_mode {
+        display: none;
+        float: right;
+        width: 50px;
+        height: 40px;
+        /* background-color: violet; */
+        position: relative;
+
+    }
+
+    .mark:before {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 60px;
+        left: 30%;
+        width: 20px;
+        height: 20px;
+        background: #c00;
+        border-radius: 2px;
+        transform: rotate(45deg);
+        -webkit-animation: mark .8s infinite;
+    }
+
+    @-webkit-keyframes mark {
+        0% {
+            top: 5px;
+        }
+
+        20% {
+            border-radius: 2px;
+            /*從 20% 的地方才開始變形*/
+        }
+
+        50% {
+            top: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        80% {
+            border-radius: 2px;
+            /*到 80% 的地方恢復原狀*/
+        }
+
+        100% {
+            top: 5px;
+        }
+    }
+
+    .mark:after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 128px;
+        width: 18px;
+        height: 3px;
+        background: #eaeaea;
+        border-radius: 100%;
+        -webkit-animation: shadow .8s infinite;
+    }
+
+    @-webkit-keyframes shadow {
+
+        0%,
+        100% {
+            top: 40px;
+            left: 30%;
+            width: 20px;
+            background: #eaeaea;
+        }
+
+        50% {
+            top: 40px;
+            left: 30%;
+            /*讓陰影保持在原位*/
+            width: 22px;
+            height: 5px;
+            background: #eee;
+        }
+    }
+
+    /* ---------點擊切換mode----- */
+    .photo_active {
+        display: block;
+    }
+
+    .H-product.photo_active {
+        transition: 1s;
+        padding-left: 30px;
+        border-left: 10px solid black;
+    }
+</style>
+
+<body>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content modal-bg">
+
+                <div class="modal-body">
+                    <div class="menubody">
+                        <div class="menubox">
+                            <div class="menubox-l">
+                                <div class="menu-photo photo_active">
+                                    <img class="menu_p_size " src="../../../03-素材/餐廳/天堂古堡/轉大小/1.png" alt="" srcset="">
+                                </div>
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/2.png" alt="" srcset="">
+                                </div>
+
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/3.png" alt="" srcset="">
+                                </div>
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/4.png" alt="" srcset="">
+                                </div>
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/5.png" alt="" srcset="">
+                                </div>
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/6.png" alt="" srcset="">
+                                </div>
+                                <div class="menu-photo">
+                                    <img class="menu_p_size" src="../../../03-素材/餐廳/天堂古堡/轉大小/7.png" alt="" srcset="">
+                                </div>
+
+
+                            </div>
+                            <div class="menubox-r">
+                                <div class="menu-main">
+                                    <div class="main_titlebox">
+                                        <h1>天堂古堡餐點精選推薦</h1>
+                                    </div>
+                                    <div class="main_product">
+                                        <div class="H-product photo_active">
+                                            <div class="mark_mode photo_active">
+                                                <div class="mark"></div>
+                                            </div>
+                                            香煎牛排佐黑胡椒醬汁
+                                            <br><span class="En_font_size">Sauteed Beef with Black Pepper Sauce</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            鮮煎鮭魚
+                                            <br><span class="En_font_size">Sauteed Saimon</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            燒烤豬肋排
+                                            <br><span class="En_font_size">Roasted Pork Ribs</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            鹽烤檸檬鯖魚
+                                            <br><span class="En_font_size">Mackerel with Lemon Sauce</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            香烤雞腿排佐芒果醬汁
+                                            <br><span class="En_font_size">Mango sriracha roasted chicken thighs</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            牛肉咖哩套餐
+                                            <br><span class="En_font_size">Beef with Curry Sauce</span>
+                                        </div>
+                                        <div class="H-product">
+                                            <div class="mark_mode">
+                                                <div class="mark"></div>
+                                            </div>
+                                            蕃茄牛腩套餐
+                                            <br><span class="En_font_size">Tomato Braised Beef Brisket</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script>
+        var click_now = document.querySelectorAll('.H-product')
+        var show_now = document.querySelectorAll('.menu-photo')
+        var mark_now = document.querySelectorAll('.mark_mode')
+
+        for (var i = 0; i < click_now.length; i++) {
+            const click_n = click_now[i];
+            const show_n = show_now[i];
+            const mark_n = mark_now[i];
+            click_n.onclick = function () {
+                remove_p_active()
+                click_n.classList.add('photo_active');
+                show_n.classList.add('photo_active');
+                mark_n.classList.add('photo_active')
+            }
+        }
+        function remove_p_active() {
+            for (var i = 0; i < click_now.length; i++) {
+                const click_n = click_now[i]
+                const show_n = show_now[i]
+                const mark_n = mark_now[i];
+                click_n.classList.remove('photo_active')
+                show_n.classList.remove('photo_active')
+                mark_n.classList.remove('photo_active')
+            }
+        }
+    </script>
+</body>
+
+</html>

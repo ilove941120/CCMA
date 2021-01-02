@@ -145,14 +145,20 @@
   } */
 
   .video_down {
-
     width: 100%;
-    /* height: calc(100 - 100px); */
     border-radius: 15% 15% 0 0;
-
   }
 
   /* -----------活動紀錄----------- */
+  .banner {
+    width: 100%;
+    height: 1100px;
+    /* background-color: crimson; */
+    background-image: url(../../03-素材/裝飾/頁首2.0-01.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:left;
+  }
 
   h1 {
     padding-top: 40px;
@@ -189,22 +195,37 @@
     align-items: center;
   }
 
-  .banner {
-    width: 100%;
-    /* height: 2000px; */
-    height: 140vh;
-    /* background-color: blue; */
-  }
+  
   .banner-title{
     display: flex;
     justify-content: center;
     margin: auto;
   }
+
+  
   .banner-title img{
     width: 15%;
     height: 5%;
     padding-top: 60px;
     margin: 0 20px;
+  }
+  .sectionTextbox1 img{
+    width: 19%;
+    margin: 0 20px;
+  }
+  .titlebox img{
+    width: 19%;
+    padding-top: 40px;
+    margin: 0 20px;
+  }
+  .cam-titlebox img{
+    width: 19%;
+    padding-top: 40px;
+    margin: 0 20px;
+  }
+  .information_title img{
+    width: 30%;
+    padding: 0 10px;
   }
 
   .banner h1{
@@ -218,7 +239,7 @@
     position: sticky;
   }
   .photo {
-    background-image: url(../../03-素材/裝飾/頁首2.1-01.png);
+    /* background-image: url(../../03-素材/裝飾/頁首2.1-01.png); */
     background-repeat: no-repeat;
     background-size: cover;
     position: sticky;
@@ -296,11 +317,114 @@ nav ul li span:nth-child(3) {
 nav ul li span:nth-child(4) {
     --n: 4;
 }
+/* -------網路按鈕2----- */
+.btn {
+  color: #101832;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 0.075em;
+  padding: 5px 15px;
+  margin: auto 2em;
+  position: relative;
+  align-self: center;
+  text-transform: uppercase;
+  border: 3px #00bcdd solid;
+  border-image: linear-gradient(45deg, #00bcdd 0%, #ff00ff 100%);
+  border-image-slice: 1 1 0 0;
+  z-index: 1;
+  box-shadow: -0.5em 0.5em rgba(16, 24, 50, 0);
+  transform-origin: left bottom;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+.btn:before, .btn:after {
+  border: 3px #00bcdd solid;
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+}
 
+.btn:before {
+  border-image: linear-gradient(45deg, #00bcdd 0%, #0097dd 100%);
+  border-image-slice: 1 1 0 1;
+  left: -0.59em;
+  top: .15em;
+  width: .31em;
+  height: 100%;
+  transform: skewY(-45deg);
+}
+
+.btn:after {
+  border-image: linear-gradient(45deg, #00bcdd 0%, #ff00ff 100%);
+  border-image-slice: 1 1 1 0;
+  bottom: -8px;
+  right: 7px;
+  width: 100%;
+  height: .31em;
+  transform: skewX(-45deg);
+}
+
+.btn:hover {
+  background-color: white;
+  background-size: 90%;
+  transform: translate(0.5em, -0.5em);
+  box-shadow: -1em 1em 0.15em rgba(16, 24, 50, 0.1);
+}
+
+.cta {
+  background-color: #00bcdd;
+}
+
+.cta:before {
+  border-image-slice: 1;
+}
+
+.cta:after {
+  border-image-slice: 1;
+}
+
+.cta:hover {
+  background: white;
+  border-image: linear-gradient(45deg, #00bcdd 0%, #ff00ff 100%);
+  border-image-slice: 1;
+  color: #101832;
+}
+
+.cta:hover:before {
+  height: 100%;
+}
+
+.cta:hover:after {
+  width: 100%;
+}
+
+.bg {
+  background: none;
+  border: 3px solid #101832;
+  color: #101832;
+}
+
+.bg:before, .bg:after {
+  background: #101832;
+  border: 3px solid #101832;
+}
+
+.bg:hover {
+  border-image: none;
+}
+
+.bg:hover:before, .bg:hover:after {
+  background: #101832;
+}
+
+/* --------------------- */
   /* --------swiper------ */
   .swiper-container {
     width: 100%;
-    height: 80%;
+    /* height: 0%; */
   }
 
   .swiper-slide {
@@ -326,6 +450,22 @@ nav ul li span:nth-child(4) {
   .igbox {
     width: 25%;
     margin: 0 50px;
+  }
+  .swiper-button-next{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url(../../03-素材/裝飾/箭頭-02.png);
+    background-size: cover;
+    color: rgba(219, 219, 219,0);
+  }
+  .swiper-button-prev{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url(../../03-素材/裝飾/箭頭-01.png);
+    background-size: cover;
+    color: rgba(219, 219, 219,0);
   }
 
   /* --------swiper------ */
@@ -353,6 +493,7 @@ nav ul li span:nth-child(4) {
     letter-spacing: 5px;
     /* line-height: 36px; */
     background-color: rgb(0, 0, 0);
+    /* background-image: url(../../03-素材/裝飾/黑色背景條.PNG); */
     color: whitesmoke;
     font-weight: bold;
     display: flex;
@@ -363,9 +504,6 @@ nav ul li span:nth-child(4) {
   .sectionTextbox1 h1{
     font-weight: bolder;
     padding: 0;
-  }
-  .sectionTextbox1 img{
-    margin: 0 20px;
   }
 
   .backgroudfixed {
@@ -660,7 +798,7 @@ border: 2px solid rgb(219, 219, 117);
   /* ----------------菜單------------- */
   .bunner_box {
     width: 25%;
-    height: 100vh;
+    height: 110vh;
     /* padding-top: 25%; */
     /* writing-mode: vertical-lr; */
     margin: auto;
@@ -852,7 +990,7 @@ border: 2px solid rgb(219, 219, 117);
 
   .camping {
     width: 100%;
-    height: 105vh;
+    height: 900px;
     background-color: rgb(118, 153, 250);
     background-image: url(../../03-素材/裝飾/桌布背景1.png);
     background-size: cover;
@@ -863,14 +1001,18 @@ border: 2px solid rgb(219, 219, 117);
 
   .cam-titlebox {
     width: 100%;
-    height: 10vh;
     /* background-color: cadetblue; */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 36px;
-    padding-top: 150px;
+    padding-top: 60px;
   }
+  .cam-titlebox h1{
+    color: black;
+    font-weight: bolder;
+  }
+
 
   /* -----------------------------電視方塊------------------------------------- */
 
@@ -878,7 +1020,7 @@ border: 2px solid rgb(219, 219, 117);
     width: 920px;
     height: 690px;
     /* background-color: #000000; */
-    margin: 100px auto;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
     padding: 0px;
@@ -890,8 +1032,11 @@ border: 2px solid rgb(219, 219, 117);
 
   .TVbox-t {
     width: 100%;
-    height: 80%;
+    height: 75%;
     margin: auto;
+    box-shadow: 4px 4px 4px #222221;
+    border-bottom: unset;
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool5.png);
     background-color: #314451;
     border-radius: 30px 30px 0 0;
     display: flex;
@@ -900,26 +1045,39 @@ border: 2px solid rgb(219, 219, 117);
 
   .TVlistbox {
     width: 15%;
-    height: 70%;
+    height: 80%;
     /* margin: 10px; */
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-left: 30px;
+    margin-top: 20px;
     /* background-color: cadetblue; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
 
+  .thembox_out{
+    width: 100%;
+    height: 15%;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+
+  }
+
   .themebox {
-    width: 80%;
-    height: 13%;
-    font-size: 18px;
-    line-height: 48px;
+    width: 98%;
+    height: 96%;
+    font-size: 24px;
+    line-height: 50px;
     letter-spacing: 5px;
     margin: auto;
-    background-color: black;
-    color: white;
-    border-radius: 50px;
+    border: 2px solid black;
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool.png);
+    color: #0A1600;
+    border-radius: 5px;
 
   }
 
@@ -928,10 +1086,9 @@ border: 2px solid rgb(219, 219, 117);
     height: 90%;
     /* margin-right: 10px; */
     /* margin: 10px; */
-    margin-right: 30px;
+    margin-left: 30px;
     margin-top: 25px;
     border-radius: 50px;
-    background-color: rgb(75, 216, 56);
     display: none;
 
   }
@@ -941,18 +1098,53 @@ border: 2px solid rgb(219, 219, 117);
 
   .TVbox-b {
     width: 100%;
-    height: 20%;
+    height: 25%;
     margin: auto;
+    box-shadow: 4px 4px 4px #222221;
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool5.png);
     background-color: #314451;
     border-radius: 0 0 30px 30px;
+    display: flex;
+  }
+  .TVbox-b img{
+    margin-left: 10px;
+    /* width: 22%; */
+    height: 100%;
+  }
+  .TVmainbox_out{
+    width: 70%;
+    height: 90%;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 20px;
   }
 
   .TVmainbox {
-    width: 80%;
-    height: 100%;
-    margin-left: 190px;
+    width: 99%;
+    height: 96%;
+    border-radius: 5px;
+    border: 2px solid black;
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool.png);
 
     /* background-color: burlywood; */
+  }
+  
+  .TVmainbox:hover{
+    transition: 1s;
+    color: rgb(230, 231, 255);
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool6.png);
+  }
+  .TVmainbox:hover .TVtext{
+    transition: 1s;
+    color: rgb(218, 255, 229);
+    font-weight: bold;
+  }
+  .TVmainbox:hover .TVtitlebox{
+    transition: 1s;
+    color: rgb(253, 255, 230);
   }
 
   .TVtitlebox {
@@ -965,7 +1157,10 @@ border: 2px solid rgb(219, 219, 117);
     letter-spacing: 5px;
     line-height: 50px;
     font-weight: bold;
-    color: white;
+    color: #0a1600;
+    font-weight: bolder;
+    margin-left: 10px;
+    margin-bottom: 5px;
   }
 
   .TVtext-group {
@@ -974,8 +1169,6 @@ border: 2px solid rgb(219, 219, 117);
     /* background-color: cadetblue; */
     display: flex;
     flex-wrap: wrap;
-
-
   }
 
   .TVtext {
@@ -987,10 +1180,8 @@ border: 2px solid rgb(219, 219, 117);
     font-size: 18px;
     letter-spacing: 3px;
     line-height: 30px;
-    color: white;
-
-
-
+    color: #720202;
+    margin-left: 10px;
   }
 
 
@@ -1006,6 +1197,9 @@ border: 2px solid rgb(219, 219, 117);
 
   .themebox.active-A {
     background-color: rgb(214, 30, 30);
+    color: cornsilk;
+    font-weight: bolder;
+    background-image: url(../../03-素材/裝飾/背景生產器light_wool6.png);
 
   }
 
@@ -1026,45 +1220,53 @@ border: 2px solid rgb(219, 219, 117);
   }
 
   .img_size {
-    width: 100%;
+    width: 90%;
     border-radius: 50px;
+    border: 4px double rgb(247, 245, 245);
   }
 
 
   /* -----------------------------最新消息------------------------------------- */
   .latest_news {
     width: 100%;
-    height: 105vh;
-    background-color: rgb(187, 56, 56);
+    height: 800px;
+    /* background-color: rgb(187, 56, 56); */
     background-image: url(../../03-素材/裝飾/桌布背景2.png);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: bottom;
   }
 
   .titlebox {
     width: 100%;
-    height: 10vh;
+    padding-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 36px;
-    /* background-color: cadetblue; */
+  }
+  .titlebox h1{
+    color: black;
+    font-weight: bolder;
   }
 
   .newbox-group {
     width: 100%;
-    height: 50vh;
+    height: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 50px;
   }
 
   .newbox {
     width: 825px;
     height: 230px;
-    background-color: burlywood;
+    background-color: #00023d;
+    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+    margin-bottom: 50px;
+    box-shadow: 4px 4px 4px #222221;
+
     /* display: flex; */
 
   }
@@ -1072,6 +1274,8 @@ border: 2px solid rgb(219, 219, 117);
   .newbox-l {
     width: 825px;
     height: 230px;
+    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+
   }
 
   .newbox-r {
@@ -1079,6 +1283,8 @@ border: 2px solid rgb(219, 219, 117);
     height: 230px;
     position: relative;
     bottom: 230px;
+    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+
   }
 
   /* -----------------------左邊照片方塊------------------------------- */
@@ -1086,7 +1292,6 @@ border: 2px solid rgb(219, 219, 117);
   .photobox-l {
     width: 825px;
     height: 230px;
-    background-color: #34424F;
     clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
 
   }
@@ -1094,15 +1299,20 @@ border: 2px solid rgb(219, 219, 117);
   .photobox-l-in {
     width: 825px;
     height: 230px;
-    background-color: white;
     clip-path: polygon(1% 2%, 64% 2%, 49.5% 98%, 1% 98%);
-    background-image: url(../../03-素材/婚攝/unnamed.jpg);
+    /* background-image: url(../../03-素材/婚攝/unnamed.jpg); */
+  }
+  
+  .photobox-l-in img{
+      width: 65%;
+      position: relative;
+      right: 150px;
+      bottom:90px;
   }
 
   /* -----------------------右邊照片方塊------------------------------- */
 
   .photobox-r {
-    background-color: #34424F;
     clip-path: polygon(100% 0, 35% 0, 50% 100%, 100% 100%);
   }
 
@@ -1113,13 +1323,20 @@ border: 2px solid rgb(219, 219, 117);
 
     clip-path: polygon(99% 2%, 36% 2%, 50.5% 98%, 99% 98%);
   }
+  .photobox-r-in img{
+    width: 65%;
+      position: relative;
+      left: 150px;
+      bottom:70px;
+      border: 2px solid black;
+  }
 
 
 
   /* -----------------------右邊文字方塊------------------------------- */
 
   .textbox-r {
-    background-color: #A69376;
+    /* background-color: #A69376; */
     clip-path: polygon(100% 0, 65% 0, 50% 100%, 100% 100%);
   }
 
@@ -1159,17 +1376,22 @@ border: 2px solid rgb(219, 219, 117);
   }
 
   .button-r {
-    width: 30%;
-    height: 20%;
-    background-color: rgba(255, 71, 71, 0.8);
-    border-radius: 20%;
+    width: 50%;
+    height: 15%;
+    /* background-color: rgba(255, 71, 71, 0.8); */
     position: absolute;
     right: 10px;
     bottom: 10px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 50px;
-    color: white;
+    font-size: 18px;
+    color: rgb(167, 167, 167);
+    /* font-weight: bolder; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  .button-r:hover{
+    color: rgb(248, 71, 71);
   }
 
   /* -----------------------左邊文字方塊------------------------------- */
@@ -1216,24 +1438,127 @@ border: 2px solid rgb(219, 219, 117);
   .button-l {
     width: 30%;
     height: 20%;
-    border-radius: 20%;
     margin-left: 250px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 24px;
     text-align: center;
     line-height: 50px;
+    color:  rgb(167, 167, 167);
+
+  }
+  .button-l:hover{
+    color: rgb(248, 71, 71);
+  }
+  /* ------------第七幕入園資訊-------------- */
+  .Park_Information{
+    width: 100%;
+    height: 676px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-image: url(../../03-素材/裝飾/入園需知背景.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+  .map_box{
+    width: 40%;
+    display: flex;
+    align-items: center;
+  }
+  .map_box img{
+    width: 100%;
+  }
+  .information_box{
+    width: 50%;
+    height: 605px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between ;
+  }
+  .information_title{
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .information_title h1{
+    margin: 0;
+    padding: 0;
+  }
+  .information_main{
+    height: 90%;
+    display: flex;
+    /* flex-wrap:wrap; */
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .in_m_t{
+    font-size: 20px;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
     color: white;
-    background-color: rgba(255, 71, 71, 0.8);
+  }
+  .m_t{
+    width: 50%;
+    padding-top: 20px;
+  }
+  .in_m_m{
+    width: 100%;
+    height: 30%;
+    font-size: 20px;
+    line-height: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    
+  }
+  .m_m{
+    width: 50%;
+  }
+  .in_m_d{
+    width: 100%;
+    height: 25%;
+    font-size: 20px;
+    line-height: 30px;
+    color: white;
 
   }
 
-
   /* ------------footbox-------------- */
-
   .footBox {
     width: 100%;
-    height: 676px;
-    background-image: url(../../03-素材/裝飾/footbox.png)
+    height: 60px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 99;
+  }
+  .foot_main{
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .m_text_l{
+    width: 43%;
+    color: cornsilk;
+    line-height: 24px;
+    font-size: 14px;
+    letter-spacing: 3px;
+  }
+  .m_text_r{
+    width: 43%;
+    line-height: 24px;
+    text-align: right;
+    color: #fff8dc;
+    font-size: 14px;
+    letter-spacing: 3px;
   }
 
 
