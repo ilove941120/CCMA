@@ -16,7 +16,7 @@
   /* --------------頁首----------- */
   .firstbox {
     width: 100%;
-    background-image: url(../../03-素材/裝飾/頁首1-02.png);
+    background-image: url(../03-素材/裝飾/頁首1-02.png);
     background-repeat: no-repeat;
     background-size: 100%;
   }
@@ -154,7 +154,7 @@
     width: 100%;
     height: 1100px;
     /* background-color: crimson; */
-    background-image: url(../../03-素材/裝飾/頁首2.0-01.png);
+    background-image: url(../03-素材/裝飾/頁首2.0-01.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position:right;
@@ -239,7 +239,7 @@
     position: sticky;
   }
   .photo {
-    /* background-image: url(../../03-素材/裝飾/頁首2.1-01.png); */
+    /* background-image: url(../03-素材/裝飾/頁首2.1-01.png); */
     background-repeat: no-repeat;
     background-size: cover;
     position: sticky;
@@ -455,7 +455,7 @@ nav ul li span:nth-child(4) {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: url(../../03-素材/裝飾/箭頭-02.png);
+    background-image: url(../03-素材/裝飾/箭頭-02.png);
     background-size: cover;
     color: rgba(219, 219, 219,0);
   }
@@ -463,7 +463,7 @@ nav ul li span:nth-child(4) {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: url(../../03-素材/裝飾/箭頭-01.png);
+    background-image: url(../03-素材/裝飾/箭頭-01.png);
     background-size: cover;
     color: rgba(219, 219, 219,0);
   }
@@ -493,7 +493,7 @@ nav ul li span:nth-child(4) {
     letter-spacing: 5px;
     /* line-height: 36px; */
     background-color: rgb(0, 0, 0);
-    /* background-image: url(../../03-素材/裝飾/黑色背景條.PNG); */
+    /* background-image: url(../03-素材/裝飾/黑色背景條.PNG); */
     color: whitesmoke;
     font-weight: bold;
     display: flex;
@@ -516,17 +516,17 @@ nav ul li span:nth-child(4) {
   }
 
   .sec1 {
-    background-image: url(../../03-素材/天空之城/天空之城1.jpg);
+    background-image: url(../03-素材/天空之城/天空之城1.jpg);
     background-position-y: 70%;
   }
 
   .sec2 {
-    background-image: url(../../03-素材/天空之城/天空之城2.jpg);
+    background-image: url(../03-素材/天空之城/天空之城2.jpg);
     background-position-y: 70%;
   }
 
   .sec3 {
-    background-image: url(../../03-素材/天空之城/天空之城3.jpg);
+    background-image: url(../03-素材/天空之城/天空之城3.jpg);
   }
 
   .openness {
@@ -540,7 +540,7 @@ nav ul li span:nth-child(4) {
     height: 3050px;
     /* background-color: rgb(255, 255, 255); */
     position: relative;
-    background-image: url(../../03-素材/裝飾/背景4500px-01.png);
+    background-image: url(../03-素材/裝飾/背景4500px-01.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -568,7 +568,7 @@ nav ul li span:nth-child(4) {
     text-align: center;
     font-size: 18px;
     padding-top: 18px;
-    background-image: url(../../03-素材/裝飾/天空之城logo白色1.png);
+    background-image: url(../03-素材/裝飾/天空之城logo白色1.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
@@ -583,7 +583,7 @@ nav ul li span:nth-child(4) {
     text-align: center;
     font-size: 18px;
     padding-top: 18px;
-    background-image: url(../../03-素材/裝飾/天空之城logo黑色1.png);
+    background-image: url(../03-素材/裝飾/天空之城logo黑色1.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
@@ -605,7 +605,7 @@ nav ul li span:nth-child(4) {
   .park_top{
     width: 100%;
     height: 160vh;
-    background-image: url(../../03-素材/裝飾/天空之城logo白色1.png);
+    background-image: url(../03-素材/裝飾/天空之城logo白色1.png);
     background-color: black;
     background-repeat: no-repeat;
     background-position: center;
@@ -617,7 +617,7 @@ nav ul li span:nth-child(4) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../../03-素材/裝飾/星空背景.png);
+    background-image: url(../03-素材/裝飾/星空背景.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -829,25 +829,25 @@ border: 2px solid rgb(219, 219, 117);
 
 
   .box_bg1 {
-    /* background-image: url(../../03-素材/餐廳/Menu1_工作區域\ 1.png); */
-    background-image: url(../../03-素材/裝飾/菜單簡介背景1.png);
+    /* background-image: url(../03-素材/餐廳/Menu1_工作區域\ 1.png); */
+    background-image: url(../03-素材/裝飾/菜單簡介背景1.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
   .box_bg1:hover{
-    background-image: url(../../03-素材/餐廳/Menu1_工作區域\ 1.png);
+    background-image: url(../03-素材/餐廳/Menu1_工作區域\ 1.png);
     transition: 2s;
     background-size: cover;
   }
 
   .box_bg2 {
-    /* background-image: url(../../03-素材/餐廳/Menu2-02.png); */
-    background-image: url(../../03-素材/裝飾/菜單簡介背景2.png);
+    /* background-image: url(../03-素材/餐廳/Menu2-02.png); */
+    background-image: url(../03-素材/裝飾/菜單簡介背景2.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
   .box_bg2:hover{
-    background-image: url(../../03-素材/餐廳/Menu2-02.png);
+    background-image: url(../03-素材/餐廳/Menu2-02.png);
     transition: 2s;
     background-size: cover;
 
@@ -869,23 +869,23 @@ border: 2px solid rgb(219, 219, 117);
   }
 
   .box_bg3 {
-    background-image: url(../../03-素材/裝飾/菜單簡介背景3.png);
+    background-image: url(../03-素材/裝飾/菜單簡介背景3.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
   .box_bg3:hover{
-    background-image: url(../../03-素材/餐廳/Menu3-03.png);
+    background-image: url(../03-素材/餐廳/Menu3-03.png);
     transition: 2s;
     background-size: cover;
   }
 
   .box_bg4 {
-    background-image: url(../../03-素材/裝飾/菜單簡介背景4.png);
+    background-image: url(../03-素材/裝飾/菜單簡介背景4.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
   .box_bg4:hover{
-    background-image: url(../../03-素材/婚攝/b20140206114141396.jpg);
+    background-image: url(../03-素材/婚攝/b20140206114141396.jpg);
     transition: 2s;
     background-size: cover;
   }
@@ -896,7 +896,7 @@ border: 2px solid rgb(219, 219, 117);
   .menubody {
     width: 100%;
     height: 100vh;
-    /* background-image: url(../../../03-素材/剪裁圖/天堂古堡菜單/天堂古堡菜單-背景.jpg); */
+    /* background-image: url(../03-素材/剪裁圖/天堂古堡菜單/天堂古堡菜單-背景.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -987,7 +987,7 @@ border: 2px solid rgb(219, 219, 117);
 
 /* ---------互動mode----- */
 .modal-bg {
-    background-image: url(../../03-素材/裝飾/木頭桌4.jpg);
+    background-image: url(../03-素材/裝飾/木頭桌4.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-color: brown;
@@ -1096,7 +1096,7 @@ border: 2px solid rgb(219, 219, 117);
   .foodbody {
     width: 100%;
     height: 100vh;
-    background-image: url(../../03-素材/菜單/鳥VS人背景.png);
+    background-image: url(../03-素材/菜單/鳥VS人背景.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -1190,7 +1190,7 @@ border: 2px solid rgb(219, 219, 117);
   /* ------------酒單-------------------- */
 
   .liqueur_bg {
-    background-image: url(../../03-素材/裝飾/木頭桌_灰暗.jpg);
+    background-image: url(../03-素材/裝飾/木頭桌_灰暗.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -1211,7 +1211,7 @@ border: 2px solid rgb(219, 219, 117);
     height: 600px;
     margin: auto;
     margin-top: 40px;
-    background-image: url(../../03-素材/裝飾/);
+    background-image: url(../03-素材/裝飾/);
 }
 .carousel-item img{
     margin: auto;
@@ -1225,7 +1225,7 @@ border: 2px solid rgb(219, 219, 117);
     width: 100%;
     height: 900px;
     background-color: rgb(118, 153, 250);
-    background-image: url(../../03-素材/裝飾/桌布背景1.png);
+    background-image: url(../03-素材/裝飾/桌布背景1.png);
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
@@ -1269,7 +1269,7 @@ border: 2px solid rgb(219, 219, 117);
     margin: auto;
     box-shadow: 4px 4px 4px #222221;
     border-bottom: unset;
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool5.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool5.png);
     background-color: #314451;
     border-radius: 30px 30px 0 0;
     display: flex;
@@ -1308,7 +1308,7 @@ border: 2px solid rgb(219, 219, 117);
     letter-spacing: 5px;
     margin: auto;
     border: 2px solid black;
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool.png);
     color: #0A1600;
     border-radius: 5px;
 
@@ -1334,7 +1334,7 @@ border: 2px solid rgb(219, 219, 117);
     height: 25%;
     margin: auto;
     box-shadow: 4px 4px 4px #222221;
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool5.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool5.png);
     background-color: #314451;
     border-radius: 0 0 30px 30px;
     display: flex;
@@ -1360,7 +1360,7 @@ border: 2px solid rgb(219, 219, 117);
     height: 96%;
     border-radius: 5px;
     border: 2px solid black;
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool.png);
 
     /* background-color: burlywood; */
   }
@@ -1368,7 +1368,7 @@ border: 2px solid rgb(219, 219, 117);
   .TVmainbox:hover{
     transition: 1s;
     color: rgb(230, 231, 255);
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool6.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool6.png);
   }
   .TVmainbox:hover .TVtext{
     transition: 1s;
@@ -1432,7 +1432,7 @@ border: 2px solid rgb(219, 219, 117);
     background-color: rgb(214, 30, 30);
     color: cornsilk;
     font-weight: bolder;
-    background-image: url(../../03-素材/裝飾/背景生產器light_wool6.png);
+    background-image: url(../03-素材/裝飾/背景生產器light_wool6.png);
 
   }
 
@@ -1464,7 +1464,7 @@ border: 2px solid rgb(219, 219, 117);
     width: 100%;
     height: 800px;
     /* background-color: rgb(187, 56, 56); */
-    background-image: url(../../03-素材/裝飾/桌布背景2.png);
+    background-image: url(../03-素材/裝飾/桌布背景2.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -1496,7 +1496,7 @@ border: 2px solid rgb(219, 219, 117);
     width: 825px;
     height: 230px;
     background-color: #00023d;
-    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+    background-image: url(../03-素材/裝飾/背景生產器Ravenna2.png);
     margin-bottom: 50px;
     box-shadow: 4px 4px 4px #222221;
 
@@ -1507,7 +1507,7 @@ border: 2px solid rgb(219, 219, 117);
   .newbox-l {
     width: 825px;
     height: 230px;
-    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+    background-image: url(../03-素材/裝飾/背景生產器Ravenna2.png);
 
   }
 
@@ -1516,7 +1516,7 @@ border: 2px solid rgb(219, 219, 117);
     height: 230px;
     position: relative;
     bottom: 230px;
-    background-image: url(../../03-素材/裝飾/背景生產器Ravenna2.png);
+    background-image: url(../03-素材/裝飾/背景生產器Ravenna2.png);
 
   }
 
@@ -1533,7 +1533,7 @@ border: 2px solid rgb(219, 219, 117);
     width: 825px;
     height: 230px;
     clip-path: polygon(1% 2%, 64% 2%, 49.5% 98%, 1% 98%);
-    /* background-image: url(../../03-素材/婚攝/unnamed.jpg); */
+    /* background-image: url(../03-素材/婚攝/unnamed.jpg); */
   }
   
   .photobox-l-in img{
@@ -1689,7 +1689,7 @@ border: 2px solid rgb(219, 219, 117);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url(../../03-素材/裝飾/入園需知背景.png);
+    background-image: url(../03-素材/裝飾/入園需知背景.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-color: black;
@@ -1808,10 +1808,10 @@ border: 2px solid rgb(219, 219, 117);
     margin: auto;
     width: 50%;
     height: 90vh;
-    background: url("../../03-素材/影片/2.gif") no-repeat top center;
+    background: url("../03-素材/影片/2.gif") no-repeat top center;
     background-size: cover;
-    -webkit-mask: url("../../03-素材/剪影圖/結婚.png") no-repeat center center;
-    mask: url("../../03-素材/剪影圖/結婚.png") no-repeat center center;
+    -webkit-mask: url("../03-素材/剪影圖/結婚.png") no-repeat center center;
+    mask: url("../03-素材/剪影圖/結婚.png") no-repeat center center;
     -webkit-mask-size: contain;
     mask-size: contain;
     /* position: absolute; */
@@ -1821,7 +1821,7 @@ border: 2px solid rgb(219, 219, 117);
   }
 
   .overlay {
-    mask: url("../../03-素材/剪影圖/結婚.png") no-repeat center center;
+    mask: url("../03-素材/剪影圖/結婚.png") no-repeat center center;
     margin: 10px;
     padding: 10px;
   }
