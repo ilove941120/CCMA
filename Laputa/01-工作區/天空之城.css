@@ -1794,6 +1794,21 @@ border: 2px solid rgb(219, 219, 117);
     letter-spacing: 3px;
   }
 
+  .top_button{
+    width: 60px;
+    height: 50px;
+    background-color: rgba(207, 209, 150, 0.7);
+    background-image: url(../03-素材/裝飾/topbutton.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    right: 20px;
+    bottom: 5px;
+    z-index: 100;
+    border-radius: 50%;
+  }
+
 
 
   /* -------------測試------------- --- */
