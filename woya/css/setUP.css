@@ -43,3 +43,14 @@ body{
     font-weight: bolder;
     border-bottom: 2px solid #2B5E95;
 }
+.boder{
+    border: 1px solid #000000;
+    border-top: 0px solid #000000;
+    border-bottom: 0px solid #000000;
+    border-left: 0px solid #000000;
+    border-right: 0px solid #000000;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}

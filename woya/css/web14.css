@@ -1,0 +1,172 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+/* 框架CSS */
+.strongholdPage{
+    width: 100%;
+    padding: 30px;
+    height: auto;
+    position: relative;
+    /* background-color: bisque; */
+}
+.pageFrame{
+    width: 80%;
+    padding-top: 80px;
+    margin: auto;
+    display: flex;
+}
+.contentBlock{
+    width: 70%;
+}
+
+@media (max-width:1200px){
+
+}
+@media (max-width:997px){
+    .pageFrame{
+        width: 100%;
+        padding-top: 50px;
+        flex-direction: column;
+    }
+    .contentBlock{
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+@media (max-width:768px){
+    .strongholdPage{
+        padding: 50px 20px;
+    }
+}
+@media (max-width:576px){
+    .correctionDescriptionPage{
+        padding: 50px 10px;
+    }
+    .pageFrame{
+        padding-top: 30px;
+    }
+}
+@media (max-width:375px){
+    
+}
+/* 頁面標題CSS */
+.pageTitle{
+    width: 30%;
+    font-size: 36px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    text-align: right;
+    position: absolute;
+    border-bottom: 1px solid red;
+    color: #2F5D98;
+    top: 15px;
+    left: 0;
+}
+.pageTitle::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+@media (max-width:997px){
+    .pageTitle{
+        width: 40%;
+        padding-right: 30px;
+        font-size: 28px;
+    }
+}
+@media (max-width:768px){
+
+}
+@media (max-width:576px){
+    .pageTitle{
+        font-size: 22px;
+        width: 50%;
+    }
+}
+@media (max-width:376px){
+    .pageTitle{
+        font-size: 20px;
+        width: 50%;
+    }
+}
+
+/* 主要內容CSS */
+.strongholdGroup{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.stronghold{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+.strongholdTitle{
+    color: #2B5E95;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.strongholdDate{
+    margin: 10px;
+}
+.contactTable{
+    width: 100%;
+    background-color: burlywood;
+
+}
+.tableTh{
+    width: 100%;
+    background-color: crimson;
+    display: flex;
+    padding: 0 5px;
+}
+.tableTr{
+    display: flex;
+}
+.person{
+    width: 35%;
+}
+.name{
+    width: 20%;
+}
+.phone{
+    width: 40%;
+}
+.email{
+    width: 50%;
+}
+.person,.name,.phone,.email{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5px;
+
+}
+@media (max-width:576px){
+    .strongholdGroup{
+        width: 100%;
+    }
+    .person,.name,.phone,.email{
+        font-size: 14px;
+    }
+}
+@media (max-width:376px){
+    .strongholdGroup{
+        width: 100%;
+    }
+
+}

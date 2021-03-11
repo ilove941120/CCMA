@@ -175,7 +175,13 @@ a:hover {
   position: absolute;
   right: 20px;
 }
-
+/* header照片 */
+.header_ph{
+  width: 100%;
+}
+.header_ph img{
+  width: 100%;
+}
 /* 外掛區 nav列表選項 */
 .li_g {
   width: 30%;
