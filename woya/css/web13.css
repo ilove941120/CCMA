@@ -5,7 +5,7 @@ body{
     margin: 0;
 }
 /* 框架CSS */
-.xxxPage{
+.surveyPage{
     width: 100%;
     padding: 50px;
     height: auto;
@@ -18,14 +18,8 @@ body{
     margin: auto;
     display: flex;
 }
-/* 主要內容CSS */
 .contentBlock{
-    width: 70%;
-}
-.text{
     width: 100%;
-    padding: 20px;
-    margin: auto;
 }
 
 @media (max-width:1200px){
@@ -43,7 +37,7 @@ body{
     }
 }
 @media (max-width:768px){
-    .xxxPage{
+    .surveyPage{
         padding: 50px 20px;
     }
 }
@@ -58,5 +52,144 @@ body{
 @media (max-width:375px){
     
 }
+
+.pageTitle{
+    width: 30%;
+    font-size: 28px;
+    font-weight: bolder;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    text-align: right;
+    position: absolute;
+    border-bottom: 1px solid red;
+    color: #2F5D98;
+    top: 15px;
+    left: 0;
+}
+.pageTitle::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+@media (max-width:997px){
+    .pageTitle{
+        width: 40%;
+        padding-right: 30px;
+        font-size: 28px;
+    }
+}
+@media (max-width:768px){
+
+}
+@media (max-width:576px){
+    .pageTitle{
+        font-size: 24px;
+    }
+}
+@media (max-width:376px){
+    .pageTitle{
+        font-size: 20px;
+        width: 50%;
+    }
+}
+
+/* 主要內容CSS */
+.serviceForm{
+    padding: 30px 100px;
+    border: 1px solid #2B5E95;
+
+}
+.serviceFormTitle{
+    font-size: 24px;
+    font-weight: bolder;
+    color: #2B5E95;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.synopsisText{
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2B5E95;
+
+}
+.inquireNumber{
+    color: #2B5E95;
+
+}
+#inquireNumber{
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(37, 75, 145, 0.877);
+}
+.formTable{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.tableTh{
+    width: 80%;
+    /* padding-left: 20px;。 */
+    margin-left: 160px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    /* background-color: crimson; */
+
+}
+
+.scoreItem{
+    padding: 0 25px;
+    color: #2B5E95;
+    font-weight: bold;
+}
+.tableTr{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.itemTitle{
+    width: 30%;
+    color: #2B5E95;
+}
+.inputGroup{
+    width: 70%;
+    margin-left: auto;
+    display: flex;
+    /* background-color: crimson; */
+}
+
+#person{
+    margin: 0 38px;
+
+}
+.epilog{
+    color: #2B5E95;
+    
+}
+.serviceForm textarea{
+    width: 100%;
+    border: 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #2B5E95;
+
+}
+#submitButton {
+    display: block;
+    margin: auto;
+    padding: 5px 20px;
+    border-radius: 0;
+    background-color: white;
+    font-weight: bolder;
+    color: #2B5E95;
+    border: 1px solid #2B5E95;
+
+  }
 
 

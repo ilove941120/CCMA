@@ -5,7 +5,7 @@ body{
     margin: 0;
 }
 /* 框架CSS */
-.xxxPage{
+.recruitPage{
     width: 100%;
     padding: 50px;
     height: auto;
@@ -18,14 +18,8 @@ body{
     margin: auto;
     display: flex;
 }
-/* 主要內容CSS */
 .contentBlock{
     width: 70%;
-}
-.text{
-    width: 100%;
-    padding: 20px;
-    margin: auto;
 }
 
 @media (max-width:1200px){
@@ -43,7 +37,7 @@ body{
     }
 }
 @media (max-width:768px){
-    .xxxPage{
+    .recruitPage{
         padding: 50px 20px;
     }
 }
@@ -58,5 +52,36 @@ body{
 @media (max-width:375px){
     
 }
+
+
+/* 主要內容CSS */
+.recruitNews{
+    width: 80%;
+    margin: auto;
+}
+.mainTitle,.subTitle{
+    color: #2B5E95;
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.mainText,.recruitNews ol{
+    font-weight: bolder;
+}
+.recruitNews ol{
+    padding-left: 20px;
+}
+.recruitNews ol li{
+    margin-bottom: 20px;
+}
+
+.mainText span{
+    color: #2B5E95;
+}
+.epilog{
+    font-weight: bolder;
+}
+
 
 
