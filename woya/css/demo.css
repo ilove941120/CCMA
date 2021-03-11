@@ -116,7 +116,13 @@ a:hover {
   position: relative;
 }
 
-
+/* header照片 */
+.header_ph{
+  width: 100%;
+}
+.header_ph img{
+  width: 100%;
+}
 
 /* banner CSS */
 .banner_g{
@@ -893,11 +899,6 @@ position: relative;
   .set_title h2 {
     width: 150px;
   }
-  .new_content{
-    font-size: 18px;
-    letter-spacing: 1 px;
-    padding-left: 170px;
-  }
   .top_img img {
     width: 110%;
     margin-left: -20px;
@@ -984,14 +985,6 @@ position: relative;
   .set_title h2 {
     width: 150px;
   }
-  .new_time{
-    width: 25%;
-  }
-  .new_content{
-    font-size: 18px;
-    letter-spacing: 1 px;
-    padding-left: 170px;
-  }
   .top_img  {
     margin: auto;
     width: 60%;
@@ -1066,18 +1059,6 @@ position: relative;
   .set_title h2 {
     width: 150px;
     font-size: 28px;
-  }
-  .new_time{
-    width: 35%;
-  }
-
-  .new_content{
-    font-size: 14px;
-    padding-left: 180px;
-    padding-top: 10px;
-    line-height: 25px;
-    letter-spacing: 2px;
-
   }
   .top_img {
     margin: auto;
@@ -1160,17 +1141,6 @@ position: relative;
   .set_title h2 {
     width: 150px;
   }
-  .new_time{
-    width: 35%;
-  }
-
-  .new_content{
-    font-size: 14px;
-    padding-left: 180px;
-    padding-top: 10px;
-    line-height: 25px;
-    letter-spacing: 2px;
-  }
   .top_img {
     width: 80%;
     margin: auto;
@@ -1218,6 +1188,9 @@ position: relative;
   }
 }
 @media (max-width: 376px){
+  .navbar{
+    width: 100%;
+  }
   .pj_introduction{
     height: 120px;
   }
@@ -1259,19 +1232,6 @@ position: relative;
   .more_button{
     margin-top: 60px;
     font-size: 14px;
-  }
-  .new_time{
-    width: 40%;
-    padding-right: 20px;
-  }
-  .new_content{
-    font-size: 14px;
-    padding-left: 160px;
-    padding-right: 20px;
-    padding-top: 10px;
-    line-height: 18px;
-    letter-spacing: 2px;
-    text-align: left;
   }
   
   .phone,

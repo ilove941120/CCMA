@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .timebox{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+            margin-left: 50px;
+            font-size: 90px;
+            text-align: center;
+
+        }
+        .button_g{
+            width: 400px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .bt{
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="time" class="timebox">
+0
+    </div>
+    <div class="button_g">
+        <div class="bt">開始</div>
+        <div class="bt">停止</div>
+        <div class="bt">重置</div>
+        <div class="bt">計時5秒</div>
+        <div class="bt">點擊輸入計時秒數</div>
+    </div>
+
+
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script>
+
+        var timing = 0;
+        var clock
+        var timeCountdown_time
+        var n1 =timeCountdown_time
+        $(".bt").eq(0).click(stard);
+        $(".bt").eq(1).click(stop);
+        $(".bt").eq(2).click(reSet);
+        $(".bt").eq(3).click(time5s);
+        $(".bt").eq(4).click(timerBt);
+        
+        // 先製作一個打印的涵式,
+        // 擊開始計數的涵式 要先在外面宣告出 時間變數和增加時間的變數
+        function stard(){
+            clock = setInterval(function(){
+                clockAdd()},1000);
+        }
+        function clockAdd(){
+            timing++;   
+            $(".timebox").text(timing);
+        }
+        // -------------
+        function time5s(){
+            clock = setInterval(function(){
+                clockAdd5s()
+            },1000);
+        }
+        function clockAdd5s(){
+            timing++;   
+            $(".timebox").text(timing);
+            if(timing == 5){
+                clearInterval(clock)
+                alert(timing +"秒鐘到囉")
+            }
+        }
+        // -------------
+        function timerBt(){
+            let n1 =prompt()
+            clock = setInterval(function(){
+                timer(n1)
+            },1000);
+        }
+        function timer(n1){
+            timing++;   
+            $(".timebox").text(timing);
+            if(timing == n1){
+                clearInterval(clock)
+                alert(timing +"秒鐘到囉")
+            }
+        }
+        // -------------
+        function stop(){
+            clearInterval(clock)
+            alert("時間停止囉")
+        }
+        function reSet(){
+            timing = 0
+            $(".timebox").text(timing);
+            alert("時間歸零")
+        }
+        
+    </script>
+    
+</body>
+</html>

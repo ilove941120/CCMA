@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <form id="message_form" method="POST">
+
+        <table id="message_table">
+      
+          <tr><td>username:</td><td>
+      
+          <input type="text" name="username" id="username"/></td></tr>  
+      
+          <tr><td>message:</td><td>
+      
+          <input type="text" name="message" id="message"/></td></tr>
+      
+          <tr><td>
+      
+           <input type="button" id="submit_message" value="送出" onClick="messageGo();"/>   
+      
+           </td></tr>
+      
+        </table>
+      
+       </form>
+    
+
+       <script src="../js/jquery-3.5.1.min.js"></script>
+       <script>
+           function messageGo(){
+
+//取得 "username" 欄位值
+
+var username = $('#username').val();        
+
+ //取得 "message" 欄位值                                
+
+var message = $('#message').val();                            
+
+  $.ajax({
+
+      //告訴程式表單要傳送到哪裡                                         
+
+      url:"message.php",                                                              
+
+      //需要傳送的資料
+
+      data:"&message="+message+"&username="+username,  
+
+       //使用POST方法     
+
+      type : "POST",                                                                    
+
+      //接收回傳資料的格式，在這個例子中，只要是接收true就可以了
+      dataType:'json', 
+
+       //傳送失敗則跳出失敗訊息      
+
+      error:function(){                                                                 
+
+      //資料傳送失敗後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
+
+      alert("失敗");
+
+      },
+
+      //傳送成功則跳出成功訊息
+
+      success:function(){                                                           
+
+      //資料傳送成功後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
+
+      alert("成功");
+
+      }
+
+  }); 
+
+};
+       </script>
+</body>
+</html>

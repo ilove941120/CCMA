@@ -1,0 +1,52 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+
+.XXXPage{
+    width: 100%;
+    padding: 50px;
+    height: auto;
+    position: relative;
+    background-color: bisque;
+}
+.pageFrame{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    background-color: beige;
+}
+.sortBlock{
+    width: 30%;
+    background-color: brown;
+}
+.sortGroup{
+    width: 100%;
+}
+.contentBlock{
+    width: 70%;
+    background-color: cornflowerblue;
+}
+
+@media (max-width:1200px){
+
+}
+@media (max-width:997px){
+    .pageFrame{
+        width: 100%;
+        flex-direction: column;
+    }
+}
+@media (max-width:768px){
+    .XXXPage{
+        padding: 50px 20px;
+    }
+}
+@media (max-width:576px){
+    
+}
+@media (max-width:375px){
+    
+}

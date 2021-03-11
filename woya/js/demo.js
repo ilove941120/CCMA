@@ -25,6 +25,8 @@ $(document).ready(function () {
     $(".li_g").hide();
     $(".navbox_li").click(function () {
         if ($(this).next(".li_g").css("display") == "none") {
+            $(this).siblings(".li_g").slideUp();
+            $(".navbox_li").find("i").css("transform","none");
             $(this).next(".li_g").slideDown("fast");
             $(this).find("i").css("transform","rotate(90deg)")
 
@@ -75,3 +77,9 @@ $(document).ready(function () {
       ],
     });
   });
+
+// 分類點擊紅色
+  $(".sortItem").click(function(){
+    $(".sortItem").removeClass("color_red");
+    $(this).addClass("color_red");
+  })

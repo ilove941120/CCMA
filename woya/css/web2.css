@@ -1,0 +1,248 @@
+*{
+    box-sizing: border-box;
+}
+a{
+    display: inline;
+    text-decoration: none;
+    color: unset;
+}
+a:hover{
+    color: red;
+}
+body{
+    margin: 0;
+}
+.about_web{
+    width: 100%;
+    height: auto;
+    padding: 50px;
+    position: relative;
+    /* background-color: blueviolet; */
+
+}
+.page_title{
+    width: 30%;
+    font-size: 42px;
+    padding-right: 70px;
+    padding-bottom: 5px;
+    text-align: right;
+    position: absolute;
+    border-bottom: 1px solid red;
+    color: #2F5D98;
+    top: 15px;
+    left: 0;
+}
+.page_title::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+.web{
+    display: none;
+}
+.web_g{
+    width: 80%;
+    margin: auto;
+    margin-top: 80px;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.web_item{
+    width: 30%;
+    height: 300px;
+    margin: 10px;
+    background-color: rgb(123, 95, 160);
+    position: relative;
+}
+.web_item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.web_mark{
+    width: 100%;
+    height: 75%;
+    background-color: rgba(37, 75, 145, 0.877);
+    color: white;
+    clip-path: polygon(0 0, 100% 46%, 100% 100%, 0% 100%);
+    padding: 0 10px;
+    padding-top:110px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    display: none;
+}
+.web_item:hover > .web_mark{
+    display: block;
+}
+.web_moreBt{
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+.web_moreBt i{
+    padding-left: 20px;
+    font-size: 15px;
+}
+.pageG{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pageG li{
+    display: inline-block;
+    color: #296194;
+    transform:rotate(45deg);
+    width: 30px;
+    height: 30px;
+    margin:0px 20px;
+    position: relative;
+}
+.pagBt{
+    display: inline-block;
+    transform:rotate(-45deg);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
+    color: #296194;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+}
+.nextBt{
+    font-size: 24px;
+}
+
+.bg_1{
+    background-color: #296194;
+}
+.bg2{
+    background-color: yellow;
+}
+.bg3{
+    background-color: teal;
+}
+.bg4{
+    background-color: thistle;
+}
+
+.cl_1{
+    color: white;
+}
+.activity{
+    display: block;
+}
+
+
+@media (max-width: 1200px){
+    .web_g{
+        width: 90%;
+    }
+    .web_item{
+        height: 200px;
+    }
+    .web_mark{
+        padding-top: 70px;
+        font-size: 18px;
+    }
+    .web_moreBt{
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+    }
+}
+
+
+@media (max-width:997px){
+    .page_title{
+        width: 30%;
+        font-size: 28px;
+    }
+    .web_mark{
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+    
+    
+
+
+}
+@media (max-width:768px){
+    .web_g{
+        width: 95%;
+    }
+    .about_web{
+        padding: 20px;
+    }
+    .page_title{
+        font-size: 28px;
+        padding-right: 30px;
+        width: 40%;
+    }
+    .web_item{
+        width: 40%;
+        height: 160px;
+    }
+    .web_mark{
+        padding-top: 60px;
+        font-size: 16px;
+    }
+    .pageG{
+        justify-content: center;
+        padding: 0;
+    }
+    .pageG li{
+        width: 25px;
+        height: 25px;
+        margin: 0 10px;
+    }
+    .pagBt{
+        width: 20px;
+        height: 20px;
+        font-size: 18px;
+        top: -1px;
+        left: -1px;
+    }
+    
+    
+}
+@media (max-width: 576px){
+    .web_item{
+        width: 40%;
+        height: 120px;
+    }
+    .web_mark{
+        padding-top: 40px;
+        font-size: 12px;
+    }
+    .web_moreBt{
+    bottom: 5px;
+    right: 5px;
+        
+    }
+    .web_moreBt i{
+        padding-left: 10px;
+        font-size: 12px;
+    }
+    
+}
+
+@media (max-width:376px){
+    .page_title{
+        font-size: 28px;
+        padding-right: 30px;
+        width: 50%;
+    }
+    
+}
