@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<style type="text/css">
+		.box {
+			display: flex;
+		}
+		.item {
+			padding: 5px 10px;
+			font-size: 14px;
+			position: relative;
+			cursor: pointer;
+		}
+		.item:after {
+			display: block;
+			content: '';
+			width: 0;
+			height: 4px;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #fff;
+			transition: all 0.3s; 
+		}
+		.item:hover:after {
+			display: block;
+			content: '';
+			width: 80%;
+			height: 4px;
+			background-color: black;
+			transition: all 0.3s; 
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<span class="item">导航一</span>
+		<span class="item">导航二</span>
+		<span class="item">导航三</span>
+	</div>
+</body>
+</html>

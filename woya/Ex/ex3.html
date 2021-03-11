@@ -1,0 +1,98 @@
+<html>
+  <head>
+  <title>My Now Amazing Webpage</title>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" href="./slick.css">
+  <link rel="stylesheet" href="./slick-theme.css">
+    <style>
+        .box_g{
+            width: 100%;
+            height: auto;
+            background-color: rgba(0, 0, 0, 0.123);
+            margin: auto;
+        }
+        .item{
+            /* width: 50%; */
+            height: auto;
+            background-color: blanchedalmond;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .item_in{
+            width: 80%;
+            margin: auto;
+            height: 100px;
+            background-color: brown;
+        }
+    </style>
+  </head>
+  <body>
+
+  <div class="box_g">
+      <div class="item">
+          <div class="item_in"></div>
+      </div>
+      <div class="item">
+        <div class="item_in"></div>
+
+      </div>
+      <div class="item">
+        <div class="item_in"></div>
+
+      </div>
+      <div class="item">
+        <div class="item_in"></div>
+
+      </div>
+      <div class="item">
+        <div class="item_in"></div>
+
+      </div>
+  </div>
+
+  <script type="text/javascript" src="./jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+  <script type="text/javascript">
+    $('.box_g').slick({
+        dots: true,
+        arrows:false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 4,
+        responsive: [
+            // {
+            // breakpoint: 1024,
+            // settings: {
+            //     slidesToShow: 3,
+            //     slidesToScroll: 3,
+            //     infinite: true,
+            //     dots: true
+            // }
+            // },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+        });
+  </script>
+
+  </body>
+</html>

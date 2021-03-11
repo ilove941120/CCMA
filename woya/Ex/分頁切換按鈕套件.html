@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* -------使用說明----- */
+        /* CHangeXXX  用Ctrl+Shift+L 全選後更改名稱  主要更換卡片樣式和JS*/
+        /* Change_box 用Ctrl+Shift+L 全選後更改名稱  主要更換卡片盒子名稱 */
+
+        /* ----------------------分頁頁面-------------------- */
+
+        .ChangeXXX_page {
+            width: 600px;
+            height: auto;
+            margin-bottom: 20px;
+            background-color: rgb(151, 35, 35);
+            color: white;
+            font-size: 36px;
+            display: none;
+        }
+        /* ------------作品卡片--------------- */
+        .Change_box-g {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .Change_box {
+            width: 80%;
+            height: 80%;
+            padding: 10px;
+            border: 6px solid rgba(255, 255, 255, 0.5);
+            box-shadow: -4px 4px 8px rgba(17, 30, 148, 0.5);
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --------分頁按鈕-------- */
+        .page-button {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ChangeXXX_bn_t {
+            width: 34.6px;
+            height: 38px;
+            margin: 10px 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ChangeXXX_bn_t:hover {
+            background-color: black;
+            color: white;
+            transition: 1s;
+        }
+
+        .ChangeXXX_bn_d {
+            width: 34.6px;
+            height: 38px;
+            margin: 10px 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ChangeXXX_bn_d:hover {
+            background-color: black;
+            color: white;
+            transition: 1s;
+        }
+
+        /* ------------分頁點擊顯示--------------- */
+
+        .ChangeXXX_active {
+            display: block;
+        }
+
+        .ChangeXXX_bn_t.ChangeXXX_active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: rgb(214, 30, 30); */
+        }
+
+        .ChangeXXX_bn_d.ChangeXXX_active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: rgb(214, 30, 30); */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-button">
+        <div class="ChangeXXX_bn_t">1</div>
+        <div class="ChangeXXX_bn_t">2</div>
+        <div class="ChangeXXX_bn_t">3</div>
+    </div>
+    <div class="ChangeXXX_page ChangeXXX_active">1
+        <div class="Change_box-g">
+            <div class="Change_box"></div>
+            <div class="Change_box"></div>
+            <div class="Change_box"></div>
+        </div>
+    </div>
+    <div class="ChangeXXX_page">2
+        <div class="Change_box-g">
+            <div class="Change_box"></div>
+            <div class="Change_box"></div>
+        </div>
+    </div>
+    <div class="ChangeXXX_page">3
+        <div class="Change_box-g">
+            <div class="Change_box"></div>
+        </div>
+    </div>
+    <div class="page-button">
+        <div class="ChangeXXX_bn_d">1</div>
+        <div class="ChangeXXX_bn_d">2</div>
+        <div class="ChangeXXX_bn_d">3</div>
+    </div>
+
+    <!-- ----作品頁面切換----------------------- -->
+    <script>
+        // ----頁面切換上----
+        var ChangeXXX_bn_ts = document.querySelectorAll('.ChangeXXX_bn_t')
+        var ChangeXXX_pages = document.querySelectorAll('.ChangeXXX_page')
+        // ----添加顯示------
+        for (var i = 0; i < ChangeXXX_bn_ts.length; i++) {
+            const ChangeXXX_bn_t = ChangeXXX_bn_ts[i];
+            const ChangeXXX_page = ChangeXXX_pages[i];
+
+            ChangeXXX_bn_t.onclick = function () {
+                remove_ChangeXXX_active_t()
+                ChangeXXX_bn_t.classList.add('ChangeXXX_active')
+                ChangeXXX_page.classList.add('ChangeXXX_active')
+            }
+        }
+        // ----移除顯示------
+        function remove_ChangeXXX_active_t() {
+            for (var i = 0; i < ChangeXXX_bn_ts.length; i++) {
+                const ChangeXXX_bn_t = ChangeXXX_bn_ts[i];
+                const ChangeXXX_page = ChangeXXX_pages[i];
+                ChangeXXX_bn_t.classList.remove('ChangeXXX_active')
+                ChangeXXX_page.classList.remove('ChangeXXX_active')
+            }
+        }
+        // ----頁面切換下----
+        var ChangeXXX_bn_ds = document.querySelectorAll('.ChangeXXX_bn_d')
+        var ChangeXXX_pages = document.querySelectorAll('.ChangeXXX_page')
+        // ----添加顯示------
+        for (var i = 0; i < ChangeXXX_bn_ds.length; i++) {
+            const ChangeXXX_bn_d = ChangeXXX_bn_ds[i];
+            const ChangeXXX_page = ChangeXXX_pages[i];
+
+            ChangeXXX_bn_d.onclick = function () {
+                remove_ChangeXXX_active_d()
+                ChangeXXX_bn_d.classList.add('ChangeXXX_active')
+                ChangeXXX_page.classList.add('ChangeXXX_active')
+            }
+        }
+        // ----移除顯示------
+        function remove_ChangeXXX_active_d() {
+            for (var i = 0; i < ChangeXXX_bn_ds.length; i++) {
+                const ChangeXXX_bn_d = ChangeXXX_bn_ds[i];
+                const ChangeXXX_page = ChangeXXX_pages[i];
+                ChangeXXX_bn_d.classList.remove('ChangeXXX_active')
+                ChangeXXX_page.classList.remove('ChangeXXX_active')
+            }
+        }
+    </script>
+</body>
+
+</html>

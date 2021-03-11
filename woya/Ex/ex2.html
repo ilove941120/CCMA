@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./slick.css">
+    <link rel="stylesheet" href="./slick-theme.css">
+    <style>
+        body{
+            margin: 0;
+            background-color: royalblue;
+        }
+        .banner{
+            width: 500px;
+            height: 300px;
+            margin: auto;
+            background-color: rgba(255, 0, 0, 0.336);
+        }
+        
+        .item{
+            width: 300px;
+            height: 300px;
+            margin: auto;
+
+            /* background-color: red; */
+        }
+
+        .slick-dots li button:before{
+            font-size: 40px;
+        }
+        .box{
+            background-color: saddlebrown;
+        }
+        /* slick CSS */
+        .single-item{
+            /* margin: auto; */
+        }
+        .slick-dots{
+            /* margin-bottom: 30px; */
+            /* padding-bottom: 30px; */
+            bottom: 25px;
+        }
+        .slick-dotted.slick-slider{
+            margin:0;
+        }
+        .slick-dots li button:before{
+            font-size: 60px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="banner single-item">
+        <div class="item">
+            <img src="./img/cat1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/cat2.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/cat3.png" alt="">
+        </div>
+    </div>
+    <div class="box">1</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="./slick.js"></script>
+    <script>
+        $('.single-item').slick({
+            arrows:false,
+            dots:true,
+        });
+    </script>
+</body>
+</html>

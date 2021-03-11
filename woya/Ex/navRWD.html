@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            height: 200vh;
+            background-color: sandybrown;
+        }
+
+        .navbar{
+            width: 100%;
+            height: 70px;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        .navbar_button{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin-left: auto;
+        }
+        .list_g{
+            width:100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgb(65, 225, 73);
+            position: fixed;
+            z-index: 100;
+            top: 0px;
+
+        }
+        .list{
+            width: 200px;
+            height: 60px;
+            background-color: royalblue;
+        }
+        .hidden{
+            display: none;
+        }
+        .mask{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.5;
+            position: fixed;
+            z-index: 99;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mask"></div>
+    <div class="navbar">
+        <div id="box2" class="navbar_button">
+            
+            
+        </div>
+        
+    </div>
+    
+    <div id="box1" class="list_g">
+        <a class="list" href="">goolge</a>
+        <a class="list" href="https://www.youtube.com/index?gl=TW">youtube</a>
+        <a class="list" href=""></a>
+        <a class="list" href=""></a>
+    </div>
+    
+    
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(".mask").hide();
+            $(".list_g").hide();
+            $(".navbar_button").click(function(){
+                $(".list_g").slideDown("slow");
+                $(".mask").fadeIn("slow");
+            })
+    
+            $("body").click(function(evt){
+                if($(evt.target).parents(".list_g").length ==0 
+                && evt.target.className != "list_g" 
+                && evt.target.className != "navbar_button"
+                ){
+                $(".list_g").slideUp("slow");
+                $(".mask").delay("500").fadeOut("slow");
+                }
+            })
+        })
+
+    </script>
+
+</body>
+</html>

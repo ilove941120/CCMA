@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <style>
+        .single-g{
+            width: 100%;
+            height: 300px;
+            background-color: blanchedalmond;
+            display: flex;
+        }
+        .item{
+            /* width: 300px; */
+            /* height: 300px; */
+            background-color: blue;
+            /* margin: 20px; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slick-center img{
+            transform: scale(1.4);
+        }
+
+        .bg1{
+            background-color: red;
+        }
+        .bg2{
+            background-color: yellow;
+        }
+        .bg3{
+            background-color: blue;
+        }
+        .bg4{
+            background-color: green;
+        }
+        .bg5{
+            background-color: black;
+        }
+
+        .box_out{
+            width: 20%  ;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+        .box_out i{
+            padding: 20px;
+            border: 1px solid black;
+
+        }
+        .box_img{
+            font-size: 160px;
+        }
+        .box_title{
+            font-size: 36px;
+            text-align: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="single-g">
+        <div class="item bg1">
+            <img src="./img/cat1.jpg" alt="">
+        </div>
+        <div class="item bg2">
+            <img src="./img/cat2.png" alt="">
+        </div>
+        <div class="item bg3">
+            <img src="./img/cat3.png" alt="">
+        </div>
+        <div class="item bg4">
+            <img src="./img/cat2.png" alt="">
+        </div>
+        <div class="item bg5">
+            <img src="./img/cat1.jpg" alt="">
+        </div>
+    </div>
+    <br>
+    <div class="box_out">
+        <div class="box_img">
+            <i class="fab fa-facebook"></i>
+
+        </div>
+        <div class="box_title">facebook</div>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.single-g').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows:false,
+                autoplay:true,
+                autoplay:2000,
+                centerMode:true,
+                centerPadding:"0px",
+            });
+        })
+    </script>
+
+</body>
+</html>
