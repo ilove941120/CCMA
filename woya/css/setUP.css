@@ -1,3 +1,9 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
 .colorBlue{
     color: #2B5E95;
     background-color: #2B5E95;
@@ -30,4 +36,10 @@
 }
 .spin90deg{
     transform: rotate(90deg);
+}
+
+.focus{
+    color: #952b34;
+    font-weight: bolder;
+    border-bottom: 2px solid #2B5E95;
 }

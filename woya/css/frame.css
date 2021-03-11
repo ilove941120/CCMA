@@ -5,7 +5,7 @@ body{
     margin: 0;
 }
 
-.XXXPage{
+.xxxPage{
     width: 100%;
     padding: 50px;
     height: auto;
@@ -14,20 +14,18 @@ body{
 }
 .pageFrame{
     width: 80%;
+    padding-top: 80px;
     margin: auto;
     display: flex;
-    background-color: beige;
 }
-.sortBlock{
-    width: 30%;
-    background-color: brown;
-}
-.sortGroup{
-    width: 100%;
-}
+
 .contentBlock{
     width: 70%;
-    background-color: cornflowerblue;
+}
+.text{
+    width: 100%;
+    padding: 20px;
+    margin: auto;
 }
 
 @media (max-width:1200px){
@@ -36,16 +34,23 @@ body{
 @media (max-width:997px){
     .pageFrame{
         width: 100%;
+        padding-top: 50px;
         flex-direction: column;
+    }
+    .contentBlock{
+        width: 100%;
+        margin: 20px 0;
     }
 }
 @media (max-width:768px){
-    .XXXPage{
+    .xxxPage{
         padding: 50px 20px;
     }
 }
 @media (max-width:576px){
-    
+    .pageFrame{
+        padding-top: 30px;
+    }
 }
 @media (max-width:375px){
     

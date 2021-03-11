@@ -1,41 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.sortBlock {
+  width: 30%;
+  height: auto;
+  /* background-color: cornflowerblue; */
+}
+.sortRWD {
+  width: 100%;
+  background-color: #bababa;
+  padding: 8px;
+  color: white;
+  position: relative;
+  transition: 0.5s;
+  display: none;
+}
+.sortRWD i {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+}
 
-.sortBlock{
-    width: 20%;
-    height: auto;
-    /* background-color: cornflowerblue; */
+.sort {
+  width: 100%;
+  /* padding-bottom: 5px; */
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #2b5e95;
+  border-bottom: 1px solid #2b5e95;
+  display: flex;
+  justify-content: space-between;
 }
-.sortRWD{
+.sort i {
+  font-size: 24px;
+}
+.sortGroup {
+  display: none;
+  margin-bottom: 10px;
+}
+.sortItem {
+  padding: 10px;
+  margin: 10px 0;
+  margin-left: 20px;
+  color: #2b5e9562;
+  border-bottom: 1px solid #2b5e9562;
+}
+
+.sort:hover {
+  color: #2b5e9562;
+  border-bottom: 2px solid #2b5e95;
+}
+.sortItem:hover {
+  color: #2b5e9562;
+  border-bottom: 2px solid #2b5e95;
+}
+.sortRWD:hover {
+  background-color: #2b5e95;
+}
+
+.spin90deg {
+  transform: rotate(90deg);
+}
+.focus {
+  color: #952b34;
+  font-weight: bolder;
+  border-bottom: 2px solid #2b5e95;
+}
+.focusRWD {
+  background-color: #2b5e95;
+}
+
+@media (max-width: 997px) {
+  .sortRWD {
+    display: block;
+  }
+  .sortLargeLayout {
     display: none;
-}
-.sort{
+  }
+  .sortBlock {
     width: 100%;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #2B5E95;
-    border-bottom: 1px solid #2B5E95;
-    display: flex;
-    justify-content: space-between;
-    
-}
-.sort i{
-    font-size: 24px;
-}
-.sortGroup{
-    display: none;
-    margin-bottom: 10px;
-}
-.sortItem{
-    padding: 5px;
-    margin-bottom: 20px;
-    margin-left: 5px;
-    color: #2b5e9562;
-    border-bottom: 1px solid #2b5e9562;
-}
-
-.colorRed{
-    color: #952b34;
-}
-.spin90deg{
-    transform: rotate(90deg);
+    text-align: center;
+  }
+  .sort {
+    margin: auto;
+  }
+  .sortItem {
+    text-align: left;
+  }
 }

@@ -22,21 +22,22 @@
 }
 @media (max-width:997px){
     .pageTitle{
-        width: 30%;
+        width: 40%;
+        padding-right: 30px;
         font-size: 28px;
     }
 }
 @media (max-width:768px){
+
+}
+@media (max-width:576px){
     .pageTitle{
-        font-size: 28px;
-        padding-right: 30px;
-        width: 40%;
+        font-size: 24px;
     }
 }
 @media (max-width:376px){
     .pageTitle{
-        font-size: 28px;
-        padding-right: 30px;
+        font-size: 20px;
         width: 50%;
     }
 }
