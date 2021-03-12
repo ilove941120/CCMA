@@ -21,6 +21,16 @@
             height: 30px;
             background-color: red;
         }
+
+        #myName {
+            padding-left: 5px;
+            border: 1px solid rgb(124, 124, 223);
+            outline: unset;
+        }
+
+        .focuse {
+            outline: 2px solid rgb(187, 169, 8);
+        }
     </style>
 </head>
 
@@ -30,18 +40,40 @@
         <div class="boxin"></div>
 
     </div>
-    <iframe 
-        width="600" 
-        height="450" 
-        frameborder="0" 
-        style="border:0" 
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc&q=高雄市政府" 
+    <iframe width="600" height="450" frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc&q=高雄市政府"
         allowfullscreen>
     </iframe>
 
+    <form action="">
+        <div class="formBlock">
+            <label for="name">您的姓名</label>
+            <br>
+            <input type="text" id="name" class="formItem" name="senderName" placeholder="您的姓名">
+        </div>
+        <div class="formBlock">
+            <label for="company">*公司名稱</label>
+            <br>
+            <input type="text" id="company" class="formItem" name="senderCompany" placeholder="公司名稱" required>
+        </div>
+        <div class="formBlock">
+            <div class="formBlockIn">
+                <label for="phone">*連絡電話</label>
+                <br>
+                <input type="text" id="phone" class="formItem" name="senderPhone" placeholder="連絡電話" required>
+            </div>
+            <div class="formBlockIn">
+                <label for="email">*E-mail</label>
+                <br>
+                <input type="email" id="email" class="formItem" name="senderEmail" placeholder="E-mail" required>
+            </div>
+        </div>
+    </form>
+
+
     <div class="g-recaptcha" data-callback="captcha_onclick" data-sitekey="your sitekey" style="margin-top:50px;"></div>
     <input type="hidden" name="recaptcha" id="recaptchaValidator" />
-
+    <script src="../js/jquery-3.5.1.min.js"></script>
     <script>
         function LoginForm() {
             wp_register_script('pm-google_script', 'https://www.google.com/recaptcha/api.js');
@@ -49,6 +81,82 @@
         }
         function captcha_onclick() {
             document.getElementById('recaptchaValidator').value = grecaptcha.getResponse();
+        }
+    </script>
+
+    <script>
+        var reNumber = /^[1-9]*$/;
+        $("#myName").focus(function () {
+            $(this).css("borderColor", "red")
+        })
+        $("#myName").blur(function () {
+            $(this).css("borderColor", "")
+            if (reNumber.test($("#myName").val())) {
+                $(".error").text('')
+            }
+            else {
+                $(".error").text('不符合規則')
+
+            }
+            // $(this).addClass("focuse")
+        })
+        var re_nm = /^\W$/,
+            re_idt = /^[A-Z]{1}\d{9}$/,
+            re_tel = /^0\d{1}\d{6,8}$/,
+            re_ctel = /^09\d{8}$/,
+            re_eml = /^\S+@\w+((\.|-)\w+)*\.\w+$/,
+            errstr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_.#@()*[]{}|!~';:<>,?/\&^%$\"+-";
+
+        function formChk() {
+            var name = $('input[name="senderName"]').val(),
+                company = $('input[name="senderCompany"]').val(),
+                phone = $('input[name="senderName"]').val(),
+                email = $('input[name="senderEmail"]').val(),
+                errTex = '',
+                errck = '',
+                chk = true,
+
+            if (name = '') {
+                errtex += '請輸入您的姓名!'
+            }
+            for (var i = 0; i < name.length; i++) { } {
+                errck = errstr.indexOf(name.charAt(i))
+                if (errck > 0) {
+                    errtex += '您的姓名輸入格式錯誤!\n';
+                    chk = false;
+                    break;
+                };
+                if (tel == '') {
+                    errtex += '請輸入您的電話號碼!\n';
+                    chk = false;
+                } else if (!re_tel.test(tel)) {
+                    errtex += '您的電話號碼輸入錯誤!\n';
+                    chk = false;
+                };
+            }
+
+            if (ctel == '') {
+                errtex += '請輸入您的手機號碼!\n';
+                chk = false;
+            } else if (!re_ctel.test(ctel)) {
+                errtex += '您的手機號碼輸入錯誤!\n';
+                chk = false;
+            };
+        }
+
+        if (email == '') {
+            errtex += '請輸入您的信箱!\n';
+            chk = false;
+        } else if (!re_eml.test(email)) {
+            errtex += '您的信箱輸入錯誤!\n';
+            chk = false;
+        };
+
+        if (chk === true) {
+            alert('form sent!');
+        } else {
+            alert(errtex);
+            return false;
         }
     </script>
 </body>
