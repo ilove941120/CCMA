@@ -26,60 +26,75 @@
       <div class="contentBlock">
           <div class="serviceForm">
             <form action="">
-              <div class="serviceFormTitle"></div>
+              <div class="serviceFormTitle">校正完成滿意度調查</div>
               <div class="synopsisText">
                 您好：<br>
                 一天、兩天，一月、兩月……令這位農民失望的是，當周圍的蒿草、灌木從小苗長到一米多高時，
                 毛竹苗還是一動不動。第二年、第三年……雖然雨水充沛、光照充足，但那棵毛竹苗還是一動不動。
               </div>
               <label class="inquireNumber" for="inquireNumber">委託單編號</label>
-              <input id="inquireNumber" name="inquireNumber" type="text" placeholder="請輸入委託單編號" required>
+              <input id="inquireNumber" name="inquireNumber" type="text" placeholder="請輸入委託單編號"
+              pattern="[0-9]{8,}"
+              autocomplete="off"
+              required>
               <div class="formTable">
-                <div class="tableTh">
-                  <div class="scoreItem">很滿意</div>
-                  <div class="scoreItem">滿意</div>
-                  <div class="scoreItem">一般</div>
-                  <div class="scoreItem">不滿意</div>
-                  <div class="scoreItem">沒意見</div>
-                </div>
                 <div class="tableTr">
-                  <div class="itemTitle">收件人員服務態度</div>
-                  <div class="inputGroup">
-                    <input type="radio" name="person" id="person" >
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
+                  <div class="scoreItemGroup">
+                    <div class="scoreItem">很滿意</div>
+                    <div class="scoreItem">滿意</div>
+                    <div class="scoreItem">一般</div>
+                    <div class="scoreItem">不滿意</div>
+                    <div class="scoreItem">沒意見</div>
                   </div>
                 </div>
                 <div class="tableTr">
                   <div class="itemTitle">收件人員服務態度</div>
-                  <div class="inputGroup">
-                    <input type="radio" name="person" id="person" >
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
+                  <div class="scoreItemGroup">
+                    <div class="scoreItem"><input type="radio" name="person" id="person" required></div>
+                    <div class="scoreItem"><input type="radio" name="person" id="person" ></div>
+                    <div class="scoreItem"><input type="radio" name="person" id="person" ></div>
+                    <div class="scoreItem"><input type="radio" name="person" id="person" ></div>
+                    <div class="scoreItem"><input type="radio" name="person" id="person" ></div>
                   </div>
                 </div>
                 <div class="tableTr">
-                  <div class="itemTitle">收件人員服務態度</div>
-                  <div class="inputGroup">
-                    <input type="radio" name="person" id="person" >
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
+                  <div class="itemTitle">校正處理效率</div>
+                  <div class="scoreItemGroup">
+                    <div class="scoreItem"><input type="radio" name="effectiveness" id="effectiveness" required></div>
+                    <div class="scoreItem"><input type="radio" name="effectiveness" id="effectiveness" ></div>
+                    <div class="scoreItem"><input type="radio" name="effectiveness" id="effectiveness" ></div>
+                    <div class="scoreItem"><input type="radio" name="effectiveness" id="effectiveness" ></div>
+                    <div class="scoreItem"><input type="radio" name="effectiveness" id="effectiveness" ></div>
                   </div>
                 </div>
                 <div class="tableTr">
-                  <div class="itemTitle">收件人員服務態度</div>
-                  <div class="inputGroup">
-                    <input type="radio" name="person" id="person" >
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
-                    <input type="radio" name="person" id="person">
+                  <div class="itemTitle">校正內容完整性</div>
+                  <div class="scoreItemGroup">
+                    <input type="radio" name="intact" id="intact" required>
+                    <input type="radio" name="intact" id="intact">
+                    <input type="radio" name="intact" id="intact">
+                    <input type="radio" name="intact" id="intact">
+                    <input type="radio" name="intact" id="intact">
+                  </div>
+                </div>
+                <div class="tableTr">
+                  <div class="itemTitle">校正報告結果可靠性</div>
+                  <div class="scoreItemGroup">
+                    <input type="radio" name="reliable" id="reliable" required>
+                    <input type="radio" name="reliable" id="reliable">
+                    <input type="radio" name="reliable" id="reliable">
+                    <input type="radio" name="reliable" id="reliable">
+                    <input type="radio" name="reliable" id="reliable">
+                  </div>
+                </div>
+                <div class="tableTr">
+                  <div class="itemTitle">校正報告服務品質</div>
+                  <div class="scoreItemGroup">
+                    <input type="radio" name="quality" id="quality" required>
+                    <input type="radio" name="quality" id="quality">
+                    <input type="radio" name="quality" id="quality">
+                    <input type="radio" name="quality" id="quality">
+                    <input type="radio" name="quality" id="quality">
                   </div>
                 </div>
               </div>

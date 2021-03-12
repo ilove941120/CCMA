@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: black;
+        }
+
+        .boxin {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="boxin"></div>
+        <div class="boxin"></div>
+
+    </div>
+    <iframe 
+        width="600" 
+        height="450" 
+        frameborder="0" 
+        style="border:0" 
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc&q=高雄市政府" 
+        allowfullscreen>
+    </iframe>
+
+    <div class="g-recaptcha" data-callback="captcha_onclick" data-sitekey="your sitekey" style="margin-top:50px;"></div>
+    <input type="hidden" name="recaptcha" id="recaptchaValidator" />
+
+    <script>
+        function LoginForm() {
+            wp_register_script('pm-google_script', 'https://www.google.com/recaptcha/api.js');
+            wp_enqueue_script('pm-google_script');
+        }
+        function captcha_onclick() {
+            document.getElementById('recaptchaValidator').value = grecaptcha.getResponse();
+        }
+    </script>
+</body>
+
+</html>

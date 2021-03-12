@@ -13,7 +13,7 @@ body{
     /* background-color: bisque; */
 }
 .pageFrame{
-    width: 80%;
+    width: 90%;
     padding-top: 80px;
     margin: auto;
     display: flex;
@@ -21,6 +21,7 @@ body{
 .contentBlock{
     width: 100%;
 }
+
 
 @media (max-width:1200px){
 
@@ -42,7 +43,7 @@ body{
     }
 }
 @media (max-width:576px){
-    .correctionDescriptionPage{
+    .surveyPage{
         padding: 50px 10px;
     }
     .pageFrame{
@@ -84,26 +85,26 @@ body{
     }
 }
 @media (max-width:768px){
-
+    .pageTitle{
+        font-size: 22px;
+    }
 }
 @media (max-width:576px){
     .pageTitle{
-        font-size: 24px;
-    }
-}
-@media (max-width:376px){
-    .pageTitle{
+        width: 60%;
         font-size: 20px;
-        width: 50%;
     }
 }
 
 /* 主要內容CSS */
 .serviceForm{
-    padding: 30px 100px;
+    width: 80%;
+    padding: 50px 200px;
+    margin: auto;
     border: 1px solid #2B5E95;
 
 }
+
 .serviceFormTitle{
     font-size: 24px;
     font-weight: bolder;
@@ -115,7 +116,6 @@ body{
     font-weight: bold;
     margin-bottom: 20px;
     color: #2B5E95;
-
 }
 .inquireNumber{
     color: #2B5E95;
@@ -130,45 +130,34 @@ body{
     margin-top: 40px;
     margin-bottom: 40px;
 }
-.tableTh{
-    width: 80%;
-    /* padding-left: 20px;。 */
-    margin-left: 160px;
-    margin-bottom: 10px;
+.tableTr{
+    width: 100%;
+    margin-bottom: 20px;
     display: flex;
-    justify-content: center;
-    /* background-color: crimson; */
-
+}
+.scoreItemGroup{
+    width: 70%;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .scoreItem{
-    padding: 0 25px;
+    width: 20%;
+    margin:0 10px;
     color: #2B5E95;
     font-weight: bold;
-}
-.tableTr{
-    width: 100%;
-    margin-bottom: 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
-
 }
-
 .itemTitle{
     width: 30%;
     color: #2B5E95;
 }
-.inputGroup{
-    width: 70%;
-    margin-left: auto;
-    display: flex;
-    /* background-color: crimson; */
-}
 
-#person{
-    margin: 0 38px;
 
-}
 .epilog{
     color: #2B5E95;
     
@@ -189,7 +178,53 @@ body{
     font-weight: bolder;
     color: #2B5E95;
     border: 1px solid #2B5E95;
-
   }
 
+  @media (max-width:1600px){
+    .serviceForm{
+        padding: 50px 150px;
+    }
+}
+@media (max-width:1400px){
+    .serviceForm{
+        padding: 50px 100px;
+    }
+}
+@media (max-width:1200px){
+    .serviceForm{
+        padding: 50px 50px;
+    }
+}
+@media (max-width:997px){
+    .serviceForm{
+        width: 100%;
+    }
+}
+@media (max-width:768px){
+    .serviceForm{
+        padding: 50px 20px;
+    }
+    .synopsisText{
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    .scoreItem{
+        font-size: 14px;
+    }
+    .itemTitle{
+        font-size: 14px;
+    }
+}
+@media (max-width:576px){
+    .scoreItem{
+        width: 5%;
+        margin:0;
+    }
+    .scoreItemGroup:nth-child(1){
+        padding-right: 1px;
+    }
+}
+@media (max-width:376px){
+
+}
 

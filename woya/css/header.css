@@ -309,4 +309,14 @@ a:hover {
   }
 }
 @media (max-width: 376px) {
+  .navbar {
+    width: 100%;
+  }
+  .navbar_logo{
+    width: 85%;
+  }
+  .nav_button{
+    width: 40px;
+    height: 40px;
+  }
 }

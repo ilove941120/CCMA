@@ -58,8 +58,7 @@
               <div class="formBlock">
                 <label for="name">您的姓名</label>
                 <br>
-                <input type="text" id="name" class="formItem" name="senderName" placeholder="您的姓名"
-                  pattern="^[\u4E00-\u9FA5]{2,5}$">
+                <input type="text" id="name" class="formItem" name="senderName" placeholder="您的姓名">
               </div>
               <div class="formBlock">
                 <label for="company">*公司名稱</label>
@@ -70,14 +69,12 @@
                 <div class="formBlockIn">
                   <label for="phone">*連絡電話</label>
                   <br>
-                  <input type="text" id="phone" class="formItem" name="senderPhone" placeholder="連絡電話" required
-                    pattern="^[0-9]{9}">
+                  <input type="text" id="phone" class="formItem" name="senderPhone" placeholder="連絡電話" required>
                 </div>
                 <div class="formBlockIn">
                   <label for="email">*E-mail</label>
                   <br>
-                  <input type="email" id="email" class="formItem" name="senderEmail" placeholder="E-mail" required
-                    pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/">
+                  <input type="email" id="email" class="formItem" name="senderEmail" placeholder="E-mail" required>
                 </div>
               </div>
               <div class="formBlock">
@@ -248,6 +245,18 @@
       var isChecked = checkboxGroup.is(':checked');
       checkboxGroup.prop('required', !isChecked);
     });
+  </script>
+  <script>
+    var n1 = $("#name").val()
+    var reTw = /^[1-9]d*$/;
+    if (n1.match(reTw)) {
+      alert("輸入正確")
+      return true
+    }
+    else {
+      alert("金錢輸入錯誤,請輸入正確格式")
+      return false
+    }
   </script>
 
 </body>
