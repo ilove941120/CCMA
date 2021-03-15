@@ -12,7 +12,7 @@
       if (
         $(evt.target).parents(".navbox_g").length == 0 &&
         evt.target.className != "navbox_g" &&
-        evt.target.className != "nav_button" 
+        evt.target.className != "nav_button" &&
         
       ) {
         $(".navbox_g").slideUp("slow");
