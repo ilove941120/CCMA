@@ -20,6 +20,8 @@
 </head>
 
 <body>
+
+  
   <!-- 您的需求/意見留言板葉面 -->
   <div class="messageBoardPage">
     <div class="pageTitle">您的需求/意見留言板</div>
@@ -49,7 +51,7 @@
       </div>
       <div class="contentBlock">
         <div class="opinionForm">
-          <form action="">
+          <form action="" id="form1" name="form1" onsubmit="return false">
             <div class="opinionFormTitle">您的需求/意見留言板</div>
             <div class="opinionFormText">
               若您對我們的相關產品、法規及技術有疑問，請填寫下列需求表單，收到您的訊息，將立即派專員與您聯絡。
@@ -58,23 +60,27 @@
               <div class="formBlock">
                 <label for="name">您的姓名</label>
                 <br>
-                <input type="text" id="name" class="formItem" name="senderName" placeholder="您的姓名">
+                <input type="text" id="name" class="formItem" name="senderName" placeholder="您的姓名"><span
+                  class='error1'></span>
               </div>
               <div class="formBlock">
                 <label for="company">*公司名稱</label>
                 <br>
-                <input type="text" id="company" class="formItem" name="senderCompany" placeholder="公司名稱" required>
+                <input type="text" id="company" class="formItem" name="senderCompany" placeholder="公司名稱"><span
+                  class='error2'></span>
               </div>
               <div class="formBlock">
                 <div class="formBlockIn">
                   <label for="phone">*連絡電話</label>
                   <br>
-                  <input type="text" id="phone" class="formItem" name="senderPhone" placeholder="連絡電話" required>
+                  <input type="text" id="phone" class="formItem" name="senderPhone" placeholder="連絡電話"><span
+                    class='error3'></span>
                 </div>
                 <div class="formBlockIn">
                   <label for="email">*E-mail</label>
                   <br>
-                  <input type="email" id="email" class="formItem" name="senderEmail" placeholder="E-mail" required>
+                  <input type="email" id="email" class="formItem" name="senderEmail" placeholder="E-mail"><span
+                    class='error4'></span>
                 </div>
               </div>
               <div class="formBlock">
@@ -82,19 +88,19 @@
                 <br>
                 <div class="itemGroup">
                   <div class="itemBlock">
-                    <input type="checkbox" name="senderDemand" id="itemDemand" required="required">VOC-CEMS
+                    <input type="checkbox" name="senderDemand" id="itemDemand" >VOC-CEMS
                   </div>
                   <div class="itemBlock">
-                    <input type="checkbox" name="senderDemand" id="itemDemand" required="required">新產品
+                    <input type="checkbox" name="senderDemand" id="itemDemand" >新產品
                   </div>
                   <div class="itemBlock">
-                    <input type="checkbox" name="senderDemand" id="itemDemand" required="required">系統整合
+                    <input type="checkbox" name="senderDemand" id="itemDemand" >系統整合
                   </div>
                   <div class="itemBlock">
-                    <input type="checkbox" name="senderDemand" id="itemDemand" required="required">校正實驗室
+                    <input type="checkbox" name="senderDemand" id="itemDemand" >校正實驗室
                   </div>
                   <div class="itemBlock">
-                    <input type="checkbox" name="senderDemand" id="itemDemand" required="required">其他
+                    <input type="checkbox" name="senderDemand" id="itemDemand" >其他
                   </div>
                 </div>
               </div>
@@ -105,7 +111,7 @@
                   placeholder="詢問內容"></textarea>
               </div>
               <div class="g-recaptcha" data-sitekey="AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc"></div>
-              <input id="submitButton" type="submit" value="確認送出">
+              <input type="submit" name="button" id="button" value="送出" />
             </div>
           </form>
         </div>
@@ -239,14 +245,14 @@
   </script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
   <script>
-    var requiredCheckboxes = $(':checkbox[required]');
-    requiredCheckboxes.on('change', function (e) {
-      var checkboxGroup = requiredCheckboxes.filter('[name="' + $(this).attr('name') + '"]');
-      var isChecked = checkboxGroup.is(':checked');
-      checkboxGroup.prop('required', !isChecked);
-    });
+    // var requiredCheckboxes = $(':checkbox[required]');
+    // requiredCheckboxes.on('change', function (e) {
+    //   var checkboxGroup = requiredCheckboxes.filter('[name="' + $(this).attr('name') + '"]');
+    //   var isChecked = checkboxGroup.is(':checked');
+    //   checkboxGroup.prop('required', !isChecked);
+    // });
   </script>
-  <script>
+  <!-- <script>
     var n1 = $("#name").val()
     var reTw = /^[1-9]d*$/;
     if (n1.match(reTw)) {
@@ -257,6 +263,75 @@
       alert("金錢輸入錯誤,請輸入正確格式")
       return false
     }
+  </script> -->
+
+  <script>
+    $(document).ready(function () {
+      $('formItem').focus(function () {
+        $(this).css("border-color", "#006cff")
+      })
+      $('formItem').blur(function () {
+        $(this).css("border-color", "")
+      })
+      var rule1 = /^.{3,5}$/;
+      $("#name").blur(function () {
+        if (rule1.test($(this).val())) {
+          $('.error1').text('')
+          $(this).css("border-color", "green")
+        } else {
+          $('.error1').text('不符合規則，請輸入3-5個任意文字')
+          $(this).css("border-color", "red")
+        }
+      })
+
+
+      var rule3 = /^0[0-9]-\d{7}$/;
+      $("#phone").blur(function () {
+        if (rule3.test($(this).val())) {
+          $('.error3').text('')
+          $(this).css("border-color", "green")
+        } else {
+          $('.error3').text('不符合規則，請輸入「0X-XXXXXXX」')
+          $(this).css("border-color", "red")
+        }
+      })
+      var rule4 = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+      $("#email").blur(function () {
+        if (rule4.test($(this).val())) {
+          $('.error4').text('')
+          $(this).css("border-color", "green")
+        } else {
+          $('.error4').text('不符合規則，請輸入正確信箱格式')
+          $(this).css("border-color", "red")
+        }
+      })
+
+      $("#button").click(function () {
+        var check = $("input[name='senderDemand']:checked").length;
+        if ($("#name").val() == "" | rule1.test($("#name").val()) == false) {
+          alert("名字不符合格式")
+          eval("document.form1['senderName'].focus()");
+        }
+        else if ($("#company").val() == "") {
+          alert("請填寫公司名稱不得為空白")
+          eval("document.form1['senderCompany'].focus()");
+        }
+        else if ($("#phone").val() == "" | rule3.test($("#phone").val()) == false) {
+          alert("電話不符合格式");
+          eval("document.form1['senderPhone'].focus()");
+        }
+        else if ($("#email").val() == "" | rule4.test($("#email").val() == false)) {
+          alert("信箱不符合格式");
+          eval("document.form1['senderEmail'].focus()");
+        }
+        else if (check == 0) {
+          alert("您尚未勾選任何項目");
+        }
+        else {
+          document.form1.submit();
+        }
+      })
+    })
   </script>
 
 </body>

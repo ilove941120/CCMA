@@ -265,3 +265,12 @@ body {
 @media (max-width:376px){
     
 }
+
+/* 驗證套件CSS */
+.error{
+  color: red;
+  margin-left: 5px;
+}
+label .error{
+  display: inline;
+}

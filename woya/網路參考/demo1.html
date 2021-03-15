@@ -19,12 +19,13 @@
     </style>
 </head>
 <body>
-    <form>
+    <form id="fomr1" name="form1" onclick="return false">
         <label for='nickname'>暱稱</label>：<input type='text' id='nickname' class='inputform' placeholder="輸入暱稱"><span class='error1'></span><br>
         <label for='number'>學號</label>：<input type='text' id='number' class='inputform' placeholder="輸入學號"><span class='error2'></span><br>
         <label for='phone'>電話</label>：<input type='text' id='phone' class='inputform' placeholder="輸入電話"><span class='error3'></span><br>
         <label for='mobile'>手機</label>：<input type='text' id='mobile' class='inputform' placeholder="輸入手機"><span class='error4'></span><br>
         <label for='address'>地址</label>：<input type='text' id='address' class='inputform' placeholder="輸入地址"><br>
+        <input type="submit" name="button" id="button" value="送出" />
     </form>
 
 
@@ -78,7 +79,58 @@
                     $(this).css("border-color","red")
                 }
             })
+
+            $("#button").click(function(){
+                   if($("#nickname").val()=="" | rule1.test($("#nickname").val()) == false){
+                    alert("名字不符合格式")
+                    eval("document.form1['nickname'].focus()");
+                    
+                   }
+                   else if($("#number").val()=="" | rule2.test($("#number").val()) == false){
+                    alert("學號不符合格式");
+                    eval("document.form1['number'].focus()");    
+                   }
+ 
+                   else{
+                    document.form1.submit();
+                   }
+               })
         })
     </script>
+    <script>
+        // $(document).ready(function(){
+        //    $("#button").click(function(){
+        //        if($("#name").val()==""){
+        //            alert("你尚未填寫姓名");
+        //            eval("document.form1['name'].focus()");       
+        //        }else if($("#phone").val()==""){
+        //            alert("你尚未填寫電話");
+        //            eval("document.form1['phone'].focus()");    
+        //        }else if($("#address").val()==""){
+        //            alert("你尚未填寫地址");
+        //            eval("document.form1['address'].focus()");       
+        //        }else{
+        //            document.form1.submit();
+        //        }
+        //    })
+        // })
+       </script>
+       <script>
+        //    $(document).ready(function(){
+        //        $("#button").click(function(){
+        //            if($("#nickname").val()==""){
+        //             alert("你尚未填寫姓名")
+        //             eval("document.form1['nickname'].focus()");       
+        //            }
+        //            else if($("#nickname").val()!=rule1.test($(this).val())){
+        //             alert("格式錯誤")
+        //             eval("document.form1['nickname'].focus()");  
+        //            }
+        //            else{
+        //             document.form1.submit();
+        //            }
+        //        })
+        //    })
+       </script>
 </body>
 </html>
