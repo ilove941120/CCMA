@@ -31,25 +31,71 @@
     background-image: url(../img/page_background1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.contentText{
+.contentBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: brown; */
+}
+.projectImg{
+    width: 50%;
+}
+.projectImg img{
     width: 100%;
-    text-align: center;
+}
+.contentText{
+    width: 50%;
+    text-align: left;
     margin-bottom: 20px;
+    margin-left: 50px;
     color: rgb(75, 75, 75);
+    padding: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: rgb(157, 165, 42); */
+}
+.contactDada{
+    margin: 5px 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    letter-spacing: 2px;
 }
 
-
-
+@media (max-width:1200px){
+    .pagecontent{
+        padding: 50px 100px;
+    }
+}
 @media (max-width:997px){
     .pagecontent{
     padding: 50px 50px;
 
     }
+    .contentText{
+        margin-left: 40px;
+    }
+    .contactDada{
+        font-size: 16px;
+    }
 }
 @media (max-width:768px){
-
+    .contentBlock{
+        flex-direction: column;
+    }
+    .contactDada{
+        font-size: 14px;
+    }
+    .projectImg{
+        width: 80%;
+    }
+    .contentText{
+        width: 80%;
+    }
 }
 @media (max-width:576px){
     .pagecontent{
@@ -65,6 +111,7 @@
             color: white;
         
         }
+        
 
 }
 @media (max-width:376px){
