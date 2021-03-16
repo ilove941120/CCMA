@@ -1,0 +1,89 @@
+body { 
+    background-color:#ffffff;
+    background-image:none;
+    background-position:top center;
+    background-repeat:repeat;
+    background-attachment : scroll;
+}
+
+#header .header_wrap {
+    height : 90px; 
+} 
+
+#header .navi_scrolled_resize .header_wrap {
+    height : 60px;
+}
+
+.header_scrolled {
+    padding-bottom: 50px;
+}
+
+#header a.logo {
+    top : 5px; left : 0px;
+}
+
+#header .logo_wrap a.logo {
+    width : 223px; height : 49px; 
+} 
+
+#header .logo_wrap {
+    width : 223px; 
+} 
+
+.custom_header {
+    top : 0px; right : 0px; 
+} 
+
+.widget_custom_recent_testimonials_entries .cmsms_content_prev_slide, 
+.widget_custom_recent_testimonials_entries .cmsms_content_next_slide,
+.widget_custom_popular_services_entries .cmsms_content_prev_slide,
+.widget_custom_popular_services_entries .cmsms_content_next_slide {
+    top:-50px;
+}
+
+#navigation ul,
+#navigation > li.current-menu-item:before, 
+#navigation > li.current-menu-parent:before, 
+#navigation > li.current-menu-ancestor:before {
+    top : 88px;
+} 
+
+@media only screen and (max-width : 1024px) { 
+    .cmsms_responsive #header .header_wrap { 
+        height : auto;
+    }
+    
+    #header .logo_wrap {
+        height : 90px;
+    }
+}
+
+@media only screen and (max-width : 1023px) {
+    #header .h_mt.navi_scrolled.navi_scrolled_resize {
+        margin-top : 0;
+    }
+}
+
+@media only screen and (max-width : 767px) {
+    .cmsms_responsive .header_scrolled {
+        padding-bottom : 0;
+    }
+}
+
+@media only screen and (max-width : 540px) {
+    .cmsms_responsive #header .header_wrap {
+        height : auto;
+    }
+    
+    #header .logo_wrap {
+        height : auto;
+    }
+    
+    .cmsms_responsive #header a.logo {
+        top : auto;
+        margin-right : auto;
+        margin-left : auto;
+        margin-bottom : 25px;
+        margin-top : 35px;
+    }
+} 
