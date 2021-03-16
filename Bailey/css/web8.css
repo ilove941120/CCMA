@@ -91,13 +91,13 @@
     align-items: center;
     border: 1px solid black;
 }
-.signIn:nth-child(1){
+.signIn:nth-child(2){
     background-color: #F6F6F6;
     color: #DEDEDE;
 }
-.signIn:nth-child(2){
+.signIn:nth-child(1){
     border-bottom: 0px ;
-    border-left: 0px;
+    border-right: 0px;
 }
 .signInForm{
     border: 1px solid black;
@@ -124,18 +124,31 @@
 .signItem{
     width: 100%;
     margin-bottom: 20px;
+    position: relative;
 }
+.signItem input{
+    width: 100%;
+}
+.signItem::before{
+    content: "*";
+    position: absolute;
+    color: red;
+    left: -12px;
+}
+.signItemSex{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.signItem span{
+    font-size: 12px;
+}
+
+
+
 .signButton{
     width: 100%;
     padding: 10px;
     font-size: 20px;
     background-color: #BBDDCF;
     border: 0;
-}
-.subOption{
-    display: flex;
-    justify-content: space-between;
-}
-a:hover{
-    color: blue;
 }

@@ -27,12 +27,13 @@
 }
 .pagecontent{
     width: 100%;
-    padding: 50px 200px;
     min-height: 400px;
+    padding: 50px 200px;
     background-image: url(../img/page_background1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -78,64 +79,35 @@
 .memberBlock{
     width: 300px;
     margin: auto;
-}
-.memberSignIn{
-    width: 100%;
-    display: flex;
-}
-.signIn{
-    width: 50%;
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: 1px solid black;
+    padding: 20px 50px;
 }
-.signIn:nth-child(1){
-    background-color: #F6F6F6;
-    color: #DEDEDE;
-}
-.signIn:nth-child(2){
-    border-bottom: 0px ;
-    border-left: 0px;
-}
-.signInForm{
-    border: 1px solid black;
-    padding: 20px;
-    height: auto;
-    border-top: 0px solid black;
+.forgetTitle{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.faceBookSignIn{
-    width: 100%;
-    padding: 5px;
-    margin: auto;
-    margin-bottom: 30px;
-    color: white;
-    background-color: #2355D0;
-    text-align: center;
-    position: relative;
-}
-.faceBookSignIn i{
-    position: absolute;
-    left: 5px;
-    top: 4px;
-}
 .signItem{
     width: 100%;
     margin-bottom: 20px;
 }
+.signItem input{
+    width: 100%;
+}
 .signButton{
     width: 100%;
-    padding: 10px;
-    font-size: 20px;
+    padding: 5px;
+    font-size: 16px;
     background-color: #BBDDCF;
     border: 0;
 }
-.subOption{
-    display: flex;
-    justify-content: space-between;
+.previousPageButtom{
+    display: inline;
+    padding: 5px;
+    border: 1px solid #BBDDCF;
+    text-align: center;
 }
-a:hover{
-    color: blue;
+.previousPageButtom i{
+    font-size: 14px;
+    margin-right: 5px;
 }

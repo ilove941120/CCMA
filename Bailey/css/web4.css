@@ -34,12 +34,7 @@
     background-size: cover;
 }
 
-.contentText{
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(75, 75, 75);
-}
+
 
 
 
@@ -70,4 +65,43 @@
 }
 @media (max-width:376px){
     
+}
+
+.contentGroup{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+.contentTitle{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.newImg{
+    width: 100%;
+}
+.newImg img{
+    width: 100%;
+}
+.newContent{
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+.activityData{
+    margin-bottom: 20px;
+}
+
+
+.previousPageButtom{
+    width: 100px;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid #BBDDCF;
+    text-align: center;
+}
+.previousPageButtom i{
+    font-size: 14px;
+    margin-right: 5px;
 }
