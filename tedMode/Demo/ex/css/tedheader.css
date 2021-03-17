@@ -1,0 +1,39 @@
+
+.dropdown img{
+    width: 30px;
+    margin: 0 10px;
+}
+
+.header-style-three .main-menu .navigation > li:last-child{
+    margin-left: 200px;
+}
+.tedIconmode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-menu .navigation > li.dropdown > a:after{
+    display: none;
+}
+
+@media (max-width:1200px){
+
+    .header-style-three .main-menu .navigation > li:last-child{
+        margin-left: 50px;
+    
+    }
+
+}
+@media (max-width:997px){
+    .dropdown img{
+        width: 25px;
+        margin: 0 5px;
+    }
+    .header-style-three .main-menu .navigation > li:last-child{
+        margin-left: 50px;
+    }
+
+}
+.testimonial-section-two{
+    padding: 180px 0 70px;
+}
