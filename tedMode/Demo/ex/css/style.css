@@ -115,10 +115,10 @@ ol li {
 	line-height:24px;
 }
 
-ul li {
+/* ul li {
 	list-style:inside url(../img/list_image.png);
 	line-height:24px;
-}
+} */
 
 img {
 	padding:0;

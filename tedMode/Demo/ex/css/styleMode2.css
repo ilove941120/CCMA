@@ -172,6 +172,7 @@ p,.text{
 	max-width:1200px;
 	padding:0px 15px;
 	margin:0 auto;
+	01
 }
 
 ul,li{
@@ -564,6 +565,7 @@ img{
 .main-header .header-upper .logo-outer{
 	position: relative;
 	float: left;
+	1
 }
 
 .main-header .header-upper .logo{
@@ -667,6 +669,7 @@ img{
 	color:#df6512;
 	margin:7px 0px 2px;
 	display: none;
+	22
 }
 
 .main-header .header-lower{
@@ -999,6 +1002,7 @@ img{
 
 .dropdown-toggle::after{
 	display: none;
+	
 }
 
 .main-header .search-box-outer .dropdown-menu{
