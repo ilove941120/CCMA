@@ -50,33 +50,7 @@ $(document).ready(function () {
     
 
 
-// <!-- slick.js -->
-$(document).ready(function () {
-    $(".banner_g").slick({
-      arrows: false,
-      dots: true,
-    });
-    $(".project_g").slick({
-      dots: true,
-      infinite: false,
-      arrows: false,
 
-      speed: 300,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            infinite: true,
-            dots: true,
-          },
-        },
-      ],
-    });
-  });
 
 // 分類點擊紅色
   $(".sortItem").click(function(){

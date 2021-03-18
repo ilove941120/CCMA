@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+    <link rel="stylesheet" href="../css/slick-theme.css">
+    <link rel="stylesheet" href="../css/slick.css">
     <link rel="stylesheet" href="../css/setUp.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
@@ -15,11 +17,40 @@
 </head>
 <body>
     <div class="pageBlock">
-        <div class="banner">
-            <img src="../img/banner2.jpg" alt="">
-            <div class="titleBlock">
-                <div class="maintitle">About Paili Food_</div>
-                <div class="subtitle">關於百利</div>
+        
+        <div class="sliderBannerBlock">
+            <div class="sliderBanner bg1">
+                <div class="bannerBlock">
+                    <div class="bannerTitleBlock">
+                        <div class="silderSubBlock"></div>
+                        <div class="silderMainBlock">
+                            <div class="maintitle">鮭魚起司壽司</div>
+                        </div>
+                    </div>
+                    <img src="../img/banner1.jpg" alt="">
+                </div>
+            </div>
+            <div class="sliderBanner bg1">
+                <div class="bannerBlock">
+                    <div class="bannerTitleBlock">
+                        <div class="silderSubBlock"></div>
+                        <div class="silderMainBlock">
+                            <div class="maintitle">鮭魚起司壽司</div>
+                        </div>
+                    </div>
+                    <img src="../img/banner2.jpg" alt="">
+                </div>
+            </div>
+            <div class="sliderBanner bg1">
+                <div class="bannerBlock">
+                    <div class="bannerTitleBlock">
+                        <div class="silderSubBlock"></div>
+                        <div class="silderMainBlock">
+                            <div class="maintitle">鮭魚起司壽司</div>
+                        </div>
+                    </div>
+                    <img src="../img/banner3.jpg" alt="">
+                </div>
             </div>
         </div>
         <!-- news Mode -->
@@ -208,6 +239,16 @@
 
 
 
-    
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/slick.js"></script>
+    <script>
+        $('.sliderBannerBlock').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+        });
+    </script>
 </body>
 </html>

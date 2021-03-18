@@ -1,46 +1,20 @@
-/* banner */
-.banner{
-    width: 100%;
-    height: 200px;
-    position: relative;
-}
-.banner img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
 
-}
-.titleBlock{
-    position: absolute;
-    top: 30%;
-    left: 5%;
-}
-.maintitle{
-    font-size: 48px;
-    color: white;
-}
-.subtitle{
-    font-size: 24px;
-    color: white;
-
-}
 .pagecontent{
     width: 100%;
     padding: 50px 200px;
-    background-image: url(../img/page_background1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-
-
-.contentText{
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(75, 75, 75);
+.pagecontent:nth-child(2){
+    background-image: url(../img/page_background1.jpg);
 }
+.pagecontent:nth-child(3){
+    background-image: url(../img/foot_background.jpg);
+
+}
+
+
+
 
 
 
@@ -72,6 +46,80 @@
 }
 @media (max-width:376px){
     
+}
+
+/* sliderBanner */
+.sliderBannerBlock{
+    width: 100%;
+    height: auto;
+    /* height: 100vh; */
+    background-color: bisque;
+}
+.sliderBanner{
+    width: 80%;
+    position: relative;
+}
+.sliderBannerBlock .slick-arrow{
+    display: none !important;
+}
+.bg1{
+    background-color: red;
+}
+.bg2{
+    background-color: blue;
+}
+.bg3{
+    background-color: yellow;
+}
+.sliderBanner img{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+.slick-dots{
+    bottom: 20px;
+}
+.slick-dotted.slick-slider{
+    margin-bottom: 0;
+    
+}
+.slick-dots li.slick-active button:before{
+    color: blue;
+}
+.slick-dots li button:before{
+    font-size: 48px;
+    color: tomato;
+}
+
+.bannerBlock{
+    position: relative;
+}
+.bannerTitleBlock{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: crimson;
+}
+.silderMainBlock{
+    width: 600px;
+    height: 300px;
+    background-color: #A6BAB1;
+    position: absolute;
+    padding: 10px;
+}
+.silderSubBlock{
+    width: 600px;
+    height: 300px;
+    background-color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.maintitle{
+    font-size: 72px;
+    letter-spacing: 5px;
+    color: white;
 }
 /* newMode CSS */
 .newGroup{
@@ -141,7 +189,8 @@
 }
 /* certificateBlock */
 .certificateBlock{
-    width: 100%;
+    max-width: 1200px;
+    margin: auto;
     display: flex;
 }
 .illustrationImg{
@@ -163,7 +212,7 @@
     width: 100%;
 }
 .certificateText{
-    width: 70%;
+    width: 100%;
 }
 .certificateImgGroup{
     position: absolute;
@@ -176,6 +225,58 @@
 .certificateImgGroup img:nth-child(2){
     width: unset;
     height: 200px;
+}
+
+@media (max-width:1200px){
+    .certificateImgGroup{
+        position: absolute;
+        bottom: -100px;
+        z-index: 99;
+    }
+    .certificateImgGroup img{
+        width:30%;
+    }
+}
+@media (max-width:997px){
+    .certificateImgGroup{
+        bottom: -100px;
+    }
+    .certificateImgGroup img:nth-child(2){
+        width: unset;
+        height: 150px;
+    }
+}
+@media (max-width:769px){
+    .certificateBlock{
+        flex-direction: column;
+        align-items: center;
+    }
+    .certificateContent{
+        flex-direction: column;
+        margin: auto;
+        margin-top: 20px;
+    }
+    .sgsLogoImg{
+        margin: auto;
+    }
+    .certificateText{
+        text-align: center;
+    }
+    .certificateImgGroup{
+        position: unset;
+        margin-top: 20px;
+        
+    }
+    .certificateImgGroup img{
+        width:35%;
+        
+    }
+    
+    .certificateImgGroup img:nth-child(2){
+        width: unset;
+        height: 120px;
+    }
+    
 }
 
 
@@ -323,6 +424,7 @@
     background-image: url(../img/banner3.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     position: relative;
 }
 .aboutContent{
