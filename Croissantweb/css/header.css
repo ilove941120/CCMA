@@ -1,0 +1,16 @@
+.headerBlock{
+    width: 100%;
+}
+.headerContent{
+    max-width: 1200px;
+    padding: 10px 0;
+    margin: auto;
+    display: flex;
+}
+.companyBlock{
+    display: flex;
+    justify-content: space-between;
+}
+.companyBlock img{
+    height: 40px;
+}
