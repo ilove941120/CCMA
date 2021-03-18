@@ -5,10 +5,11 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.pagecontent:nth-child(2){
-    background-image: url(../img/page_background1.jpg);
-}
 .pagecontent:nth-child(3){
+    background-image: url(../img/page_background1.jpg);
+    background-position: right;
+}
+.pagecontent:nth-child(4){
     background-image: url(../img/foot_background.jpg);
 
 }
@@ -51,13 +52,13 @@
 /* sliderBanner */
 .sliderBannerBlock{
     width: 100%;
-    height: auto;
-    /* height: 100vh; */
-    background-color: bisque;
+    /* background-color: bisque; */
 }
 .sliderBanner{
-    width: 80%;
+    width: 100%;
     position: relative;
+    max-height: 870px;
+
 }
 .sliderBannerBlock .slick-arrow{
     display: none !important;
@@ -71,10 +72,12 @@
 .bg3{
     background-color: yellow;
 }
-.sliderBanner img{
+.bannerBlock{
     width: 100%;
-    height: auto;
-    margin: auto;
+}
+.bannerBlock img{
+    width: 101%;
+    object-fit: contain;
 }
 .slick-dots{
     bottom: 20px;
@@ -101,55 +104,163 @@
     left: 0;
     background-color: crimson;
 }
-.silderMainBlock{
+.silderMainBlock,.silderSubBlock{
     width: 600px;
-    height: 300px;
+    height: 250px;
     background-color: #A6BAB1;
     position: absolute;
     padding: 10px;
 }
 .silderSubBlock{
-    width: 600px;
-    height: 300px;
     background-color: white;
-    position: absolute;
     top: 20px;
     left: 20px;
 }
+
 .maintitle{
     font-size: 72px;
     letter-spacing: 5px;
     color: white;
 }
-/* newMode CSS */
-.newGroup{
+.sliderBanner{
+    float: left;
+}
+.sliderBanner::after{
+    content: "";
+    clear: both;
+}
+@media (max-width:1400px){
+    .bannerTitleBlock{
+        top: 60%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 400px;
+        height: 150px;
+        position: absolute;
+        padding: 10px;
+    }
+    .maintitle{
+        font-size: 48px;
+        letter-spacing: 5px;
+        color: white;
+    }
+    
+}
+@media (max-width:997px){
+    .bannerTitleBlock{
+        top: 50%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 300px;
+        height: 150px;
+    }
+    .maintitle{
+        font-size: 24px;
+
+    }
+    
+}
+@media (max-width:768px){
+    .bannerTitleBlock{
+        top: 55%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 250px;
+        height: 100px;
+    }
+    .maintitle{
+        font-size: 24px;
+
+    }
+    .silderSubBlock{
+        top: 10px;
+        left: 10px;
+    }
+    
+}
+@media (max-width:576px){
+    .bannerTitleBlock{
+        top: 50%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 170px;
+        height: 70px;
+    }
+    .maintitle{
+        font-size: 18px;
+        letter-spacing: 1px;
+
+
+    }
+    .silderSubBlock{
+        top: 5px;
+        left: 5px;
+    }
+    
+}
+@media (max-width:376px){
+    .bannerTitleBlock{
+        top: 45%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 150px;
+        height: 70px;
+    }
+    .maintitle{
+        font-size: 18px;
+        letter-spacing: 1px;
+
+
+    }
+    .silderSubBlock{
+        background-color: white;
+        top: 5px;
+        left: 5px;
+    }
+    
+}
+/* slider newMode CSS */
+.newMode{
     max-width: 1200px;
     margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
+
 }
-.newItem{
-    width: 30%;
+.sliderShowNew {
+    max-width: 1200px;
+    height: auto;
+    margin: auto;
+}
+
+.slidderShowBlock {
+    width: 100px;
+    /* background-color: tomato; */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+.newItem {
+    width: 100%;
     min-height: 150px;
-    /* margin: 5px; */
+    margin: 5px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
 }
-.newImg{
+
+.newImg {
     width: 100%;
     height: 60%;
 }
-.newImg img{
+
+.newImg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.newContent{
+
+.newContent {
     width: 100%;
     height: 40%;
     text-align: center;
@@ -159,14 +270,17 @@
 
 
 }
-.newTitle{
+
+.newTitle {
     font-size: 14px;
 }
-.newData{
+
+.newData {
     margin-top: 20px;
     font-size: 12px;
 }
-.newMask{
+
+.newMask {
     width: 100%;
     height: 100%;
     background-color: rgba(255, 248, 220, 0.445);
@@ -176,17 +290,19 @@
     opacity: 0;
     transition: 1s;
 }
-.newItem:hover .newMask{
+
+.newItem:hover .newMask {
     opacity: 1;
 }
-.newItem:hover{
+
+.newItem:hover {
     color: teal;
 }
-@media (max-width:997px){
-    .newItem{
-        width: 45%;
-    }
+.sliderShowNew .slick-arrow{
+    display: none !important;
 }
+
+
 /* certificateBlock */
 .certificateBlock{
     max-width: 1200px;
@@ -301,7 +417,7 @@
     position: absolute;
     bottom: -260px;
     left: -150px;
-    z-index: 0;
+    z-index: -1;
 }
 .topBackgroundImg1 img{
     width: 100%;
@@ -327,6 +443,24 @@
     }
     .topBackgroundImg1,.topBackgroundImg2{
         width: 300px;
+    }
+    .topBackgroundImg1{
+        top: 20%;
+        right: -100px;
+    }
+    .topBackgroundImg2{
+        bottom: 10%;
+        right: -100px;
+    }
+}
+@media (max-width:576px){
+    .topSellers{
+        max-width: 1200px;
+        margin: auto;
+        padding:0;
+    }
+    .topBackgroundImg1,.topBackgroundImg2{
+        width: 250px;
     }
     .topBackgroundImg1{
         top: 20%;
@@ -401,12 +535,29 @@
     opacity: 1;
 }
 
+.newMoreButtom{
+    width: 100px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 5px;
+    border: 1px solid #00c975;
+    text-align: center;
+}
+.newMoreButtom i{
+    font-size: 14px;
+    margin-left: 5px;
+}
+@media (max-width:997px){
+    .newMoreButtom{
+        margin-top: 30px;
+    }
+}
 .moreButtom{
     width: 100px;
     margin: auto;
     margin-top: 50px;
     padding: 5px;
-    border: 1px solid #BBDDCF;
+    border: 1px solid #00c975;
     text-align: center;
 }
 .moreButtom i{

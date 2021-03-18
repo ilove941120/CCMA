@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="../css/slick-theme.css">
     <link rel="stylesheet" href="../css/slick.css">
@@ -15,9 +16,63 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
+
 <body>
     <div class="pageBlock">
-        
+        <!-- header 區域 -->
+        <div class="headerBlock">
+            <!-- header 主要內容 -->
+            <div class="header">
+                <div class="headerLogoImg">
+                    <img src="../img/logo.png" alt="">
+                </div>
+                <div class="navbar">
+                    <div class="mainItemGroup">
+                        <div class="navbarItem">關於百利</div>
+                        <div class="navbarItem">商品介紹</div>
+                        <div class="navbarItem">經銷據點</div>
+                        <div class="navbarItem">最新消息</div>
+                        <div class="navbarItem">會員中心</div>
+                        <div class="navbarItem">聯絡我們</div>
+                    </div>
+                    <div class="subItemGroup">
+                        <div class="subItem"><i class="fab fa-facebook-square"></i>登入</div>
+                        <div class="subItem"><i class="fas fa-shopping-cart"></i>購物車</div>
+                        <div class="subItem">
+                            <div class="searchButton"><i class="fas fa-search"></i>搜尋</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header RWD -->
+                <div class="navbarList"><i class="fas fa-bars"></i></div>
+                <div class="navbarListGroup">
+                    <div class="headerLogoImgRWD">
+                        <img src="../img/logo.png" alt="">
+                    </div>
+                    <div class="mainList">
+                        <div class="navbarListItem">關於百利</div>
+                        <div class="navbarListItem">商品介紹</div>
+                        <div class="navbarListItem">經銷據點</div>
+                        <div class="navbarListItem">最新消息</div>
+                        <div class="navbarListItem">會員中心</div>
+                        <div class="navbarListItem">聯絡我們</div>
+                    </div>
+                    <div class="subList">
+                        <div class="subListItem"><i class="fab fa-facebook-square"></i>登入</div>
+                        <div class="subListItem"><i class="fas fa-shopping-cart"></i>購物車</div>
+                        <div class="subListItem"><i class="fas fa-search"></i>搜尋</div>
+                    </div>
+
+                    <div class="closeButton"><i class="fas fa-times"></i></div>
+                </div>
+
+            </div>
+            <div class="searchBlock">
+                <input type="text" id="search" name="search">
+            </div>
+            <!-- 遮罩 -->
+            <div class="mask"></div>
+        </div>
         <div class="sliderBannerBlock">
             <div class="sliderBanner bg1">
                 <div class="bannerBlock">
@@ -27,7 +82,7 @@
                             <div class="maintitle">鮭魚起司壽司</div>
                         </div>
                     </div>
-                    <img src="../img/banner1.jpg" alt="">
+                    <img src="../img/sliderBanner01.png" alt="">
                 </div>
             </div>
             <div class="sliderBanner bg1">
@@ -38,7 +93,7 @@
                             <div class="maintitle">鮭魚起司壽司</div>
                         </div>
                     </div>
-                    <img src="../img/banner2.jpg" alt="">
+                    <img src="../img/sliderBanner02.png" alt="">
                 </div>
             </div>
             <div class="sliderBanner bg1">
@@ -49,62 +104,106 @@
                             <div class="maintitle">鮭魚起司壽司</div>
                         </div>
                     </div>
-                    <img src="../img/banner3.jpg" alt="">
+                    <img src="../img/sliderBanner03.png" alt="">
                 </div>
             </div>
         </div>
         <!-- news Mode -->
         <div class="pagecontent">
-            <div class="newGroup">
-                <div class="newItem">
-                    <div class="newImg">
-                        <img src="../img/newImg.jpg" alt="">
-                    </div>
-                    <div class="newContent">    
-                        <div class="newTitle">
-                            【中秋禮】月圓團圓滿千送百
-                        </div>
-                        <div class="newData">
-                            -2019/10/4-
-                        </div>
-                    </div>
-                    <div class="newMask"></div>
+            <div class="newMode">
+                <div class="topSellersTitle">
+                    New_
                 </div>
-                <div class="newItem">
-                    <div class="newImg">
-                        <img src="../img/newImg.jpg" alt="">
-                    </div>
-                    <div class="newContent">    
-                        <div class="newTitle">
-                            【中秋禮】月圓團圓滿千送百
-                            【中秋禮】月圓團圓滿千送百
-                            【中秋禮】月圓團圓滿千送百
-                            【中秋禮】月圓團圓滿千送百
+                <div class="sliderShowNew">
+                    <div class="slidderShowBlock">
+                        <div class="newItem">
+                            <div class="newImg">
+                                <img src="../img/newImg.jpg" alt="">
+                            </div>
+                            <div class="newContent">
+                                <div class="newTitle">
+                                    0【中秋禮】月圓團圓滿千送百
+                                </div>
+                                <div class="newData">
+                                    -2019/10/4-
+                                </div>
+                            </div>
+                            <div class="newMask"></div>
                         </div>
-                        <div class="newData">
-                            -2019/10/4-
+                    </div>
+                    <div class="slidderShowBlock">
+                        <div class="newItem">
+                            <div class="newImg">
+                                <img src="../img/newImg.jpg" alt="">
+                            </div>
+                            <div class="newContent">
+                                <div class="newTitle">
+                                    1【中秋禮】月圓團圓滿千送百
+                                </div>
+                                <div class="newData">
+                                    -2019/10/4-
+                                </div>
+                            </div>
+                            <div class="newMask"></div>
                         </div>
                     </div>
-                    <div class="newMask"></div>
+                    <div class="slidderShowBlock">
+                        <div class="newItem">
+                            <div class="newImg">
+                                <img src="../img/newImg.jpg" alt="">
+                            </div>
+                            <div class="newContent">
+                                <div class="newTitle">
+                                    2【中秋禮】月圓團圓滿千送百
+                                </div>
+                                <div class="newData">
+                                    -2019/10/4-
+                                </div>
+                            </div>
+                            <div class="newMask"></div>
+                        </div>
+                    </div>
+                    <div class="slidderShowBlock">
+                        <div class="newItem">
+                            <div class="newImg">
+                                <img src="../img/newImg.jpg" alt="">
+                            </div>
+                            <div class="newContent">
+                                <div class="newTitle">
+                                    3【中秋禮】月圓團圓滿千送百
+                                </div>
+                                <div class="newData">
+                                    -2019/10/4-
+                                </div>
+                            </div>
+                            <div class="newMask"></div>
+                        </div>
+                    </div>
+                    <div class="slidderShowBlock">
+                        <div class="newItem">
+                            <div class="newImg">
+                                <img src="../img/newImg.jpg" alt="">
+                            </div>
+                            <div class="newContent">
+                                <div class="newTitle">
+                                    4【中秋禮】月圓團圓滿千送百
+                                </div>
+                                <div class="newData">
+                                    -2019/10/4-
+                                </div>
+                            </div>
+                            <div class="newMask"></div>
+                        </div>
+                    </div>
+            
+            
                 </div>
-                <div class="newItem">
-                    <div class="newImg">
-                        <img src="../img/newImg.jpg" alt="">
-                    </div>
-                    <div class="newContent">    
-                        <div class="newTitle">
-                            【中秋禮】月圓團圓滿千送百
-                        </div>
-                        <div class="newData">
-                            -2019/10/4-
-                        </div>
-                    </div>
-                    <div class="newMask"></div>
+                <div class="newMoreButtom">
+                    More<i class="fas fa-chevron-right"></i>
                 </div>
             </div>
-            <div class="moreButtom">
-                More<i class="fas fa-chevron-right"></i>
-            </div>
+            
+            
         </div>
 
         <!-- certificateBlock -->
@@ -129,7 +228,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <!-- top sellers Mode -->
@@ -188,7 +287,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
 
@@ -201,11 +300,11 @@
                 <div class="aboutText">
                     這是個真實的故事，每當朋友抱怨著婚姻如何讓彼此受傷,折磨、美好殆盡、夢想幻滅。我就回憶起一段往事………
 
-他們是我見過最美滿、最相知的神仙眷屬，十一年的攜手人生路，一路只有愛、學習、體諒和寧靜，但是，卻無法共吟白首，我記得「天若有情天亦老」的句子 ，只是恨天，常常無情……
+                    他們是我見過最美滿、最相知的神仙眷屬，十一年的攜手人生路，一路只有愛、學習、體諒和寧靜，但是，卻無法共吟白首，我記得「天若有情天亦老」的句子 ，只是恨天，常常無情……
 
-認識啟源的時候，他是個正在讀外語學校的少校軍官，她是國立藝術學院的學生，他們的戀情發生得曲折卻又極自然，兩校聯誼郊遊，第一次他出席了，她沒來，他卻注意到有個女孩—曹修忠，和他同學同名，心上留了意；第二次，她來了，他卻走得匆匆，她對他的印象只是一百八的高個兒帥哥；第三次，他請客，她卻有事先走；兩人的交集總差那麼一點兒，三次擦身而過，卻依然逃不過注定了緣訂三生的前宿，許久之後，他單獨約了她，確定了「眾裡尋她千百度」，這個女孩就是他要的終身伴侶，她在家排行第七，他喚她：小七。
+                    認識啟源的時候，他是個正在讀外語學校的少校軍官，她是國立藝術學院的學生，他們的戀情發生得曲折卻又極自然，兩校聯誼郊遊，第一次他出席了，她沒來，他卻注意到有個女孩—曹修忠，和他同學同名，心上留了意；第二次，她來了，他卻走得匆匆，她對他的印象只是一百八的高個兒帥哥；第三次，他請客，她卻有事先走；兩人的交集總差那麼一點兒，三次擦身而過，卻依然逃不過注定了緣訂三生的前宿，許久之後，他單獨約了她，確定了「眾裡尋她千百度」，這個女孩就是他要的終身伴侶，她在家排行第七，他喚她：小七。
 
-啟源與小七是很特別、很特別的一對，他們的婚姻之所以完美無瑕，該歸功於戀愛談得夠久也夠平淡，他是軍人，假期並不多，她是滾石唱片的宣傳，常要帶歌星出國做節目，他們相見苦短，相處卻如老友，更難得的是保持著知已般的友誼而能發乎情，止乎禮。假日他來她的小屋，她做可口好菜，兩人共餐、逗狗、看書、看錄影帶、無話不談，安安靜靜過一天。她出國的日子，他天天來幫她餵狗狗，他不輕易表露感情，她也不破壞這份老友情誼，他們的愛從不表白，看似平平淡淡，卻有無窮滋味；彷彿老夫老妻，心中無欲無求，卻更雋永
+                    啟源與小七是很特別、很特別的一對，他們的婚姻之所以完美無瑕，該歸功於戀愛談得夠久也夠平淡，他是軍人，假期並不多，她是滾石唱片的宣傳，常要帶歌星出國做節目，他們相見苦短，相處卻如老友，更難得的是保持著知已般的友誼而能發乎情，止乎禮。假日他來她的小屋，她做可口好菜，兩人共餐、逗狗、看書、看錄影帶、無話不談，安安靜靜過一天。她出國的日子，他天天來幫她餵狗狗，他不輕易表露感情，她也不破壞這份老友情誼，他們的愛從不表白，看似平平淡淡，卻有無窮滋味；彷彿老夫老妻，心中無欲無求，卻更雋永
                 </div>
             </div>
         </div>
@@ -228,9 +327,9 @@
             </div>
         </div>
 
-        
-        
-        
+
+
+
 
 
     </div>
@@ -242,13 +341,53 @@
     <script src="../js/jquery-3.5.1.min.js"></script>
     <script src="../js/slick.js"></script>
     <script>
+        // navbarList彈出
+        $(".navbarList").click(function () {
+            $(".navbarListGroup").slideDown()
+            $(".mask").fadeIn("slow");
+        })
+        // 遮罩區關閉
+        $(".mask").click(function (evt) {
+            if (
+                $(evt.target).parents(".navbarListGroup").length == 0 &&
+                evt.target.className != "navbarListGroup" &&
+                evt.target.className != "navbarList"
+            ) {
+                $(".navbarListGroup").slideUp("slow")
+                $(".mask").delay("500").fadeOut("slow")
+            }
+        })
+        // 打叉叉關閉
+        $(".closeButton").click(function () {
+            $(".mask").fadeOut("slow");
+            $(".navbarListGroup").slideUp();
+        })
+
+        $(".searchButton").click(function () {
+            $(".searchBlock").slideToggle()
+        })
+
+
+    </script>
+    <script>
         $('.sliderBannerBlock').slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        fade: true,
-        cssEase: 'linear'
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            cssEase: 'linear',
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+        $('.sliderShowNew').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            autoplay: true,
+            autoplaySpeed: 2000,
         });
     </script>
+    </script>
 </body>
+
 </html>
