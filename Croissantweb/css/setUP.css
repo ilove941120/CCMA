@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+body{
+    margin: 0;
+}
+a{
+    color: unset;
+    text-decoration: unset;
+}
+
+.color{
+    color: #78583A;
+    color: #352514;
+}
+
+.clearBoth{
+    clear: both;
+}

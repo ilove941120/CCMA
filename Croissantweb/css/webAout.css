@@ -1,0 +1,43 @@
+/* about */
+
+.aboutBlock{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+}
+.aboutImg{
+    width: 50%;
+}
+.aboutImg img{
+    width: 100%;
+    height: 100%;
+}
+.aboutContent{
+    width: 50%;
+    padding: 20px 100px;
+    color: white;
+    background-color: #725334;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    letter-spacing: 5px;
+    
+}
+.aboutTitle{
+    text-align: center;
+    font-size: 36px;
+}
+.aboutTitle span{
+    font-size: 24px;
+}
+.aboutText{
+    padding: 20px 0;
+    
+}
+.aboutMoreButton{
+    width: 120px;
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid white;
+    margin: auto;
+}

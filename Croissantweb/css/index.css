@@ -1,0 +1,356 @@
+
+/* slider Banner */
+/* sliderBanner */
+.sliderBannerBlock{
+    width: 100%;
+    /* background-color: bisque; */
+}
+.sliderBanner{
+    width: 100%;
+    height: 51.5vw;
+
+}
+.sliderBannerBlock .slick-arrow{
+    display: none !important;
+}
+.bg1{
+    background-color: red;
+}
+.bg2{
+    background-color: blue;
+}
+.bg3{
+    background-color: yellow;
+}
+.bannerBlock{
+    width: 100%;
+    height: 100%;
+
+}
+.bannerBlock img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* object-position: top; */
+    
+}
+.slick-dots{
+    bottom: 20px;
+}
+.slick-dotted.slick-slider{
+    margin-bottom: 0;
+    
+}
+.slick-dots li.slick-active button:before{
+    color: blue;
+}
+.slick-dots li button:before{
+    font-size: 48px;
+    color: tomato;
+}
+
+.bannerBlock{
+    position: relative;
+}
+.bannerTitleBlock{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: crimson;
+}
+.silderMainBlock,.silderSubBlock{
+    width: 600px;
+    height: 250px;
+    background-color: #A6BAB1;
+    position: absolute;
+    padding: 10px;
+}
+.silderSubBlock{
+    background-color: white;
+    top: 20px;
+    left: 20px;
+}
+
+.maintitle{
+    font-size: 72px;
+    letter-spacing: 5px;
+    color: white;
+}
+.sliderBanner{
+    float: left;
+}
+.sliderBanner::after{
+    content: "";
+    clear: both;
+}
+@media (max-width:1400px){
+    .bannerTitleBlock{
+        top: 60%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 400px;
+        height: 150px;
+        position: absolute;
+        padding: 10px;
+    }
+    .maintitle{
+        font-size: 48px;
+        letter-spacing: 5px;
+        color: white;
+    }
+    
+}
+@media (max-width:997px){
+    .bannerTitleBlock{
+        top: 50%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 300px;
+        height: 150px;
+    }
+    .maintitle{
+        font-size: 24px;
+
+    }
+    
+}
+@media (max-width:768px){
+    .bannerTitleBlock{
+        top: 55%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 250px;
+        height: 100px;
+    }
+    .maintitle{
+        font-size: 24px;
+
+    }
+    .silderSubBlock{
+        top: 10px;
+        left: 10px;
+    }
+    
+}
+@media (max-width:576px){
+    .bannerTitleBlock{
+        top: 50%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 170px;
+        height: 70px;
+    }
+    .maintitle{
+        font-size: 18px;
+        letter-spacing: 1px;
+
+
+    }
+    .silderSubBlock{
+        top: 5px;
+        left: 5px;
+    }
+    
+}
+@media (max-width:376px){
+    .bannerTitleBlock{
+        top: 45%;
+    }
+    .silderMainBlock,.silderSubBlock{
+        width: 150px;
+        height: 70px;
+    }
+    .maintitle{
+        font-size: 18px;
+        letter-spacing: 1px;
+
+
+    }
+    .silderSubBlock{
+        background-color: white;
+        top: 5px;
+        left: 5px;
+    }
+    
+}
+
+/* Product overview */
+.productView{
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+}
+    
+.productViewTitle{
+    font-size: 36px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #78583A;
+
+}
+.productViewTitle span{
+    font-size: 24px;
+}
+.productViewSlider{
+    padding: 50px;
+}
+.productItem{
+    padding: 0 20px;
+}
+.productImg{
+    padding: 20px 0;
+    position: relative;
+}
+.productImg img{
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 15px black;
+}
+.playButton{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 15px black;
+    position: absolute;
+    bottom: -20px;
+    left: 42%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+
+}
+.playButton i{
+    margin-left: 5px;
+}
+.productContent{
+    text-align: center;
+    margin: 50px 0;
+    color: #78583A;
+
+}
+.productTitle{
+    margin-bottom: 20px;
+}
+
+
+/* video */
+.videoBlock{
+    width: 100%;
+    margin-bottom: 100px;
+}
+.videoBlock img{
+    width: 100%;
+}
+
+/* about */
+
+.aboutBlock{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    margin-bottom: 50px;
+}
+.aboutImg{
+    width: 50%;
+}
+.aboutImg img{
+    width: 100%;
+    height: 100%;
+}
+.aboutContent{
+    width: 50%;
+    padding: 20px 100px;
+    color: white;
+    background-color: #725334;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    letter-spacing: 5px;
+    
+}
+.aboutTitle{
+    text-align: center;
+    font-size: 36px;
+}
+.aboutTitle span{
+    font-size: 24px;
+}
+.aboutText{
+    padding: 20px 0;
+    
+}
+.aboutMoreButton{
+    width: 120px;
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid white;
+    margin: auto;
+}
+
+/* News 最新消息 */
+.newsBlock{
+    max-width: 1200px;
+    margin: auto;
+}
+.newsTitle{
+    color: #78583A;
+    margin-bottom: 50px;
+    font-size: 36px;
+    letter-spacing: 5px;
+    text-align: center;
+}
+.newsTitle span{
+    font-size: 24px;
+}
+.newsList{
+    width: 100%;
+    display: flex;
+}
+.newsItem{
+    width: 25%;
+    padding: 5px;
+}
+.newsItemImg{
+    position: relative;
+}
+.newsItemImg img{
+    width: 100%;
+}
+.newsText{
+    width: 100%;
+    padding: 20px 0;
+    letter-spacing: 2px;
+    color: #78583A;
+}
+.newsMoreButton{
+    color: #78583A;
+    display: flex;
+    align-items: center;
+
+}
+.newsMoreButton span{   
+    border-bottom: 1px solid #78583a83;
+}
+
+.newsMask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.521);
+    display: none;
+}
+.newsItem:hover .newsMask{
+    display: block;
+}
+.newsMoreButton i{
+    opacity: 0;
+    margin-left: 10px;
+}
+.newsMoreButton:hover i{
+    opacity: 1;
+}
