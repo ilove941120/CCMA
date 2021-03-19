@@ -157,6 +157,9 @@
     background-color: rgba(0, 0, 0, 0.747);
     z-index: 99;
 }
+.anchorPoint{
+    height: 90px;
+}
 
 @media (max-width:1400px){
     .navbar{
