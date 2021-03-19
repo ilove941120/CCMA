@@ -113,6 +113,10 @@
     font-size: 14px;
     margin-right: 5px;
 }
+.previousPageButtom:hover{
+    border: 1px solid #FDE6C4;
+
+}
 
 @media (max-width:576px){
     .contentTitle{

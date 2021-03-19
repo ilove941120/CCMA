@@ -145,6 +145,9 @@
     margin: 0 5px;
     text-align: center;
 }
+.checkoutButton:hover{
+    border: 1px solid #F7D08F;
+}
 .productItemContent{
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -163,6 +166,9 @@
 .previousPageButtom i{
     font-size: 14px;
     margin-right: 5px;
+}
+.previousPageButtom:hover{
+    border: 1px solid #F7D293;
 }
 
 /* topSellersBlock CSS */
@@ -243,6 +249,9 @@
     padding: 5px;
     border: 1px solid #BBDDCF;
     text-align: center;
+}
+.moreButtom:hover{
+    border: 1px solid #F7D08F;
 }
 .moreButtom i{
     font-size: 14px;

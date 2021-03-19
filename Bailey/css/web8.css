@@ -152,3 +152,6 @@
     background-color: #BBDDCF;
     border: 0;
 }
+.signButton:hover{
+    background-color: #FDE6C4;
+}
