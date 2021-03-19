@@ -24,6 +24,7 @@ body{
 }
 .companyBlock img{
     height: 40px;
+    padding-left: 5px;
 }
 .companyName{
     font-weight: bolder;
@@ -60,8 +61,90 @@ body{
     border-right: 1px solid #78583A;
     margin: 0 5px;
 }
+
+.navbarList{
+    display: none;
+    /* margin-left: auto; */
+    margin-right: 20px;
+    font-size: 36px;
+    padding: 5px;
+
+}
+.navbarListGroup{
+    width: 100%;
+    position: fixed;
+    z-index: 990;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(0, 0, 0, 0.842); */
+    text-shadow: 0 0 15px yellow;
+    color: white;
+    font-size: 24px;
+    display: none;
+}
+.navbarListItem{
+    margin: 0 10px;
+    padding: 5px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+.navbarListItem:hover{
+    color: #e6e6e6;
+    text-shadow: 0 0 10px #ff0000;
+    /* border-bottom: 1px solid #d8d8d8; */
+}
+.listSearchBar{
+    width: 280px;
+    margin-left: 10px;
+    border: 1px solid #78583A;
+    max-height: 30px;
+    padding: 2px 5px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.listSearchBar input{
+    border: 0;
+    border-left: 1px solid #78583A;
+    border-right: 1px solid #78583A;
+    margin: 0 5px;
+}
+.navbarMask{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.747);
+    z-index: 9;
+}
+.closeButton{
+    width: 20px;
+    height: 20px;
+    color: brown;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 101;
+    font-size: 20px;
+}
 @media (max-width:997px){
-    .naverbar,.searchBar{
+    .naverbar{
         display: none;
+    }
+    .searchBar{
+    margin-right: 20px;
+
+    }
+    .navbarList{
+        display: block;
+    }
+}
+@media (max-width:576px){
+    .searchBar{
+        display: none;
+    }
+    .navbarList{
+        margin-left: auto;
     }
 }

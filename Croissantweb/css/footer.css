@@ -42,6 +42,7 @@ body{
 }
 .contentItem img{
     width: 30px;
+    margin: 0 5px;
 }
 .topBar{
     width: 120px;
@@ -56,4 +57,19 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media(max-width:997px){
+    .footerContent{
+        flex-wrap: wrap;
+    }
+    .contentBlock{
+        width: 100%;
+
+    }
+    .contentItem{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
