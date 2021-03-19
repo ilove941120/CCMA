@@ -1,0 +1,166 @@
+.headerBlock{
+    width: 100%;
+}
+.header{
+    display: flex;
+    padding: 0px 50px;
+}
+.Company{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-left: 200px;
+
+}
+.companyName{
+    color: #759942;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.companyLogo{
+    width: 50px;
+    padding-top: 5px;
+
+}
+.companyLogo img{
+    width: 100%;
+}
+.navbar{
+    width: 50%;
+    display: flex;
+}
+.navbarItem{
+    width: 20%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #759942;
+
+}
+.navbarItem:hover{
+    background-color: #759942;
+    color: white;
+}
+.ohterbar{
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #759942;
+
+}
+.signIn{
+    margin-right: 20px;
+}
+.searchBlock i{
+    margin-left: 10px;
+
+}
+
+.navbarList{
+    display: none;
+    font-size: 24px;
+    line-height: 54px;
+    margin-left: 20px;
+    color: #759942;
+}
+.navbarListGroup{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    background-color: #FBF8E9;
+    /* background-color: chocolate; */
+}
+.navbarListLogo{
+    display: flex;
+    padding-top: 10px;
+    justify-content: center;
+}
+.navbarListItem{
+    padding: 15px;
+    color: #759942;
+}
+.navbarListItem:hover{
+    background-color: #759942;
+    color: white;
+}
+.listOtherbar{
+    margin-top: 20px;
+    display: none;
+}
+.listSignIn{
+    padding: 15px;
+    font-size: 24px;
+    color: #759942;
+
+}
+.listSignIn i:hover{
+    color: red;
+
+}
+.listSearchBlock{
+    padding: 15px;
+    color: #759942;
+
+}
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.582);
+    display: none;
+    z-index: 9;
+}
+.closeButton{
+    width: 20px;
+    height: 20px;
+    color: brown;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 101;
+    font-size: 20px;
+}
+@media(max-width:1400px){
+    .Company{
+        margin-left: 80px;
+    }
+}
+@media(max-width:1200px){
+    .Company{
+        margin-left: 0px;
+    }
+}
+@media(max-width:997px){
+    .navbar{
+        display: none;
+    }
+    .navbarList{
+        display: block;
+    }
+
+}
+@media(max-width:576px){
+    .header{
+        padding:  0 20px;
+    }
+    .ohterbar{
+        display: none;
+    }
+    .navbarList{
+        margin-left: auto;
+    }
+    .listOtherbar{
+        display: block;
+    }
+
+}
