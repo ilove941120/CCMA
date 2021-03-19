@@ -27,7 +27,7 @@
 
         <div class="headerContent">
             <div class="companyBlock">
-                <img src="../img/logo.png" alt="">
+                <img src="img/logo.png" alt="">
                 <div class="companyName">可頌麵包坊</div>
             </div>
             <div class="naverbar">
@@ -335,6 +335,13 @@
             $(".navbarListGroup").slideUp();
         })
         $(window).resize(function(){
+            if($(window).width() > 997){
+                $(".navbarMask").hide()
+            }
+            else{
+                $(".navbarListGroup").hide ()
+    
+            }
             if($(window).width() < 576){
                 $(".listSearchBar").show()
             }
@@ -343,6 +350,8 @@
     
             }
         })
+
+
 
     </script>
     <script>

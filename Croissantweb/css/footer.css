@@ -28,7 +28,14 @@ body{
     font-weight: bolder;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-height: 80px;
     
+}
+@media(max-width:1500px){
+    .contentBlock{
+        letter-spacing: 2px;
+    }
 }
 .contentItem{
     width: 100%;

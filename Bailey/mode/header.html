@@ -98,6 +98,13 @@
             $(".searchBlock").slideToggle()
         })
 
+        $(window).resize(function(){
+            if($(window).width() > 997){
+                $(".mask").hide();
+                $(".navbarListGroup").hide();
+            }
+        })
+
 
     </script>
 </body>
