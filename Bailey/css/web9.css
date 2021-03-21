@@ -71,3 +71,134 @@
 @media (max-width:376px){
     
 }
+
+
+
+
+
+
+
+
+
+/* topSellersBlock CSS */
+
+.topSellers{
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.topSellersTitle{
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.topSellersSubTitle{
+    width: 60%;
+    border-bottom: 5px solid green;
+    margin-bottom: 20px;
+}
+/* projectItem */
+.productShowGroup{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.projectItem{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.projectImg{
+    width: 100%;
+    position: relative;
+    background-color: violet;
+}
+.projectImg img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+.projectName{
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+.projectMask{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.432);
+    opacity: 0;
+    transition: 1s;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    top: 0;
+    left: 0;
+}
+.projectMaskIn{
+    width: 97%;
+    height: 97%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(255, 255, 255);
+}
+.projectItem:hover .projectMask{
+    opacity: 1;
+}
+
+.moreButtom{
+    width: 100px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 5px;
+    border: 1px solid #BBDDCF;
+    text-align: center;
+}
+.moreButtom:hover{
+    border: 1px solid #F7D08F;
+}
+.moreButtom i{
+    font-size: 14px;
+    margin-left: 5px;
+}
+@media (max-width:997px){
+
+    .productItmeShop{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .ShopImg{
+        width: 300px;
+    }
+    .ShopImgContent{
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .pric,.projectWeight,.quantity,.quantityAction{
+        margin-bottom: 20px;
+    }
+}
+@media (max-width:769px){
+    .productItemContent{
+        padding: 20px;
+    }
+    .productShowGroup{
+        flex-wrap: wrap;
+    }
+    .projectItem{
+        width: 45%;
+        margin: 0 5px;
+    }
+    .productTitle{
+        margin-top: 10px;
+        font-size: 24px ;
+    }
+}
