@@ -10,6 +10,9 @@ a{
 a:hover{
     color: unset;
 }
+.inputWatermark{
+    color: rgba(165, 42, 42, 0.719);
+}
 
 .colorBlue{
     color: #2B5E95;

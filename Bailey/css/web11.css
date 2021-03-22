@@ -99,7 +99,7 @@
 .shopListRow select{
     /* margin-left: 60px; */
 }
-.productSort,.productprice,.productQuantity,.productTotal,.productDelete{
+.productSort,.productPrice,.productQuantity,.productTotal,.productDelete{
     width: 13%;
     padding: 0 20px;
     display: flex;
@@ -177,6 +177,94 @@
     padding: 5px 0;
 }
 
+
+/* RWDshopList  */
+.shopListRWD{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.shopItemRWD{
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    border: 1px solid black;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 20px;
+
+    
+}
+.productImgRWD{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.productImgRWD img{
+    width: 100%;
+    object-fit: contain;
+    max-height: 150px;
+
+
+}
+.contentRWD{
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productNameRWD{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+.productpriceRWD span{
+    margin-left: 20px;
+
+}
+.productSortRWD select{
+    margin-left: 20px;
+}
+.productQuantityRWD{
+    display: flex;
+    /* justify-content: space-between; */
+}
+.quantityButtonMode{
+    display: flex;
+    margin-left: 20px;
+}
+.productQuantityRWD input{
+    width: 40px;
+    margin: 0 10px;
+}
+.productTotalRWD span{
+    margin-left: 20px;
+}
+.productDeleteRWD{
+    position: absolute;
+    color: brown;
+    top: 10px;
+    left: 10px;
+}
+@media(max-width:769px){
+
+}
+@media(max-width:576px){
+    .shopItemRWD{
+        /* padding: 10px; */
+    }
+    .productNameRWD{
+        font-size: 16px;
+    }
+    .productDeleteRWD{
+        font-size: 12px;
+        top: 5px;
+        left: 5px;
+    }
+}
 
 /* shopForm 收件人資訊表單 */
 .shopForm{
