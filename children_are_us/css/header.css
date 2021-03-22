@@ -7,6 +7,7 @@
 }
 .Company{
     display: flex;
+    width: 15%;
     height: 100%;
     align-items: center;
     margin-left: 200px;
@@ -137,10 +138,17 @@
 }
 @media(max-width:1200px){
     .Company{
+        width: 18%;
+        margin-left: 0px;
+    }
+    .Company{
         margin-left: 0px;
     }
 }
 @media(max-width:997px){
+    .Company{
+        width: 35%;
+    }
     .navbar{
         display: none;
     }
@@ -161,6 +169,9 @@
     }
     .listOtherbar{
         display: block;
+    }
+    .Company{
+        width: 70%;
     }
 
 }

@@ -436,12 +436,17 @@
 
 
 .topButton{
-    /* width: 50px; */
-    /* height: 50px; */
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
 }
-.top_bottom img{
-    width: 100%;
+.topButton img{
+    width: 80%;
+}
+
+@media (max-width:769px){
+    .topButton{
+        bottom: 0px;
+        right: -10px;
+    }
 }
