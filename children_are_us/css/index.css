@@ -1,15 +1,135 @@
 
+/* slider Banner */
+/* sliderBanner */
+.sliderBannerBlock{
+    width: 100%;
+    /* background-color: bisque; */
+}
+.sliderBanner{
+    width: 100%;
+    height: 51.5vw;
+
+}
+.sliderBannerBlock .slick-arrow{
+    display: none !important;
+}
+.bg1{
+    background-color: red;
+}
+.bg2{
+    background-color: blue;
+}
+.bg3{
+    background-color: yellow;
+}
+
+.bannerBlock{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+}
+.bannerBlock img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* object-position: top; */
+    
+}
+.bgMaskRed{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(177, 0, 0, 0.151);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.bgMaskBlue{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 77, 177, 0.144);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.clickButton{
+    width: 26%;
+    height: 16%;
+    /* background-color: rgba(95, 158, 160, 0.418); */
+    position: absolute;
+    bottom: 7%;
+    right: 11%;
+}
+
+.slick-dots{
+    bottom: 20px;
+}
+.slick-dotted.slick-slider{
+    margin-bottom: 0;
+    
+}
+.slick-dots li.slick-active button:before{
+    color: blue;
+}
+.slick-dots li button:before{
+    font-size: 48px;
+    color: tomato;
+}
+
+.bannerBlock{
+    position: relative;
+}
+.bannerTitleBlock{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: crimson;
+}
+.silderMainBlock,.silderSubBlock{
+    width: 600px;
+    height: 250px;
+    background-color: #A6BAB1;
+    position: absolute;
+    padding: 10px;
+}
+.silderSubBlock{
+    background-color: white;
+    top: 20px;
+    left: 20px;
+}
+
+.maintitle{
+    font-size: 72px;
+    letter-spacing: 5px;
+    color: white;
+}
+.sliderBanner{
+    float: left;
+}
+.sliderBanner::after{
+    content: "";
+    clear: both;
+}
+
+
+
 /* 頁面標題 CSS */
 .videoTitle{
+    margin-top: 50px;
     margin-bottom: 50px;
     /* background-color: red; */
 }
 
 .aboutTitle{
+    margin-top: 50px;
     margin-bottom: 50px;
     /* background-color: red; */
 }
 .newsTitle{
+    margin-top: 50px;
     margin-bottom: 50px;
     /* background-color: red; */
 }
@@ -32,22 +152,30 @@
 .newsBlock{
     max-width: 1200px;
     margin: auto;
+    margin-bottom: 20px;
+
 }
 .newsContent{
-    padding: 10px 50px;
-    border: 1px solid black;
+    padding: 10px 0px;
     display: flex;
+    flex-direction: column;
 }
 .newsItem{
     width: 100%;
     display: flex;
+    border: 1px solid black;
+    margin-bottom: 20px;
 }
 .contentImg{
     width: 50%;
     border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .contentImg img{
-    width: 90%;
+    width: 100%;
+    padding: 10px 30px;
     margin: auto;
 }
 .contentTextBlock{
@@ -61,12 +189,15 @@
     font-size: 24px;
     margin-bottom: 40px;
     color: #759942;
+    letter-spacing: 2px;
+
+
 
 }
 .newsItemText{
     margin-bottom: 40px;
     color: #759942;
-
+    letter-spacing: 2px;
 }
 .newsMoreButton{
     width: 70px;
@@ -79,7 +210,44 @@
     color: #F8C068;
 }
 
+@media(max-width:1200px){
+    .newsBlock{
+        width: 95%;
+    }
+}
+@media(max-width:769px){
+    .newsItem{
+        flex-direction: column;
+        padding: 0 10px;
+    }
+    .contentImg{
+        width: 100%;
+        border-right: unset;
+        border-bottom: 1px solid black;
+        max-height: 300px;
 
+    }
+    .contentImg img{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin: auto;
+        object-fit: contain;
+    }
+    .contentTextBlock{
+        width: 100%;
+        padding: 20px;
+    }
+    .newsItemTitle{
+        font-size: 20px;
+    }
+}
+@media (max-width:576px){
+    .newsItemText{
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+}
 
 
 
@@ -100,8 +268,35 @@
     background-color: #E8EABC;
 }
 .sliderVideoBlock{
-    height: 500px;
+    height: 450px;
 }
+.sliderVideoBlockRWD{
+    display: none;
+    width: 100%;
+    height: 250px;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 50px;
+}
+.videoBox{
+    width: 350px;
+    height: 250px;
+    margin: auto;
+    background-color: cadetblue;
+}
+
+.videoBox iframe{
+    width: 100%;
+    height: 250px;
+}
+.sliderVideoBlockRWD .slick-dots{
+    bottom: -30px;
+}
+.sliderVideoBlockRWD .slick-dots li button:before{
+    font-size: 40px;
+}
+
+
 .videoMoreButton{
     display: block;
     width: 150px;
@@ -117,11 +312,53 @@
 
 }
 
+
+
+/* swiper套件 */
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .swiper-containerRWD {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    max-width: 500px;
+    max-height: 400px;
+    margin: 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .swiper-slide iframe{
+      width: 600px;
+      /* min-width: 350px; */
+      height: 315px;
+  }
+  @media (max-width:997px){
+    .sliderVideoBlock{
+        display: none;
+    }
+    .sliderVideoBlockRWD{
+        display: block;
+    }
+  }
+
+
+
 /* about頁面 CSS */
 .aboutBlock{
     max-width: 1200px;
     margin: auto;
-    padding: 50px 0;
+    /* padding: 50px 0; */
+    margin-bottom: 50px;
 }
 
 
@@ -195,4 +432,16 @@
         height: 20px;
     }
     
+}
+
+
+.topButton{
+    /* width: 50px; */
+    /* height: 50px; */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+.top_bottom img{
+    width: 100%;
 }
