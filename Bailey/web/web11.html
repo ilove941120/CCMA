@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../css/setUp.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/web11.css">
+</head>
+<body>
+
+    <!-- header 區域 -->
+    <div class="headerBlock">
+        <!-- header 主要內容 -->
+        <div class="header">
+            <div class="headerLogoImg">
+                <img src="../img/logo.png" alt="">
+            </div>
+            <div class="navbar">
+                <div class="mainItemGroup">
+                    <div class="navbarItem">關於百利</div>
+                    <div class="navbarItem">商品介紹</div>
+                    <div class="navbarItem">經銷據點</div>
+                    <div class="navbarItem">最新消息</div>
+                    <div class="navbarItem">會員中心</div>
+                    <div class="navbarItem">聯絡我們</div>
+                </div>
+                <div class="subItemGroup">
+                    <div class="subItem"><i class="fab fa-facebook-square"></i>登入</div>
+                    <div class="subItem"><i class="fas fa-shopping-cart"></i>購物車<div class="shopQuantitySame shopQuantity">0</div></div>
+                    <div class="subItem"><div class="searchButton"><i class="fas fa-search"></i>搜尋</div></div>
+                </div>
+            </div>
+            <!-- header RWD -->
+            <div class="navbarList"><i class="fas fa-bars"></i></div>
+            <div class="navbarListGroup">
+                <div class="headerLogoImgRWD">
+                    <img src="../img/logo.png" alt="">
+                </div>
+                <div class="mainList">
+                    <div class="navbarListItem">關於百利</div>
+                    <div class="navbarListItem">商品介紹</div>
+                    <div class="navbarListItem">經銷據點</div>
+                    <div class="navbarListItem">最新消息</div>
+                    <div class="navbarListItem">會員中心</div>
+                    <div class="navbarListItem">聯絡我們</div>
+                </div>
+                <div class="subList">
+                    <div class="subListItem"><i class="fab fa-facebook-square"></i>登入</div>
+                    <div class="subListItem"><i class="fas fa-shopping-cart"></i>購物車 <div class="shopQuantitySame shopQuantityRWD">0</div></div>
+                    <div class="subListItem"><i class="fas fa-search"></i>搜尋</div>
+                </div>
+
+                <div class="closeButton"><i class="fas fa-times"></i></div>
+            </div>
+
+        </div>
+        <div class="searchBlock">
+            <input type="text" id="search" name="search">
+        </div>
+        <!-- 遮罩 -->
+        <div class="mask"></div>
+    </div>
+    <div class="anchorPoint"></div>
+
+    <div class="pageBlock">
+        <div class="banner">
+            <img src="../img/banner2.jpg" alt="">
+            <div class="titleBlock">
+                <div class="maintitle">Shopping Cart_</div>
+                <div class="subtitle">購物車</div>
+            </div>
+        </div>
+        <div class="pagecontent">
+            <div class="shoppingCartBlock">
+                <div class="searchBlock">
+                    <input type="text" placeholder="搜尋訂單商品...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="shopList">
+                    <div class="shopListRow">
+                        <div class="productImg"></div>
+                        <div class="productMainName">商品</div>
+                        <div class="productSort">PHYD</div>
+                        <div class="productprice">單價</div>
+                        <div class="productQuantity">數量</div>
+                        <div class="productTotalMain">小計</div>
+                        <div class="productDelete">刪除</div>
+                    </div>
+                    <div class="shopListRow">
+                        <div class="productImg"><img src="../img/banner1.jpg" alt=""></div>
+                        <div class="productName">
+                            <div class="shopTag"></div>
+                            【百利有機香菇】海苔香鬆/包
+                        </div>
+                        <div class="productSort">
+                            <select name="" id="">
+                                <option value="">100g</option>
+                            </select>
+                        </div>
+                        <div class="productprice">190</div>
+                        <div class="productQuantity">
+                            <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
+                            <input type="text" value="1">
+                            <div class="additon"><i class="fas fa-plus-circle"></i></div>
+                        </div>
+                        <div class="productTotal">190</div>
+                        <div class="productDelete">
+                            <i class="far fa-times-circle"></i>
+                        </div>
+                    </div>
+                    <div class="shopListRow">
+                        <div class="productImg"><img src="../img/banner1.jpg" alt=""></div>
+                        <div class="productName">
+                            <div class="shopTag"></div>
+                            【百利有機香菇】海苔香鬆/包
+                        </div>
+                        <div class="productSort">
+                            <select name="" id="">
+                                <option value="">100g</option>
+                            </select>
+                        </div>
+                        <div class="productprice">190</div>
+                        <div class="productQuantity">
+                            <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
+                            <input type="text" value="1">
+                            <div class="additon"><i class="fas fa-plus-circle"></i></div>
+                        </div>
+                        <div class="productTotal">190</div>
+                        <div class="productDelete">
+                            <i class="far fa-times-circle"></i>
+                        </div>
+                    </div>
+                    <div class="shopListRow">
+                        <div class="productImg"><img src="../img/banner1.jpg" alt=""></div>
+                        <div class="productName">
+                            <div class="shopTag"></div>
+                            【百利有機香菇】海苔香鬆/包
+                        </div>
+                        <div class="productSort">
+                            <select name="" id="">
+                                <option value="">100g</option>
+                            </select>
+                        </div>
+                        <div class="productprice">190</div>
+                        <div class="productQuantity">
+                            <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
+                            <input type="text" value="1">
+                            <div class="additon"><i class="fas fa-plus-circle"></i></div>
+                        </div>
+                        <div class="productTotal">190</div>
+                        <div class="productDelete">
+                            <i class="far fa-times-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="priceTotal">
+                        <span class="PScontent">不含運費</span>
+                        合計：<span class="lastPriceTotal"></span> 元
+                    </div>
+                </div>
+                <div class="shopNote">
+                    <div class="shopNoteTitle">購物須知</div>
+                    <div class="shopNoteContent">
+                        歡迎來到百利
+                        <div class="shopItem">*所有商品皆為現貨+預購，預購須7-21個工作天(不含例假日)。</div>
+                        <div class="shopItem">*訂購商品請務必確認商品種類，數量。如有與疑慮，請登入官網後，使用＂聯絡我們＂詢問客服</div>
+                        <div class="shopItem">*訂購後，單筆訂單更改尺寸/加購商品以1次為限，原訂單商品不得取消，若有更改訂單之需求，請登入官網後，使用右上方＂聯絡我們＂詢問客服</div>
+                    </div>
+                </div>
+                <div class="shopForm">
+                    <form action="" class="shopFormBlock">
+                        <div class="addresseeBlock">
+                            <div class="addresseeTitle">收件人資訊</div>
+                            <input type="text" placeholder="中文全名" class="addresseeName">
+                            <input type="text" placeholder="手機" class="addresseePhone">
+                            <input type="email" name="" id="addresseeEmail" placeholder="電子郵件" class="addresseeEmail">
+                            <label for="remarks" class="remarksTitle">訂單備註</label>
+                            <textarea name="" id="remarks" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="payMethod">
+                            <div class="payMethodTitle">付款方式</div>
+                            <select name="" id="" class="selectMethod">
+                                <option value="">全家便利商店取貨付款</option>
+                                <option value="">7-11便利商店取貨付款</option>
+                            </select>
+                            <select name="" id="" class="selectMethod">
+                                <option value="">全家便利商店取貨付款</option>
+                                <option value="">7-11便利商店取貨付款</option>
+                            </select>
+                            <div class="shopMoneyTotal">合計(含運費)：<span class="lastPriceTotal"></span>元</div>
+                            <div class="submitButton">提交表單</div>
+                            <div class="lastNote">請仔細閱讀"購物須知"，提交訂單表示您已經同意相關挑款</div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
+            
+            
+
+        </div>
+    </div>
+
+    <!-- footer 區域 -->
+    <div class="footerBlock">
+        <div class="footer">
+            <div class="footerMainContent">
+                <div class="footerLogo">
+                    <img src="../img/logo.png" alt="">
+                </div>
+                <div class="footerCompanyData">
+                    <div class="companyDada">服務專線: <span>04-2563493</span> <i class="fas fa-phone-volume"></i></div>
+                    <div class="companyData">歡迎商店、食品商行、團媽、普渡等來電批發</div>
+                    <div class="companyData">傳真:049-2561183 地址:南投縣草屯鎮中原里玉屏路22之59號</div>
+                </div>
+            </div>
+            <div class="footerSubcontent">
+                Copyright@2019百利有機科技有限公司 all rights reserved. 網站設計-橘野數位設計
+            </div>
+        </div>
+    </div> 
+
+
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/header.js"></script>
+
+    <script>
+
+        
+        // 數量增加減少
+        var n4 =$('.lastPriceTotal')
+        // 載入計算總價格
+        $(document).ready(function(){
+            
+            var total=0
+            $(".productTotal").each(function(){
+                total += parseInt($(this).text())
+            })
+            n4.text(total);
+
+            var n10 = $(".shopListRow").length
+            $(".shopQuantity").text(parseInt(n10)-1)
+            $(".shopQuantityRWD ").text(parseInt(n10)-1)
+
+
+            if($(".shopQuantitySame").text() > 0){
+                $(".shopQuantitySame").addClass("bg_red")
+            }
+            else{
+                $(".shopQuantitySame").removeClass("bg_red")
+            }
+        })
+        //點擊數量+1並且更新小計價格 和總價格
+        $(".additon").click(function(){
+            var total=0
+            var n1 =$(this).siblings("input")
+            n1.val(parseInt(n1.val()) + 1)
+            var n2 =$(this).parents(".shopListRow").find(".productTotal")
+            var n3 =$(this).parents(".shopListRow").find(".productprice")
+            var n5 =$('.shopListRow')
+            n2.text(parseInt(n1.val()) * parseInt(n3.text()) )
+            $(".productTotal").each(function(){
+                total += parseInt($(this).text())
+            })
+            n4.text(total)
+        })
+        //點擊數量-1 如果小於零不動作  更新小計價格和總價格
+        $(".lowerButton").click(function(){
+            var total=0
+            var n1 =$(this).siblings("input")
+            if(n1.val() > 0){
+                n1.val(parseInt(n1.val()) - 1)
+            }
+            var n2 =$(this).parents(".shopListRow").find(".productTotal")
+            var n3 =$(this).parents(".shopListRow").find(".productprice")
+            n2.text(parseInt(n1.val()) * parseInt(n3.text()) )
+            $(".productTotal").each(function(){
+                total += parseInt($(this).text())
+            })
+            n4.text(total)
+        })
+        // 刪除品項並重新計算價格
+        $('.productDelete').click(function(){
+            $(this).parents(".shopListRow").remove()
+            var total=0
+            $(".productTotal").each(function(){
+                total += parseInt($(this).text())
+            })
+            n4.text(total);
+            var n10 = $(".shopListRow").length
+            $(".shopQuantity").text(parseInt(n10)-1)
+            $(".shopQuantityRWD ").text(parseInt(n10)-1)
+
+            if($(".shopQuantitySame").text() > 0){
+                $(".shopQuantitySame").addClass("bg_red")
+            }
+            else{
+                $(".shopQuantitySame").removeClass("bg_red")
+            }
+        })
+        
+    </script>
+    
+    
+</body>
+</html>

@@ -76,7 +76,132 @@
 
 
 
+/* loctionBLock CSS */
+.loctionBlock{
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+.loctionBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cityName{
+    border: 1px solid #BADCD0;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 20px;
+    margin: 5px;
+}
+.detailedBlock{
+    border-top: 1px solid rgb(172, 172, 172);
+    margin-top: 20px;
+}
+.detailedRow{
+    display: flex;
+    border-bottom: 1px solid rgb(172, 172, 172);
 
+}
+.loctionName{
+    width: 30%;
+}
+.loctionPostion{
+    width: 40%;
+}
+.loctionPhone{
+    width: 20%;
+}
+.LoctionMap{
+    width: 10%;
+    text-align: center;
+
+}
+.LoctionMap i{
+    color: red;
+
+}
+.loctionName,.loctionPostion,.loctionPhone,.LoctionMap{
+    padding: 10px;
+}
+.loctionName,.loctionPostion,.loctionPhone{
+    border-right: 1px solid rgb(172, 172, 172);
+}
+
+/* detailedBlockRWD CSS */
+.detailedBlockRWD{
+    display: none;
+    margin-top: 20px;
+}
+.detailItem{
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.detailItemTitle{
+    width: 100%;
+    border-top: 1px solid rgb(172, 172, 172)
+}
+.detailItemGroup{
+    width: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    display: none;
+}
+
+.detailItemRow{
+    display: flex;
+    border-bottom: 1px solid rgb(172, 172, 172);
+}
+.detailItemMainTitle{
+    width: 35%;
+    border-right: 1px solid rgb(172, 172, 172);
+    padding: 5px;
+}
+
+.detailItemContent{
+    padding: 5px 10px;
+    width: 65%;
+}
+
+.detailItemContent i{
+    margin-left: 20px;
+    color: red;
+}
+
+
+
+@media(max-width:769px){
+    .detailedBlock{
+        display: none;
+    }
+    .detailedBlockRWD{
+        display: block;
+    }
+    .loctionBlock{
+        padding: 20px;
+    }
+    .detailItemMainTitle{
+        width: 25%;
+    }
+    
+    .detailItemContent{
+        width: 75%;
+    }
+}
+
+@media(max-width:576px){
+    .detailItemMainTitle{
+        width: 35%;
+    }
+    
+    .detailItemContent{
+        width: 65%;
+    }
+
+}
 
 
 
@@ -194,7 +319,7 @@
         flex-wrap: wrap;
     }
     .projectItem{
-        width: 45%;
+        width: 30%;
         margin: 0 5px;
     }
     .productTitle{
