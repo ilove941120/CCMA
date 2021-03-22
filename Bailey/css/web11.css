@@ -75,6 +75,7 @@
 
 .shoppingCartBlock{
     max-width: 1200px;
+    margin: auto;
 }
 .searchBlock{
     margin-left: auto;
@@ -96,7 +97,7 @@
     display: flex;
 }
 .shopListRow select{
-    margin-left: 60px;
+    /* margin-left: 60px; */
 }
 .productSort,.productprice,.productQuantity,.productTotal,.productDelete{
     width: 13%;

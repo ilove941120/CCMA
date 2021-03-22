@@ -178,20 +178,20 @@
                     <form action="" class="shopFormBlock">
                         <div class="addresseeBlock">
                             <div class="addresseeTitle">收件人資訊</div>
-                            <input type="text" placeholder="中文全名" class="addresseeName">
-                            <input type="text" placeholder="手機" class="addresseePhone">
-                            <input type="email" name="" id="addresseeEmail" placeholder="電子郵件" class="addresseeEmail">
+                            <input type="text" id="formAddresseeName" placeholder="中文全名" class="addresseeName">
+                            <input type="text" id="formAddressPhone" placeholder="手機" class="addresseePhone">
+                            <input type="email" name="" id="formAddresseeEmail" placeholder="電子郵件" class="addresseeEmail">
                             <label for="remarks" class="remarksTitle">訂單備註</label>
                             <textarea name="" id="remarks" cols="30" rows="10"></textarea>
                         </div>
                         <div class="payMethod">
                             <div class="payMethodTitle">付款方式</div>
-                            <select name="" id="" class="selectMethod">
+                            <select name="" id="formPayMethod" class="selectMethod">
                                 <option value="">全家便利商店取貨付款</option>
                                 <option value="">7-11便利商店取貨付款</option>
                             </select>
-                            <select name="" id="" class="selectMethod">
-                                <option value="">全家便利商店取貨付款</option>
+                            <select name="" id="formShipping" class="selectMethod">
+                                <option value="">統一超商(711)運費0元</option>
                                 <option value="">7-11便利商店取貨付款</option>
                             </select>
                             <div class="shopMoneyTotal">合計(含運費)：<span class="lastPriceTotal"></span>元</div>
@@ -305,6 +305,14 @@
             else{
                 $(".shopQuantitySame").removeClass("bg_red")
             }
+        })
+
+
+        // 表單驗證
+        var chineseNameCheck = /^[\u4E00-\u9FA5]+$/;
+        var phoneCheck = /^[0][9]\d{8}$/
+        $(".submitButton").click(function(){
+
         })
         
     </script>
