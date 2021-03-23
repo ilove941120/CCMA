@@ -1,0 +1,166 @@
+.headerBlock{
+    padding: 20px 40px;
+    position: relative;
+}
+
+.header{
+    max-width: 1400px;
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+}
+.headerCompanyBlock{
+    display: flex;
+    /* align-items: center; */
+}
+.headerCompanyName{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 10px;
+    color: #5F411A;
+
+
+}
+.headerCompanyMainName{
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+.headerCompanySubName{
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.navbarBlockBig{
+    /* display: none; */
+    margin-top: 10px;
+
+}
+
+.navbarMain{
+    display: flex;
+    margin-left: 10px;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.navbarItem{
+    font-size: 15px;
+    margin: 0 10px;
+    padding-bottom: 2px;
+    color: #5F411A;
+}
+.navbarItem:hover{
+    border-bottom: 1px solid #5F411A;
+}
+.otherBar{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+.searchBlock{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    justify-content: space-between;
+
+}
+.iconBlock{
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+
+}
+.headerIconBar{
+margin-left: 90px;
+}
+
+.headerIconBar img{
+    margin: 0 10px;
+}
+
+.nabarBlockMid{
+    width: 100%;
+    display: flex;
+    /* background-color: tomato; */
+    justify-content: space-around;
+    padding: 10px 0;
+}
+.navbarBlockRWD{
+    margin-left: auto;
+    display: none;
+}
+.navbarList{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #5F411A;
+
+}
+@media(max-width:1500px){
+    .navbarBlockBig{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .navbarItem{
+        margin: 0 5px;
+    }
+    .otherBar{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 50px;
+        right: 40px;
+    }
+}
+
+
+@media (max-width:1200px){
+    .headerIconBar{
+        margin-left: 40px;
+        }
+}
+
+@media (max-width:997px){
+.navbarBlockBig{
+    display: none;
+}
+.otherBar{
+    display: none;
+}
+.navbarBlockRWD{
+    display: block;
+}
+    
+}
+@media (max-width:768px){
+
+}
+@media (max-width:576px){
+    .headerBlock{
+        padding: 20px 10px;
+    }
+    .header{
+        flex-wrap: unset;
+    }
+    .headerCompanyLogo img{
+        width: 50px;
+    }
+    .headerCompanyMainName{
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: bolder;
+    }
+    .headerCompanySubName{
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+}
+@media (max-width:376px){
+    
+}
