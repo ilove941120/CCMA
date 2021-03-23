@@ -33,7 +33,9 @@
                 </div>
                 <div class="subItemGroup">
                     <div class="subItem"><i class="fab fa-facebook-square"></i>登入</div>
-                    <div class="subItem"><i class="fas fa-shopping-cart"></i>購物車<div class="shopQuantitySame shopQuantity">0</div></div>
+                    <div class="subItem">
+                        <i class="fas fa-shopping-cart"></i>購物車<div class="shopQuantity">10</div>
+                    </div>
                     <div class="subItem"><div class="searchButton"><i class="fas fa-search"></i>搜尋</div></div>
                 </div>
             </div>
@@ -53,7 +55,9 @@
                 </div>
                 <div class="subList">
                     <div class="subListItem"><i class="fab fa-facebook-square"></i>登入</div>
-                    <div class="subListItem"><i class="fas fa-shopping-cart"></i>購物車 <div class="shopQuantitySame shopQuantityRWD">0</div></div>
+                    <div class="subListItem">
+                        <i class="fas fa-shopping-cart"></i> 購物車 <div class="shopQuantity">1000</div>
+                    </div>
                     <div class="subListItem"><i class="fas fa-search"></i>搜尋</div>
                 </div>
 
@@ -111,7 +115,7 @@
                             <div class="additon"><i class="fas fa-plus-circle"></i></div>
                         </div>
                         <div class="productTotal">190</div>
-                        <div class="productDelete">
+                        <div class="productDeletMain productDelete">
                             <i class="far fa-times-circle"></i>
                         </div>
                     </div>
@@ -133,7 +137,7 @@
                             <div class="additon"><i class="fas fa-plus-circle"></i></div>
                         </div>
                         <div class="productTotal">190</div>
-                        <div class="productDelete">
+                        <div class="productDeletMain productDelete">
                             <i class="far fa-times-circle"></i>
                         </div>
                     </div>
@@ -155,14 +159,14 @@
                             <div class="additon"><i class="fas fa-plus-circle"></i></div>
                         </div>
                         <div class="productTotal">190</div>
-                        <div class="productDelete">
+                        <div class="productDeletMain productDelete">
                             <i class="far fa-times-circle"></i>
                         </div>
                     </div>
                     
                     <div class="priceTotal">
                         <span class="PScontent">不含運費</span>
-                        合計：<span class="lastPriceTotal"></span> 元
+                        合計：<span id="lastPriceTotal" class="lastPriceTotal1"></span> 元
                     </div>
                 </div>
                 <div class="shopListRWD">
@@ -177,7 +181,7 @@
                                     <option value="">100g</option>
                                 </select>
                             </div>
-                            <div class="productPriceRWD">單價 <span class="n1">190</span> </div>
+                            <div class="productPriceBlockRWD">單價 <span class="productPriceRWD">190</span> </div>
                             <div class="productQuantityRWD">數量 
                                 <div class="quantityButtonMode">
                                     <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
@@ -185,9 +189,55 @@
                                     <div class="additon"><i class="fas fa-plus-circle"></i></div>
                                 </div>
                             </div>
-                            <div class="productTotalRWD">小計 <span class="n2">190</span></div>
+                            <div class="productTotalBlockRWD">小計 <span class="productTotalRWD">190</span></div>
                         </div>
-                        <div class="productDeleteRWD"><i class="far fa-times-circle"></i></div>
+                        <div class="productDeletMain productDeleteRWD"><i class="far fa-times-circle"></i></div>
+                    </div>
+                    <div class="shopItemRWD">
+                        <div class="productImgRWD">
+                            <img src="../img/item1.jpg" alt="">
+                        </div>
+                        <div class="contentRWD">
+                            <div class="productNameRWD"><span>【百利有機香菇】海苔香鬆/包</span></div>
+                            <div class="productSortRWD">PHYD
+                                <select name="" id="">
+                                    <option value="">100g</option>
+                                </select>
+                            </div>
+                            <div class="productPriceBlockRWD">單價 <span class="productPriceRWD">190</span> </div>
+                            <div class="productQuantityRWD">數量 
+                                <div class="quantityButtonMode">
+                                    <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
+                                    <input type="text" value="1">
+                                    <div class="additon"><i class="fas fa-plus-circle"></i></div>
+                                </div>
+                            </div>
+                            <div class="productTotalBlockRWD">小計 <span class="productTotalRWD">190</span></div>
+                        </div>
+                        <div class="productDeletMain productDeleteRWD"><i class="far fa-times-circle"></i></div>
+                    </div>
+                    <div class="shopItemRWD">
+                        <div class="productImgRWD">
+                            <img src="../img/item1.jpg" alt="">
+                        </div>
+                        <div class="contentRWD">
+                            <div class="productNameRWD"><span>【百利有機香菇】海苔香鬆/包</span></div>
+                            <div class="productSortRWD">PHYD
+                                <select name="" id="">
+                                    <option value="">100g</option>
+                                </select>
+                            </div>
+                            <div class="productPriceBlockRWD">單價 <span class="productPriceRWD">190</span> </div>
+                            <div class="productQuantityRWD">數量 
+                                <div class="quantityButtonMode">
+                                    <div class="lowerButton"><i class="fas fa-minus-circle"></i></div>
+                                    <input type="text" value="1">
+                                    <div class="additon"><i class="fas fa-plus-circle"></i></div>
+                                </div>
+                            </div>
+                            <div class="productTotalBlockRWD">小計 <span class="productTotalRWD">190</span></div>
+                        </div>
+                        <div class="productDeletMain productDeleteRWD"><i class="far fa-times-circle"></i></div>
                     </div>
 
 
@@ -221,7 +271,7 @@
                                 <option value="">統一超商(711)運費0元</option>
                                 <option value="">7-11便利商店取貨付款</option>
                             </select>
-                            <div class="shopMoneyTotal">合計(含運費)：<span class="lastPriceTotal"></span>元</div>
+                            <div class="shopMoneyTotal">合計(含運費)：<span id="lastPriceTotal" class="lastPriceTotal1"></span>元</div>
                             <div id="submitButtonFom" class="submitButton">提交表單</div>
                             <div class="lastNote">請仔細閱讀"購物須知"，提交訂單表示您已經同意相關挑款</div>
                         </div>
@@ -265,9 +315,11 @@
 
         
         // 數量增加減少
-        var n4 =$('.lastPriceTotal')
+        var n4 =$('.lastPriceTotal1')
+        // -------------------------------------------------------------
+        // 預載入
         $(document).ready(function(){
-            // 載入偵測版面
+            // 載入偵測目前視窗大小切換版面
             if($(window).width() < 769){
                 $(".shopListRWD").show();
                 $(".shopList").hide();
@@ -277,28 +329,39 @@
                  $(".shopList").show();
             }
 
-            // 載入計算總價格
+            // 載入計算目前總價格
             var lastTotal=0
+            var lastTotalRWD=0
+
             $(".productTotal").each(function(){
                 lastTotal += parseInt($(this).text())
             })
-            n4.text(lastTotal);
+            $(".productTotalRWD").each(function(){
+                lastTotalRWD += parseInt($(this).text())
+            })
+            if($(window).width() > 769){
+                n4.text(lastTotal)
+            }
+            else{
+                n4.text(lastTotalRWD)
+            }
 
             var shopListNumber = $(".shopListRow").length
             $(".shopQuantity").text(parseInt(shopListNumber)-1)
-            $(".shopQuantityRWD ").text(parseInt(shopListNumber)-1)
 
 
-            if($(".shopQuantitySame").text() > 0){
-                $(".shopQuantitySame").addClass("bg_red")
+            if($(".shopQuantity").text() > 0){
+                $(".shopQuantity").addClass("bg_red")
             }
             else{
-                $(".shopQuantitySame").removeClass("bg_red")
+                $(".shopQuantity").removeClass("bg_red")
             }
         })
+        // -------------------------------------------------------------
 
-        // RWD購物清單版型切換
+        // 感應到視窗變化動作
         $(window).resize(function(){
+            // 如果視窗小於769執行RWD板型出現一般版型消失,大於RWD消失一般版版型出現
             if($(window).width() < 769){
                 $(".shopListRWD").show();
                 $(".shopList").hide();
@@ -307,123 +370,148 @@
                 $(".shopListRWD").hide();
                 $(".shopList").show();
             }
-        })
 
-        
-        //點擊數量+1並且更新小計價格 和總價格
-        // $(".additon").click(function(){
-        //     var lastTotal=0
-        //     var productNumber =$(this).siblings("input")
-        //     var subTotal =$(this).parents(".shopListRow").find(".productTotal")
-        //     var price =$(this).parents(".shopListRow").find(".productPrice")
-        //     var subTotalRWD =$(this).parents(".shopItemRWD").find(".productTotalRWD")
-        //     var priceRWD =$(this).parents(".shopListRow").find(".productTotalRWD")
-
-        //     productNumber.val(parseInt(productNumber.val()) + 1)
-        //     subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) )
-        //     subTotalRWD.text(parseInt(productNumber.val()) * parseInt(priceRWD.text()) )
-        //     $(".productTotal").each(function(){
-        //         lastTotal += parseInt($(this).text())
-        //     })
-        //     n4.text(lastTotal)
-        // })
-        //點擊數量-1 如果小於零不動作  更新小計價格和總價格
-        $(".lowerButton").click(function(){
-            var lastTotal=0;
-            var productNumber =$(this).siblings("input")
-            if(productNumber.val() > 0){
-                productNumber.val(parseInt(productNumber.val()) - 1);
-            }
-
-
-            var subTotal =$(this).parents(".shopListRow").find(".productTotal");
-            var price =$(this).parents(".shopListRow").find(".productPrice");
-            subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) );
-            $(".productTotal").each(function(){
-                lastTotal += parseInt($(this).text());
-            })
-            n4.text(lastTotal);
-        })
-        // 刪除品項並重新計算價格
-        $('.productDelete').click(function(){
-            $(this).parents(".shopListRow").remove()
-            var lastTotal=0;
-            $(".productTotal").each(function(){
-                lastTotal += parseInt($(this).text());
-            })
-            n4.text(lastTotal);
-            var shopListNumber = $(".shopListRow").length;
-            $(".shopQuantity").text(parseInt(shopListNumber)-1);
-            $(".shopQuantityRWD").text(parseInt(shopListNumber));
-
-            if($(".shopQuantitySame").text() > 0){
-                $(".shopQuantitySame").addClass("bg_red");
-            }
-            else{
-                $(".shopQuantitySame").removeClass("bg_red");
-            }
-        })
-        var n10 =0
-        
-        $(window).resize(function(){
-            var windowNowWidth = $(window).width();
-            console.log(windowNowWidth)
-            return n10
-        })
-        console.log(n10)
-
-        if(n10 < 769){
-            $(".additon").click(function(){
-                var lastTotal=0
-                var productNumber =$(this).siblings("input")
-                var priceRWD =$(this).parents(".shopItemRWD").find(".n1")
-                var subTotalRWD =$(this).parents(".shopItemRWD").find(".n2")
-
-                productNumber.val(parseInt(productNumber.val()) + 1)
-                subTotalRWD.text(parseInt(productNumber.val()) * parseInt(priceRWD.text()) )
-                $(".n2").each(function(){
-                    lastTotal += parseInt($(this).text())
-                })
-                n4.text(lastTotal)
-            })
-        }
-        else{
-            $(".additon").click(function(){
-                var lastTotal=0
-                var productNumber =$(this).siblings("input")
-                var subTotal =$(this).parents(".shopListRow").find(".productTotal")
-                var price =$(this).parents(".shopListRow").find(".productPrice")
-
-                productNumber.val(parseInt(productNumber.val()) + 1)
-                subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) )
-                $(".productTotal").each(function(){
-                    lastTotal += parseInt($(this).text())
-                })
-                n4.text(lastTotal)
-            })
-        }
-
-
-
-        // RWD版--刪除品項並重新計算價格
-        $('.productDeleteRWD').click(function(){
-            $(this).parents(".shopItemRWD").remove()
             var lastTotal=0
+            var lastTotalRWD=0
+            var productNumber =$(this).siblings("input")
+            var subTotal =$(this).parents(".shopListRow").find(".productTotal")
+            var price =$(this).parents(".shopListRow").find(".productPrice")
+            var priceRWD =$(this).parents(".shopItemRWD").find(".productPriceRWD")
+            var subTotalRWD =$(this).parents(".shopItemRWD").find(".productTotalRWD")
+
+            // 數量+1
+            productNumber.val(parseInt(productNumber.val()) + 1)
+            // 計算小計並填寫
+            subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) )
+            subTotalRWD.text(parseInt(productNumber.val()) * parseInt(priceRWD.text()) )
+            // 小計加總
             $(".productTotal").each(function(){
                 lastTotal += parseInt($(this).text())
             })
-            n4.text(lastTotal);
-            var shopListNumber = $(".shopListRow").length
-            $(".shopQuantity").text(parseInt(shopListNumber)-1)
-            $(".shopQuantityRWD ").text(parseInt(shopListNumber)-1)
-
-            if($(".shopQuantitySame").text() > 0){
-                $(".shopQuantitySame").addClass("bg_red")
+            $(".productTotalRWD").each(function(){
+                lastTotalRWD += parseInt($(this).text())
+            })
+            // 如果視窗大於769執行填寫lastTotal 小於執行填寫lastTotalRWD
+            if($(window).width() > 769){
+                n4.text(lastTotal)
             }
             else{
-                $(".shopQuantitySame").removeClass("bg_red")
+                n4.text(lastTotalRWD)
+            }
+
+        })
+
+        // -------------------------------------------------------------
+        
+        // 點擊增加圖示動作
+        $(".additon").click(function(){
+            var lastTotal=0
+            var lastTotalRWD=0
+            var productNumber =$(this).siblings("input")
+            var subTotal =$(this).parents(".shopListRow").find(".productTotal")
+            var price =$(this).parents(".shopListRow").find(".productPrice")
+
+            var priceRWD =$(this).parents(".shopItemRWD").find(".productPriceRWD")
+            var subTotalRWD =$(this).parents(".shopItemRWD").find(".productTotalRWD")
+
+            // 點擊數量+1
+            productNumber.val(parseInt(productNumber.val()) + 1)
+            // 小計價格計算並填寫
+            subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) )
+            subTotalRWD.text(parseInt(productNumber.val()) * parseInt(priceRWD.text()) )
+            // 總價格計算
+            $(".productTotal").each(function(){
+                lastTotal += parseInt($(this).text())
+            })
+            $(".productTotalRWD").each(function(){
+                lastTotalRWD += parseInt($(this).text())
+            })
+            // 如果視窗大於769填寫lastTotal 小於填寫lastTotalRWD
+            if($(window).width() > 769){
+                n4.text(lastTotal)
+            }
+            else{
+                n4.text(lastTotalRWD)
             }
         })
+        //  點擊減少圖示動作
+        $(".lowerButton").click(function(){
+            var lastTotal=0;
+            var lastTotalRWD=0
+            var productNumber =$(this).siblings("input")
+            var subTotal =$(this).parents(".shopListRow").find(".productTotal");
+            var price =$(this).parents(".shopListRow").find(".productPrice");
+
+            var priceRWD =$(this).parents(".shopItemRWD").find(".productPriceRWD")
+            var subTotalRWD =$(this).parents(".shopItemRWD").find(".productTotalRWD")
+
+            // 點擊數量-1 如果小於零不動作
+            if(productNumber.val() > 0){
+                productNumber.val(parseInt(productNumber.val()) - 1);
+            }
+            // 小計價格計算並填寫
+            subTotal.text(parseInt(productNumber.val()) * parseInt(price.text()) );
+            subTotalRWD.text(parseInt(productNumber.val()) * parseInt(priceRWD.text()) )
+            // 總價格計算
+            $(".productTotal").each(function(){
+                lastTotal += parseInt($(this).text());
+            })
+            $(".productTotalRWD").each(function(){
+                lastTotalRWD += parseInt($(this).text())
+            })
+            // 如果視窗大於769填寫lastTotal 小於填寫lastTotalRWD
+            if($(window).width() > 769){
+                n4.text(lastTotal)
+            }
+            else{
+                n4.text(lastTotalRWD)
+            }
+        })
+
+        // -------------------------------------------------------------
+        // 刪除品項並重新計算價格
+        $('.productDelete').click(function(){
+            // 刪除品項
+            $(this).parents(".shopListRow").remove()
+            // 計算總價格
+            var lastTotal=0;
+            $(".productTotal").each(function(){
+                lastTotal += parseInt($(this).text());
+            })
+            n4.text(lastTotal);
+
+            var shopListNumber = $(".shopListRow").length;
+            $(".shopQuantity").text(parseInt(shopListNumber)-1);
+
+
+            if($(".shopQuantity").text() > 0){
+                $(".shopQuantity").addClass("bg_red");
+            }
+            else{
+                $(".shopQuantity").removeClass("bg_red");
+            }
+        })
+        // RWD版--刪除品項並重新計算價格
+        $('.productDeleteRWD').click(function(){
+
+            $(this).parents(".shopItemRWD").remove()
+            var lastTotalRWD=0
+            $(".productTotalRWD").each(function(){
+                lastTotalRWD += parseInt($(this).text())
+            })
+            n4.text(lastTotalRWD);
+            var shopListNumber = $(".shopItemRWD").length
+            $(".shopQuantity ").text(parseInt(shopListNumber))
+
+            if($(".shopQuantity").text() > 0){
+                $(".shopQuantity").addClass("bg_red")
+            }
+            else{
+                $(".shopQuantity").removeClass("bg_red")
+            }
+        })
+
+
 
 
         // 表單驗證
@@ -435,7 +523,6 @@
             if($("#formAddresseeName").val() =="" | chineseNameCheck.test($("#formAddresseeName").val()) == false){
                 $("#formAddresseeName").addClass("inputWatermark")
                 $("#formAddresseeName").val("名字不符合格式")
-
             }
             if($("#formAddressPhone").val() =="" | phoneCheck.test($("#formAddressPhone").val()) == false){
                 $("#formAddressPhone").addClass("inputWatermark")

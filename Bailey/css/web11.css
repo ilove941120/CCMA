@@ -221,7 +221,7 @@
     font-weight: bolder;
     margin-bottom: 10px;
 }
-.productpriceRWD span{
+.productPriceRWD{
     margin-left: 20px;
 
 }
@@ -240,7 +240,7 @@
     width: 40px;
     margin: 0 10px;
 }
-.productTotalRWD span{
+.productTotalRWD{
     margin-left: 20px;
 }
 .productDeleteRWD{
@@ -349,6 +349,7 @@
     padding: 5px 0;
     margin-bottom: 20px;
     border-radius: 5px;
+    cursor: pointer; 
 
 }
 .submitButton:hover{

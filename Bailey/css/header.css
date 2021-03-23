@@ -77,36 +77,30 @@
     /* font-size: 16px; */
 }
 .subItem{
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .subListItem{
-    position: relative;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.shopQuantitySame{
-    display: inline;
-    padding:5px 5px;
+.shopQuantity{
+    padding:3px 3px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: grey;
     border-radius: 50%;
-    font-size: 14px;
-    position: absolute;
-}
-.shopQuantity{
-    /* width: 20px; */
-
-    top: -2px;
-    right: -37px;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
-.shopQuantityRWD{
-
-    top: -5px;
-    left:70%;
-    letter-spacing: 0;
-}
 
 .navbarList{
     display: none;
@@ -127,7 +121,7 @@
     position: fixed;
     z-index: 999;
     font-size: 14px;
-    letter-spacing: 5px;
+    /* letter-spacing: 5px; */
 }
 .headerLogoImgRWD{
     display: flex;

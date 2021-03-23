@@ -30,11 +30,11 @@
                 $(".navbarListGroup").hide();
             }
         })
-
-        // 購物車數量變色
-        if($(".shopQuantityRWD").text() > 0){
-            $(".shopQuantityRWD").css("backgroundColor","red")
-        }
         if($(".shopQuantity").text() > 0){
-            $(".shopQuantity").css("backgroundColor","red")
+            $(".shopQuantity").addClass("bg_red");
         }
+        else{
+            $(".shopQuantity").removeClass("bg_red");
+        }
+
+
