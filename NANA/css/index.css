@@ -12,6 +12,7 @@
     letter-spacing: 2px;
     border-bottom: 1px dotted #5F411A;
     margin: auto;
+    margin-bottom: 30px;
     color: #5F411A;
 
 }
@@ -89,28 +90,330 @@
 /* about 關於美甲美睫沙龍 */
 .aboutBlock{
     padding: 50px;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100px;
+
+    /* margin-top: 50px; */
 }
 .blockMainTitle{
     font-size: 28px;
     font-weight: bolder;
     text-align: center;
+    margin-top: 150px;
     margin-bottom: 40px;
     letter-spacing: 2px;
     color: #5F411A;
 }
 .blockSubTitle{
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
     letter-spacing: 2px;
 }
+.aboutContent{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* about課程項目 */
+.aboutItem{
+    width: 30%;
+    position: relative;
+    background-color: white;
+    z-index: 2;
 
+}
+.aboutImgBlock{
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+.aboutImgBlock img{
+    width: 100%;
+}
+.aboutdetail{
+    width: 100%;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgb(148, 148, 148);
+}
+.detailBlock{
+    margin-bottom: 10px;
+}
+/* 課程介紹黃色版本 */
+.detailMainText{
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #868475;
+    font-weight: bolder;
+}
+.detailSubText{
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #E6D5B1;
+}
+.detailMoreButton{
+    position: absolute;
+    padding:60px 80px;
+    right: -5px;
+    bottom: -5px;
+    background-image: url(../img/moreImg1.png);
+    background-repeat: no-repeat;
+    background-size: 160px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.moreText{
+    position: absolute;
+    font-size: 18px;
+    left: 20%;
+    top: 33%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #B28135;
+}
+
+/* 課程介紹紅色版本 */
+.detailMainTextRed{
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #FF6962;
+    font-weight: bolder;
+}
+.detailSubTextRed{
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #FFC3B9;
+}
+.detailMoreButtonRed{
+    position: absolute;
+    padding:60px 90px;
+    right: -30px;
+    bottom: -25px;
+    background-image: url(../img/moreImg2.png);
+    background-repeat: no-repeat;
+    background-size: 180px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moreTextRed{
+    position: absolute;
+    font-size: 18px;
+    left: 30%;
+    top: 37%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #FF6962;
+}
+.moreText:visited{
+    color: white;
+}
+.moreTextRed:visited{
+    color: white;
+}
+.moreTextSm:visited{
+    color: white;
+}
+.aboutPageButton{
+    display: block;
+    width: 100px;
+    margin: auto;
+    margin-top: 120px;
+    padding: 5px;
+    border-bottom: 1px solid #5F411A;
+    color: #5F411A;
+    text-align: center;
+}
+.aboutPageButton:visited{
+    color: #5F411A;
+
+}
+.detailMoreButtonSm{
+    position: absolute;
+    padding:40px 45px;
+    left: 7%;
+    top: 33%;
+    background-image: url(../img/moreImg1.png);
+    background-repeat: no-repeat;
+    background-size: 90px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+    opacity: 0;
+    transition: 1s;
+}
+.moreTextSm{
+    position: absolute;
+    font-size: 14px;
+    left: 10%;
+    top: 33%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #B28135;
+}
+.detailMoreButtonRedSm{
+    position: absolute;
+    padding:40px 55px;
+    left:8%;
+    bottom: 25%;
+    background-image: url(../img/moreImg2.png);
+    background-repeat: no-repeat;
+    background-size: 110px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 1s;
+}
+
+
+
+
+/* 背景裝飾區 */
+.aboutTitleBlock{
+    background-image: url(../img/backgroundImg2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 1px;
+}
+.backgroundDecoration{
+    width: 100%;
+}
+.Decoration1{
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    z-index: -22;
+}
+.Decoration3{
+    position: absolute;
+    top: -2%;
+    right: -5%;
+    width: 40%;
+}
+@media(max-width:1400px){
+    .Decoration3{
+        width: 50%;
+    }
+}
+@media(max-width:769px){
+    .Decoration3{
+        width: 60%;
+    }
+}
+@media(max-width:769px){
+    .Decoration3{
+        width: 80%;
+    }
+}
+@media(max-width:1300px){
+    .aboutBlock{
+    }
+    .detailMoreButton{
+        right: 0%;
+        bottom: -100px;
+    }
+    .detailMoreButtonRed{
+        right: 0%;
+        bottom: -100px;
+    }
+}
+@media (max-width:997px){
+    .aboutContent{
+        flex-direction: column;
+    }
+    .aboutItem{
+        width: 100%;
+        display: flex;
+        box-shadow: 2px 2px 10px rgb(148, 148, 148);
+        margin-bottom: 20px;
+        padding: 5px;
+
+    }
+    .aboutImgBlock{
+        width: 30%;
+        min-height: 200px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+    }
+    .aboutImgBlock img{
+        object-fit: cover;
+        min-width: 150px;
+        min-height: 200px;
+    }
+    .aboutdetail{
+        width: 70%;
+        box-shadow: unset;
+    }
+    .detailMoreButton{
+        padding:50px 65px;
+        background-size: 130px;
+        right: 0%;
+        bottom: 0px;
+    }
+    .detailMoreButtonRed{
+        padding:60px 80px;
+        background-size: 160px;
+        right: -5%;
+        bottom:-8%;
+    }
+    .aboutPageButton{
+        margin-top: 50px;
+    }
+    
+}
+@media (max-width:576px){
+    .aboutBlock{
+        padding: 20px;
+    }
+    .blockSubTitle{
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+    .aboutdetail{
+        padding: 10px 0;
+    }
+    .detailBlock{
+        margin-left: 70px;
+    }
+    .detailMainText{
+        font-size: 14px;
+    }
+    .detailMainTextRed{
+        font-size: 14px;
+    }
+    .detailMoreButton{
+        display: none;
+    }
+    .detailMoreButtonRed{
+        display: none;
+    }
+    .aboutItem:hover .detailMoreButtonSm{
+        opacity: 1;
+    }
+    .aboutItem:hover .detailMoreButtonRedSm{
+        opacity: 1;
+    }
+}
 
 /* workShow 作品欣賞區 */
 .workShowBlock{
-    padding: 50px;
 }
 .workShowSliderBlock{
-    padding: 20px;
 }
 
 .workShowItem{
@@ -141,6 +444,9 @@
 }
 .workMoreButton:hover{
     background-color: #B87C33;
+    color: white;
+}
+.workMoreButton:visited{
     color: white;
 }
 

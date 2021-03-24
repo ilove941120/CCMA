@@ -11,8 +11,17 @@ a{
 a:hover{
     color: unset;
 }
+a:active{
+    color: unset;
+}
+a:visited{
+    color: unset;
+}
 .inputWatermark{
     color: rgba(165, 42, 42, 0.719);
+}
+.cleatBoth{
+    clear: both;
 }
 
 .color{
