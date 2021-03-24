@@ -1,7 +1,9 @@
 
 
 
-
+.bannerBlock .slick-next{
+    clear: both;
+}
 /* 框架和共通設定 */
 .blockTitle{
     width: 250px;
@@ -67,6 +69,7 @@
 }
 .bannerItem{
     width: 100%;
+    display: block !important;
 }
 .bannerItem img{
     width: 100%;
@@ -213,6 +216,16 @@
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #FF6962;
 }
+.moreTextRedSm{
+    position: absolute;
+    font-size: 14px;
+    left: 30%;
+    top: 37%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #FF6962;
+}
 .moreText:visited{
     color: white;
 }
@@ -239,7 +252,7 @@
 .detailMoreButtonSm{
     position: absolute;
     padding:40px 45px;
-    left: 7%;
+    left: 30%;
     top: 33%;
     background-image: url(../img/moreImg1.png);
     background-repeat: no-repeat;
@@ -265,7 +278,7 @@
 .detailMoreButtonRedSm{
     position: absolute;
     padding:40px 55px;
-    left:8%;
+    left:20%;
     bottom: 25%;
     background-image: url(../img/moreImg2.png);
     background-repeat: no-repeat;
@@ -293,9 +306,14 @@
 }
 .Decoration1{
     position: absolute;
-    bottom: 0;
-    left: 5%;
+    bottom: 10%;
+    left: 0%;
     z-index: -22;
+}
+.Decoration2{
+    position: absolute;
+    bottom: 40%;
+    left: 0%;
 }
 .Decoration3{
     position: absolute;
@@ -311,6 +329,10 @@
 @media(max-width:769px){
     .Decoration3{
         width: 60%;
+    }
+    .Decoration1{
+        bottom: 4%;
+        left: -20%;
     }
 }
 @media(max-width:769px){
@@ -412,8 +434,21 @@
 
 /* workShow 作品欣賞區 */
 .workShowBlock{
+
 }
 .workShowSliderBlock{
+    position: relative;
+}
+.riverDecoration{
+    background-image: url(../img/workShowMywhite5.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    pointer-events: none;
 }
 
 .workShowItem{

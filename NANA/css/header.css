@@ -73,9 +73,19 @@ body{
     justify-content: space-between;
 
 }
-.searchBlock a{
-    padding-top: 4px;
+.searchBlock input{
+    height: 24px;
 }
+.searchIcon{
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: center;
+    padding: 12px;
+}
+/* .searchBlock a{
+    padding-top: 4px;
+} */
 .iconBlock{
     width: 20px;
     height: 20px;
@@ -145,6 +155,9 @@ margin-left: 90px;
     color: #5F411A;
     border-bottom: 1px solid #5F411A;
     display: flex;
+}
+.navbarItemOtherRWD img{
+    cursor: pointer;
 }
 .navbarItemRWD:hover{
     background-color: #5F411A;
@@ -248,4 +261,28 @@ margin-left: 90px;
 }
 @media (max-width:376px){
     
+}
+.topButton{
+    background-color: rgba(255, 255, 255, 0.644);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.61);
+    padding: 30px;
+    border-radius: 50%;
+    background-image: url(../img/topButton.png);
+    background-size: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    right: 20px;
+    bottom:20px;
+    z-index: 10;
+}
+.topButton::after{
+    content: "TOP";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: rotate(-45deg);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #E16C69;
 }
