@@ -113,7 +113,11 @@ margin-left: 90px;
     background-color: rgb(231, 231, 192);
     opacity: 0;
     transition: 2s;
-    overflow:scroll;
+    overflow:auto;
+    z-index: 100;
+}
+.navbarItemGroup::-webkit-scrollbar{
+    width: 0px;
 }
 .show{
     left:0;
