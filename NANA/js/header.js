@@ -5,7 +5,7 @@ $(".navbarList").click(function(){
 
 })
 $(".closeButton").click(function(){
-    $(".navbarItemGroup").removeClass("show").slideUp()
+    $(".navbarItemGroup").removeClass("show").delay(2000).slideUp()
 })
 $(window).resize(function(){
     if($(window).width() > 997){

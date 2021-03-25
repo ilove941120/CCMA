@@ -52,13 +52,14 @@ body{
     margin: 0 10px;
     padding-bottom: 2px;
     color: #5F411A;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0);
 }
 .navbarItem:visited{
     color: #5F411A;
 }
 .navbarItem:hover{
     border-bottom: 1px solid #5F411A;
+    transition: 1s;
 }
 .otherBar{
     display: flex;
@@ -119,6 +120,7 @@ margin-left: 90px;
     align-items: center;
     font-size: 24px;
     color: #5F411A;
+    cursor: pointer;
 
 }
 .navbarItemGroup{
@@ -126,7 +128,7 @@ margin-left: 90px;
     height: 100%;
     position:fixed;
     top: 0;
-    left: -3000px;
+    left: -500px;
     background-color: #FAF0DC;
     opacity: 0;
     transition: 2s;
@@ -147,7 +149,6 @@ margin-left: 90px;
     color: #5F411A;
     border-bottom: 1px solid #5F411A;
     display: flex;
-    
 }
 .navbarItemOtherRWD{
     font-size: 18px;    

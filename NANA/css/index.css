@@ -192,7 +192,7 @@
     font-weight: bolder;
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #B28135;
-    /* transition: 1s; */
+    transition: 1s;
 }
 .moreTextRed{
     position: absolute;
@@ -203,7 +203,7 @@
     font-weight: bolder;
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #FF6962;
-    /* transition: 1s; */
+    transition: 1s;
 
 }
 
@@ -238,6 +238,7 @@
     border-bottom: 1px solid #5F411A;
     color: #5F411A;
     text-align: center;
+    transition: 1s;
 }
 
 .aboutPageButton:visited{
@@ -492,6 +493,7 @@
     padding: 10px 40px;
     background-color: #F0CD8B;
     color: white;
+    transition: 1s;
 }
 .workMoreButton:hover{
     background-color: #B87C33;
