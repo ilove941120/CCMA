@@ -1,0 +1,137 @@
+
+.footer{
+    max-width: 1200px;
+    display: flex;
+    margin: auto;
+    padding: 40px;
+    
+}
+
+.footerMainContent{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+
+}
+.footerSubContent{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+
+}
+.footerCompanyBlock{
+    display: flex;
+    margin-bottom: 10px;
+}
+.footerCompanyBlock img{
+
+}
+.companyName{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #5F411A;
+    margin-left: 10px;
+
+
+}
+.companyNameMain{
+    font-size: 16px;
+    font-weight: bolder;
+}
+.companyNameSub{
+    font-size: 12px;
+
+}
+
+.companyNameSub{
+}
+.strongholdBlock{
+    display: flex;
+    color: #5F411A;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.test1{
+    letter-spacing: 12px;
+    margin-right: -12px;
+}
+
+
+.iconBar{
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: auto;
+
+}
+.mainIcon img{
+    margin-right: 20px;
+}
+.subIcon{
+    margin-left: 20px;
+}
+.subIcon img{
+    margin-right: 10px;
+
+}
+.subContentText{
+    color: #5F411A;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    margin-left: auto;
+}
+
+
+@media (max-width:997px){
+
+}
+@media (max-width:768px){
+    .footer{
+        flex-direction: column;
+        padding: 10px;
+    }
+    .footerMainContent{
+        width: 100%;
+    }
+    .footerSubContent{
+        width: 100%;
+    }
+    .footerCompanyBlock{
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .strongholdBlock{
+        margin: auto;
+        margin-bottom: 20px;
+
+    }
+    .iconBar{
+        margin: auto;
+        margin-bottom: 10px;
+    }
+    .subContentText{
+        margin: auto;
+
+    }
+    .test1{
+        letter-spacing: 12px;
+        margin-left: 0px;
+    }
+
+}
+@media (max-width:576px){
+    .strongholdBlock{
+        font-size: 14px;
+    }
+    .test1{
+        letter-spacing: 12px;
+    }
+
+}
+@media (max-width:376px){
+    
+}
