@@ -1,88 +1,40 @@
 
 .footer{
-    max-width: 1200px;
     display: flex;
     margin: auto;
     padding: 40px;
-    
-}
-
-.footerMainContent{
-    width: 55%;
+    background-image: url(../img/footer.png);
+    background-position:0 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
-
-}
-.footerSubContent{
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-
-}
-.footerCompanyBlock{
-    display: flex;
-    margin-bottom: 10px;
-}
-.footerCompanyBlock img{
-
-}
-.companyName{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    color: #5F411A;
-    margin-left: 10px;
-
-
-}
-.companyNameMain{
-    font-size: 16px;
-    font-weight: bolder;
-}
-.companyNameSub{
-    font-size: 12px;
-
-}
-
-.companyNameSub{
-}
-.strongholdBlock{
-    display: flex;
-    color: #5F411A;
-    font-weight: bolder;
-    letter-spacing: 2px;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 5px;
+    padding: 50px 0;
+    flex-direction: column;
 }
-.test1{
-    letter-spacing: 12px;
-    margin-right: -12px;
-}
-
-
-.iconBar{
+.footerTitle{
+    width: 100%;
     display: flex;
-    margin-bottom: 10px;
-    margin-left: auto;
-
+    justify-content: center;
+    margin-bottom: 20px;
 }
-.mainIcon img{
-    margin-right: 20px;
+.footerTitle img{
+    width: 100px;
 }
-.subIcon{
-    margin-left: 20px;
-}
-.subIcon img{
-    margin-right: 10px;
-
-}
-.subContentText{
-    color: #5F411A;
-    letter-spacing: 2px;
+.footerContent{
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
     font-weight: bolder;
-    margin-left: auto;
+    color: #61615D;
+    margin-bottom: 10px;
+}
+.webDesignCompany{
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #61615D;
 }
 
 
@@ -91,45 +43,21 @@
 }
 @media (max-width:768px){
     .footer{
+        display: flex;
+        margin: auto;
+        padding: 40px;
+        background-image: url(../img/footerSm.png);
+        background-position:center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
         flex-direction: column;
-        padding: 10px;
     }
-    .footerMainContent{
-        width: 100%;
-    }
-    .footerSubContent{
-        width: 100%;
-    }
-    .footerCompanyBlock{
-        margin: auto;
-        margin-bottom: 20px;
-    }
-    .strongholdBlock{
-        margin: auto;
-        margin-bottom: 20px;
-
-    }
-    .iconBar{
-        margin: auto;
-        margin-bottom: 10px;
-    }
-    .subContentText{
-        margin: auto;
-
-    }
-    .test1{
-        letter-spacing: 12px;
-        margin-left: 0px;
-    }
-
 }
 @media (max-width:576px){
-    .strongholdBlock{
-        font-size: 14px;
-    }
-    .test1{
-        letter-spacing: 12px;
-    }
 
 }
 @media (max-width:376px){
