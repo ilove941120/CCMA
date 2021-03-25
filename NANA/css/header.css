@@ -52,6 +52,7 @@ body{
     margin: 0 10px;
     padding-bottom: 2px;
     color: #5F411A;
+    border: 1px solid white;
 }
 .navbarItem:visited{
     color: #5F411A;

@@ -167,6 +167,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 1s;
 }
 .detailMoreButtonRed{
     position: absolute;
@@ -180,6 +181,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 1s;
 }
 .moreText{
     position: absolute;
@@ -190,6 +192,7 @@
     font-weight: bolder;
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #B28135;
+    /* transition: 1s; */
 }
 .moreTextRed{
     position: absolute;
@@ -200,6 +203,8 @@
     font-weight: bolder;
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #FF6962;
+    /* transition: 1s; */
+
 }
 
 /* 課程介紹hover紅色版本 */
@@ -386,9 +391,6 @@
     .detailMoreButtonSm,.detailMoreButtonRedSm{
         display: block;
     }
-    .aboutItem:hover .detailMoreButtonSm{
-        opacity: 1;
-    }
     .aboutItem:hover .detailMoreButtonRedSm{
         opacity: 1;
     }
@@ -466,6 +468,7 @@
 
 .workShowItem{
     position: relative;
+    width: 25%;
 }
 .workShowItem img{
     width: 100%;
@@ -476,7 +479,7 @@
     position: absolute;
     /* bottom: 100px; */
     bottom: 20%;
-    left: 25px;
+    left: 0px;
 }
 .workName{
     margin: 20px;

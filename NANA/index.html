@@ -139,12 +139,12 @@
             </div>
             <div class="blockContentLG">
                 <div class="aboutContent">
-                    <div class="aboutItem">
+                    <a href="" class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course1.png" alt="">
-                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
+                            <div href="#" class="viewCoursesSm detailMoreButtonRedSm">
                                 <div  class="moreTextRedSm">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
                         <div class="aboutdetail">
                             <div class="detailBlock">
@@ -171,17 +171,17 @@
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="viewCourses detailMoreButton">
+                            <div  class="viewCourses detailMoreButton">
                                 <div class="viewCoursesSm moreText">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="aboutItem">
+                    </a>
+                    <a href="#" class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course2.png" alt="">
-                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
+                            <div class="viewCoursesSm detailMoreButtonRedSm">
                                 <div  class="moreTextRedSm">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
                         <div class="aboutdetail">
                             <div class="detailBlock">
@@ -208,17 +208,17 @@
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="viewCourses detailMoreButton">
+                            <div  class="viewCourses detailMoreButton">
                                 <div  class="viewCoursesSm moreText">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="aboutItem">
+                    </a>
+                    <a href="#" class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course1.png" alt="">
-                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
+                            <div  class="viewCoursesSm detailMoreButtonRedSm">
                                 <div  class="moreTextRedSm">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
                         <div class="aboutdetail">
                             <div class="detailBlock">
@@ -245,11 +245,11 @@
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="viewCourses detailMoreButton">
+                            <div href="#" class="viewCourses detailMoreButton">
                                 <div  class="viewCoursesSm moreText">查看課程</div> 
-                            </a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
             </div>
@@ -269,6 +269,7 @@
                 <div class="workShowSliderBlock">
                     <div class="workShowSliderContent">
                         <div class="workShowItem">
+                            <div class="workShowContent"></div>
                             <img src="img/workShowMy01.png" alt="">
                             <div class="workContentBlock">
                                 <div class="workName">美甲</div>
@@ -479,8 +480,7 @@
             $(this).find(".detailSubText").addClass("hoverMainColor")
             $(this).find(".viewCoursesSm").removeClass("moreText")
             $(this).find(".viewCoursesSm").addClass("moreTextRed")
-            $(this).find(".viewCourses").removeClass("detailMoreButton")
-            $(this).find(".viewCourses").addClass("detailMoreButtonRed")
+            $(this).find(".viewCourses").removeClass("detailMoreButton").delay(5000).addClass("detailMoreButtonRed")
         }
         ,function(){
             $(this).find(".detailMainText").removeClass("hoverMainColor")
@@ -488,8 +488,7 @@
             $(this).find(".detailSubText").removeClass("hoverMainColor")
             $(this).find(".viewCoursesSm").removeClass("moreTextRed")
             $(this).find(".viewCoursesSm").addClass("moreText")
-            $(this).find(".viewCourses").addClass("detailMoreButton")
-            $(this).find(".viewCourses").removeClass("detailMoreButtonRed")
+            $(this).find(".viewCourses").addClass("detailMoreButton").delay(5000).removeClass("detailMoreButtonRed")
         }
         )
     </script>
