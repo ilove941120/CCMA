@@ -168,30 +168,6 @@
     justify-content: center;
     align-items: center;
 }
-.moreText{
-    position: absolute;
-    font-size: 18px;
-    left: 20%;
-    top: 33%;
-    color: white;
-    font-weight: bolder;
-    letter-spacing: 2px;
-    text-shadow: 2px 1px 0px #B28135;
-}
-
-/* 課程介紹紅色版本 */
-.detailMainTextRed{
-    font-size: 20px;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-    color: #FF6962;
-    font-weight: bolder;
-}
-.detailSubTextRed{
-    font-size: 12px;
-    letter-spacing: 1px;
-    color: #FFC3B9;
-}
 .detailMoreButtonRed{
     position: absolute;
     padding:60px 90px;
@@ -205,7 +181,16 @@
     justify-content: center;
     align-items: center;
 }
-
+.moreText{
+    position: absolute;
+    font-size: 18px;
+    left: 20%;
+    top: 33%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #B28135;
+}
 .moreTextRed{
     position: absolute;
     font-size: 18px;
@@ -216,16 +201,20 @@
     letter-spacing: 2px;
     text-shadow: 2px 1px 0px #FF6962;
 }
-.moreTextRedSm{
-    position: absolute;
-    font-size: 14px;
-    left: 30%;
-    top: 37%;
-    color: white;
-    font-weight: bolder;
-    letter-spacing: 2px;
+
+/* 課程介紹hover紅色版本 */
+.hoverMainColor{
+    color: #FF6962;
+}
+.hoverSubColor{
+    color: #FFC3B9;
+}
+.hoverMoreText{
     text-shadow: 2px 1px 0px #FF6962;
 }
+
+
+
 .moreText:visited{
     color: white;
 }
@@ -245,8 +234,13 @@
     color: #5F411A;
     text-align: center;
 }
+
 .aboutPageButton:visited{
     color: #5F411A;
+}
+.aboutPageButton:hover{
+    color: #FF6962;
+    border-bottom: 1px solid #FF6962;
 
 }
 .detailMoreButtonSm{
@@ -265,16 +259,6 @@
     opacity: 0;
     transition: 1s;
 }
-.moreTextSm{
-    position: absolute;
-    font-size: 14px;
-    left: 10%;
-    top: 33%;
-    color: white;
-    font-weight: bolder;
-    letter-spacing: 2px;
-    text-shadow: 2px 1px 0px #B28135;
-}
 .detailMoreButtonRedSm{
     position: absolute;
     padding:40px 55px;
@@ -290,6 +274,126 @@
     opacity: 0;
     transition: 1s;
 }
+.moreTextSm{
+    position: absolute;
+    font-size: 14px;
+    left: 10%;
+    top: 33%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #B28135;
+}
+.moreTextRedSm{
+    position: absolute;
+    font-size: 14px;
+    left: 30%;
+    top: 37%;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 2px 1px 0px #FF6962;
+}
+
+@media(max-width:1300px){
+    .aboutBlock{
+    }
+    .detailMoreButton{
+        right: 0%;
+        bottom: -100px;
+    }
+    .detailMoreButtonRed{
+        right: 0%;
+        bottom: -100px;
+    }
+    .detailMoreButtonSm,.detailMoreButtonRedSm{
+        display: none;
+    }
+}
+@media (max-width:997px){
+    .aboutContent{
+        flex-direction: column;
+    }
+    .aboutItem{
+        width: 100%;
+        display: flex;
+        box-shadow: 2px 2px 10px rgb(148, 148, 148);
+        margin-bottom: 20px;
+        padding: 5px;
+
+    }
+    .aboutImgBlock{
+        width: 30%;
+        min-height: 200px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+    }
+    .aboutImgBlock img{
+        object-fit: cover;
+        min-width: 150px;
+        min-height: 200px;
+    }
+    .aboutdetail{
+        width: 70%;
+        box-shadow: unset;
+    }
+    .detailMoreButton{
+        padding:50px 65px;
+        background-size: 130px;
+        right: 0%;
+        bottom: 0px;
+    }
+    .detailMoreButtonRed{
+        padding:60px 80px;
+        background-size: 160px;
+        right: -5%;
+        bottom:-8%;
+    }
+    .aboutPageButton{
+        margin-top: 50px;
+    }
+    
+    
+}
+@media (max-width:576px){
+    .aboutBlock{
+        padding: 20px;
+    }
+    .blockSubTitle{
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+    .aboutdetail{
+        padding: 10px 0;
+    }
+    .detailBlock{
+        margin-left: 70px;
+    }
+    .detailMainText{
+        font-size: 14px;
+    }
+    .detailMainTextRed{
+        font-size: 14px;
+    }
+    .detailMoreButton{
+        display: none;
+    }
+    .detailMoreButtonRed{
+        display: none;
+    }
+    .detailMoreButtonSm,.detailMoreButtonRedSm{
+        display: block;
+    }
+    .aboutItem:hover .detailMoreButtonSm{
+        opacity: 1;
+    }
+    .aboutItem:hover .detailMoreButtonRedSm{
+        opacity: 1;
+    }
+}
+
 
 
 
@@ -340,97 +444,6 @@
         width: 80%;
     }
 }
-@media(max-width:1300px){
-    .aboutBlock{
-    }
-    .detailMoreButton{
-        right: 0%;
-        bottom: -100px;
-    }
-    .detailMoreButtonRed{
-        right: 0%;
-        bottom: -100px;
-    }
-}
-@media (max-width:997px){
-    .aboutContent{
-        flex-direction: column;
-    }
-    .aboutItem{
-        width: 100%;
-        display: flex;
-        box-shadow: 2px 2px 10px rgb(148, 148, 148);
-        margin-bottom: 20px;
-        padding: 5px;
-
-    }
-    .aboutImgBlock{
-        width: 30%;
-        min-height: 200px;
-        margin: 0;
-        display: flex;
-        align-items: center;
-
-    }
-    .aboutImgBlock img{
-        object-fit: cover;
-        min-width: 150px;
-        min-height: 200px;
-    }
-    .aboutdetail{
-        width: 70%;
-        box-shadow: unset;
-    }
-    .detailMoreButton{
-        padding:50px 65px;
-        background-size: 130px;
-        right: 0%;
-        bottom: 0px;
-    }
-    .detailMoreButtonRed{
-        padding:60px 80px;
-        background-size: 160px;
-        right: -5%;
-        bottom:-8%;
-    }
-    .aboutPageButton{
-        margin-top: 50px;
-    }
-    
-}
-@media (max-width:576px){
-    .aboutBlock{
-        padding: 20px;
-    }
-    .blockSubTitle{
-        font-size: 14px;
-        letter-spacing: 1px;
-    }
-    .aboutdetail{
-        padding: 10px 0;
-    }
-    .detailBlock{
-        margin-left: 70px;
-    }
-    .detailMainText{
-        font-size: 14px;
-    }
-    .detailMainTextRed{
-        font-size: 14px;
-    }
-    .detailMoreButton{
-        display: none;
-    }
-    .detailMoreButtonRed{
-        display: none;
-    }
-    .aboutItem:hover .detailMoreButtonSm{
-        opacity: 1;
-    }
-    .aboutItem:hover .detailMoreButtonRedSm{
-        opacity: 1;
-    }
-}
 
 /* workShow 作品欣賞區 */
 .workShowBlock{
@@ -463,7 +476,7 @@
     position: absolute;
     /* bottom: 100px; */
     bottom: 20%;
-    left: 20px;
+    left: 25px;
 }
 .workName{
     margin: 20px;
@@ -525,7 +538,7 @@
     letter-spacing: 2px;
 }
 .storySubTitle{
-    color: #5F411A;
+    color: #8a6f3d;
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: bolder;
@@ -534,6 +547,7 @@
 .storyText{
     letter-spacing: 5px;
     line-height: 30px;
+    font-weight: bolder;
 }
 @media (max-width:997px){
     .storySliderBlock{

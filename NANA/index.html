@@ -142,8 +142,8 @@
                     <div class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course1.png" alt="">
-                            <a href="#" class="detailMoreButtonSm">
-                                <div  class="moreTextSm">查看課程</div> 
+                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
+                                <div  class="moreTextRedSm">查看課程</div> 
                             </a>
                         </div>
                         <div class="aboutdetail">
@@ -171,53 +171,53 @@
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="detailMoreButton">
-                                <div class="moreText">查看課程</div> 
+                            <a href="#" class="viewCourses detailMoreButton">
+                                <div class="viewCoursesSm moreText">查看課程</div> 
                             </a>
                         </div>
                     </div>
                     <div class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course2.png" alt="">
-                            <a href="#" class="detailMoreButtonRedSm">
+                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
                                 <div  class="moreTextRedSm">查看課程</div> 
                             </a>
                         </div>
                         <div class="aboutdetail">
                             <div class="detailBlock">
-                                <div class="detailMainTextRed">
+                                <div class="detailMainText">
                                     特色凝膠進階課程
                                 </div>
-                                <div class="detailSubTextRed">
+                                <div class="detailSubText">
                                     鑽石星空設計
                                 </div>
                             </div>
                             <div class="detailBlock">
-                                <div class="detailMainTextRed">
+                                <div class="detailMainText">
                                     特色凝膠進階課程
                                 </div>
-                                <div class="detailSubTextRed">
+                                <div class="detailSubText">
                                     鑽石閃耀設計
                                 </div>
                             </div>
                             <div class="detailBlock">
-                                <div class="detailMainTextRed">
+                                <div class="detailMainText">
                                     凝膠應用進階課程
                                 </div>
-                                <div class="detailSubTextRed">
+                                <div class="detailSubText">
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="detailMoreButtonRed">
-                                <div  class="moreTextRed">查看課程</div> 
+                            <a href="#" class="viewCourses detailMoreButton">
+                                <div  class="viewCoursesSm moreText">查看課程</div> 
                             </a>
                         </div>
                     </div>
                     <div class="aboutItem">
                         <div class="aboutImgBlock">
                             <img src="img/course1.png" alt="">
-                            <a href="#" class="detailMoreButtonSm">
-                                <div  class="moreTextSm">查看課程</div> 
+                            <a href="#" class="viewCoursesSm detailMoreButtonRedSm">
+                                <div  class="moreTextRedSm">查看課程</div> 
                             </a>
                         </div>
                         <div class="aboutdetail">
@@ -245,8 +245,8 @@
                                     凝膠應用A班-彩虹馬卡龍
                                 </div>
                             </div>
-                            <a href="#" class="detailMoreButton">
-                                <div  class="moreText">查看課程</div> 
+                            <a href="#" class="viewCourses detailMoreButton">
+                                <div  class="viewCoursesSm moreText">查看課程</div> 
                             </a>
                         </div>
                     </div>
@@ -474,6 +474,24 @@
             cssEase: 'linear'
         });
         
+        $(".aboutItem").hover(function(){
+            $(this).find(".detailMainText").addClass("hoverMainColor")
+            $(this).find(".detailSubText").addClass("hoverMainColor")
+            $(this).find(".viewCoursesSm").removeClass("moreText")
+            $(this).find(".viewCoursesSm").addClass("moreTextRed")
+            $(this).find(".viewCourses").removeClass("detailMoreButton")
+            $(this).find(".viewCourses").addClass("detailMoreButtonRed")
+        }
+        ,function(){
+            $(this).find(".detailMainText").removeClass("hoverMainColor")
+            $(this).find(".detailSubText").removeClass("hoverMoreText")
+            $(this).find(".detailSubText").removeClass("hoverMainColor")
+            $(this).find(".viewCoursesSm").removeClass("moreTextRed")
+            $(this).find(".viewCoursesSm").addClass("moreText")
+            $(this).find(".viewCourses").addClass("detailMoreButton")
+            $(this).find(".viewCourses").removeClass("detailMoreButtonRed")
+        }
+        )
     </script>
 </body>
 </html>
