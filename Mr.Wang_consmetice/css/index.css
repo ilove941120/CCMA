@@ -4,7 +4,6 @@
 .editonTybeLg{
     max-width: 1200px;
     margin: auto;
-    padding: 50px 0;
 }
 
 
@@ -13,25 +12,40 @@
 .showPagecontent{
     width: 100%;
     /* max-width: 800px; */
+    padding: 50px 0;
     display: flex;
     justify-content: space-between;
 }
 .showProductBlock{
-    width: 48%;
+    width: 50%;
     display: flex;
     flex-wrap: wrap;
 }
 .mainProductItem{
     width: 100%;
-    padding: 20px;
+    padding: 10px;
 }
 .mainProductItem img{
     width: 100%;
 }
 .subProductItem{
     width: 50%;
-    padding: 20px;
+    padding: 10px;
 }
 .subProductItem img{
     width: 100%;
+}
+
+@media (max-width:768px){
+    .showPagecontent{
+        padding: 30px 0;
+    }
+    .mainProductItem{
+        width: 100%;
+        padding: 5px;
+    }
+    .subProductItem{
+        width: 50%;
+        padding: 5px;
+    }
 }
