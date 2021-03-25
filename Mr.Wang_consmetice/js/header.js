@@ -1,14 +1,14 @@
-$(".navbarItemGroup").hide()
+$('.navbarListItemGroup').hide();
 $(".navbarList").click(function(){
-    $(".navbarItemGroup").show();
-    $(".navbarItemGroup").addClass("show")
+    $('.navbarListItemGroup').show().addClass("show");
+});
 
-})
 $(".closeButton").click(function(){
-    $(".navbarItemGroup").removeClass("show").slideUp()
-})
+    $('.navbarListItemGroup').removeClass("show").delay(1000).slideUp();
+});
+
 $(window).resize(function(){
-    if($(window).width() > 997){
-    $(".navbarItemGroup").hide()
+    if($(window).width() >997){
+    $('.navbarListItemGroup').hide()
 }
-})
+});

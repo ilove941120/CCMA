@@ -39,29 +39,83 @@
 .navbarList{
     margin-left: auto;
     margin-right: 20px;
+    display: none;
 }
 .navbarListItemGroup{
     position: fixed;
+    width: 60%;
+    padding: 10px;
+    padding-right: 40px;
+    padding-bottom: 50px;
+
     top: 0;
-    left: 0;
-    background-color: #E7E6E3;
+    right: 0;
+    opacity: 0;
+    background-color: #616161;
+    border-radius: 0 0 0 100%;
+    box-shadow: -5px 5px 10px rgb(146, 146, 146);
+    display: flex;
+    flex-direction: column;
+    transition:1s;
+}
+.show{
+    opacity: 1;
+}
+.navbarListItem{
+    color: white;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+.navbarListItem i{
+    font-size: 14px;
+}
+.companyLogoRWd{
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.companyLogoRWd img{
+    width: 160px;
+}
+.closeButton{
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    font-size: 24px;
+    color: #F8E196;
 }
 @media(max-width:1500px){
 }
 
 @media (max-width:1200px){
-
+}
 
 @media (max-width:997px){
     .navbarBlock{
         display: none;
     }
+    .navbarList{
+        display: block;
+    }
 }
 @media (max-width:768px){
-
+    .navbarListItemGroup{
+        width: 70%;
+        top: 0;
+        right: 0;
+    }
 }
 @media (max-width:576px){
-
+    .navbarListItemGroup{
+        width: 100%;
+        padding: 10px;
+        padding-right: 40px;
+        top: 0;
+        right: 0;
+        border-radius: unset;
+    }
 }
 @media (max-width:376px){
     
