@@ -4,7 +4,7 @@ $(".navbarList").click(function(){
 });
 
 $(".closeButton").click(function(){
-    $('.navbarListItemGroup').removeClass("show").delay(1000).slideUp();
+    $('.navbarListItemGroup').removeClass("show").delay(1000).fadeOut();
 });
 
 $(window).resize(function(){
