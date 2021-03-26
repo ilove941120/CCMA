@@ -1,28 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .box{
-            background-image: url(../img/workShowMy5.png);
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    pointer-events: none;
-        }
-    </style>
-</head>
-<body>
 
-    <!-- <img src="../img/workShowMy5.png" alt=""> -->
-    <div class="box"></div>
-    
-</body>
-</html>
+<html>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+     
+    <body>
+     
+    <div id="play">
+        <div id="ht" hidden="hidden">http://www.baidu.com</div>
+        <a id="t1" href="http://www.baidu.com">
+            <img id="t2" src="../img/productShow1.png" width="100" height="150">
+            <h3 id="t3">1.jpg</h3>
+        </a>
+     
+        <ul>
+            <li class="item">
+                <div class="url" hidden="hidden">http://www.sina.com</div>
+                <div>
+                    <a id="a1">
+                        <img id="b1" src="../img/productShow3.png" width="100" height="150">
+                        <h3 id="c1">2.jgp</h3>
+                    </a>
+                </div>
+            </li>
+     
+            <li class="item">
+                <div class="url" hidden="hidden">http://www.qq.com</div>
+                <div>
+                    <a id="a2">
+                        <img id="b2" src="../img/productShow4.png" width="100" height="150">
+                        <h3 id="c2">3.jgp</h3>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+     
+    <script>
+        $(document).ready(function() {
+            $(".item").click(function () {
+                var imgsrc = $(this).find('img').attr('src');
+                var title = $(this).find('h3').text();
+                var url = $(this).find('div.url').text();
+     
+                $(this).find('img').attr('src', $('#t2').attr('src'));
+                $(this).find('h3').text($('#t3').text());
+     
+                $('#t2').attr('src', imgsrc);
+                $('#t3').text(title);
+                $('#t1').attr('href', url);
+     
+     
+                console.log(url);
+            });
+        });
+    </script>
+    </body>
+    </html>
+    ————————————————
+    版权声明：本文为CSDN博主「fjb2080」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/fjb2080/article/details/80880955

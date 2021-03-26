@@ -7,9 +7,272 @@
     max-width: 1200px;
     margin: auto;
 }
+/* banner 橫幅區 */
+.bannerSlider{
+    z-index: 1;
+}
+.bannerItem{
+    width: 100%;
+    display: block !important;
+    height: 500px;
+    /* background-image: url(../img/bannerSlider.png); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.bannerImg{
+    background-image: url(../img/bannerSlider.png);
+}
+.bannerImg1{
+    background-image: url(../img/introductionBanner.png);
+}
+.bannerImg2{
+    background-image: url(../img/bannerSlider.png);
+}
+.experienceNowButton{
+    width: 155px;
+    text-align: center;
+    color: #C9A842;
+    padding: 5px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid #C9A842;
+    position: absolute;
+    bottom: 8%;
+    right: 33.5%;
+    z-index: 2000;
+}
+.experienceNowButton:hover{
+    color: #FE6464;
+    border: 2px solid #FE6464;
+}
+.bannerSlider .slick-dots{
+    bottom: 0;
+    z-index: 100 !important;
+}
+.bannerSlider.slick-slider{
+    margin-bottom: 0;
+}
+.slick-dots li{
+    width: 10px;
+}
+.slick-dots li button{
+    width: 0;
+}
+.slick-dots li button:before{
+    content: "";
+    width: 2px;
+    height: 5px;
+    background-color: #C2C0C0;
+    border-radius: 50%;
+    transition: 1s;
+    padding:0 2px;
+}
+.slick-dots li.slick-active button:before{
+    content: "";
+    width: 10px;
+    height: 5px;
+    border-radius: 20px;
+    background-color: #C2C0C0;
+}
+@media(max-width:1700px){
+    .experienceNowButton{
+        width: 155px;
+        bottom: 10%;
+        right: 33%;
+    }
+}
+@media(max-width:1600px){
+    .experienceNowButton{
+        width: 140px;
+        bottom: 10%;
+        right: 32.5%;
+    }
+}
+@media(max-width:1500px){
+    .experienceNowButton{
+        width: 150px;
+        bottom: 10%;
+        right: 31%;
+    }
+}
+@media(max-width:1400px){
+    .experienceNowButton{
+        width: 150px;
+        bottom: 10%;
+        right: 30%;
+    }
+}
+@media(max-width:1300px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 29%;
+    }
+}
+@media(max-width:1199px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 31%;
+        font-size: 18px;
+
+    }
+}
+@media(max-width:1150px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 30%;
+    }
+}
+@media(max-width:1100px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 28%;
+    }
+}
+@media(max-width:1050px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 27%;
+    }
+}
+@media(max-width:997px){
+    .experienceNowButton{
+        width: 120px;
+        bottom: 10%;
+        right: 27%;
+        font-size: 16px;
+    }
+}
+@media(max-width:920px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 26%;
+    }
+}
+@media(max-width:870px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 25%;
+    }
+}
+@media(max-width:810px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 23%;
+    }
+}
+
+@media(max-width:769px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 22%;
+    }
+}
+@media(max-width:700px){
+    .experienceNowButton{
+        width: 100px;
+        padding:2px 0;
+        bottom: 10%;
+        right: 19%;
+        border: 1px solid #C9A842;
+    }
+}
+@media(max-width:650px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 17%;
+    }
+}
+@media(max-width:600px){
+    .experienceNowButton{
+        width: 100px;
+        bottom: 10%;
+        right: 14%;
+    }
+}
+@media(max-width:576px){
+    .experienceNowButton{
+        width: 80px;
+        font-size: 12px;
+        bottom: 7%;
+        right: 28%;
+    }
+}
+@media(max-width:520px){
+    .experienceNowButton{
+        width: 80px;
+        bottom: 7%;
+        right: 25%;
+    }
+}
+@media(max-width:500px){
+    .experienceNowButton{
+        width: 80px;
+        bottom: 7%;
+        right: 20%;
+    }
+}
+@media(max-width:450px){
+    .experienceNowButton{
+        width: 80px;
+        bottom: 7%;
+        right: 21%;
+    }
+}
+@media(max-width:400px){
+    .experienceNowButton{
+        width: 80px;
+        bottom: 7%;
+        right: 19%;
+    }
+}
+@media(max-width:375px){
+    .experienceNowButton{
+        width: 80px;
+        bottom: 7%;
+        right: 13%;
+    }
+}
 
 
-/* about 關於頁面 */
+
+
+
+@media(max-width:1200px){
+    .bannerItem{
+        height: 400px;
+    }
+}
+@media(max-width:997px){
+    /* .bannerItem{
+        height: 50vh;
+    } */
+}
+@media(max-width:769px){
+    .bannerItem{
+    }
+}
+@media(max-width:576px){
+    .bannerItem{
+        height: 200px;
+    }
+}
+.bannerItem img{
+    width: 100%;
+}
+
+/* about 關於區 */
 .aboutBlock{
     background-image: url(../img/aboutBackgroundImg1.png);
     /* height: 600px; */
@@ -19,12 +282,12 @@
     /* align-items: center; */
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
 }
 .aboutDecoration{
     position: absolute;
     top: -80px;
     left: 49%;
+    z-index: 0;
 }
 .aboutDecoration img{
     width: 100%;
@@ -34,13 +297,16 @@
     position: absolute;
     bottom: -20px;
 }
-.aboutDecoratio1 img{
+.aboutDecoration1 img{
     width: 100%;
 }
 .aboutDecoration2{
     width: 100%;
     position: absolute;
     top: -5px;
+}
+.aboutDecoration2 img{
+    width: 100%;
 }
 
 .aboutTitle{
@@ -67,7 +333,32 @@
 .aboutMoreButoon::after{
     content: "〉";
 }
+.aboutMoreButoon:hover{
+    color:#FE6464;
+    border-bottom: 1px solid #FE6464;
+
+}
+@media(max-width:997px){
+    .aboutBlock{
+        padding: 100px 0;
+    }
+    .aboutDecoration{
+        top: -80px;
+    }
+    .aboutTitle{
+        margin-top: 100px;
+    }
+}
 @media (max-width:576px){
+    .aboutBlock{
+        padding: 70px 0;
+    }
+    .aboutDecoration{
+        top: -120px;
+    }
+    .aboutTitle{
+        margin-top: 90px;
+    }
     .aboutText{
         width: 320px;
         margin: auto;
@@ -76,8 +367,11 @@
         font-weight: bold;
         letter-spacing: 1px;
     }
+    .aboutMoreButoon{
+        margin-top: 50px;
+    }
 }
-/* newsBlock 新消息頁面 */
+/* newsBlock 最新消息區 */
 .newsPageBlock{
     padding: 20px;
     position: relative;
@@ -108,7 +402,7 @@
 .newsImg::after{
     content: "";
     width: 99%;
-    height: 98%;
+    height: 98.5%;
     border: 2px solid #C9A842;
     position: absolute;
     top: 0;
@@ -149,21 +443,36 @@
     position:absolute;
     right: -40px;
 }
+.newsPageMoreButton:hover{
+    color: #FE6464;
+    border-bottom: 1px solid #FE6464;
+
+}
 
 @media (max-width:1300px){
     .newsPageMoreButton{
         right: 20px;
     }
 }
+@media(max-width:997px){
+    .newsImg::after{
+        height: 98.5%;
+    }
+}
+@media(max-width:820px){
+    .newsImg::after{
+        height: 97%;
+    }
+}
+@media(max-width:769px){
+    .newsImg::after{
+        width: 98%;
+        height: 97%;
+    }
+}
 @media(max-width:576px){
     .newsImg::after{
-        content: "";
-        width: 98%;
-        height: 95%;
-        border: 2px solid #C9A842;
-        position: absolute;
-        top: 0;
-        left:0;
+        height: 96%;
     }
     .newsPageBlock{
         padding: 5px;
@@ -185,8 +494,144 @@
         font-size: 12px;
     }
 }
+/* shoppingBlock 產品推薦區 */
+.shoppingBlock{
+    width: 100%;
+    padding: 40px;
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+.shoppingPageContent{
+    max-width: 1200px;
+    margin: auto;
+}
+.sortBar{
+    display: flex;
+    justify-content: center;
+}
+.sortItem{
+    margin: 0 20px;
+    margin-bottom: 50px;
+    color: white;
+    font-weight: bold;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #000000;
+    transition: 1s;
+    cursor: pointer;
 
-/* showProductBlock 產品展示 */
+}
+.sortItem:hover{
+    color:#CC9E23;
+    border-bottom: 2px solid #CC9E23;
+}
+.sortItemBlock{
+    width: 100%;
+    /* display: none; */
+    justify-content: space-between;
+    display: flex;
+
+}
+/* .sortItemBlockActive{
+} */
+.sortItemProduct{
+    width: 20%;
+}
+.sortItemProductSm{
+    width: 45%;
+}
+.sortItemProductMl{
+    width: 30%;
+}
+.sortItemProduct:hover .sortItemButtonBlock{
+    opacity: 1;
+}
+.sortItemProductImg{
+    width: 100%;
+    position: relative;
+}
+.sortItemButtonBlock{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 98%;
+    background-color: rgba(255, 248, 234, 0.295);
+    opacity: 0;
+    transition: 1s;
+}
+.sortItemButton{
+    display: block;
+    width: 80%;
+    background-color: white;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+
+}
+.sortItemButton:hover{
+    background-color: #CC9E23;
+    color: white;
+}
+.sortItemProductImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.sortItemProductContent{
+    width: 100%;
+    padding: 20px 0;
+}
+.sortItemProductText{
+    margin-bottom: 20px;
+    color: #EADAA3;
+}
+.sortItemProductPrice{
+    text-align: center;
+    color: #EADAA3;
+}
+.shoppingPageButton{
+    display: inline;
+    float: right;
+    text-align: right;
+    color: #EADAA3;
+    border-bottom: 1px solid black;
+    transition: 1s;
+}
+.shoppingPageButton::after{
+    content: "";
+    clear: both;
+}
+.shoppingPageButton:hover{
+    color: #FE6464;
+    border-bottom: 1px solid #FE6464;
+}
+
+@media(max-width:768px){
+    .sortItemButtonBlock{
+        height: 97%;
+    }
+    .sortItem {
+        margin: 0 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .sortItemProductText{
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .sortItemButton{
+        font-size: 12px;
+        padding: 2px;
+    }
+    .shoppingPageButton{
+        font-size: 14px;
+    }
+
+}
+/* showProductBlock 產品展示區 */
 .showPagecontent{
     width: 100%;
     /* max-width: 800px; */
@@ -195,66 +640,102 @@
     justify-content: space-between;
 }
 .showProductBlock{
-    width: 50%;
+    width: 49%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .mainProductItem{
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     position: relative;
 }
 .mainProductItem img{
     width: 100%;
+    height: 100%;
 }
-.mainProductItem::after{
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 25px);
-    background-color: rgba(228, 206, 174, 0.473);
-    opacity: 0;
-    transition: 1s;
-}
-.mainProductItem:hover.mainProductItem::after{
-    opacity: 1;
-}
+
+
 .subProductItem{
-    width: 50%;
-    padding: 10px;
+    width: 48%;
+    padding: 5px;
     position: relative;
 
 }
 .subProductItem img{
     width: 100%;
+    height: 100%;
 }
-.subProductItem::after{
+/* .subProductItem::after{
     content: "";
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 25px);
-    background-color: rgba(228, 206, 174, 0.473);
-    opacity: 0;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(228, 206, 174);
+    opacity: 1;
     transition: 1s;
 }
 .subProductItem:hover.subProductItem::after{
     opacity: 1;
+} */
+.ItemMask{
+    width: 98.5%;
+    height: 98.5%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(228, 174, 174, 0.37);
+}
+.ItemMaskSub{
+    width: 97%;
+    height: 97%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(228, 174, 174, 0.37);
+}
+@media (max-width:997px){
+    .ItemMask{
+        width: 98%;
+        height: 98%;
+        top: 5px;
+        left: 5px;
+    }
+    .ItemMaskSub{
+        width: 96%;
+        height: 96%;
+        top: 5px;
+        left: 5px;
+    }
+}
+@media (max-width:769px){
+    .ItemMask{
+        width: 97%;
+        height: 97%;
+        top: 5px;
+        left: 5px;
+    }
+    .ItemMaskSub{
+        width: 94%;
+        height: 94%;
+        top: 5px;
+        left: 5px;
+    }
 }
 
-@media (max-width:768px){
-    .showPagecontent{
-        padding: 30px 0;
+@media (max-width:576px){
+    .ItemMask{
+        width: 95%;
+        height: 95%;
+        top: 5px;
+        left: 5px;
     }
-    .mainProductItem{
-        width: 100%;
-        padding: 5px;
-    }
-    .subProductItem{
-        width: 50%;
-        padding: 5px;
+    .ItemMaskSub{
+        width: 90%;
+        height: 90%;
+        top: 5px;
+        left: 5px;
     }
 }

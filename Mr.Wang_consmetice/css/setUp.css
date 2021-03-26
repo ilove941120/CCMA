@@ -77,6 +77,15 @@ a:active{
     border-left: 1px solid #000000;
     border-right: 1px solid #000000;
 }
+.bgWhite{
+    background-color: white;
+}
+.bgRed{
+    background-color: red;
+}
+.bgBlue{
+    background-color: blue;
+}
 
 @media (max-width:1400px){
     
