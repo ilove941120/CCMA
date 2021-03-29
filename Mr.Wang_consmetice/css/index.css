@@ -507,7 +507,7 @@
 }
 @media(max-width:576px){
     .newsImg::after{
-        height: 96%;
+        height: 95%;
     }
     .newsPageBlock{
         padding: 5px;
