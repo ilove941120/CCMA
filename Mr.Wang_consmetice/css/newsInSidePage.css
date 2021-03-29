@@ -37,7 +37,7 @@
 }
 .newsContentImg{
     width: 45%;
-    height: calc(100vw * 0.45 / 585 * 515);
+    max-height: calc(100vw * 0.45 / 585 * 515);
 }
 .newsContentImg img{
     width: 100%;
@@ -104,8 +104,6 @@
     }
     
     .newsContentImg{
-        width: 45%;
-        height: calc(100vw * 0.45 / 585 * 515);
         margin-bottom: 20px;
     }
     .newsContent{
