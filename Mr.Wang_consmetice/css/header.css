@@ -29,7 +29,7 @@
     transition: 0.5s;
 }
 .navbarItem:hover{
-    color: #FE6464;
+    color: #D04000;
 }
 
 .otherBar{
@@ -42,7 +42,7 @@
     transition: 0.5s;
 }
 .otherBarItem:hover{
-    color: #FE6464;
+    color: #D04000;
 }
 .navbarList{
     margin-left: auto;
@@ -82,12 +82,12 @@
 .navbarListItem:hover{
     color: #ffffff;
     transition: 2s;
-    text-shadow:  0px 0px 30px #fcf372,0px 0px 30px #fcf372,0px 0px 30px #fcf372;
+    text-shadow:  0px 0px 30px #D04000,0px 0px 30px #D04000,0px 0px 30px #fcf372;
 }
 .companyLogoRWd{
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     margin-right: 10px;
 }
 .companyLogoRWd img{
@@ -98,7 +98,7 @@
     top: 5%;
     left: 10%;
     font-size: 24px;
-    color: #F8E196;
+    color: #D04000;
 }
 @media(max-width:1500px){
 }

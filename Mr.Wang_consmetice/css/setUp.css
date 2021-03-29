@@ -62,9 +62,7 @@ a:active{
 }
 
 .focus{
-    color: #952b34;
-    font-weight: bolder;
-    border-bottom: 2px solid #2B5E95;
+    color: #D04000;
 }
 .border{
     border: 1px solid #000000;
