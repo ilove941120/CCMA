@@ -47,7 +47,7 @@
 
 .ItemImg{
     width: 100%;
-    height:calc(100vw * 0.16 / 300*380);
+    height:calc(100vw * 0.32 / 300*380);
     position: relative;
 }
 .ItemImg img{
@@ -131,7 +131,7 @@
     }
     .ItemImg{
         width: 100%;
-        height:calc(100vw * 0.28 / 300*380);
+        /* height:calc(100vw * 0.28 / 300*380); */
     }
     .itemMask img{
         padding: 5px;
