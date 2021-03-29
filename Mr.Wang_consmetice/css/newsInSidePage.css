@@ -23,33 +23,30 @@
     height: 100%;
     object-fit: cover;
 }
-/* @media(max-width:1200px){
-    .pageBanner img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-} */
 .pageContentBLock{
     width: 100%;
 }
-.aboutContentBLock{
+.newsContentBLock{
     width: 100%;
     display: flex;
     border-top: 2px solid black;
     padding: 20px 10px;
 }
-.aboutContentImg{
-    width: 45%;
-    height: calc(100vw * 0.45 / 585 * 515);
+.newsContentBLock:last-child{
+    border: unset;
 }
-.aboutContentImg img{
+.newsContentImg{
+    width: 45%;
+    max-height: calc(100vw * 0.45 / 585 * 515);
+}
+.newsContentImg img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     border: 1px solid black;
+    object-position: right;
 }
-.aboutContent{
+.newsContent{
     width: 55%;
     padding: 0 20px;
     position: relative;
@@ -58,19 +55,32 @@
     font-size: 36px;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #564E45;
+    position: relative;
+}
+.mainTitle{
+    margin-right: 65px;
+}
+.newsDate{
+    font-size:12px;
+    padding-bottom: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(14, 0, 0, 0.719);
+
 }
 .contentText{
     width: 100%;
     font-weight: bold;
     margin-bottom: 40px;
+    color: rgba(14, 0, 0, 0.719);
 }
 .productListButton{
     position: absolute;
     bottom: 0;
     right: 0;
     padding: 0 20px;
-    font-weight: bold;
+    font-weight: bolder;
     transition: 0.5s;
 }
 .productListButton:hover{
@@ -84,7 +94,7 @@
     .pageContentBlock{
         margin: 50px auto;
     }
-    .aboutContentBLock{
+    .newsContentBLock{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -93,12 +103,10 @@
         padding: 10px 0;
     }
     
-    .aboutContentImg{
-        width: 45%;
-        height: calc(100vw * 0.45 / 585 * 515);
+    .newsContentImg{
         margin-bottom: 20px;
     }
-    .aboutContent{
+    .newsContent{
         width: 100%;
         padding: 0 20px;
         position: relative;
