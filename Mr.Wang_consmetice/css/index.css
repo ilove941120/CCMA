@@ -272,8 +272,7 @@
     } */
 }
 @media(max-width:769px){
-    .bannerItem{
-    }
+
 }
 @media(max-width:576px){
     .bannerItem{
@@ -334,7 +333,7 @@
     font-weight: bold;
     letter-spacing: 1px;
 }
-.aboutMoreButoon{
+.aboutMoreButton{
     margin: auto;
     margin-top: 100px;
     padding-left: 5px;
@@ -343,10 +342,10 @@
     font-weight: bold;
     transition: 0.5s;
 }
-.aboutMoreButoon::after{
+.aboutMoreButton::after{
     content: "〉";
 }
-.aboutMoreButoon:hover{
+.aboutMoreButton:hover{
     color:#FE6464;
     border-bottom: 1px solid #FE6464;
 
@@ -380,7 +379,7 @@
         font-weight: bold;
         letter-spacing: 1px;
     }
-    .aboutMoreButoon{
+    .aboutMoreButton{
         margin-top: 50px;
     }
 }
@@ -699,7 +698,7 @@
 
 }
 /* showProductBlock 產品展示區 */
-.showPagecontent{
+.showPageContent{
     width: 100%;
     /* max-width: 800px; */
     padding: 50px 0;

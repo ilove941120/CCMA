@@ -39,6 +39,9 @@
     border-top: 2px solid black;
     padding: 20px 10px;
 }
+.aboutContentBLock:last-child{
+    border: unset;
+}
 .aboutContentImg{
     width: 45%;
     height: calc(100vw * 0.45 / 585 * 515);
@@ -48,6 +51,7 @@
     height: 100%;
     object-fit: cover;
     border: 1px solid black;
+    object-position: right;
 }
 .aboutContent{
     width: 55%;
@@ -58,19 +62,32 @@
     font-size: 36px;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #564E45;
+    position: relative;
+}
+.mainTitle{
+    margin-right: 65px;
+}
+.newsDate{
+    font-size:12px;
+    padding-bottom: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(14, 0, 0, 0.719);
+
 }
 .contentText{
     width: 100%;
     font-weight: bold;
     margin-bottom: 40px;
+    color: rgba(14, 0, 0, 0.719);
 }
 .productListButton{
     position: absolute;
     bottom: 0;
     right: 0;
     padding: 0 20px;
-    font-weight: bold;
+    font-weight: bolder;
 
 }
 .posictionLeft{
