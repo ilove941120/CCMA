@@ -16,7 +16,7 @@
     width: 100%;
     padding: 20px 0;
     border-top: 2px solid black;
-    max-height: calc(100vh * 0.625 / 1200 * 400);
+    /* height: calc(100vh * 0.8 / 1200 * 400); */
 }
 .pageBanner img{
     width: 100%;

@@ -58,13 +58,13 @@
         <div class="allProductBlock">
             <div class="sortBlock">
                 <div class="sortTitle">產品分類</div>
-                <div class="sortList">全部商品</div>
+                <div class="sortList">全部商品 <span>》</span> </div>
                 <hr class="hrStyle">
                 <div class="sortItemGroup">
-                    <div class="sortItem">保濕</div>
-                    <div class="sortItem">抗老</div>
-                    <div class="sortItem">美白</div>
-                    <div class="sortItem">修護</div>
+                    <a href="" class="sortItem">保濕</a>
+                    <a href="" class="sortItem">抗老</a>
+                    <a href="" class="sortItem">美白</a>
+                    <a href="" class="sortItem">修護</a>
                 </div>
             </div>
             <div class="productList">
@@ -85,7 +85,7 @@
                 </a>
                 <a href="" class="productItem">
                     <div class="productItemImg">
-                        <img src="../img/download.jpg" alt="">
+                        <img src="../img/ProductItem2.png" alt="">
                         <div class="productItemImgMask">
                             <div class="joinShoppingCart">加入購物車</div>
                         </div>
@@ -143,6 +143,111 @@
                         </div>
                     </div>
                 </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem2.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem3.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem4.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem1.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem2.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem3.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="productItem">
+                    <div class="productItemImg">
+                        <img src="../img/ProductItem4.png" alt="">
+                        <div class="productItemImgMask">
+                            <div class="joinShoppingCart">加入購物車</div>
+                        </div>
+                    </div>
+                    <div class="productContent">
+                        <div class="productText">【本館熱銷】奇蹟光斑深層精華液...</div>
+                        <div class="productSubText">光彩迷人必備</div>
+                        <div class="productPrice">
+                            NT$2,980
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
         
@@ -182,15 +287,10 @@
         $(window).scroll(function(){
             var nw =$(".productItemImg").width()
             $(".productItemImg").height(nw)
-            var nw =$(".suggestItemImg").width()
-            $(".suggestItemImg").height(nw)
-
         })
         $(window).resize(function(){
             var nw =$(".productItemImg").width()
             $(".productItemImg").height(nw)
-            var nw =$(".suggestItemImg").width()
-            $(".suggestItemImg").height(nw)
         })
         $(".add").click(function(){
             $(".quantity").text(parseInt($(".quantity").text()) + 1)
@@ -199,6 +299,10 @@
             if( $(".quantity").text() > 0){
                 $(".quantity").text(parseInt($(".quantity").text()) - 1)
             }
+        })
+        $(".sortItemGroup").hide()
+        $('.sortList').click(function(){
+            $(".sortItemGroup").slideToggle()
         })
     </script>
 

@@ -122,7 +122,19 @@
     <script src="../js/header.js"></script>
     <script src="../js/slick.js"></script>
 
+    <script>
+        var nw =$(".newsContentImg").width()
+            $(".newsContentImg").height(nw)
+        $(window).scroll(function(){
+            var nw =$(".newsContentImg").width()
+            $(".newsContentImg").height(nw)
 
+        })
+        $(window).resize(function(){
+            var nw =$(".newsContentImg").width()
+            $(".newsContentImg").height(nw)
+        })
+    </script>
 
 
 </body>

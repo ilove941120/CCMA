@@ -41,6 +41,11 @@
     margin: 0 20px;
     transition: 0.5s;
 }
+.shoppingCartIcon{
+    margin: 0 20px;
+    transition: 0.5s;
+}
+
 .otherBarItem:hover{
     color: #D04000;
 }
@@ -121,4 +126,133 @@
 }
 @media (max-width:376px){
     
+}
+
+/* 側邊購物車 */
+.shoppingCartBlock{
+    width: 400px;
+    height: 100%;
+    padding: 0 20px;
+    padding-top: 80px;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    z-index: 25;
+    background-color: #FFFFFF;
+    transition: 1s ease;
+    
+}
+@media(max-width:768px){
+    .shoppingCartBlock{
+        width: 100%;
+    }
+}
+.shoppingCartTitle{
+    display: flex;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.199);
+}
+.shoppingName{
+    font-size: 20px;
+}
+.shoppingBlockClose{
+    font-size: 20px;
+}
+.shoppingCartItemGroup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+.shoppingCartItem{
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    border-bottom: 1px solid black;
+    justify-content: space-between;
+    align-items: center;
+}
+.shoppingCareItemDelete{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    color: rgba(0, 0, 0, 0.418);
+    padding-left: 5px;
+
+}
+.shoppingCareItemImg{
+    width: 25%;
+    /* height: calc( 100vw * 0.2 / 120 * 150); */
+    height: 120px;
+    margin: 0 10px;
+}
+.shoppingCareItemImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media(max-width:768px){
+    .shoppingCareItemImg img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+.shoppingCareItemContent{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.shoppingCareItemQuantity{
+    display: flex;
+    width: 50%;
+    padding: 0 10px;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+.shoppingCareItemTotalBlock{
+    text-align: right;
+
+}
+.shoppingCareItemTotal{
+    color: rgba(0, 0, 0, 0.548);
+
+}
+.shoppingCareItemTitle{
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.418);
+    font-weight: bolder;
+}
+.shoppingCareItemDiscount{
+    color: #FA8282;
+}
+.shoppingCareItemPrice{
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.418);
+
+}
+.discountBlock,.priceTotal{
+    display: flex;
+    justify-content: space-between;
+}
+.discountBlock{
+    color: #FA8282;
+    font-size: 14px;
+}
+.priceTotal{
+    margin-bottom: 20px;
+}
+.seeShoppingCart{
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: black;
+    color: #E79E4A;
+    border: 1px solid #E79E4A;
 }
