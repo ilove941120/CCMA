@@ -29,10 +29,12 @@
 .shoppingCartBlock{
     display: flex;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .shoppingItemImg{
     width: 48%;
     max-height: calc(100vw * 0.48 / 560 * 640 );
+    margin: auto;
 }
 .shoppingItemImg img{
     width: 100%;
@@ -54,7 +56,7 @@
     width: 100%;
     margin-bottom: 150px;
 }
-.ohterBlock{
+.otherBlock{
     width: 100%;
     padding: 0 20px;
     position: absolute;
@@ -63,23 +65,48 @@
 }
 .priceBlock{
     font-size: 36px;
+    margin-bottom: 10px;
 }
 .priceBlock span{
     font-size: 18px;
     color: gray;
-    text-decoration: line-through;  
+    text-decoration: line-through;
 }
-
+.quantityBlock{
+    padding: 10px 0;
+    border: 1px solid black;
+    width: 48%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.less,.add{
+    padding: 0 5px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+.quantity{
+    font-size: 24px;
+    font-weight: bolder;
+}
 .optionsBlock{
     display: flex;
     justify-content: space-between;
 }
 .options{
-    width: 50%;
-    margin: 0 10px;
+    width: 48%;
     border: 1px solid rgba(0, 0, 0, 0.219);
     text-align: center;
     padding: 10px 0;
+    font-weight: bolder;
+    transition: 1s;
+}
+.options:hover{
+    color: #D3A841;
+    border: 1px solid #D3A841;
+    background-color: black;
 }
 @media (max-width:1200px){
     .pageTitle{
@@ -87,5 +114,155 @@
     }
     .shoppingCartBlock{
         padding: 0 10px;
+    }
+}
+@media(max-width:768px){
+    .pageContentBlock{
+        margin: 50px 0;
+    }
+    .shoppingCartBlock{
+        flex-direction: column;
+    }
+    .shoppingItemContent{
+        width: 100%;
+        padding: 0;
+        position: relative;
+    }
+    .shoppingItemImg{
+        margin-bottom: 20px;
+    }
+    .shoppingItemTitle{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .shoppingItemText{
+        font-size: 12px;
+        letter-spacing: 2px;
+        line-height: 18px;
+        margin-bottom: 180px;
+    }
+    .otherBlock{
+        padding: 0;
+    }
+    .quantityBlock{
+        padding: 3px 0;
+    }
+    .quantity{
+        font-size: 18px;
+    }
+    .priceBlock{
+        font-size: 24px;
+    }
+    .priceBlock span{
+        font-size: 14px;
+        color: gray;
+        text-decoration: line-through;  
+    }
+    .options{
+        padding: 5px 0;
+        font-size: 14px;
+    }
+}
+@media(max-width:576px){
+    .priceBlock{
+        font-size: 20px;
+    }
+    .priceBlock span{
+        font-size: 12px;
+    }
+}
+.suggestBlock{
+    width: 100%;
+}
+.suggestTitle{
+    margin-bottom: 10px;
+    color: #4a4240d0;
+    font-weight: bolder;
+}
+.suggestItemBlock{
+    width: 100%;
+}
+.suggestItem{
+    width: 18%;
+    padding: 0 10px;
+}
+.suggestItemImg{
+    width: 100%;
+    max-height: (100vw * 0.18 / 230 *260);
+    margin-bottom: 20px;
+    position: relative;
+}
+.suggestItemImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.suggestItemImgMask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.514);
+    opacity: 0;
+    transition: 1s;
+}
+.joinShoppingCart{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    background-color: black;
+    color: white;
+    opacity: 0;
+    transition: 1s;
+}
+.suggestItem:hover .suggestItemImgMask{
+    opacity: 1;
+}
+.suggestItem:hover .joinShoppingCart{
+    opacity: 1;
+    padding: 10px;
+
+}
+.joinShoppingCart:hover{
+    background-color: #D3A841;
+}
+.suggestContent{
+    width: 100%;
+}
+.suggestText{
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.suggestPrice span{
+    text-decoration:line-through;
+    font-size: 12px;
+    margin-right: 10px;
+    color: gray;
+}
+
+@media (max-width:1200px){
+    .suggestBlock{
+        padding: 0 10px;
+    }
+}
+@media(max-width:997px){
+    .pageTitle{
+        font-size: 28px;
+    }
+    
+}
+
+@media(max-width:768px){
+    .pageTitle{
+        font-size: 20px;
+    }
+}
+@media(max-width:576px){
+    .pageTitle{
+        font-size: 18px;
     }
 }
