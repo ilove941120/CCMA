@@ -16,15 +16,17 @@
     width: 100%;
     padding: 20px 0;
     border-top: 2px solid black;
-    height: 23.541vw;
+    height: 37.6vw;
 }
+/* @media(max-width:1200px){
+    .pageBanner{
+        height: 37.6vw;
+    }
+} */
 .pageBanner img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-.pageContentBLock{
-    width: 100%;
 }
 .newsContentBLock{
     width: 100%;
