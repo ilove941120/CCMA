@@ -38,18 +38,18 @@
 .signIn{
     margin: 0 20px;
     font-weight: bold;
-
+    transition: 1s;
 }
-.shoppingCartIcon{
+.shoppingCarIcon{
     margin: 0 20px;
-    /* transition: 2.5s; */
+    transition: 1s;
     font-weight: bold;
 }
 
 .signIn:hover{
     color: #D04000;
 }
-.shoppingCartIcon:hover{
+.shoppingCarIcon:hover{
     color: #D04000;
 }
 .navbarList{
@@ -137,7 +137,7 @@
 }
 
 /* 側邊購物車 */
-.SideShoppingCartBlock{
+.SideShoppingCarBlock{
     width: 400px;
     height: 100%;
     padding: 0 20px;
@@ -152,11 +152,11 @@
     
 }
 @media(max-width:768px){
-    .SideShoppingCartBlock{
+    .SideShoppingCarBlock{
         width: 100%;
     }
 }
-.SideShoppingCartTitle{
+.SideShoppingCarTitle{
     display: flex;
     padding-bottom: 20px;
     justify-content: space-between;
@@ -171,13 +171,13 @@
     font-size: 20px;
     cursor: pointer;
 }
-.SideShoppingCartItemGroup{
+.SideShoppingCarItemGroup{
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
 }
-.SideShoppingCartItem{
+.SideShoppingCarItem{
     width: 100%;
     padding: 10px 0;
     display: flex;
@@ -185,7 +185,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.SideShoppingCareItemDelete{
+.SideShoppingCarItemDelete{
     display:flex;
     align-items: center;
     justify-content: center;
@@ -195,40 +195,40 @@
     cursor: pointer;
 
 }
-.SideShoppingCareItemImg{
+.SideShoppingCarItemImg{
     width: 25%;
     /* height: calc( 100vw * 0.2 / 120 * 150); */
     height: 120px;
     margin: 0 10px;
 }
-.SideShoppingCareItemImg img{
+.SideShoppingCarItemImg img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 @media(max-width:768px){
-    .SideShoppingCareItemImg img{
+    .SideShoppingCarItemImg img{
         width: 100%;
         height: 100%;
         object-fit: contain;
     }
 }
-.SideShoppingCareItemContent{
+.SideShoppingCarItemContent{
     width: 65%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.SideShoppingCareItemTitle{
+.SideShoppingCarItemTitle{
     margin-bottom: 10px;
     color: rgba(0, 0, 0, 0.418);
     font-weight: bolder;
 }
-.SideShoppingCareItemPrice{
+.SideShoppingCarItemPrice{
     margin-bottom: 10px;
     color: rgba(0, 0, 0, 0.418);
 }
-.SideShoppingCareItemQuantity{
+.SideShoppingCarItemQuantity{
     display: flex;
     width: 50%;
     padding: 0 10px;
@@ -238,31 +238,31 @@
 .headerAdd,.headerLess{
     cursor: pointer;
 }
-.SideShoppingCareItemTotalBlock{
+.SideShoppingCarItemTotalBlock{
     text-align: right;
 
 }
-.SideShoppingCareItemTotal{
+.SideShoppingCarItemTotal{
     color: rgba(0, 0, 0, 0.548);
 
 }
 
-.SideShoppingCareItemDiscount{
+.SideShoppingCarItemDiscount{
     color: #FA8282;
 }
 
-.SideShoppingCareDiscountBlock,.SideShoppingCarePriceTotal{
+.SideShoppingCarDiscountBlock,.SideShoppingCarPriceTotal{
     display: flex;
     justify-content: space-between;
 }
-.SideShoppingCareDiscountBlock{
+.SideShoppingCarDiscountBlock{
     color: #FA8282;
     font-size: 14px;
 }
-.SideShoppingCarePriceTotal{
+.SideShoppingCarPriceTotal{
     margin-bottom: 20px;
 }
-.SideShoppingCareSeeShoppingCart{
+.SideShoppingCarSeeShoppingCar{
     display: block;
     width: 100%;
     padding: 10px 0;
@@ -272,6 +272,6 @@
     border: 1px solid #E79E4A;
     margin-bottom: 50px;
 }
-.SideShoppingCareSeeShoppingCart:hover{
+.SideShoppingCarSeeShoppingCar:hover{
     color: #E79E4A;
 }

@@ -84,8 +84,9 @@
     text-align: center;
     padding: 10px 0;
     margin: 0 5px;
+    cursor: pointer;
 }
-@media(max-width:576px){
+@media(max-width:1200px){
     .contactForm{
         padding: 10px 20px;
         margin: 0 10px;

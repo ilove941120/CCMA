@@ -18,22 +18,22 @@ $(window).resize(function(){
 
 
 // 側邊購物車滑出
-$(".shoppingCartIcon").click(function(){
-    $(".SideShoppingCartBlock").fadeIn()
-    $(".SideShoppingCartBlock").animate({
+$(".shoppingCarIcon").click(function(){
+    // $(".SideShoppingCarBlock").fadeIn()
+    $(".SideShoppingCarBlock").animate({
         right:"0px",
         transition:"1s"
     })
 })
 $(".SideShoppingBlockClose").click(function(){
-    $(".SideShoppingCartBlock").animate({
+    $(".SideShoppingCarBlock").animate({
         right:"-100%",
         transition:"1s"
     })
-    $(".SideShoppingCartBlock").fadeOut()
+    // $(".SideShoppingCarBlock").fadeOut()
 })
 var headerLastTotal = 0;
-$(".SideShoppingCareItemTotal span").each(function(){
+$(".SideShoppingCarItemTotal span").each(function(){
         headerLastTotal += parseInt($(this).text())
     })
     $(".headerLastTotal span").text(headerLastTotal)
@@ -41,14 +41,14 @@ $(".SideShoppingCareItemTotal span").each(function(){
 $(".headerAdd").click(function(){
     var headerLastTotal = 0;
     var itemTotalPrice =0;
-    var itemPrice = $(this).parents(".SideShoppingCartItem").find('.SideShoppingCareItemPrice span').text()
-    var itemQuantity =$(this).siblings((".headerquantity")).text()
-    $(this).parents(".SideShoppingCartItem").find(".headerquantity").text(parseInt(itemQuantity) + 1)
-    var itemQuantityNew =$(this).parents(".SideShoppingCartItem").find(".headerquantity").text()
+    var itemPrice = $(this).parents(".SideShoppingCarItem").find('.SideShoppingCarItemPrice span').text()
+    var itemQuantity =$(this).siblings((".headerQuantity")).text()
+    $(this).parents(".SideShoppingCarItem").find(".headerQuantity").text(parseInt(itemQuantity) + 1)
+    var itemQuantityNew =$(this).parents(".SideShoppingCarItem").find(".headerQuantity").text()
     itemTotalPrice = parseInt(itemQuantityNew) * parseInt(itemPrice)
-    $(this).parents(".SideShoppingCartItem").find(".SideShoppingCareItemTotal span").text(itemTotalPrice)
+    $(this).parents(".SideShoppingCarItem").find(".SideShoppingCarItemTotal span").text(itemTotalPrice)
 
-    $(".SideShoppingCareItemTotal span").each(function(){
+    $(".SideShoppingCarItemTotal span").each(function(){
         headerLastTotal += parseInt($(this).text())
     })
     $(".headerLastTotal span").text(headerLastTotal)
@@ -58,25 +58,25 @@ $(".headerAdd").click(function(){
 $(".headerLess").click(function(){
     var headerLastTotal = 0;
     var itemTotalPrice =0;
-    var itemPrice = $(this).parents(".SideShoppingCartItem").find('.SideShoppingCareItemPrice span').text()
-    var itemQuantity =$(this).siblings((".headerquantity")).text()
+    var itemPrice = $(this).parents(".SideShoppingCarItem").find('.SideShoppingCarItemPrice span').text()
+    var itemQuantity =$(this).siblings((".headerQuantity")).text()
     if(itemQuantity > 0){
-    $(this).parents(".SideShoppingCartItem").find(".headerquantity").text(parseInt(itemQuantity) - 1)
-    var itemQuantityNew =$(this).parents(".SideShoppingCartItem").find(".headerquantity").text()
+    $(this).parents(".SideShoppingCarItem").find(".headerQuantity").text(parseInt(itemQuantity) - 1)
+    var itemQuantityNew =$(this).parents(".SideShoppingCarItem").find(".headerQuantity").text()
     itemTotalPrice = parseInt(itemQuantityNew) * parseInt(itemPrice)
-    $(this).parents(".SideShoppingCartItem").find(".SideShoppingCareItemTotal span").text(itemTotalPrice)
+    $(this).parents(".SideShoppingCarItem").find(".SideShoppingCarItemTotal span").text(itemTotalPrice)
     }
 
-    $(".SideShoppingCareItemTotal span").each(function(){
+    $(".SideShoppingCarItemTotal span").each(function(){
         headerLastTotal += parseInt($(this).text())
     })
     $(".headerLastTotal span").text(headerLastTotal)
 })
 // 刪除按鈕
-$(".SideShoppingCareItemDelete").click(function(){
+$(".SideShoppingCarItemDelete").click(function(){
     var headerLastTotal = 0;
-    $(this).parents(".SideShoppingCartItem").remove()
-    $(".SideShoppingCareItemTotal span").each(function(){
+    $(this).parents(".SideShoppingCarItem").remove()
+    $(".SideShoppingCarItemTotal span").each(function(){
         headerLastTotal += parseInt($(this).text())
     })
     $(".headerLastTotal span").text(headerLastTotal)
