@@ -1,0 +1,51 @@
+.pageContentBlock{
+    max-width: 1200px;
+    margin: 20px auto;
+}
+.signInBlock{
+    width: 100%;
+}
+.SignInTitle{
+    background-color: #E9E7E7;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.signInContent{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.signInMethod1{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+}
+.signForm{
+    width: 50%;
+}
+.signInItem{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.signInButton{
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.signInMethod2{
+    width: 45%;
+    border-left: 1px solid #8f8f8f;
+}
+.signInMethodTitle{
+    text-align: center;
+}
+.signInMethodImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}

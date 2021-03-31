@@ -1,10 +1,14 @@
 *{
     box-sizing: border-box;
+    -webkit-tap-highlight-color:transparent;
+
 }
 body{
     margin: 0;
     font-family: "微軟正黑體";
 }
+
+
 a{
     text-decoration: none;
     color: unset;
@@ -57,8 +61,10 @@ a:active{
     /* 內縮 */
     padding: 5px;
 }
-.spin90deg{
+.spin90deg1{
     transform: rotate(90deg);
+    line-height: 25px;
+    padding-left: 5px;
 }
 
 .focus{

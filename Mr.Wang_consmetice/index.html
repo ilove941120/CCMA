@@ -31,12 +31,14 @@
                     <a href="#" class="navbarItem">聯絡我們 <i class="fas fa-caret-down"></i></a>
                 </div>
                 <div class="otherBar">
-                    <a href="#" class="otherBarItem">登入</a>
+                    <a href="#" class="signIn">登入</a>
                     <a href="#" class="shoppingCartIcon">購物車</a>
                 </div>
             </div>
             <div class="navbarList">
-                <i class="fas fa-bars"></i> 
+                <a href="#" class="signIn">登入</a>
+                <a href="#" class="shoppingCartIcon">購物車</a>
+                <i class="humburger fas fa-bars"></i> 
             </div>
             <div class="navbarListItemGroup">
                 <a href="index.html" class="companyLogoRWd">
@@ -49,56 +51,35 @@
                 <a href="#" class="navbarListItem">聯絡我們 <i class="fas fa-caret-down"></i></a>
                 <div class="closeButton"><i class="fas fa-times"></i></div>
             </div>
-            <div class="shoppingCartBlock">
-                <div class="shoppingCartTitle">
-                    <div class="shoppingName">購物車</div>
-                    <div class="shoppingBlockClose">X</div>
+            <div class="SideShoppingCartBlock">
+                <div class="SideShoppingCartTitle">
+                    <div class="SideShoppingName">購物車</div>
+                    <div class="SideShoppingBlockClose">X</div>
                 </div>
-                <div class="shoppingCartItemGroup">
-                    <div class="shoppingCartItem">
-                        <div class="shoppingCareItemDelete">X</div>
-                        <div class="shoppingCareItemImg">
+                <div class="SideShoppingCartItemGroup">
+                    <div class="SideShoppingCartItem">
+                        <div class="SideShoppingCareItemDelete">X</div>
+                        <div class="SideShoppingCareItemImg">
                             <img src="img/shopSide.png" alt="">
                         </div>
-                        <div class="shoppingCareItemContent">
-                            <div class="shoppingCareItemTitle">煥活肌膚光彩精華</div>
-                            <div class="shoppingCareItemPrice">NT$ <span>5980</span> </div>
-                            <div class="shoppingCareItemQuantity">
-                                <div class="less">-</div>
-                                <div class="quantity">1</div>
-                                <div class="add">+</div>
+                        <div class="SideShoppingCareItemContent">
+                            <div class="SideShoppingCareItemTitle">煥活肌膚光彩精華</div>
+                            <div class="SideShoppingCareItemPrice">NT$ <span>5980</span> </div>
+                            <div class="SideShoppingCareItemQuantity">
+                                <div class="headerLess">-</div>
+                                <div class="headerquantity">1</div>
+                                <div class="headerAdd">+</div>
                             </div>
-                            <div class="shoppingCareItemTotalBlock">
-                                <div class="shoppingCareItemTotal">NT$ <span>5980</span></div>
-                                <div class="shoppingCareItemDiscount">-NT$0</div>
+                            <div class="SideShoppingCareItemTotalBlock">
+                                <div class="SideShoppingCareItemTotal">NT$ <span>5980</span></div>
+                                <div class="SideShoppingCareItemDiscount">-NT$0</div>
                             </div>
                         </div>
                     </div>
-                    <div class="shoppingCartItem">
-                        <div class="shoppingCareItemDelete">X</div>
-                        <div class="shoppingCareItemImg">
-                            <img src="img/shopSide.png" alt="">
-                        </div>
-                        <div class="shoppingCareItemContent">
-                            <div class="shoppingCareItemTitle">煥活肌膚光彩精華</div>
-                            <div class="shoppingCareItemPrice">NT$ <span>5980</span> </div>
-                            <div class="shoppingCareItemQuantity">
-                                <div class="less">-</div>
-                                <div class="quantity">1</div>
-                                <div class="add">+</div>
-                            </div>
-                            <div class="shoppingCareItemTotalBlock">
-                                <div class="shoppingCareItemTotal">NT$ <span>5980</span></div>
-                                <div class="shoppingCareItemDiscount">-NT$0</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
                 </div>
-                <div class="discountBlock">折扣 <span>-NT$0</span> </div>
-                <div class="priceTotal">小計 <div class="lastTotal">NT$<span></span></div>  </div>
-                <a href="" class="seeShoppingCart">查看購物車</a>
+                <div class="SideShoppingCareDiscountBlock">折扣 <span>-NT$0</span> </div>
+                <div class="SideShoppingCarePriceTotal">小計 <div class="headerLastTotal">NT$<span></span></div>  </div>
+                <a href="" class="SideShoppingCareSeeShoppingCart">查看購物車</a>
             </div>
         </div>
     </div>
@@ -551,71 +532,6 @@
     </script>
 
     <script>
-        // 側邊購物車滑出
-        // $(".shoppingCartBlock").hide()
-        $(".shoppingCartIcon").click(function(){
-            $(".shoppingCartBlock").animate({
-                right:"0px"
-            })
-        })
-        $(".shoppingBlockClose").click(function(){
-            $(".shoppingCartBlock").animate({
-                right:"-500px"
-            })
-        })
-        var lastTotal = 0;
-        $(".shoppingCareItemTotal span").each(function(){
-                lastTotal += parseInt($(this).text())
-            })
-            $(".lastTotal span").text(lastTotal)
-        // 增加按鈕
-        $(".add").click(function(){
-            var lastTotal = 0;
-            var itemTotalPrice =0;
-            var itemPrice = $(this).parents(".shoppingCartItem").find('.shoppingCareItemPrice span').text()
-            var itemQuantity =$(this).siblings((".quantity")).text()
-            $(this).parents(".shoppingCartItem").find(".quantity").text(parseInt(itemQuantity) + 1)
-            var itemQuantityNew =$(this).parents(".shoppingCartItem").find(".quantity").text()
-            itemTotalPrice = parseInt(itemQuantityNew) * parseInt(itemPrice)
-            $(this).parents(".shoppingCartItem").find(".shoppingCareItemTotal span").text(itemTotalPrice)
-
-            $(".shoppingCareItemTotal span").each(function(){
-                lastTotal += parseInt($(this).text())
-            })
-            $(".lastTotal span").text(lastTotal)
-        })
-
-        // 減少按鈕
-        $(".less").click(function(){
-            var lastTotal = 0;
-            var itemTotalPrice =0;
-            var itemPrice = $(this).parents(".shoppingCartItem").find('.shoppingCareItemPrice span').text()
-            var itemQuantity =$(this).siblings((".quantity")).text()
-            if(itemQuantity > 0){
-            $(this).parents(".shoppingCartItem").find(".quantity").text(parseInt(itemQuantity) - 1)
-            var itemQuantityNew =$(this).parents(".shoppingCartItem").find(".quantity").text()
-            itemTotalPrice = parseInt(itemQuantityNew) * parseInt(itemPrice)
-            $(this).parents(".shoppingCartItem").find(".shoppingCareItemTotal span").text(itemTotalPrice)
-            }
-
-            $(".shoppingCareItemTotal span").each(function(){
-                lastTotal += parseInt($(this).text())
-            })
-            $(".lastTotal span").text(lastTotal)
-        })
-        // 刪除按鈕
-        $(".shoppingCareItemDelete").click(function(){
-            var lastTotal = 0;
-            $(this).parents(".shoppingCartItem").remove()
-            $(".shoppingCareItemTotal span").each(function(){
-                lastTotal += parseInt($(this).text())
-            })
-            $(".lastTotal span").text(lastTotal)
-        })
-        
-
-    </script>
-    <script>
         $(".sortItemBlock").hide()
         $(".sortItemBlock").eq(0).show()
         var nw =$(".falseBox").width()
@@ -652,13 +568,14 @@
                 $(".sortItemBlock").eq(sortItemThis).find(".sortItemProduct").addClass("sortItemProductSm")
             }
         })
-        $(window).scroll(function(){
-            var nw =$(".falseBox").width()
-            $(".sortItemProductImg").height(nw)
+        $(document).ready(function(){
+            
         })
         $(document).ready(function(){
             // 確認目前版面要顯現幾個
             // 版面1
+            var nw =$(".falseBox").width()
+            $(".sortItemProductImg").height(nw)
             if($(window).width() > 997){
                 $(".sortItemBlock").eq(0).find(".sortItemProduct").eq(3).show()
                 $(".sortItemBlock").eq(0).find(".sortItemProduct").removeClass("sortItemProductMl")

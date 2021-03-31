@@ -34,25 +34,31 @@
 
 .otherBar{
     margin-left: auto;
+}
+.signIn{
+    margin: 0 20px;
     font-weight: bold;
 
 }
-.otherBarItem{
-    margin: 0 20px;
-    transition: 0.5s;
-}
 .shoppingCartIcon{
     margin: 0 20px;
-    transition: 0.5s;
+    /* transition: 2.5s; */
+    font-weight: bold;
 }
 
-.otherBarItem:hover{
+.signIn:hover{
+    color: #D04000;
+}
+.shoppingCartIcon:hover{
     color: #D04000;
 }
 .navbarList{
     margin-left: auto;
     margin-right: 20px;
     display: none;
+}
+.humburger{
+    cursor: pointer;
 }
 .navbarListItemGroup{
     position: fixed;
@@ -80,13 +86,14 @@
     margin-bottom: 20px;
     text-align: right;
     font-weight: bolder;
+    transition: 1s;
+
 }
 .navbarListItem i{
     font-size: 14px;
 }
 .navbarListItem:hover{
     color: #ffffff;
-    transition: 2s;
     text-shadow:  0px 0px 30px #D04000,0px 0px 30px #D04000,0px 0px 30px #fcf372;
 }
 .companyLogoRWd{
@@ -104,6 +111,7 @@
     left: 10%;
     font-size: 24px;
     color: #D04000;
+    cursor: pointer;
 }
 @media(max-width:1500px){
 }
@@ -129,25 +137,26 @@
 }
 
 /* 側邊購物車 */
-.shoppingCartBlock{
+.SideShoppingCartBlock{
     width: 400px;
     height: 100%;
     padding: 0 20px;
     padding-top: 80px;
     position: fixed;
     top: 0;
-    right: 0px;
+    right: -100%;
     z-index: 25;
     background-color: #FFFFFF;
-    transition: 1s ease;
+    transition: 0.5s ease;
+    overflow: scroll;
     
 }
 @media(max-width:768px){
-    .shoppingCartBlock{
+    .SideShoppingCartBlock{
         width: 100%;
     }
 }
-.shoppingCartTitle{
+.SideShoppingCartTitle{
     display: flex;
     padding-bottom: 20px;
     justify-content: space-between;
@@ -155,19 +164,20 @@
     font-weight: bolder;
     color: rgba(0, 0, 0, 0.199);
 }
-.shoppingName{
+.SideShoppingName{
     font-size: 20px;
 }
-.shoppingBlockClose{
+.SideShoppingBlockClose{
     font-size: 20px;
+    cursor: pointer;
 }
-.shoppingCartItemGroup{
+.SideShoppingCartItemGroup{
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
 }
-.shoppingCartItem{
+.SideShoppingCartItem{
     width: 100%;
     padding: 10px 0;
     display: flex;
@@ -175,79 +185,84 @@
     justify-content: space-between;
     align-items: center;
 }
-.shoppingCareItemDelete{
+.SideShoppingCareItemDelete{
     display:flex;
     align-items: center;
     justify-content: center;
     width: 5%;
     color: rgba(0, 0, 0, 0.418);
     padding-left: 5px;
+    cursor: pointer;
 
 }
-.shoppingCareItemImg{
+.SideShoppingCareItemImg{
     width: 25%;
     /* height: calc( 100vw * 0.2 / 120 * 150); */
     height: 120px;
     margin: 0 10px;
 }
-.shoppingCareItemImg img{
+.SideShoppingCareItemImg img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 @media(max-width:768px){
-    .shoppingCareItemImg img{
+    .SideShoppingCareItemImg img{
         width: 100%;
         height: 100%;
         object-fit: contain;
     }
 }
-.shoppingCareItemContent{
+.SideShoppingCareItemContent{
     width: 65%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.shoppingCareItemQuantity{
+.SideShoppingCareItemTitle{
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.418);
+    font-weight: bolder;
+}
+.SideShoppingCareItemPrice{
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.418);
+}
+.SideShoppingCareItemQuantity{
     display: flex;
     width: 50%;
     padding: 0 10px;
     justify-content: space-between;
     border: 1px solid black;
 }
-.shoppingCareItemTotalBlock{
+.headerAdd,.headerLess{
+    cursor: pointer;
+}
+.SideShoppingCareItemTotalBlock{
     text-align: right;
 
 }
-.shoppingCareItemTotal{
+.SideShoppingCareItemTotal{
     color: rgba(0, 0, 0, 0.548);
 
 }
-.shoppingCareItemTitle{
-    margin-bottom: 10px;
-    color: rgba(0, 0, 0, 0.418);
-    font-weight: bolder;
-}
-.shoppingCareItemDiscount{
+
+.SideShoppingCareItemDiscount{
     color: #FA8282;
 }
-.shoppingCareItemPrice{
-    margin-bottom: 10px;
-    color: rgba(0, 0, 0, 0.418);
 
-}
-.discountBlock,.priceTotal{
+.SideShoppingCareDiscountBlock,.SideShoppingCarePriceTotal{
     display: flex;
     justify-content: space-between;
 }
-.discountBlock{
+.SideShoppingCareDiscountBlock{
     color: #FA8282;
     font-size: 14px;
 }
-.priceTotal{
+.SideShoppingCarePriceTotal{
     margin-bottom: 20px;
 }
-.seeShoppingCart{
+.SideShoppingCareSeeShoppingCart{
     display: block;
     width: 100%;
     padding: 10px 0;
@@ -255,4 +270,8 @@
     background-color: black;
     color: #E79E4A;
     border: 1px solid #E79E4A;
+    margin-bottom: 50px;
+}
+.SideShoppingCareSeeShoppingCart:hover{
+    color: #E79E4A;
 }
