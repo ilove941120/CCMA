@@ -91,27 +91,27 @@
                     <form class="signForm" action="">
                         <div class="signInItem">
                             <label for="email">電子郵件</label>
-                            <input type="email" id="email">
+                            <input type="email" id="email" placeholder="您的電子郵件">
                         </div>
                         <div class="signInItem">
                             <label for="password">密碼</label>
-                            <input type="password" id="password">
+                            <input type="password" id="password" placeholder="輸入您的密碼">
                         </div>
                         <div class="signInRememberMe" id="remember">
                             <input type="radio" name="" id="remember">記住我的帳號
                         </div>
-                        <div class="signInButton">登入</div>
+                        <a href="" class="signInButton">登入</a>
                         <div class="signInOtherBar">
-                            <div class="signInOtherItem">忘記密碼?</div>
-                            <div class="signInOtherItem">還不是會員嗎?</div>
+                            <a href="" class="signInOtherItem">忘記密碼?</a>
+                            <a href="" class="signInOtherItem">還不是會員嗎?</a>
                         </div>
                     </form>
                 </div>
                 <div class="signInMethod2">
                     <div class="signInMethodTitle">使用社群媒體登入</div>
-                    <div class="signInMethodImg">
+                    <a href="" class="signInMethodImg">
                         <img src="../img/lineBLack.png" alt="">
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -161,11 +161,18 @@
         $(document).ready(function(){
             var nw = $(".strongholdItemImg").width();
             $(".strongholdItemImg").height(nw);
+            var nw1 = $(".signInMethodImg").width();
+            $(".signInMethodImg").height(nw1)
         })
         $(window).resize(function(){
             var nw = $(".strongholdItemImg").width();
             $(".strongholdItemImg").height(nw);
+            var nw1 = $(".signInMethodImg").width();
+            $(".signInMethodImg").height(nw1)
         })
+    </script>
+    <script>
+        
     </script>
 
 
