@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/setUp.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/signIn.css">
+    <link rel="stylesheet" href="../css/registered.css">
 
 </head>
 <body>
@@ -83,38 +83,65 @@
     </div>
     <!-- 頁面區域 -->
     <div class="pageContentBlock">
-        
-        <div class="signInBlock">
-            <div class="SignInTitle">登入</div>
-            <div class="signInContent">
-                <div class="signInMethod1">
-                    <form class="signForm" action="">
-                        <div class="signInItem">
-                            <label for="email">電子郵件</label>
-                            <input type="email" id="email" placeholder="您的電子郵件">
-                        </div>
-                        <div class="signInItem">
-                            <label for="password">密碼</label>
-                            <input type="password" id="password" placeholder="輸入您的密碼">
-                        </div>
-                        <div class="signInRememberMe" id="remember">
-                            <input type="checkbox" name="" id="remember">記住我的帳號
-                        </div>
-                        <a href="" class="signInButton">登入</a>
-                        <div class="signInOtherBar">
-                            <a href="" class="signInOtherItem">忘記密碼?</a>
-                            <a href="" class="signInOtherItem">還不是會員嗎?</a>
-                        </div>
-                    </form>
+        <div class="pageBanner">
+            <img src="../img/registerBanner.png" alt="">
+        </div>
+        <div class="pageTitle">註冊帳戶</div>
+        <form action="" class="registerForm">
+            <div class="formItem">
+                <label for="">收件姓名* <span class="remind">*必填欄位</span> </label>
+                <input class="inputTextBox" type="text" id="name" placeholder="請輸入您的姓名">
+            </div>
+            <div class="formItem">
+                <label for="">稱謂*</label>
+                <input type="radio" name="gender" id="gender">先生
+                <input type="radio" name="gender" id="gender">女士
+            </div>
+            <div class="formItem">
+                <label for="">生日*</label>
+                <div class="inputDateBoxBlock">
+                    <select name="" id="" class="inputDateBox" >
+                        <option value="">年份</option>
+                    </select>
+                    <select name="" id="" class="inputDateBox">
+                        <option value="">月份</option>
+                    </select>
+                    <select name="" id="" class="inputDateBox">
+                        <option value="">日期</option>
+                    </select>
                 </div>
-                <div class="signInMethod2">
-                    <div class="signInMethodTitle">使用社群媒體登入</div>
-                    <a href="" class="signInMethodImg">
-                        <img src="../img/lineBLack.png" alt="">
-                    </a>
+                <div class="remarks">留下您的生日，橘碼與你同慶專屬於您的一天</div>
+            </div>
+            <div class="formItem">
+                <label for="">電子信箱*</label>
+                <input class="inputTextBox" type="email" id="email" placeholder="請輸入您的電子信箱">
+            </div>
+            <div class="formItem">
+                <label for="">手機號碼*</label>
+                <input class="inputTextBox" type="text" id="phone" placeholder="請輸入您的手機">
+            </div>
+            <div class="formOtherItemBlock">
+                <div class="otherItem">
+                    <input type="checkbox" name="" id="agree1">
+                    <label for="agree1">我同意於手收到橘碼光彩的消息</label>
+                    
+                </div>
+                <div class="otherItem">
+                    <input type="checkbox" name="" id="agree2">
+                    <label for="agree2">我要訂閱優惠電子報</label>
+
+                </div>
+                <div class="otherItem">
+                    <input type="checkbox" name="" id="agree3">
+                    <label for="agree3">我同意使用條款，請建立帳戶</label>
+
                 </div>
             </div>
-        </div>
+
+            <a href="" class="submitButton">提交</a>
+        </form>
+        
+        
 
 
     </div>
@@ -145,14 +172,7 @@
     <script src="../js/header.js"></script>
     <script src="../js/slick.js"></script>
     <script>
-        $(document).ready(function(){
-            var nw1 = $(".signInMethodImg").width();
-            $(".signInMethodImg").height(nw1)
-        })
-        $(window).resize(function(){
-            var nw1 = $(".signInMethodImg").width();
-            $(".signInMethodImg").height(nw1)
-        })
+
     </script>
     <script>
         

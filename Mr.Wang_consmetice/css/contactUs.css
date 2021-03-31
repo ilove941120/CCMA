@@ -1,0 +1,95 @@
+.pageContentBlock{
+    max-width: 1200px;
+    margin: 20px auto;
+}
+.pageBanner{
+    width: 100%;
+    margin: 20px 0;
+}
+.pageBanner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid black;
+}
+.pageTitle{
+    width: 100%;
+    border-bottom: 4px solid #BCBABA;
+    margin-bottom: 20px;
+}
+@media(max-width:1200px){
+    .pageTitle{
+        padding: 0 10px;
+    }
+}
+
+.contactForm{
+    background-color: #EAE7E7;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    border-radius: 10px;
+}
+.contactFormTitle{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.contactFormGroup{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.contactFormItemSm{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+}
+.contactFormItemSm label{
+    margin-bottom: 5px;
+}
+.contactFormItemSm input{
+    padding: 5px 10px;
+}
+.contactFormItemXl{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.contactFormItemXl label{
+    margin-bottom: 5px;
+}
+.contactFormItemXl input{
+    padding: 5px 10px;
+}
+.contactFormItemXl textarea{
+    padding: 5px 10px;
+}
+.checkBlock{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.checkAPI{
+    width: 170px;
+    background-color: black;
+    color: red;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 5px;
+}
+.submitFormButton{
+    width: 170px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 5px;
+}
+@media(max-width:576px){
+    .contactForm{
+        padding: 10px 20px;
+        margin: 0 10px;
+        margin-top: 20px;
+        margin-bottom: 60px;
+    }
+}
