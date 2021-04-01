@@ -12,84 +12,337 @@
     object-fit: cover;
     border: 1px solid black;
 }
-.pageTitle{
-    width: 100%;
-    border-bottom: 4px solid #BCBABA;
-    margin-bottom: 20px;
-}
-@media(max-width:1200px){
-    .pageTitle{
-        padding: 0 10px;
-    }
-}
 
-.contactForm{
-    background-color: #EAE7E7;
-    padding: 10px 20px;
-    margin-top: 20px;
-    margin-bottom: 60px;
-    border-radius: 10px;
+
+/* checkoutBLock */
+.checkoutBlock{
+    width: 100%;
 }
-.contactFormTitle{
-    font-size: 20px;
+.shoppingListBlock{
+    width: 100%;
+}
+.shoppingListTitleBar{
+    width: 100%;
+    border-bottom: 2px solid  #A6A5A5;
+
+}
+.shoppingListBlankArea{
+    width: 32%;
+}
+.shoppingListTitle{
+    width: 100%;
+    display: flex;
+}
+.shoppingListItem{
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 2px solid  #A6A5A5;
+
+}
+.shoppingListItemDelete{
+    width: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.shoppingListItemImg{
+    width: 17%;
+    height: 150px;
+    display: flex;
+}
+.shoppingListItemImg img{
+    width: 100%;
+    height: 100%;
+    object-position: left;
+    object-fit: contain;
+}
+.rwdChange{
+    display: flex;
+    width: 75%;
+}
+.shoppingListItemName{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.shoppingListItemPrice{
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+.shoppingListItemQuantityBlock{
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+.shoppingListItemQuantityGroup{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #A6A5A5;
+    width: 70%;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+.shoppingListItemTotalBlock{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+}
+.shoppingListItemDiscount{
+    font-size: 14px;
+    color: #E99D8A;
+}
+.shoppingListCheckoutBlock{
+    width: 100%;
+    display: flex;
     margin-bottom: 20px;
 }
-.contactFormGroup{
-    margin-bottom: 20px;
+.discountBLock{
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.discount{
+    /* width: 50%; */
+    position: absolute;
+    bottom: 10%;
+}
+.discountSubmitBlock{
+    display: flex;
+    margin-top: 5px;
+    width: 100%;
+}
+.discountSubmitBlock input{
+    /* width: 200px; */
+}
+.discountSubmit{
+    width: 60px;
+    background-color: #918F8F;
+    color: white;
+    padding: 5px 0;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+.checkoutList{
+    width: 50%;
+}
+.checkoutListItemBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* justify-content: flex-end; */
+    border-bottom: 1px solid black;
+    padding: 5px 0;
+}
+.checkoutListItem{
+    width: 40%;
+    margin: 5px 0;
     display: flex;
     justify-content: space-between;
 }
-.contactFormItemSm{
-    width: 49%;
+.checkoutListItem:nth-child(2){
+    color: #E99D8A;
+}
+.checkoutListItemTitle{
+    width: 50%;
+    text-align: right;
+}
+.checkoutListItemContent{
+    width: 50%;
+    text-align: right;
+}
+.lastPriceBLock{
+    width: 20%;
     display: flex;
-    flex-direction: column;
-}
-.contactFormItemSm label{
-    margin-bottom: 5px;
-}
-.contactFormItemSm input{
-    padding: 5px 10px;
-}
-.contactFormItemXl{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-.contactFormItemXl label{
-    margin-bottom: 5px;
-}
-.contactFormItemXl input{
-    padding: 5px 10px;
-}
-.contactFormItemXl textarea{
-    padding: 5px 10px;
-}
-.checkBlock{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.checkAPI{
-    width: 170px;
-    background-color: black;
-    color: red;
-    text-align: center;
+    margin-left: auto;
     padding: 10px 0;
-    margin: 0 5px;
+    font-weight: bolder;
 }
-.submitFormButton{
-    width: 170px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin: 0 5px;
+.lastPriceTitle{
+    width: 50%;
+    text-align: right;
+}
+.lastPrice{
+    width: 50%;
+    text-align: right;
+}
+
+@media(max-width:1200px){
+    .checkoutBlock{
+        padding: 0 10px;
+    }
+}
+@media(max-width:997px){
+    .checkoutListItem{
+        width: 60%;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .lastPriceBLock{
+        width: 30%;
+        display: flex;
+        margin-left: auto;
+        padding: 10px 0;
+        font-weight: bolder;
+    }
+
+}
+@media(max-width:768px){
+    .shoppingListItem {
+        padding: 10px 0;
+    }
+    .shoppingListItemImg{
+        height: 80px;
+    }
+    .checkoutListItem{
+        width: 70%;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .lastPriceBLock{
+        width: 35%;
+        display: flex;
+        margin-left: auto;
+        padding: 10px 0;
+        font-weight: bolder;
+    }
+    .shoppingListItemDelete{
+        font-size: 12px;
+    }
+    .shoppingListItemName{
+        font-size: 12px;
+    }
+    .shoppingListItemPrice{
+        font-size: 12px;
+    }
+    .shoppingListItemQuantityGroup{
+        font-size: 12px;
+    }
+    .shoppingListItemTotal{
+        font-size: 12px;
+    }
+    .shoppingListItemDiscount{
+        font-size: 12px;
+    }
+    .shoppingListItemQuantityBlock{
+        font-size: 12px;
+    }
+    .shoppingListItemTotalBlock{
+        font-size: 12px;
+    }
+    
 }
 @media(max-width:576px){
-    .contactForm{
-        padding: 10px 20px;
-        margin: 0 10px;
+    .shoppingListItemDelete{
+        width: 10%;
+    }
+    .shoppingListItemImg{
+        width: 30%;
+        height: auto;
+    }
+    .rwdChange{
+        flex-wrap: wrap;
+        margin-left: 10px;
+        width: 60%;
+    }
+    .shoppingListItemName{
+        width: 100%;
+        justify-content: left;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    .shoppingListItemPrice{
+        width: 100%;
+        margin-bottom: 5px;
+
+    }
+    .shoppingListItemQuantityBlock{
+        width: 100%;
+        margin-bottom: 10px;
+
+    }
+    .shoppingListItemTotalBlock{
+        width: 100%;
+        
+    }
+    .shoppingListItemDiscount{
+        width: 100%;
+    }
+    .discountSubmitBlock{
+        display: flex;
+        margin-top: 5px;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .discount label{
+        font-size: 12px;
+    }
+    .discount input{
+        width: 80%;
+        margin-right: auto;
+    }
+    .discountSubmit{
+        width: 80%;
+        background-color: #918F8F;
+        color: white;
+        padding: 5px 0;
+        text-align: center;
+        margin-right: auto;
         margin-top: 20px;
-        margin-bottom: 60px;
+        margin-left: 0px;
+        font-size: 12px;
+    }
+    .checkoutListItem{
+        width: 100%;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .lastPriceBLock{
+        width: 50%;
+        display: flex;
+        margin-left: auto;
+        padding: 10px 0;
+        font-weight: bolder;
+        font-size: 12px;
+
+    }
+    .shoppingListCheckoutBlock {
+        margin-bottom: 0;
+    }
+    .shoppingListTitleBar{
+        display: none;
+    }
+    .shoppingListItemPrice::before{
+        content: "價格:";
+        margin-right: 10px;
+    }
+    .shoppingListItemQuantityBlock::before{
+        content: "數量:";
+        font-size: 12px;
+        margin-right: 10px;
+    }
+    .shoppingListItemTotal::before{
+        content: "小計:";
+        font-size: 12px;
+        margin-right: 15px;
+    }
+    .shoppingListItemDiscount::before{
+        content: "折扣:";
+        font-size: 12px;
+        margin-right: 10px;
     }
 }
