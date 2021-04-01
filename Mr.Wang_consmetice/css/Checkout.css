@@ -148,14 +148,25 @@
     display: flex;
     justify-content: space-between;
 }
-.checkoutListItem:nth-child(2){
-    color: #E99D8A;
-}
 .checkoutListItemTitle{
     width: 50%;
     text-align: right;
 }
-.checkoutListItemContent{
+.checkoutShipping{
+    width: 50%;
+    text-align: right;
+}
+.checkoutDiscount{
+    width: 50%;
+    text-align: right;
+    color: #E99D8A;
+
+}
+.checkoutHandlingFee{
+    width: 50%;
+    text-align: right;
+}
+.checkoutPrice{
     width: 50%;
     text-align: right;
 }
@@ -290,11 +301,11 @@
         font-size: 12px;
     }
     .discount input{
-        width: 80%;
+        width: 90%;
         margin-right: auto;
     }
     .discountSubmit{
-        width: 80%;
+        width: 90%;
         background-color: #918F8F;
         color: white;
         padding: 5px 0;
