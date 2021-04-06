@@ -1,6 +1,8 @@
+
 .pageContentBlock{
     max-width: 1200px;
     margin: 20px auto;
+    min-height: 65vh;
 }
 .signInBlock{
     width: 100%;

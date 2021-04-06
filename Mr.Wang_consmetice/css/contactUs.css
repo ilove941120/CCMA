@@ -71,11 +71,15 @@
 }
 .checkAPI{
     width: 170px;
-    background-color: black;
+    /* background-color: black; */
     color: red;
     text-align: center;
     padding: 10px 0;
     margin: 0 5px;
+    background-image: url(../img/reCAPTCHA.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 .submitFormButton{
     width: 170px;
@@ -85,6 +89,10 @@
     padding: 10px 0;
     margin: 0 5px;
     cursor: pointer;
+    transition: 0.5s;
+}
+.submitFormButton:hover{
+    background-color: #CF4F33;
 }
 @media(max-width:1200px){
     .contactForm{

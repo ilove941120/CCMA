@@ -60,6 +60,7 @@
     background-position:center;
     background-position: 98%;
     background-size: 25px;
+    cursor: pointer;
 }
 .remarks{
     font-size: 12px;
@@ -77,6 +78,11 @@
     background-color: #BCBABA;
     color: white;
     margin: auto;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.submitButton:hover{
+    background-color: #CF4F33;
 }
 
 

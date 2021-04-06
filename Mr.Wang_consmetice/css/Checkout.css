@@ -45,6 +45,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .shoppingListItemImg{
     width: 17%;
@@ -86,6 +87,9 @@
     padding: 0 5px;
     border-radius: 5px;
 }
+.shoppingListItemLess,.shoppingListItemAdd{
+    cursor: pointer;
+}
 .shoppingListItemTotalBlock{
     width: 20%;
     display: flex;
@@ -117,6 +121,7 @@
     display: flex;
     margin-top: 5px;
     width: 100%;
+    cursor: pointer;
 }
 .discountSubmitBlock input{
     /* width: 200px; */
@@ -356,4 +361,112 @@
         font-size: 12px;
         margin-right: 10px;
     }
+}
+
+.clientNewsBlock{
+    width: 100%;
+    margin-bottom: 50px;
+}
+.clientForm{
+    width: 80%;
+    margin: auto;
+}
+.orderNewsTitle{
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+.orderItem{
+    display: flex;
+    flex-direction: column;
+}
+.orderItem label{
+    margin-bottom: 10px;
+}
+.orderItem input{
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.consigneeTitle{
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+.consigneeItem{
+    display: flex;
+    flex-direction: column;
+}
+.consigneeItem label{
+    margin-bottom: 10px;
+}
+.consigneeItem input{
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.payMethodTitle{
+    margin-bottom: 10px;
+}
+.payMethodBlock select{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.shipMethodTitle{
+    margin-bottom: 10px;
+}
+.shipMethodBlock select{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.remarksTitle{
+    margin-bottom: 10px;
+}
+.remarksBlock textarea{
+    width: 100%;
+    padding: 5px;
+}
+.inputArrowStyle{
+    width: 33%;
+    padding: 10px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background-image: url(../img/arrowDown-01.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-position: 98%;
+    background-size: 14px;
+    
+}
+.inputArrowStyle option:focus{
+    background-color:white;
+}
+.inputArrowStyle option{
+    background-color:white;
+    -webkit-appearance:none;
+}
+.consigneeCheck{
+    margin-left: 0px;
+}
+.formButtonBar{
+    display: flex;
+    justify-content: center;
+}
+.keepShopping,.orderCompleted{
+    width: 150px;
+    margin: 20px 20px;
+    padding: 10px 0;
+    background-color: #CF4F33;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.keepShopping:hover{
+    background-color: rgb(58, 0, 0);
+    color: white;
+}
+.orderCompleted:hover{
+    background-color: rgb(58, 0, 0);
 }
