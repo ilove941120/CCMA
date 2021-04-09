@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .submit{
+            padding: 5px;
+            border: 1px solid black;
+            margin-top: 10px;
+            width: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="two.php" id="two" method="GET">
+        <label for="date">請輸入天數</label>
+        <input type="text" id="date" name="date" value="">
+        <div class="submit">送出</div>
+    </form>
+    
+
+    <script src="js/jquery-3.5.1.min.js"></script>  
+    <script>
+        
+        $(".submit").click(function(){
+            var checkDate = /^[0-9]*$/;
+            if($("#date").val().match(checkDate) == false){
+                alert("傳送失敗")
+            }
+            else{
+                alert("傳送成功");
+                $("#two").submit();
+            }
+        })
+    </script>
+</body>
+</html>
