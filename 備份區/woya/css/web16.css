@@ -1,0 +1,276 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+/* 框架CSS */
+.messageBoardPage {
+  width: 100%;
+  padding: 50px;
+  height: auto;
+  position: relative;
+  /* background-color: bisque; */
+}
+.pageFrame {
+  width: 80%;
+  padding-top: 80px;
+  margin: auto;
+  display: flex;
+}
+
+.contentBlock {
+  width: 70%;
+}
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 997px) {
+  .pageFrame {
+    width: 100%;
+    padding-top: 50px;
+    flex-direction: column;
+  }
+  .contentBlock {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+@media (max-width: 768px) {
+  .messageBoardPage {
+    padding: 50px 20px;
+  }
+}
+@media (max-width: 576px) {
+  .messageBoardPage {
+    padding: 50px 10px;
+  }
+  .pageFrame {
+    padding-top: 30px;
+  }
+}
+@media (max-width: 375px) {
+}
+
+.pageTitle{
+    width: 30%;
+    font-size: 28px;
+    font-weight: bolder;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    text-align: right;
+    position: absolute;
+    border-bottom: 1px solid red;
+    color: #2F5D98;
+    top: 15px;
+    left: 0;
+}
+.pageTitle::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+@media (max-width:997px){
+    .pageTitle{
+        width: 40%;
+        padding-right: 30px;
+        font-size: 28px;
+    }
+}
+@media (max-width:768px){
+    .pageTitle{
+        font-size: 22px;
+    padding-right: 20px;
+
+    }
+}
+@media (max-width:576px){
+    .pageTitle{
+        width: 60%;
+        font-size: 20px;
+    }
+}
+
+/* 主要內容CSS */
+/* 表單 */
+.opinionForm {
+  width: 80%;
+  margin: auto;
+  padding: 20px 50px;
+  border: 1px solid #2b5e95;
+  display: flex;
+  flex-direction: column;
+}
+.opinionFormTitle {
+  font-size: 24px;
+  font-weight: bolder;
+  color: #2b5e95;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.opinionFormText {
+    width: 80%;
+  font-weight: bold;
+  margin: auto;
+  margin-bottom: 20px;
+  color: #2b5e95;
+}
+.formBlock {
+  color: #2b5e95;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.formBlock:nth-child(3) {
+  display: flex;
+  justify-content: space-between;
+}
+.formBlockIn {
+  width: 45%;
+}
+.formItem {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(37, 75, 145, 0.877);
+}
+.itemGroup {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.itemBlock{
+    margin: 0 10px;
+}
+.g-recaptcha{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+#submitButton {
+  display: block;
+  margin: auto;
+  padding: 5px 20px;
+  border-radius: 0;
+  background-color: white;
+  font-weight: bolder;
+  color: #2b5e95;
+  border: 1px solid #2b5e95;
+}
+
+@media (max-width:1400px){
+    
+}
+@media (max-width:1200px){
+    
+}
+@media (max-width:997px){
+    .opinionForm {
+        width: 100%;
+        margin: auto;
+        padding: 20px 50px;
+        border: 1px solid #2b5e95;
+        display: flex;
+        flex-direction: column;
+      }
+}
+@media (max-width:768px){
+    
+}
+@media (max-width:576px){
+    .opinionForm {
+        padding: 20px 20px;
+      }
+      .formBlock {
+        color: #2b5e95;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+}
+@media (max-width:376px){
+    
+}
+/* 公司位置 */
+.companyAdress{
+    width: 80%;
+    margin: auto;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E6E6E6;
+}
+.companyBlock{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.companyTitle{
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+    color: #2b5e95;
+}
+.companyMap{
+    width: 100%;
+}
+.companyMap iframe{
+    width: 100%;
+}
+.companyContent{
+    display: flex;
+    flex-direction: column;
+}
+.companyContentItem{
+    font-size: 14px;
+    margin: 10px;
+    color: #2b5e95;
+
+
+}
+@media (max-width:1400px){
+    
+}
+@media (max-width:1200px){
+    
+}
+@media (max-width:997px){
+    .companyAdress{
+        width: 100%;
+        margin: auto;
+        padding: 20px 20px;
+
+    }
+}
+@media (max-width:768px){
+    .companyAdress{
+        padding: 20px 20px;
+        flex-wrap: wrap;
+    }
+    .companyBlock{
+        width: 45%;
+    }
+    .companyTitle{
+        font-size: 18px;
+    }
+    .companyContentItem{
+        font-size: 12px;
+    }
+}
+@media (max-width:576px){
+    
+}
+@media (max-width:376px){
+    
+}
+
+/* 驗證套件CSS */
+.error{
+  color: red;
+  margin-left: 5px;
+}
+label .error{
+  display: inline;
+}

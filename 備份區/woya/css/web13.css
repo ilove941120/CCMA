@@ -1,0 +1,230 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+/* 框架CSS */
+.surveyPage{
+    width: 100%;
+    padding: 50px;
+    height: auto;
+    position: relative;
+    /* background-color: bisque; */
+}
+.pageFrame{
+    width: 90%;
+    padding-top: 80px;
+    margin: auto;
+    display: flex;
+}
+.contentBlock{
+    width: 100%;
+}
+
+
+@media (max-width:1200px){
+
+}
+@media (max-width:997px){
+    .pageFrame{
+        width: 100%;
+        padding-top: 50px;
+        flex-direction: column;
+    }
+    .contentBlock{
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+@media (max-width:768px){
+    .surveyPage{
+        padding: 50px 20px;
+    }
+}
+@media (max-width:576px){
+    .surveyPage{
+        padding: 50px 10px;
+    }
+    .pageFrame{
+        padding-top: 30px;
+    }
+}
+@media (max-width:375px){
+    
+}
+
+.pageTitle{
+    width: 30%;
+    font-size: 28px;
+    font-weight: bolder;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    text-align: right;
+    position: absolute;
+    border-bottom: 1px solid red;
+    color: #2F5D98;
+    top: 15px;
+    left: 0;
+}
+.pageTitle::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+@media (max-width:997px){
+    .pageTitle{
+        width: 40%;
+        padding-right: 30px;
+        font-size: 28px;
+    }
+}
+@media (max-width:768px){
+    .pageTitle{
+        font-size: 22px;
+    }
+}
+@media (max-width:576px){
+    .pageTitle{
+        width: 60%;
+        font-size: 20px;
+    }
+}
+
+/* 主要內容CSS */
+.serviceForm{
+    width: 80%;
+    padding: 50px 200px;
+    margin: auto;
+    border: 1px solid #2B5E95;
+
+}
+
+.serviceFormTitle{
+    font-size: 24px;
+    font-weight: bolder;
+    color: #2B5E95;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.synopsisText{
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2B5E95;
+}
+.inquireNumber{
+    color: #2B5E95;
+
+}
+#inquireNumber{
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(37, 75, 145, 0.877);
+}
+.formTable{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.tableTr{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+}
+.scoreItemGroup{
+    width: 70%;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.scoreItem{
+    width: 20%;
+    margin:0 10px;
+    color: #2B5E95;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.itemTitle{
+    width: 30%;
+    color: #2B5E95;
+}
+
+
+.epilog{
+    color: #2B5E95;
+    
+}
+.serviceForm textarea{
+    width: 100%;
+    border: 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #2B5E95;
+
+}
+#submitButton {
+    display: block;
+    margin: auto;
+    padding: 5px 20px;
+    border-radius: 0;
+    background-color: white;
+    font-weight: bolder;
+    color: #2B5E95;
+    border: 1px solid #2B5E95;
+  }
+
+  @media (max-width:1600px){
+    .serviceForm{
+        padding: 50px 150px;
+    }
+}
+@media (max-width:1400px){
+    .serviceForm{
+        padding: 50px 100px;
+    }
+}
+@media (max-width:1200px){
+    .serviceForm{
+        padding: 50px 50px;
+    }
+}
+@media (max-width:997px){
+    .serviceForm{
+        width: 100%;
+    }
+}
+@media (max-width:768px){
+    .serviceForm{
+        padding: 50px 20px;
+    }
+    .synopsisText{
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    .scoreItem{
+        font-size: 14px;
+    }
+    .itemTitle{
+        font-size: 14px;
+    }
+}
+@media (max-width:576px){
+    .scoreItem{
+        width: 5%;
+        margin:0;
+    }
+    .scoreItemGroup:nth-child(1){
+        padding-right: 1px;
+    }
+}
+@media (max-width:376px){
+
+}
+

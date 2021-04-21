@@ -1,0 +1,87 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+/* 框架CSS */
+.recruitPage{
+    width: 100%;
+    padding: 50px;
+    height: auto;
+    position: relative;
+    /* background-color: bisque; */
+}
+.pageFrame{
+    width: 80%;
+    padding-top: 80px;
+    margin: auto;
+    display: flex;
+}
+.contentBlock{
+    width: 70%;
+}
+
+@media (max-width:1200px){
+
+}
+@media (max-width:997px){
+    .pageFrame{
+        width: 100%;
+        padding-top: 50px;
+        flex-direction: column;
+    }
+    .contentBlock{
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+@media (max-width:768px){
+    .recruitPage{
+        padding: 50px 20px;
+    }
+}
+@media (max-width:576px){
+    .recruitPage{
+        padding: 50px 10px;
+    }
+    .pageFrame{
+        padding-top: 30px;
+    }
+}
+@media (max-width:375px){
+    
+}
+
+
+/* 主要內容CSS */
+.recruitNews{
+    width: 80%;
+    margin: auto;
+}
+.mainTitle,.subTitle{
+    color: #2B5E95;
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.mainText,.recruitNews ol{
+    font-weight: bolder;
+}
+.recruitNews ol{
+    padding-left: 20px;
+}
+.recruitNews ol li{
+    margin-bottom: 20px;
+}
+
+.mainText span{
+    color: #2B5E95;
+}
+.epilog{
+    font-weight: bolder;
+}
+
+
+
