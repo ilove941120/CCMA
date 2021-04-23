@@ -222,9 +222,9 @@
                         重金屬含量及108年食品金牌獎的肯定。
                     </div>
                     <div class="certificateImgGroup">
-                        <img src="img/index_about_img1.jpg" alt="">
-                        <img src="img/index_about_img2.png" alt="">
-                        <img src="img/index_about_img3.jpg" alt="">
+                        <img class="testImg1" src="img/index_about_img1.jpg" alt="">
+                        <img class="testImg2" src="img/index_about_img2.png" alt="">
+                        <img class="testImg3" src="img/index_about_img3.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -241,7 +241,7 @@
                     <img src="img/index_product_link_background2.png" alt="">
                 </div>
                 <div class="topSellers">
-                    <div class="topSellersTitle">
+                    <div class="topSellersTitle1">
                         Top Sellers_
                     </div>
                     <div class="topSellersSubTitle">
@@ -370,6 +370,102 @@
             if($(window).width() > 997){
                 $(".mask").hide();
                 $(".navbarListGroup").hide();
+            }
+        })
+
+        $(window).scroll(function(){
+
+            var scroH = $(document).scrollTop();  //滚动高度
+            console.log(scroH)
+            // New_主標題左滑進入 動畫
+            var x=$(".topSellersTitle").offset().top
+            if($(document).scrollTop()>(x)){
+                $(".topSellersTitle").animate(
+                    {
+                    opacity:1,
+                    left:0,
+
+                }
+                ,1000
+                )
+            }
+            // Top Sellers_主標題左滑進入 動畫
+            y=$(".topSellersTitle1").offset().top
+            if($(document).scrollTop()>(1400)){
+                $(".topSellersTitle1").animate(
+                    {
+                    opacity:1,
+                    left:0,
+                }
+                ,1000
+                )
+                
+            }
+
+            // new more案紐 動畫
+            var z=$(".newMoreButtom").offset().top
+            if($(document).scrollTop()>(z)){
+                $(".newMoreButtom").animate(
+                    {
+                    opacity:1,
+                    bottom:0,
+                    transition: "0.5s"
+                }
+                )
+                
+            }
+            // Top Sellers_ more案紐 動畫
+            var r=$(".moreButtom").offset().top
+            if($(document).scrollTop()>(r*0.7)){
+                $(".moreButtom").animate(
+                    {
+                    opacity:1,
+                    bottom:0,
+                }
+                )
+                
+            }
+            // 獎狀動畫
+            var r=$(".certificateContent").offset().top
+            if($(document).scrollTop()>(r*0.7)){
+                $(".certificateContent").animate(
+                    {
+                    opacity:1,
+                    right:0,
+                }
+                ,1000
+                ,function(){
+                    $(".testImg1").animate({
+                        opacity:1,
+                    }
+                    ,1000
+                    ,function(){
+                        $(".testImg2").animate({
+                        opacity:1,
+                    }
+                        ,1000
+                        ,function(){
+                            $(".testImg3").animate({
+                                opacity:1,
+                            })
+                        }
+
+                        )
+                }
+                )
+            }
+            )}
+            var q=$('.aboutTitle').offset().top;
+            if($(document).scrollTop()>(q*0.8)){
+                $(".aboutTitle").animate({
+                    left: 0,
+                    opacity: 1
+                },2000,function(){
+                    $(".aboutText").animate({
+                        left: 0,
+                        opacity: 1
+                    },2000)
+                })
             }
         })
 

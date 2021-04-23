@@ -4,6 +4,8 @@
     padding: 50px 200px;
     background-repeat: no-repeat;
     background-size: cover;
+    /* overflow: hidden; */
+    /* height: 500px; */
 }
 .pagecontent:nth-child(3){
     background-image: url(../img/page_background1.jpg);
@@ -13,7 +15,15 @@
     background-image: url(../img/foot_background.jpg);
 
 }
-
+.testImg1{
+    opacity: 0;
+}
+.testImg2{
+    opacity: 0;
+}
+.testImg3{
+    opacity: 0;
+}
 
 
 
@@ -229,6 +239,7 @@
     max-width: 1200px;
     height: auto;
     margin: auto;
+    margin-top: 100px;
 }
 
 .slidderShowBlock {
@@ -308,6 +319,7 @@
     max-width: 1200px;
     margin: auto;
     display: flex;
+    position: relative;
 }
 .illustrationImg{
     width: 40%;
@@ -319,7 +331,10 @@
 .certificateContent{
     width: 60%;
     display: flex;
-    position: relative;
+    position: relaative;
+    opacity: 0;
+    right: -1200px;
+    /* transition: 2s; */
 }
 .sgsLogoImg{
     width: 30%;
@@ -474,6 +489,19 @@
 .topSellersTitle{
     font-size: 48px;
     margin-bottom: 20px;
+    /* margin-right: 200px; */
+    opacity: 0;
+    position: relative;
+    left: -150px;
+
+}
+.topSellersTitle1{
+    font-size: 48px;
+    margin-bottom: 20px;
+    /* margin-right: 200px; */
+    opacity: 0;
+    position: relative;
+    left: -250px;
 }
 .topSellersSubTitle{
     width: 60%;
@@ -542,11 +570,15 @@
     padding: 5px;
     border: 1px solid #00c975;
     text-align: center;
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
 }
 .newMoreButtom i{
     font-size: 14px;
     margin-left: 5px;
 }
+
 @media (max-width:997px){
     .newMoreButtom{
         margin-top: 30px;
@@ -559,6 +591,9 @@
     padding: 5px;
     border: 1px solid #00c975;
     text-align: center;
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
 }
 .moreButtom i{
     font-size: 14px;
@@ -588,10 +623,15 @@
 .aboutTitle{
     font-size: 24px;
     margin-bottom: 20px;
+    position: relative;
+    left: -600px;
+    opacity: 0;
 }
 .aboutText{
     line-height: 30px;
-
+    position: relative;
+    left: -600px;
+    opacity: 0;
 }
 .aboutMask{
     width: 100%;
