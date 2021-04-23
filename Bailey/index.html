@@ -373,99 +373,143 @@
             }
         })
 
+        $(document).scroll(function(){
+            // New_主標題左滑進入 動畫
+            var x=$(".topSellersTitle").offset().top
+            if($(document).scrollTop()>(x-400)){
+                $(".topSellersTitle").addClass("leftIn")
+            }
+            else{
+                $(".topSellersTitle").removeClass("leftIn")
+            }
+            // Top Sellers_主標題左滑進入 動畫
+            y=$(".topSellersTitle1").offset().top
+            if($(document).scrollTop()>(1400)){
+                $(".topSellersTitle1").addClass("leftIn")
+            }
+            else{
+                $(".topSellersTitle1").removeClass("leftIn")
+            }
+
+            // new more案紐 動畫
+            var z=$(".newMoreButtom").offset().top
+            if($(document).scrollTop()>(z-1000)){
+                $(".newMoreButtom").addClass("topIn")
+            }
+            else{
+                $(".newMoreButtom").removeClass("topIn")
+            }
+            // Top Sellers_ more案紐 動畫
+            var r=$(".moreButtom").offset().top
+            if($(document).scrollTop()>(r*0.7)){
+                $(".moreButtom").addClass("topIn")
+            }
+            else{
+                $(".moreButtom").removeClass("topIn")
+            }
+            var q=$('.aboutTitle').offset().top;
+            if($(document).scrollTop()>(2200)){
+                $('.aboutTitle').addClass("textleftIn")
+                setTimeout(() => {
+                    $('.aboutText').addClass("textleftIn")
+                }, 2000);
+            }
+            else{
+                $('.aboutText').removeClass("textleftIn")
+                $('.aboutTitle').removeClass("textleftIn")
+            }
+            // 獎狀動畫
+            var r=$(".certificateContent").offset().top
+            if($(document).scrollTop()>(r*0.7)){
+                $('.certificateContent').addClass("rightIn")
+                setTimeout(() => {
+                    $(".testImg1").addClass("opacityIn")
+                    setTimeout(() => {
+                        $(".testImg2").addClass("opacityIn")
+                            setTimeout(() => {
+                                $(".testImg3").addClass("opacityIn")
+                            }, 1500);
+                    }, 1500);
+                }, 1500);
+            }
+            else{
+                $('.certificateContent').removeClass("rightIn")
+                $(".testImg1").removeClass("opacityIn")
+                $(".testImg2").removeClass("opacityIn")
+                $(".testImg3").removeClass("opacityIn")
+
+            }
+        })
+
+        // 視窗滾動動作
         $(window).scroll(function(){
 
             var scroH = $(document).scrollTop();  //滚动高度
             console.log(scroH)
             // New_主標題左滑進入 動畫
             var x=$(".topSellersTitle").offset().top
-            if($(document).scrollTop()>(x)){
-                $(".topSellersTitle").animate(
-                    {
-                    opacity:1,
-                    left:0,
-
-                }
-                ,1000
-                )
+            if($(document).scrollTop()>(x-400)){
+                $(".topSellersTitle").addClass("leftIn")
+            }
+            else{
+                $(".topSellersTitle").removeClass("leftIn")
             }
             // Top Sellers_主標題左滑進入 動畫
             y=$(".topSellersTitle1").offset().top
             if($(document).scrollTop()>(1400)){
-                $(".topSellersTitle1").animate(
-                    {
-                    opacity:1,
-                    left:0,
-                }
-                ,1000
-                )
-                
+                $(".topSellersTitle1").addClass("leftIn")
+            }
+            else{
+                $(".topSellersTitle1").removeClass("leftIn")
             }
 
             // new more案紐 動畫
             var z=$(".newMoreButtom").offset().top
-            if($(document).scrollTop()>(z)){
-                $(".newMoreButtom").animate(
-                    {
-                    opacity:1,
-                    bottom:0,
-                    transition: "0.5s"
-                }
-                )
-                
+            if($(document).scrollTop()>(z-1000)){
+                $(".newMoreButtom").addClass("topIn")
+            }
+            else{
+                $(".newMoreButtom").removeClass("topIn")
             }
             // Top Sellers_ more案紐 動畫
             var r=$(".moreButtom").offset().top
             if($(document).scrollTop()>(r*0.7)){
-                $(".moreButtom").animate(
-                    {
-                    opacity:1,
-                    bottom:0,
-                }
-                )
-                
+                $(".moreButtom").addClass("topIn")
+            }
+            else{
+                $(".moreButtom").removeClass("topIn")
+            }
+            var q=$('.aboutTitle').offset().top;
+            if($(document).scrollTop()>(2200)){
+                $('.aboutTitle').addClass("textleftIn")
+                setTimeout(() => {
+                    $('.aboutText').addClass("textleftIn")
+                }, 2000);
+            }
+            else{
+                $('.aboutText').removeClass("textleftIn")
+                $('.aboutTitle').removeClass("textleftIn")
             }
             // 獎狀動畫
             var r=$(".certificateContent").offset().top
             if($(document).scrollTop()>(r*0.7)){
-                $(".certificateContent").animate(
-                    {
-                    opacity:1,
-                    right:0,
-                }
-                ,1000
-                ,function(){
-                    $(".testImg1").animate({
-                        opacity:1,
-                    }
-                    ,1000
-                    ,function(){
-                        $(".testImg2").animate({
-                        opacity:1,
-                    }
-                        ,1000
-                        ,function(){
-                            $(".testImg3").animate({
-                                opacity:1,
-                            })
-                        }
-
-                        )
-                }
-                )
+                $('.certificateContent').addClass("rightIn")
+                setTimeout(() => {
+                    $(".testImg1").addClass("opacityIn")
+                    setTimeout(() => {
+                        $(".testImg2").addClass("opacityIn")
+                            setTimeout(() => {
+                                $(".testImg3").addClass("opacityIn")
+                            }, 1500);
+                    }, 1500);
+                }, 1500);
             }
-            )}
-            var q=$('.aboutTitle').offset().top;
-            if($(document).scrollTop()>(q*0.8)){
-                $(".aboutTitle").animate({
-                    left: 0,
-                    opacity: 1
-                },2000,function(){
-                    $(".aboutText").animate({
-                        left: 0,
-                        opacity: 1
-                    },2000)
-                })
+            else{
+                $('.certificateContent').removeClass("rightIn")
+                $(".testImg1").removeClass("opacityIn")
+                $(".testImg2").removeClass("opacityIn")
+                $(".testImg3").removeClass("opacityIn")
+
             }
         })
 

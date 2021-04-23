@@ -331,7 +331,7 @@
 .certificateContent{
     width: 60%;
     display: flex;
-    position: relaative;
+    position: relative;
     opacity: 0;
     right: -1200px;
     /* transition: 2s; */
@@ -490,19 +490,24 @@
     font-size: 48px;
     margin-bottom: 20px;
     /* margin-right: 200px; */
-    opacity: 0;
     position: relative;
     left: -150px;
+    opacity: 0;
 
+    
 }
+
+
+
 .topSellersTitle1{
     font-size: 48px;
     margin-bottom: 20px;
     /* margin-right: 200px; */
     opacity: 0;
     position: relative;
-    left: -250px;
+    left: -150px;
 }
+
 .topSellersSubTitle{
     width: 60%;
     border-bottom: 5px solid green;
@@ -579,6 +584,7 @@
     margin-left: 5px;
 }
 
+
 @media (max-width:997px){
     .newMoreButtom{
         margin-top: 30px;
@@ -641,3 +647,97 @@
     top: 0;
     left: 0;
 }
+
+.textleftIn{
+    animation: textleftIn 1s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes textleftIn {
+    0%{
+        left: -600px;
+        opacity: 0;
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+    
+}
+
+.opacityIn{
+    animation: opacityIn 1s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes opacityIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.topIn{
+    animation:  topIn 2s 1;
+    animation-fill-mode:forwards;
+}
+
+@keyframes topIn {
+    0%{
+        opacity: 0;
+        bottom:-100px;
+    }
+    100%{
+        opacity: 1;
+        bottom:0
+    }
+}
+.leftIn{
+    animation: leftIn 2s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes leftIn {
+    0%{
+        opacity: 0;
+        left:-150px;
+        color: red;
+    }
+    100%{
+        opacity: 1;
+        left: 0;
+        color: blue;
+    }
+    
+}
+.lefout{
+    animation: lefout 2s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes lefout {
+    0%{
+        opacity: 1;
+        left:0px;
+    }
+    100%{
+        opacity: 0;
+        left: -150px;
+    }
+    
+}
+.rightIn{
+    animation: rightIn 1s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes rightIn {
+    0%{
+        right: -1200px;
+        opacity: 0;
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+    
+}
+
+

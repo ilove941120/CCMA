@@ -1,0 +1,123 @@
+<!-- 
+    1.讀取慢問題:
+        .env設定錯誤,app.baseURL開啟且設定到別的路徑
+    2.更改CSS沒有作用:
+        有暫存檔問題,可以用ctrl+shift+R,更新畫面就會洗掉了
+    3.灌資料表:
+        核心設出一個共用的值來儲存資料表
+      灌不同的資料表:
+        核心利用unset() 調用完成後銷除
+    4.跳轉分頁問題:
+        首先會進入首頁是因為讀取到 App/Confing/Routes.php 中設定Load_page::welcome;
+        讀取Load_page然後啟動function welcome()
+        welecome 裡面有 呼叫顯示 (head,welcome.foot)
+    5.資料庫操作
+        搜尋:
+            1.可以利用foreach() 產生資料
+            2.->like:在資料表中的欄位找出有比對字的資料
+            3.->orderBy:排序方式
+            4.->limit(10):限制顯示數量
+        新增:
+            1.->insert($data):新增一個$data的物件或陣列
+            目前問題:跳轉到新增的分頁新贈項目
+            測試:在當前頁面製作表格,送出後在當前頁面產生剛新增的項目
+            
+
+        修改:
+            1.->update($data):選取欄位替換值
+       
+        刪除:
+            1.->delete(['cTitle' => 'My title']):刪除欄位'Title' = 'My title'的資料
+
+    2021/04/19問題:
+    1.資料傳送出去接到 function index
+    A:主要原因是Form action="" 空值關係,絕對不可以空值!
+    2.replace() 比較像增加資料
+    A:replace()會去比對刪除 所以最後insert() 就變成新增資料了,所以通常用updat()語法去更新資料
+    3.我要怎麼進去 add 或是 index
+    A:觀看網站不會有後台登入的入口,後臺登入需要另外做一個連結,因次可以另外把後臺的資料放在一個資料夾然後再設定連接的class/function
+    4.後台表單的連結:
+    A:Backend/Date/add == controllers到Backend找到Date資料夾立面的add函式
+    5.新增項目有完成,但目前是跳轉到同一頁,要分開,資料顯示自己一頁,新增頁面自己一頁
+    A:路徑規則中 我預設了 login會得到Backend/Date/show 資料夾/Class/函式,因此超連結到其它後端畫面 就是 echo base_url()/後端資料夾/Class/函式
+      base_url()是預測首頁網址
+    6.讀取頁面ID已經設好了,現在要如何取得這個ID,並讓顯示畫面調出該ID下的資料
+
+    2021/04/20:
+    1.如何取片段:URI Segments
+    2.建立片段 :URL Helper
+    3.GET POST 方式:IncomingRequest Class
+    2.我只會用foreach去把值拿出來,但我只要單一個值怎麼拿
+    2021/04/21:
+    1.我目前有個登入頁面了,然後我要把登入頁面的值傳送給自己確認是不是帳密,是就跳轉
+    2.form表單的action=""裡面要設什麼
+    A:傳送到檢查方式檢查成功進入後台 失敗就顯示錯誤
+    3.目前要記住帳密還要做登出動作
+    2021/04/21:
+    1.setPath() 是做什麼用的?
+    2.今天目標:要做出一個總後台頁面裡面有關於我們 最新消息 選項 點最新消息 可以到最新消息的頁面有資料表 
+      可以新增修改刪除 點關於我們可以進到關於我們的頁面可以修改內容
+    目前問題:
+    目前問題:
+    目前問題:
+
+
+    流程是
+    打login1會進去到 date/loginPage
+    帳號密碼輸入完成後傳送action設定的路徑
+    這個路徑要設去檢查方法做檢查 檢查成功轉到 後臺首頁
+
+    後臺流程
+    有一個登入畫面 進去後 各個頁面的編輯可以點集編輯
+
+
+    分頁流程
+    1.顯示頁面 會有一個呼叫 $pagination_link,$pagination_link來自controller News/ilist 的$content['pagination_link']
+    $content['pagination_link'] 有這個代表 方法她在echo view的時候有傳 $content 過去 所以過去他要叫出來就變成 $pagination_link
+    就可以產生分頁列
+    2.$content['pagination_link']如何產生
+    $content['pagination_link'] = $this->pagination->makeLinks($current_page, $limit, $total_rows, 'default_full', 7);
+    makeLinks()手動創建鏈接，該方法分別將當前頁面，每頁的結果數和項目總數作為第一個，第二個和第三個參數：
+    3.setPath($base_url_segment) 要做什麼用的? 
+    $base_url_segment = 'ctr/news/ilist/'. $t1 .'/'. $begin_date .'/'. $last_date;
+    setPath($base_url_segment) = setPath($base_url_segment)
+    A 應該是設置路徑用的
+
+
+    登入登出
+    1.先做出一個輸入畫面
+    2.把輸入的帳密傳送到 Login/_check_login 檢查
+    3.檢查成功 把帳密存入session("參數","login") 把跳轉進後台失敗回到登入畫面
+      session("參數","名稱(自己設定)") 意思是 session 的參數 會等於 login 參數和login都是隨意命名,然後這個session會整個網站都會通用且是暫存狀態
+      時間到會自己消除
+    4.接這在設立一個方式 _check_login() 檢查每個頁面的 session 是不是等於 login,不是就跳轉道登入畫面 並利用die()停止後續動作 這個die()是關鍵!!!!!
+      如果沒有停止他會繼續動作就會造成你還是在同一頁不會跳到登入頁
+    
+
+    分頁
+    目前CI4是採用公司的其核心有被改過,所以直接套用公司的 主要放入system資料夾 index.php ,.htaccess 三個東西
+    $this->pagination-> 意思是pagination物件
+    setSegment() 意思網段
+    setPath() 預設 base_url() 就是index.php 
+    $current_page = $this->uri->setSilent()->getSegment(7,1); 這個意思是當前頁面
+    $limt=n 顯示幾個
+    $data_row = ($current_page - 1) * $limit; 從第幾個開始
+    findAll() 語法 = findAll(幾筆,有幾頁)
+
+    Config/Pager 下可以設定分頁樣式
+    設出一個名稱 =>指定到版型的路徑
+    7 意思是加在第幾個片段
+    makeLinks($current_page, $limit, $total_rows, 'default_full', 7);
+    製作連結
+    $current_page       這個意思是當前頁面
+    $limt               顯示幾個
+    $total_rows         總數
+    'default_full'      預設分頁樣式
+    7                   意思是加在第幾個片段
+    (CM)V作法
+    $query = $builder->get('news',$limit, $data_row);
+    get('資料表',幾筆,起始位置)
+
+    setSilent()放
+ -->
+
