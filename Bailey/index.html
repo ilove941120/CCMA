@@ -207,28 +207,29 @@
         </div>
 
         <!-- certificateBlock -->
-        <div class="pagecontent">
-            <div class="certificateBlock">
-                <div class="illustrationImg">
-                    <img src="img/30235296_m.jpg" alt="">
-                </div>
-                <div class="certificateContent">
-                    <div class="sgsLogoImg">
-                        <img src="img/index_about_right_img.png" alt="">
+        <div class="bigBlock">
+            <div class="pagecontent1">
+                <div class="certificateBlock">
+                    <div class="illustrationImg">
+                        <img src="img/30235296_m.jpg" alt="">
                     </div>
-                    <div class="certificateText">
-                        通過SGS檢驗無農藥殘留、
-                        <br>
-                        重金屬含量及108年食品金牌獎的肯定。
-                    </div>
-                    <div class="certificateImgGroup">
-                        <img class="testImg1" src="img/index_about_img1.jpg" alt="">
-                        <img class="testImg2" src="img/index_about_img2.png" alt="">
-                        <img class="testImg3" src="img/index_about_img3.jpg" alt="">
+                    <div class="certificateContent">
+                        <div class="sgsLogoImg">
+                            <img src="img/index_about_right_img.png" alt="">
+                        </div>
+                        <div class="certificateText">
+                            通過SGS檢驗無農藥殘留、
+                            <br>
+                            重金屬含量及108年食品金牌獎的肯定。
+                        </div>
+                        <div class="certificateImgGroup">
+                            <img class="testImg1" src="img/index_about_img1.jpg" alt="">
+                            <img class="testImg2" src="img/index_about_img2.png" alt="">
+                            <img class="testImg3" src="img/index_about_img3.jpg" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- top sellers Mode -->
@@ -373,74 +374,7 @@
             }
         })
 
-        $(document).scroll(function(){
-            // New_主標題左滑進入 動畫
-            var x=$(".topSellersTitle").offset().top
-            if($(document).scrollTop()>(x-400)){
-                $(".topSellersTitle").addClass("leftIn")
-            }
-            else{
-                $(".topSellersTitle").removeClass("leftIn")
-            }
-            // Top Sellers_主標題左滑進入 動畫
-            y=$(".topSellersTitle1").offset().top
-            if($(document).scrollTop()>(1400)){
-                $(".topSellersTitle1").addClass("leftIn")
-            }
-            else{
-                $(".topSellersTitle1").removeClass("leftIn")
-            }
-
-            // new more案紐 動畫
-            var z=$(".newMoreButtom").offset().top
-            if($(document).scrollTop()>(z-1000)){
-                $(".newMoreButtom").addClass("topIn")
-            }
-            else{
-                $(".newMoreButtom").removeClass("topIn")
-            }
-            // Top Sellers_ more案紐 動畫
-            var r=$(".moreButtom").offset().top
-            if($(document).scrollTop()>(r*0.7)){
-                $(".moreButtom").addClass("topIn")
-            }
-            else{
-                $(".moreButtom").removeClass("topIn")
-            }
-            var q=$('.aboutTitle').offset().top;
-            if($(document).scrollTop()>(2200)){
-                $('.aboutTitle').addClass("textleftIn")
-                setTimeout(() => {
-                    $('.aboutText').addClass("textleftIn")
-                }, 2000);
-            }
-            else{
-                $('.aboutText').removeClass("textleftIn")
-                $('.aboutTitle').removeClass("textleftIn")
-            }
-            // 獎狀動畫
-            var r=$(".certificateContent").offset().top
-            if($(document).scrollTop()>(r*0.7)){
-                $('.certificateContent').addClass("rightIn")
-                setTimeout(() => {
-                    $(".testImg1").addClass("opacityIn")
-                    setTimeout(() => {
-                        $(".testImg2").addClass("opacityIn")
-                            setTimeout(() => {
-                                $(".testImg3").addClass("opacityIn")
-                            }, 1500);
-                    }, 1500);
-                }, 1500);
-            }
-            else{
-                $('.certificateContent').removeClass("rightIn")
-                $(".testImg1").removeClass("opacityIn")
-                $(".testImg2").removeClass("opacityIn")
-                $(".testImg3").removeClass("opacityIn")
-
-            }
-        })
-
+        
         // 視窗滾動動作
         $(window).scroll(function(){
 
@@ -480,35 +414,28 @@
                 $(".moreButtom").removeClass("topIn")
             }
             var q=$('.aboutTitle').offset().top;
-            if($(document).scrollTop()>(2200)){
+            if($(document).scrollTop()>(q-400)){
                 $('.aboutTitle').addClass("textleftIn")
-                setTimeout(() => {
-                    $('.aboutText').addClass("textleftIn")
-                }, 2000);
+                $('.aboutText').addClass("textleftIn2s")
             }
             else{
-                $('.aboutText').removeClass("textleftIn")
                 $('.aboutTitle').removeClass("textleftIn")
+                $('.aboutText').removeClass("textleftIn2s")
             }
             // 獎狀動畫
-            var r=$(".certificateContent").offset().top
-            if($(document).scrollTop()>(r*0.7)){
+            // var r=$(".certificateContent").offset().top
+            var r=$(".certificateImgGroup").offset().top
+            if($(document).scrollTop()>(r-800)){
                 $('.certificateContent').addClass("rightIn")
-                setTimeout(() => {
-                    $(".testImg1").addClass("opacityIn")
-                    setTimeout(() => {
-                        $(".testImg2").addClass("opacityIn")
-                            setTimeout(() => {
-                                $(".testImg3").addClass("opacityIn")
-                            }, 1500);
-                    }, 1500);
-                }, 1500);
+                $(".testImg1").addClass("opacityIn")
+                $(".testImg2").addClass("opacityIn4s")
+                $(".testImg3").addClass("opacityIn6s")
             }
             else{
                 $('.certificateContent').removeClass("rightIn")
                 $(".testImg1").removeClass("opacityIn")
-                $(".testImg2").removeClass("opacityIn")
-                $(".testImg3").removeClass("opacityIn")
+                $(".testImg2").removeClass("opacityIn4s")
+                $(".testImg3").removeClass("opacityIn6s")
 
             }
         })

@@ -15,6 +15,7 @@
     background-image: url(../img/foot_background.jpg);
 
 }
+
 .testImg1{
     opacity: 0;
 }
@@ -315,6 +316,16 @@
 
 
 /* certificateBlock */
+.bigBlock{
+    height: 500px;
+    /* background-color: #00c975; */
+    overflow: hidden;
+}
+.pagecontent1{
+    height: 400px;
+    display: flex;
+    background-image: url(../img/foot_background.jpg);
+}
 .certificateBlock{
     max-width: 1200px;
     margin: auto;
@@ -346,16 +357,28 @@
     width: 100%;
 }
 .certificateImgGroup{
+    width: 700px;
+    height: 400px;
     position: absolute;
     bottom: -150px;
     z-index: 99;
 }
-.certificateImgGroup img{
+/* .certificateImgGroup img{
     width:40%;
-}
-.certificateImgGroup img:nth-child(2){
+} */
+/* .certificateImgGroup img:nth-child(2){
     width: unset;
-    height: 200px;
+} */
+.testImg1{
+    width: 30%;
+}
+.testImg2{
+    width: 15%;
+    height: 250px;
+}
+.testImg3{
+    width: 40%;
+    height: 380px;
 }
 
 @media (max-width:1200px){
@@ -652,6 +675,11 @@
     animation: textleftIn 1s 1;
     animation-fill-mode:forwards;
 }
+.textleftIn2s{
+    animation: textleftIn 1s 1;
+    animation-fill-mode:forwards;
+    animation-delay: 1s;
+}
 @keyframes textleftIn {
     0%{
         left: -600px;
@@ -663,10 +691,51 @@
     }
     
 }
-
-.opacityIn{
+/* .testImg1{
     animation: opacityIn 1s 1;
     animation-fill-mode:forwards;
+    animation-delay:2s;
+}
+.testImg2{
+    animation: opacityIn 1s 1;
+    animation-fill-mode:forwards;
+    animation-delay:2s;
+}
+.testImg3{
+    animation: opacityIn 1s 1;
+    animation-fill-mode:forwards;
+    animation-delay:2s;
+} */
+.opacityIn{
+    animation: opacityIn 4s 1;
+    animation-fill-mode:forwards;
+    animation-delay:2s;
+}
+@keyframes opacityIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.opacityIn4s{
+    animation: opacityIn 3s 1;
+    animation-fill-mode:forwards;
+    animation-delay:4s;
+}
+@keyframes opacityIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.opacityIn6s{
+    animation: opacityIn 3s 1;
+    animation-fill-mode:forwards;
+    animation-delay:6s;
 }
 @keyframes opacityIn {
     0%{
@@ -700,12 +769,10 @@
     0%{
         opacity: 0;
         left:-150px;
-        color: red;
     }
     100%{
         opacity: 1;
         left: 0;
-        color: blue;
     }
     
 }

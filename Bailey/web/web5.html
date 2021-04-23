@@ -83,7 +83,7 @@
         </div>
         <div class="pagecontent">
             <div class="newGroup">
-                <div class="newItem">
+                <div class="newItem other1">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-                <div class="newItem">
+                <div class="newItem other2">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-                <div class="newItem">
+                <div class="newItem other3">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -128,7 +128,7 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-                <div class="newItem">
+                <div class="newItem other4">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-                <div class="newItem">
+                <div class="newItem other5">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-                <div class="newItem">
+                <div class="newItem other6">
                     <div class="newImg">
                         <img src="../img/newImg.jpg" alt="">
                     </div>
@@ -170,7 +170,6 @@
                     </div>
                     <div class="newMask"></div>
                 </div>
-
             </div>
 
         </div>
@@ -197,5 +196,22 @@
 
     <script src="../js/jquery-3.5.1.min.js"></script>
     <script src="../js/header.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            var newGroupTop = $(".newGroup").offset().top;
+            var newItemTop =$(".newItem").offset().top;
+            console.log(newGroupTop)
+            console.log(newItemTop)
+            if(newItemTop>=newGroupTop){
+                $(".other1").addClass("leftIn0");
+                $(".other2").addClass("leftIn1");
+                $(".other3").addClass("leftIn2");
+                $(".other4").addClass("leftIn3");
+                $(".other5").addClass("leftIn4");
+                $(".other6").addClass("leftIn5");
+            }
+        })
+    </script>
 </body>
 </html>
