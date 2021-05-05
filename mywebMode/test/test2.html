@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100%;
+            height: 60vw;
+            background-color: cornflowerblue;
+            background-image: url(../img/test1.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .box2{
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(100, 232, 237);
+        }
+        .boxItem{
+            width: 50px;
+            height: 50px;
+            background-color: crimson;
+            position: relative;
+            top: 80%;
+            left: 45%;
+        }
+        .boxItem1{
+            width: 50px;
+            height: 50px;
+            background-color: rgb(190, 220, 20);
+            position: relative;
+            top: 20%;
+            transform: translate(500px);
+            opacity: 0;
+        }
+        /* .other1{
+            left: -500px;
+            opacity: 0;
+        } */
+        .leftIn{
+            animation: leftIn 2s 1;
+            animation-fill-mode: forwards;
+
+        }
+        @keyframes leftIn{
+            0%{
+                opacity: 0;
+                transform: translate(-500px);
+
+
+            }
+            100%{
+                transform: translate(300px);
+
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="boxItem"></div>
+    </div>
+    <div class="box2">
+        <div class="boxItem1"></div>
+    </div>
+    <div class="box2"></div>
+    <div class="box2"></div>
+    <div class="box2"></div>
+    
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script>
+        // 載入的時候觸發
+        $(document).ready(function(){
+            var windowTop = $(window).height()
+            var windowScrollTop = $(window).scrollTop()
+            var boxItemTop = $(".boxItem").offset().top
+            var boxItem1Top = $(".boxItem1").offset().top
+
+            var windowToatalTop = windowTop + windowScrollTop
+            console.log("紅色盒子高度"+boxItemTop)
+            console.log("滾動高度"+windowToatalTop)
+            if(windowToatalTop > boxItemTop){
+                $(".boxItem").addClass("leftIn")
+            }
+            else{
+                $(".boxItem").removeClass("leftIn")
+            }
+            if(windowToatalTop > boxItem1Top){
+                $(".boxItem1").addClass("leftIn")
+            }
+            else{
+                $(".boxItem1").removeClass("leftIn")
+            }
+        })
+
+    </script>
+</body>
+</html>
