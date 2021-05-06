@@ -144,38 +144,34 @@
         var phoneCheck = /^[0][9]\d{8}$/
         var emailCheck = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         $(".submitFormButton").click(function(){
-            if($("#name").val() =="" | chineseNameCheck.test($("#name").val()) == false){
-                $("#name").addClass("inputWatermark")
-                $("#name").val("名字不符合格式")
+
+            if($("#name").val() == ""){
+                alert("姓名欄位不可以為空")
+                return false;
             }
-            if($("#phone").val() =="" | phoneCheck.test($("#phone").val()) == false){
-                $("#phone").addClass("inputWatermark")
-                $("#phone").val("電話不符合格式")
+            if(chineseNameCheck.test($("#name").val()) == false){
+                alert("名字不符合格式")
+                return false;
             }
-            if($("#email").val() =="" | emailCheck.test($("#email").val()) == false){
-                $("#email").addClass("inputWatermark")
-                $("#email").val("信箱不符合格式")
+            if($("#phone").val() == ""){
+                alert("電話欄位不可以為空")
+                return false;
+            }
+            if(phoneCheck.test($("#phone").val()) == false){
+                alert("電話不符合格式")
+                return false;
+            }
+            if($("#email").val() == ""){
+                alert("信箱欄位不可以為空")
+                return false;
+            }
+            if(emailCheck.test($("#email").val()) == false){
+                alert("信箱不符合格式")
+                return false;
             }
             else {
                 $(".contactForm").submit();
-            }
-        })
-        $("#name").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#phone").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#email").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
+                alert("表單填寫正確")
             }
         })
 

@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+    -webkit-tap-highlight-color:transparent;
+
+}
+body{
+    margin: 0;
+    font-family: "微軟正黑體";
+}
+a{
+    text-decoration: none;
+    color: unset;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);  
+    -webkit-user-select: none;  
+    -moz-user-focus: none;  
+    -moz-user-select: none; 
+}
+/* a:hover{
+    color: unset;
+}
+a:active{
+    color: unset;
+} */
+
+.inputWatermark{
+    color: rgba(165, 42, 42, 0.719);
+}
+.cleatBoth{
+    clear: both;
+}
+
+.color{
+    /* 淡 */
+
+    color: #80715C;
+    background-color: #80715C;
+    border: 1px solid #867A6E;
+    border-bottom: 1px solid #867A6E;
+
+    /* 深 */
+
+    color: #5F411A;
+
+    color: #8B7762;
+
+}
+
+.fontSiz{
+    font-size: 48px;
+    font-size: 36px;
+    font-size: 24px;
+    font-size: 18px;
+    font-size: 14px;
+    font-size: 12px;
+}
+.spacing{
+    /* 向下 */
+    margin-bottom: 20px;
+    /* 內縮 */
+    padding: 5px;
+}
+.spin90deg1{
+    transform: rotate(90deg);
+    line-height: 25px;
+    padding-left: 5px;
+}
+
+.focus{
+    color: #D04000;
+}
+.border{
+    border: 1px solid #000000;
+    border-top: 0px solid #000000;
+    border-bottom: 0px solid #000000;
+    border-left: 0px solid #000000;
+    border-right: 0px solid #000000;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+.bgWhite{
+    background-color: white;
+}
+.bgRed{
+    background-color: red;
+}
+.bgBlue{
+    background-color: blue;
+}
+
+
+
+@media (max-width:1400px){
+    
+}
+@media (max-width:1200px){
+    
+}
+@media (max-width:997px){
+    
+}
+@media (max-width:768px){
+    
+}
+@media (max-width:576px){
+    
+}
+@media (max-width:376px){
+    
+}

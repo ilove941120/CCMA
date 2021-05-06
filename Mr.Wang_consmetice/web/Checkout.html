@@ -454,82 +454,66 @@
         var emailCheck = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
  
         $(".orderCompleted").click(function(){
-            if($("#orderName").val() =="" | chineseNameCheck.test($("#orderName").val()) == false){
-                $("#orderName").addClass("inputWatermark")
-                $("#orderName").val("名字不符合格式")
+            // ------訂購人驗證-------
+            if($("#orderName").val() == ""){
+                alert("姓名欄位不可以為空")
                 return false;
             }
+            if(chineseNameCheck.test($("#orderName").val()) == false){
+                alert("名字不符合格式")
+                return false;
+            }
+            if($("#orderPhone").val() == ""){
+                alert("電話欄位不可以為空")
+                return false;
+            }
+            if(phoneCheck.test($("#orderPhone").val()) == false){
+                alert("電話不符合格式")
+                return false;
+            }
+            if($("#orderEmail").val() == ""){
+                alert("信箱欄位不可以為空")
+                return false;
+            }
+            if(emailCheck.test($("#orderEmail").val()) == false){
+                alert("信箱不符合格式")
+                return false;
+            }
+
+            // ------收件人驗證-------
+            if($("#consigneeName").val() == ""){
+                alert("姓名欄位不可以為空")
+                return false;
+            }
+            if(chineseNameCheck.test($("#consigneeName").val()) == false){
+                alert("名字不符合格式")
+                return false;
+            }
+            if($("#consigneePhone").val() == ""){
+                alert("電話欄位不可以為空")
+                return false;
+            }
+            if(phoneCheck.test($("#consigneePhone").val()) == false){
+                alert("電話不符合格式")
+                return false;
+            }
+            if($("#consigneeEmail").val() == ""){
+                alert("信箱欄位不可以為空")
+                return false;
+            }
+            if(emailCheck.test($("#consigneeEmail").val()) == false){
+                alert("信箱不符合格式")
+                return false;
+            }
+
             
-            if($("#orderPhone").val() =="" | phoneCheck.test($("#orderPhone").val()) == false){
-                $("#orderPhone").addClass("inputWatermark")
-                $("#orderPhone").val("電話不符合格式")
-                return false;
-            }
-            if($("#orderEmail").val() =="" | emailCheck.test($("#orderEmail").val()) == false){
-                $("#orderEmail").addClass("inputWatermark")
-                $("#orderEmail").val("信箱不符合格式")
-                return false;
-            }
-            if($("#consigneeName").val() =="" | chineseNameCheck.test($("#consigneeName").val()) == false){
-                $("#consigneeName").addClass("inputWatermark")
-                $("#consigneeName").val("名字不符合格式")
-                return false;
-            }
-            
-            if($("#consigneePhone").val() =="" | phoneCheck.test($("#consigneePhone").val()) == false){
-                $("#consigneePhone").addClass("inputWatermark")
-                $("#consigneePhone").val("電話不符合格式")
-                return false;
-            }
-            if($("#consigneeEmail").val() =="" | emailCheck.test($("#consigneeEmail").val()) == false){
-                $("#consigneeEmail").addClass("inputWatermark")
-                $("#consigneeEmail").val("信箱不符合格式")
-                return false;
-            }
            
             else {
+                alert("表單填寫正確")
                 $(".clientForm").submit();
             }
         })
 
-        $("#orderName").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#orderPhone").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#orderEmail").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-
-        $("#consigneeName").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#consigneePhone").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        $("#consigneeEmail").click(function(){
-            if($(this).hasClass("inputWatermark")){
-                $(this).val("")
-                $(this).removeClass("inputWatermark")
-            }
-        })
-        
         
     </script>
 

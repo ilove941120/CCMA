@@ -1,0 +1,156 @@
+/* 共通 css開始  */
+html{
+    overflow-x: hidden;
+}
+body{
+	font-family: "微軟正黑體";
+	line-height: 1.5em;
+	margin:0;
+    overflow-x: hidden;
+}
+
+a{
+	text-decoration:none;
+	outline: none;
+	hlbr:expression(this.onFocus=this.blur());		
+}
+
+a:hover,a:focus{
+    text-decoration: none;
+    outline: none;
+}
+
+a img{
+	border:none;
+}
+:focus{
+    outline: none;
+}
+
+
+/* sass */
+:root{
+
+    --gs_ilist_0002_color_0001:#000;
+    --gs_ilist_0002_color_0002:red;
+    --gs_ilist_0002_color_0003:#fff;
+
+
+    --gs_ilist_0002_fontSize_0001:1.3em;
+    --gs_ilist_0002_fontSize_0002:18px;
+
+    --gs_ilist_0002_borderWeidth_0001:0 0 1px 0;
+    --gs_ilist_0002_borderWeidth_0002:1px;
+    --gs_ilist_0002_borderColor_0001:#bfbfbf;
+    --gs_ilist_0002_borderColor_0002:#000;
+    --gs_ilist_0002_borderStyle_0001:solid;
+
+
+    --gs_ilist_0002_backgroundColor_0001:#ffe5e5;
+    --gs_ilist_0002_backgroundColor_0002:red;
+
+
+}
+/* sass */
+
+.news_list{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0;
+    /* border-bottom: 1px solid #bfbfbf;
+    font-size: 1.3em;
+    color: #000; */
+    font-weight: 600;
+    font-size: var(--gs_ilist_0002_fontSize_0001);
+    color: var(--gs_ilist_0002_color_0001);
+    border-width: var(--gs_ilist_0002_borderWeidth_0001);
+    border-color: var(--gs_ilist_0002_borderColor_0001);
+    border-style: var(--gs_ilist_0002_borderStyle_0001);
+}
+
+.news_list_date{
+    padding: 6px 6px;
+    /* background: #ffe5e5; */
+    background: var(--gs_ilist_0002_backgroundColor_0001);
+
+}
+
+.news_list_title{
+    padding: 0 10px;
+    transition: all 0.4s ease-in-out;
+}
+
+.news_list:hover .news_list_date{
+    /* color: #000; */
+    color: var(--gs_ilist_0002_color_0001);
+
+}
+
+.news_list:hover .news_list_title{
+    /* color: red; */
+    color: var(--gs_ilist_0002_color_0002);
+
+    transform: translateX(10px);
+}
+
+.news_list:last-child{
+    border-bottom: none;
+}
+
+/* 分頁 */
+.pagination{
+	width: 100%;
+	padding: 10px 0;
+	clear: both;
+	text-align: center;
+	background: none;
+	box-shadow: none;
+	margin: 0;
+}
+
+.pagination a{
+	padding: 0.3em 0.7em;
+	background: none;
+	/* color: #000; */
+	/* font-size: 18px; */
+	margin: 0 0.1em;
+	/* border: 1px solid #000; */
+	border-radius: 5px;
+	transition: all 0.2s ease-in-out;
+	display: inline-block;
+    color: var(--gs_ilist_0002_color_0001);
+    font-size: var(--gs_ilist_0002_fontSize_0002);
+    border-width: var(--gs_ilist_0002_borderWeidth_0002);
+    border-color: var(--gs_ilist_0002_borderColor_0002);
+    border-style: var(--gs_ilist_0002_borderStyle_0001);
+
+
+}
+
+.pagination strong{
+	padding: 0.3em 0.7em;
+	color: #FFF;
+	margin: 0.1em;
+	/* font-size: 18px;
+	border: 1px solid #000;
+	background: #f00; */
+	border-radius: 5px;
+	transition: all 0.2s ease-in-out;
+	display: inline-block;
+    font-size: var(--gs_ilist_0002_fontSize_0002);
+    background: var(--gs_ilist_0002_backgroundColor_0002);
+    border-width: var(--gs_ilist_0002_borderWeidth_0002);
+    border-color: var(--gs_ilist_0002_borderColor_0002);
+    border-style: var(--gs_ilist_0002_borderStyle_0001);
+
+
+}
+
+.pagination a:hover, .pagination strong:hover{
+	/* color: #fff;
+	background: #f00; */
+    color: var(--gs_ilist_0002_color_0003);
+    background: var(--gs_ilist_0002_backgroundColor_0002);
+}

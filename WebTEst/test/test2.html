@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/setUp.css">
+  <link rel="stylesheet" href="../css/test2.css">
+</head>
+<body>
+  <!-- 點擊出現 互動視窗  -->
+
+
+  <div class="Viewbuttom">點擊</div>
+  <div class="ViewModeBlock">
+    <div class="ViewMode">
+      <div class="Viewhead">
+        <div class="ViewTitle">Hello</div>
+      </div>
+      <div class="ViewContent">
+        <div class="ViewText">這是一個互動視窗歐</div>
+      </div>
+      <div class="ViewFoot">
+        這裡是互動視窗Foot
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="../js/jquery-3.5.1.min.js"></script>
+  <script>
+    $(".Viewbuttom").on("click",function(){
+        $(".ViewModeBlock").addClass("viewActive")
+    })
+  </script>
+
+
+</body>
+</html>
