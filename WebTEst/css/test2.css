@@ -1,0 +1,54 @@
+.Viewbuttom{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    margin-top: 50px;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Viewbuttom:hover{
+    background-color: brown;
+    color: white;
+}
+
+.ViewModeBlock{
+    width: 100%;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.637);
+    border: 1px solid rgba(128, 128, 128, 0.541);
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+.ViewMode{
+    width: 80%;
+    padding: 50px;
+    background-color: white;
+
+
+}
+.Viewhead{
+    width: 100%;
+    height: 30px;
+    border-bottom:2px solid black ;
+}
+.ViewContent{
+    width: 100%;
+    height: 300px;
+}
+.ViewFoot{
+    width: 100%;
+    height: 70px;
+}
+
+.viewActive{
+    display: flex;
+}
