@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box3{
+            background-color: red;
+        }
+        .box4{
+            width: 150px;
+            height: 50px;
+            background-color: rgba(176, 176, 248, 0.527);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clickButton{
+            width: 100px;
+            height: 30px;
+            margin: 0 5px;
+            background-color: rgb(243, 178, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 基礎用法 -->
+    <div id="app">
+        {{haha}}
+    </div>
+    <!-- 數據渲染 v-text v-html 差別 -->
+    <div class="box1">
+        <p v-text="example1"></p>
+        <p v-html="example2"></p>
+        <p v-text="example2"></p>
+
+        {{example2}}
+    </div>
+    <!-- 數據渲染隱藏 v-if v-show差別 -->
+    <div class="box2">
+        <p v-html="item1" v-if="isShow"></p>
+        <p v-html="item1" v-show="isShow"></p>
+    </div>
+    <!-- 數據渲染 循環列表 v-for-->
+    <div class="box3">
+        <p v-for=" item in arr">
+            {{item}}
+        </p>
+        <ul>
+            <li v-for="item in arr">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <ul>
+        <li v-for="item in arr">
+            {{item}}
+        </li>
+    </ul>
+    <!-- 綁定事件 v-on -->
+    <div class="box4">
+        <div class="clickButton" v-text="name1" v-on:click="speak"></div>
+        <div class="clickButton" v-text="name2" @click="speak2"></div>
+    </div>
+    <!-- 屬性綁定 v-bind -->
+    <div class="box5">
+        <img v-bind:src="imgLink1"/>
+    </div>
+
+    <script>
+        var app =new Vue({
+            el:"#app",
+            data:{
+                message:"hello Vue",
+                haha:"哈哈",
+                hehe:"嘿嘿"
+
+            }
+        });
+
+        var box1 = new Vue({
+            el:".box1",
+            data:{
+                example1:"您好呀",
+                example2:"<h1>您好呀<h1/>"
+            }
+        })
+
+        var box2 = new Vue({
+            el:".box2",
+            data:{
+                item1:"<h1>隱藏方式<h1/>",
+                isShow:false,
+            }
+        })
+
+        var box3 = new Vue({
+            el:".box3",
+            data:{
+                text1:"第一次",
+                arr:['1.html','2.css','3.javaScript']
+            }
+        })
+
+        var box4 = new Vue({
+            el:".box4",
+            data:{
+                    name1:"點一下",
+                    name2:"看一下",
+            },
+            methods:{
+                speak:function(){
+                    alert("HELLO");
+                },
+                speak2:function(){
+                    alert("WORLD");
+                }
+            }
+        })
+
+        var box5 = new Vue({
+            el:".box5",
+            data:{
+                img1:"圖片1",
+                imgLink1:"Image1.jpg"
+            }
+        })
+    </script>
+</body>
+</html>
