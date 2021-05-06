@@ -7,6 +7,9 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
+        *{
+            box-sizing: border-box;
+        }
         .box3{
             background-color: red;
         }
@@ -27,14 +30,38 @@
             align-items: center;
             justify-content: center;
         }
+        .box6{
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .textBox1{
+            width: 250px;
+            height: 80px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .activeBox1{
+            background-color: rgb(142, 165, 42);
+        }
     </style>
 </head>
 <body>
     <!-- 基礎用法 -->
+    <h1>基礎用法</h1>
     <div id="app">
         {{haha}}
     </div>
     <!-- 數據渲染 v-text v-html 差別 -->
+    <h1>數據渲染</h1>
+
     <div class="box1">
         <p v-text="example1"></p>
         <p v-html="example2"></p>
@@ -43,11 +70,15 @@
         {{example2}}
     </div>
     <!-- 數據渲染隱藏 v-if v-show差別 -->
+    <h1>數據渲染隱藏</h1>
+
     <div class="box2">
         <p v-html="item1" v-if="isShow"></p>
         <p v-html="item1" v-show="isShow"></p>
     </div>
     <!-- 數據渲染 循環列表 v-for-->
+    <h1>數據渲染 循環列表</h1>
+
     <div class="box3">
         <p v-for=" item in arr">
             {{item}}
@@ -64,13 +95,29 @@
         </li>
     </ul>
     <!-- 綁定事件 v-on -->
+    <h1>綁定事件</h1>
+
     <div class="box4">
         <div class="clickButton" v-text="name1" v-on:click="speak"></div>
         <div class="clickButton" v-text="name2" @click="speak2"></div>
     </div>
     <!-- 屬性綁定 v-bind -->
+    <h1>屬性綁定</h1>
+
     <div class="box5">
         <img v-bind:src="imgLink1"/>
+    </div>
+    <!-- 樣式綁定 v-bind -->
+    <h1>樣式綁定</h1>
+
+    <div class="box6">
+        <div class="textBox1" v-bind:class="{activeBox1:isActive}">浪子回頭</div>
+    </div>
+    <!-- 雙向綁定 -->
+    <h1>雙向綁定</h1>
+    <div class="box7">
+        <input type="text" v-model="titleName">
+        <p>{{titleName}}</p>
     </div>
 
     <script>
@@ -129,6 +176,20 @@
             data:{
                 img1:"圖片1",
                 imgLink1:"Image1.jpg"
+            }
+        })
+
+        var box6 = new Vue({
+            el:".box6",
+            data:{
+                isActive:false
+            }
+        })
+
+        var box7 = new Vue({
+            el:".box7",
+            data:{
+                titleName:"LKB"
             }
         })
     </script>
