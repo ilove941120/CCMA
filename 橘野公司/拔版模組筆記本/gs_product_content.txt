@@ -1,0 +1,2 @@
+gs_product_content //無購物車產品頁面
+gs_product_content_0001 丐幫滷味 產品介紹  無購物車產品頁面

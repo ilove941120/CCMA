@@ -1,0 +1,3 @@
+gs_head_img //上方大圖
+gs_head_img_0001 	丐幫滷味 頁面 上方大圖
+gs_head_img_0002	恩典水電材料有限公司 上方大圖
