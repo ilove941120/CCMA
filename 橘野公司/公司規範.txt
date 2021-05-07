@@ -1,0 +1,7 @@
+1.要上交的case檔案 要乾淨,沒有用到的東西就刪除
+2.通常使用Bootstrap4 要告知才會用Bootstrap3
+3.固定的圖片放img資料夾(例如ICON,LOGO) 可更動圖片放upload
+4.CSS使用底線寫法
+5.head foot 拆開 用php include 匯入
+6.網站php檔放在檔案資料夾最外層
+
