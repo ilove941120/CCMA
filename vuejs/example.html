@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
         *{
             box-sizing: border-box;
@@ -51,7 +50,22 @@
         .activeBox1{
             background-color: rgb(142, 165, 42);
         }
+        .box8{
+            width: 100%;
+            background-color: yellow;
+            padding: 10px;
+        }
+        .buttonI{
+            display: inline;
+            padding: 5px 10px;
+            border: 2px solid red;
+            cursor: pointer;
+        }
     </style>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
 </head>
 <body>
     <!-- 基礎用法 -->
@@ -118,6 +132,13 @@
     <div class="box7">
         <input type="text" v-model="titleName">
         <p>{{titleName}}</p>
+    </div>
+    <!-- 計算屬性 -->
+    <h1>計算屬性</h1>
+    <div class="box8">
+        <div class="buttonI" @click="add">
+            {{clickTime}}
+        </div>
     </div>
 
     <script>
@@ -190,6 +211,37 @@
             el:".box7",
             data:{
                 titleName:"LKB"
+            }
+        })
+
+        var box8 = new Vue({
+            el:".box8",
+            data:{
+                i:0
+            },
+            methods:{
+                add:function(){
+                    this.i++;
+                    console.log(this.i)
+                }
+            },
+            computed:{
+                clickTime:function(){
+                    if(this.i<10){
+                        return "加油你做了"+this.i+"下了";
+                    }
+                    else if(this.i<20){
+                        return "20下了不遠了還有"+(20 - this.i)+"下";
+                    }
+                    else{
+                        return "恭喜完成20下目標"
+                    }
+                }
+            },
+            watch:{
+                i:function(newValue,oldValue){
+                    console.log(newValue,oldValue)
+                }
             }
         })
     </script>

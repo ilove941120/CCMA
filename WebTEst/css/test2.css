@@ -17,9 +17,9 @@
 }
 
 .ViewModeBlock{
-    width: 100%;
-    min-height: 100vh;
     display: none;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.637);
@@ -27,28 +27,73 @@
     position: fixed;
     top: 0;
     z-index: 10;
+    overflow: scroll;
+    padding: 100px 0;
+
+
 }
 .ViewMode{
     width: 80%;
     padding: 50px;
     background-color: white;
+    position: relative;
+    margin: auto;
 
 
 }
 .Viewhead{
     width: 100%;
     height: 30px;
-    border-bottom:2px solid black ;
+    border-bottom:2px solid rgba(0, 0, 0, 0.26) ;
+    background-color: red;
+
 }
 .ViewContent{
     width: 100%;
-    height: 300px;
+    overflow: hidden;
+
+
 }
 .ViewFoot{
     width: 100%;
     height: 70px;
+    border-top:2px solid rgba(0, 0, 0, 0.26) ;
+    display: flex;
+    align-items: center;
+
 }
 
 .viewActive{
     display: flex;
+}
+
+.closeButton{
+    width: 60px;
+    height: 30px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    cursor: pointer;
+}
+.closeButton:hover{
+    background-color: red;
+    color: white;
+}
+.closeIcon{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 18px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+.closeIcon:hover{
+    color: red;
 }
