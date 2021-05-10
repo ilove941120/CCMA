@@ -1,0 +1,47 @@
+
+<body>
+
+    <!-- top案紐 -->
+    <div class="top_button_block">
+        <a href="#" class="top_button">^</a>
+    </div>
+    <!-- foot -->
+    <div class="foot">
+        <div class="container">
+            <div class="row">
+                <div class="foot_top">
+                    <div class="foot_logo_block"></div>
+                    <div class="foot_content_block">
+                        <div class="foot_content">TEL: 07-2156809  FAX: 07-2156909</div>
+                        <div class="foot_content">交通:捷運紅線中央公園站，近青年路口</div>
+                        <div class="foot_content">地址:高雄市前金區中華四路282號5樓</div>
+                    </div>
+                </div>
+                 
+            </div>
+            <div class="row">
+                <div class="foot_bottom">
+                    <div class="foot_company">Copyright© 地球公民基金會 <br class="show_RWD"> 2021.All right reserved.</div>
+                    <div class="foot_make_company"><img src="img/myicon.png" alt=""> 網頁設計:賴科榜</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".top_button_block").hide()
+        $(document).scroll(function(){
+            var windowScrollTop = $(window).scrollTop()
+            if( windowScrollTop > 0){
+                $(".top_button_block").fadeIn()
+            }
+            else{
+                $(".top_button_block").fadeOut()
+            }
+        })
+    </script>
+    
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地球公民</title>
+    <link rel="Shortcut Icon" type="image/x-icon" href="img/icon.png" />
+    <link rel="stylesheet" href="css/bootstrap4.min.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/gs.css">
+
+    <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
+    <script src="js/bootstrap4.js"></script>
+    <script src="js/slick.js"></script>
+    <!-- <script src="js/js.js"></script> -->
+</head>
+<body>
+    <!-- head主選單 -->
+    <div class="head">
+        <div class="language_block_RWD">
+            <a href="#" class="language_RWD language_active">繁中</a>
+            <a href="#" class="language_RWD">EN</a>
+        </div>
+        <div class="container">
+            
+            <div class="row">
+                <div class="menu_block">
+                    <a href="index.html" class="menu_item menu_item_active">首頁</a>
+                    <a href="about_us.html" class="menu_item">關於我們</a>
+                    <a href="index.html" class="menu_logo"></a>
+                    <div class="menu_item">產品介紹</div>
+                    <div class="menu_item_list">
+                        <a href="product.html" class="list_sort">新聞列表</a>
+                        <a href="product.html" class="list_sort">山林水土</a>
+                        <a href="product.html" class="list_sort">用續花東</a>
+                        <a href="product.html" class="list_sort">環境汙染</a>
+                    </div>
+                    <a href="about_us.html" class="menu_item">聯絡我們</a>
+                    <div class="language_block">
+                        <a href="#" class="language language_active">繁中</a>
+                        <a href="#" class="language">EN</a>
+                    </div>
+                    <div class="menu_RWD"></div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div class="menu_item_block_RWD">
+            <a href="index.html" class="menu_logo_RWD"></a>
+            <a href="index.html" class="menu_item_RWD">首頁</a>
+            <a href="about_us.html" class="menu_item_RWD">關於我們</a>
+            <div class="menu_item_RWD">產品介紹</div>
+            <div class="menu_item_list_RWD">
+                <a href="product.html" class="list_sort_RWD">新聞列表</a>
+                <a href="product.html" class="list_sort_RWD">山林水土</a>
+                <a href="product.html" class="list_sort_RWD">用續花東</a>
+                <a href="product.html" class="list_sort_RWD">環境汙染</a>
+            </div>
+            <a href="" class="menu_item_RWD">聯絡我們</a>
+            <div class="menu_close_RWD">X</div>
+        </div>
+    </div>
+
+    <script>
+        // 點擊彈出
+        $(".menu_item").click(function(){
+            if($(this).next(".menu_item_list").css("display") == "none"){
+                $(this).next(".menu_item_list").slideDown();
+            }
+            else{
+                $(this).next(".menu_item_list").slideUp();
+            }
+        })
+        $(".menu_item_RWD").click(function(){
+            if($(this).next(".menu_item_list_RWD").css("display") == "none"){
+                $(this).addClass("show_list")
+                $(this).next(".menu_item_list_RWD").slideDown();
+            }
+            else{
+                $(this).next(".menu_item_list_RWD").slideUp();
+                $(this).removeClass("show_list");
+
+            }
+        })
+        // 漢堡條
+        
+        $(".menu_RWD").click(function(){
+            if($(".menu_item_block_RWD").css("display") == "none"){
+                $(".menu_item_block_RWD").slideDown()
+            }
+        })
+        $(window).resize(function(){
+            if($(window).width() > 768){
+                $(".menu_item_block_RWD").hide()
+            }
+            if($(window).width() < 768){
+                $(".menu_item_list").hide()
+            }
+        })
+
+        $(".menu_close_RWD").click(function(){
+            $(".menu_item_block_RWD").slideUp()
+
+        })
+
+    </script>
+
+    <section>
+        <div class="welcome_page">
+            <!-- 主輪播 -->
+            <div class="main_slider">
+                <div class="slide_item">
+                    <img src="upload/main_slider.jpg" alt="">
+                </div>
+                <div class="slide_item">
+                    <img src="upload/banner1.jpg" alt="">
+                </div>
+                <div class="slide_item">
+                    <img src="upload/banner3.jpg" alt="">
+                </div>
+            </div>
+            <!-- JS slick 輪播 -->
+            <script>
+                $('.main_slider').slick({
+                    arrows:false,
+                    dots: true,
+                    infinite: true,
+                    speed: 500,
+                    fade: true,
+                    cssEase: 'linear'
+                });
+            </script>
+            <!-- 主輪播 -->
+            <!-- 關於我們 -->
+            <div class="about_block">
+                <div class="about_mask"></div>
+                <div class="about_content_block">
+                    <div class="about_english_title"> <div class="line_decoration_left"></div> ABOUT US <div class="line_decoration_right"></div></div>
+                    <div class="about_chinese_title">關於地球公民基金會</div>
+                    <div class="about_content">
+
+                        <div class="about_text">
+                            地球公民基金會是推展環境保護的公益團體，結合地球公民協會與台灣環境行動網(註)，
+                            <br>
+                            於2010年由174位捐款人捐助基金，登記立案為財團法人，是台灣第一個透過大眾募款成立的環保基金會。
+                            <br>
+                            （地球公民基金會 - 基金捐助人名單及徵信）
+                            <br>
+                            目前，地球公民基金會在高雄市、台北市、花蓮市設有辦公室。
+                            <br>
+                            我們透過調查研究、揭露環境問題，提出解決方案，並據以進行政策施壓、國會遊說、教育推廣等，期望能善盡地球公民之責任。
+                            <br>
+                            地球公民深信：專業的環保團體＋公民行動，是改變世界的最大動力
+                            <br>
+                            連結各種社會力，改變法令政策，以各種行動帶來正面的改變！
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- 關於我們 -->
+            <!-- 產品展示 -->
+            <div class="product_show_block">
+                <div class="container">
+                    <div class="row">
+                        <div class="page_title_block">
+                          <div class="product_english_title">
+                            <div class="line_decoration_left"></div>
+                            News
+                            <div class="line_decoration_right"></div>
+                          </div>
+                          <div class="product_chinese_title">最新消息</div>
+                        </div>
+                      </div>
+                    <div class="row">
+                        <div class="product_show">
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news1.png" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">樂見恆春站回歸公園站 如實反映空品以改善空污</div>
+                                </div>
+                            </a>
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news2.jpg" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">國土計畫下，山還能被挖成一座魚池嗎?</div>
+                                </div>
+                            </a>
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news3.jpg" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">農地違章工廠續命仙丹如何架空國土計畫？</div>
+                                </div>
+                            </a>
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news4.jpeg" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">地球公民基金會對於三接外推方案的五點聲明</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="product_show_sm">
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news1.png" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">樂見恆春站回歸公園站 如實反映空品以改善空污</div>
+                                </div>
+                            </a>
+                            <a href="product_in.html" class="product_item">
+                                <img src="upload/news2.jpg" alt="">
+                                <div class="product_item_mask">
+                                    <div class="product_item_name">國土計畫下，山還能被挖成一座魚池嗎?</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- JS產品的寬度等於高度 -->
+            <script>
+                var product_width = $("product_item").width()
+                $(document).ready(function(){
+                    $(".product_item").height(product_width)
+                })
+                $(window).resize(function(){
+                    $(".product_item").height(product_width)
+                })
+            </script>
+            <!-- 產品展示 -->
+            <!-- 公司 -->
+            <div class="company_block">
+                <div class="container">
+                  <div class="row">
+                    <div class="company">
+                      <a href="https://www.zhi-shan.org/" class="company_item">
+                        <img src="img/other_logo1.png" alt="" />
+                      </a>
+                      <a href="https://www.tgpf.org.tw/main8-1.asp" class="company_item">
+                        <img src="img/other_logo2.png" alt="" />
+                      </a>
+                      <a href="https://exploit.org.tw/" class="company_item">
+                        <img src="img/other_logo3.png" alt="" />
+                      </a>
+                      <a href="http://www.eqpf.org/home.aspx" class="company_item">
+                        <img src="img/other_logo4.png" alt="" />
+                      </a>
+                      <a href="https://teia.tw/" class="company_item">
+                        <img src="img/other_logo5.png" alt="" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- 公司 -->
+        </div>
+    </section>
+    <!-- footer -->
+    <footer class="footerpage">
+    </footer>
+
+    <script>
+        $(function() {
+            /*公共部分
+            * 导航栏
+            * footer CopyRight
+            */
+            $(".headerpage").load("head.html");
+            $(".footerpage").load("foot.html");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>地球公民</title>
+    <link rel="Shortcut Icon" type="image/x-icon" href="img/icon.png" />
+    <link rel="stylesheet" href="css/bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/slick-theme.css" />
+    <link rel="stylesheet" href="css/slick.css" />
+    <link rel="stylesheet" href="css/gs.css" />
+
+    <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script
+      language="javascript"
+      src="js/preload/jquery.preload.min.js"
+    ></script>
+    <script src="js/bootstrap4.js"></script>
+    <script src="js/slick.js"></script>
+    <!-- <script src="js/js.js"></script> -->
+  </head>
+  <body>
+    <!-- header -->
+    <header class="headerpage">
+    </header>
+    <section>
+      <!-- 聯絡我們 -->
+      <div class="contact">
+        <div class="container">
+          <div class="row">
+            <div class="contact_title_block">
+              <div class="contact_english_title"> 
+                <div class="line_decoration_left"></div>
+                Contact Us  
+                <div class="line_decoration_right"></div>
+              </div>
+              <div class="contact_chinese_title">地球公民基金會</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="contact_page_content_block">
+              營業時間：(平日)08:30 ~ 17:30
+              <br>
+              [高雄總部]80146高雄市前金區中華四路282號5樓 電話： 07-2156809 傳真：07-2156909
+              <br>
+              [台北辦公室]10049台北市中正區北平東路28號9樓之2 電話： 02-2392-0371  傳真：02-23920381
+              <br>
+              [花東辦公室]97053花蓮縣花蓮市自由街150號6樓之3 電話： 03-8310916 傳真：03-8310916
+            </div>
+          </div>
+          <div class="row">
+            <div class="form_and_map">
+              <form action="" class="contact_form">
+                <input type="text" placeholder="姓名" id="visitor_name" name="visitor_name" class="input_style">
+                <input type="text" placeholder="電話" id="visitor_phone" name="visitor_phone" class="input_style">
+                <input type="email" placeholder="E-mail" id="visitor_email" name="visitor_email" class="input_style">
+                <textarea name="visitor_ask" id="visitor_ask" cols="30" rows="10" placeholder="詢問內容" class="textarea_style"></textarea>
+                <div class="button_bar">
+                  <div class="i_not_robot">
+                    <div class="g-recaptcha" data-sitekey="AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc"></div>
+                  </div>
+                  <div class="sent_button">確定送出</div>
+                </div>
+              </form>
+              <div class="map_block">
+                <iframe class="mapStyle"
+                      frameborder="0" 
+                      style="border:0" 
+                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1pjEmAoe0XG4iW6x1qQ8ZnEcDQdvhHBc&q=高雄地球公民基金會" 
+                      allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 判斷當前頁面為menu添加顯示 -->
+      
+      <!-- JS表單驗證 -->
+      <script>
+        var chineseNameCheck = /^[\u4E00-\u9FA5]+$/;
+          var phoneCheck = /^[0][9]\d{8}$/
+          var emailCheck = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          var textareaCheck = "";
+          // 點擊驗證表單
+          $(".sent_button").click(function(){
+              if($("#visitor_name").val() =="" || chineseNameCheck.test($("#visitor_name").val()) == false){
+                  alert("請輸入中文姓名,不可以空百或格式錯誤")
+                  return false;
+    
+              }
+              if($("#visitor_phone").val() =="" || phoneCheck.test($("#visitor_phone").val()) == false){
+                  alert("請輸入手機,不可以空白或格式錯誤")
+                  return false;
+    
+              }
+              if($("#visitor_email").val() =="" || emailCheck.test($("#visitor_email").val()) == false){
+                  alert("請輸入E-mail,不可以空白或格式錯誤")
+                  return false;
+    
+              }
+              if($("#visitor_ask").val() ==""){
+                  alert("請輸入問題,不可以空白")
+                  return false;
+    
+              }
+              
+              else {
+                  $(".contact_form").submit();
+              }
+          })
+      </script>
+      <!-- 聯絡我們 -->
+    
+      <!-- 產品展示 -->
+      <div class="product_show_block">
+        <div class="container">
+          <div class="row">
+            <div class="page_title_block">
+              <div class="product_english_title">
+                <div class="line_decoration_left"></div>
+                News
+                <div class="line_decoration_right"></div>
+              </div>
+              <div class="product_chinese_title">最新消息</div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="product_show">
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news1.png" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">樂見恆春站回歸公園站 如實反映空品以改善空污</div>
+                    </div>
+                </a>
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news2.jpg" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">國土計畫下，山還能被挖成一座魚池嗎?</div>
+                    </div>
+                </a>
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news3.jpg" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">農地違章工廠續命仙丹如何架空國土計畫？</div>
+                    </div>
+                </a>
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news4.jpeg" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">地球公民基金會對於三接外推方案的五點聲明</div>
+                    </div>
+                </a>
+            </div>
+            <div class="product_show_sm">
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news1.png" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">樂見恆春站回歸公園站 如實反映空品以改善空污</div>
+                    </div>
+                </a>
+                <a href="product_in.html" class="product_item">
+                    <img src="upload/news2.jpg" alt="">
+                    <div class="product_item_mask">
+                        <div class="product_item_name">國土計畫下，山還能被挖成一座魚池嗎?</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+      </div>
+      <!-- JS產品的寬度等於高度 -->
+      <script>
+        var product_width = $("product_item").width();
+        $(document).ready(function () {
+          $(".product_item").height(product_width);
+        });
+        $(window).resize(function () {
+          $(".product_item").height(product_width);
+        });
+      </script>
+      <!-- 產品展示 -->
+      <!-- 公司 -->
+      <div class="company_block">
+        <div class="container">
+          <div class="row">
+            <div class="company">
+              <a href="https://www.zhi-shan.org/" class="company_item">
+                <img src="img/other_logo1.png" alt="" />
+              </a>
+              <a href="https://www.tgpf.org.tw/main8-1.asp" class="company_item">
+                <img src="img/other_logo2.png" alt="" />
+              </a>
+              <a href="https://exploit.org.tw/" class="company_item">
+                <img src="img/other_logo3.png" alt="" />
+              </a>
+              <a href="http://www.eqpf.org/home.aspx" class="company_item">
+                <img src="img/other_logo4.png" alt="" />
+              </a>
+              <a href="https://teia.tw/" class="company_item">
+                <img src="img/other_logo5.png" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 公司 -->
+    </section>
+    <!-- footer -->
+    <footer class="footerpage">
+    </footer>
+    <script>
+      $(function() {
+          /*公共部分
+           * 导航栏
+           * footer CopyRight
+           */
+          $(".headerpage").load("head.html");
+          $(".footerpage").load("foot.html");
+      });
+  </script>
+  </body>
+</html>
