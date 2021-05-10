@@ -192,6 +192,8 @@ button:focus {
   height: 50px;
   background-image: url(../img/menu_RWD.png);
   display: none;
+  cursor: pointer;
+
 }
 @media (max-width: 768px) {
   .menu_RWD {
