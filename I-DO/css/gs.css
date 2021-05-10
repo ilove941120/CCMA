@@ -305,8 +305,7 @@ button:focus {
   display: none;
   justify-content: flex-end;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.212); */
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.212);
 }
 .language_RWD {
   margin: 0 5px;
