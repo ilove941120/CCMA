@@ -258,7 +258,7 @@ a:hover,a:focus{
 @media (max-width:430px){
 	.decoration1{
 		width: 250px;
-		top: -80px;
+		top: -90px;
 		left: -150px;
 	}
 }
@@ -383,7 +383,17 @@ a:hover,a:focus{
 	position: relative;
 	width: 100%;
 	height: 1100px;
+	background-color: rgba(165, 42, 42, 0.247);
 
+}
+@media (max-width:576px){
+	.about_block{
+		position: relative;
+		width: 100%;
+		height: 700px;
+		background-color: rgba(165, 42, 42, 0.247);
+	
+	}
 }
 .decoration_block{
 	width: 100%;
@@ -391,8 +401,17 @@ a:hover,a:focus{
 	position: absolute;
 	overflow: hidden;
 	top: -300px;
-
-
+	background-color: rgba(0, 255, 255, 0.411);
+}
+@media (max-width:576px){
+	.decoration_block{
+		width: 100%;
+		height: 500px;
+		position: absolute;
+		overflow: hidden;
+		top: 0px;
+		background-color: rgba(0, 255, 255, 0.411);
+	}
 }
 .decoration7{
 	width: 1400px;
@@ -421,6 +440,24 @@ a:hover,a:focus{
 		position: absolute;
 		right: -250px;
 		top: 8%;
+		z-index:11;
+	}
+}
+@media (max-width:768px){
+	.decoration7{
+		width: 650px;
+		position: absolute;
+		right: -150px;
+		top: 11%;
+		z-index:11;
+	}
+}
+@media (max-width:576px){
+	.decoration7{
+		width: 490px;
+		position: absolute;
+		right: -150px;
+		top: 0%;
 		z-index:11;
 	}
 }
@@ -463,6 +500,15 @@ a:hover,a:focus{
 		width: 80%;
 	}
 }
+@media (max-width:768px){
+	.decoration10{
+		top: 58%;
+		right: -5%;
+	}
+	.decoration10 img{
+		width: 90%;
+	}
+}
 .decoration11{
 	position: absolute;
 	top: 71%;
@@ -482,6 +528,30 @@ a:hover,a:focus{
 	}
 	.decoration11 img{
 		width: 70%;
+		height: 100%;
+	}
+}
+@media (max-width:768px){
+	.decoration11{
+		position: absolute;
+		top: 74%;
+		right: -20%;
+		z-index: 6;
+	}
+	.decoration11 img{
+		width: 50%;
+		height: 100%;
+	}
+}
+@media (max-width:576px){
+	.decoration11{
+		position: absolute;
+		top: 74%;
+		right: -30%;
+		z-index: 6;
+	}
+	.decoration11 img{
+		width: 40%;
 		height: 100%;
 	}
 }
@@ -505,7 +575,7 @@ a:hover,a:focus{
 @media (max-width:1400px){
 	.decoration4{
 		left: -4%;
-		top: 55%;
+		top: 45%;
 	}
 	.decoration4 img{
 		width: 80%;
@@ -521,6 +591,24 @@ a:hover,a:focus{
 		width: 80%;
 	}
 }
+@media (max-width:768px){
+	.decoration4{
+		left: -5%;
+		top: 45%;
+	}
+	.decoration4 img{
+		width: 70%;
+	}
+}
+@media (max-width:576px){
+	.decoration4{
+		left: -5%;
+		top: 42%;
+	}
+	.decoration4 img{
+		width: 70%;
+	}
+}
 .decoration9{
 	width: 280px;
 	position: absolute;
@@ -534,7 +622,16 @@ a:hover,a:focus{
 @media (max-width:992px){
 	.decoration9 img{
 		width: 80%;
-		height: 100%;
+	}
+}
+@media (max-width:768px){
+	.decoration9 img{
+		width: 70%;
+	}
+}
+@media (max-width:576px){
+	.decoration9 img{
+		width: 40%;
 	}
 }
 /* .decoration5{
@@ -582,6 +679,30 @@ a:hover,a:focus{
 		height: 100%;
 	}
 }
+@media (max-width:768px){
+	.decoration5{
+		position: absolute;
+		top: 45%;
+		left: -8%;
+		z-index: -2;
+	}
+	.decoration5 img{
+		width: 40%;
+		height: 100%;
+	}
+}
+@media (max-width:576px){
+	.decoration5{
+		position: absolute;
+		top: 45%;
+		left: -7%;
+		z-index: -2;
+	}
+	.decoration5 img{
+		width: 30%;
+		height: 100%;
+	}
+}
 /* .decoration6{
 	width: 180px;
 	position: absolute;
@@ -592,7 +713,7 @@ a:hover,a:focus{
 .decoration6 img{
 	width: 100%;
 	height: 100%;
-} */
+} */	
 .decoration6{
 	position: absolute;
 	top: 22%;
@@ -627,6 +748,30 @@ a:hover,a:focus{
 		height: 100%;
 	}
 }
+@media (max-width:768px){
+	.decoration6{
+		position: absolute;
+		top: 27%;
+		left: -3.5%;
+		z-index: -2;
+	}
+	.decoration6 img{
+		width: 40%;
+		height: 100%;
+	}
+}
+@media (max-width:576px){
+	.decoration6{
+		position: absolute;
+		top: 27%;
+		left: -3%;
+		z-index: -2;
+	}
+	.decoration6 img{
+		width: 30%;
+		height: 100%;
+	}
+}
 .about_content{
 	width: 660px;
 	height: 450px;
@@ -648,6 +793,24 @@ a:hover,a:focus{
 		z-index:99;
 		top: 25%;
 		left: 5%;
+	}
+}
+@media (max-width:768px){
+	.about_content{
+		width: 300px;
+		height: 200px;
+		top: 25%;
+		left: 15%;
+		/* background-color: wheat; */
+	}
+}
+@media (max-width:576px){
+	.about_content{
+		width: 200px;
+		height: 100px;
+		top: 25%;
+		left: 15%;
+		/* background-color: wheat; */
 	}
 }
 .about_title{
@@ -688,10 +851,39 @@ a:hover,a:focus{
 		line-height: 24px;
 	}
 }
+@media (max-width:768px){
+	.about_title{
+		margin-bottom: 20px;
+	}
+	.about_title img{
+		width: 20%;
+		height: 100%;
+	}
+	.about_text{
+		overflow-y: scroll;
+		font-size: 12px;
+		line-height: 20px;
+		height: 150px;
+	}
+}
 /* ------產品區------ */
 .produck_block{
 	position: relative;
-	
+}
+@media (max-width:1700px){
+	.produck_block{
+		margin-top: 250px;
+	}
+}
+@media (max-width:1400px){
+	.produck_block{
+		margin-top: 0px;
+	}
+}
+@media (max-width:997px){
+	.produck_block{
+		margin-top: -100px;
+	}
 }
 .produck_background{
 	width: 100%;
@@ -702,36 +894,82 @@ a:hover,a:focus{
 	top: -50%;
 	z-index: -1;
 }
+@media (max-width:1400px){
+	.produck_background{
+		height: 785px;
+	}
+}
+@media (max-width:1200px){
+	.produck_background{
+		height: 700px;
+	}
+}
+@media (max-width:992px){
+	.produck_background{
+		height: 600px;
+	}
+}
 .decoration12{
 	position: absolute;
-	top: 0%;
-	right: 22%;
-	width: 250px;
+	top: -5%;
+	right: 5%;
 	z-index: -2;
 }
 .decoration12 img{
-	width: 180%;
+	width: 100%;
 	height: 100%;
+}
+@media (max-width:1700px){
+	.decoration12{
+		top: -8%;
+		right: 3%;
+	}
+}
+@media (max-width:1400px){
+	.decoration12{
+		top: -50%;
+		right: 0%;
+	}
 }
 .decoration13{
 	position: absolute;
 	top: 5%;
 	left: -6.5%;
-	width: 250px;
 }
 .decoration13 img{
 	width: 100%;
 	height: 100%;
 }
+@media (max-width:1200px){
+	.decoration13{
+		position: absolute;
+		top: 5%;
+		left: -6.5%;
+	}
+	.decoration13 img{
+		width: 90%;
+		height: 100%;
+	}
+}
 .decoration13_1{
 	position: absolute;
 	top: 27%;
 	left: 7%;
-	width: 250px;
 }
 .decoration13_1 img{
 	width: 100%;
 	height: 100%;
+}
+@media (max-width:1200px){
+	.decoration13_1{
+		position: absolute;
+		top: 30%;
+		left: 10%;
+	}
+	.decoration13_1 img{
+		width: 80%;
+		height: 100%;
+	}
 }
 .decoration14{
 	position: absolute;
@@ -747,18 +985,35 @@ a:hover,a:focus{
 	position: absolute;
 	top: 2%;
 	left: 22%;
-	width: 65px;
+	/* width: 65px; */
 }
 .decoration_product_title img{
-	width: 100%;
+	width: 90%;
 	height: 100%;
 }
-
-.slider_block{
-	width: 100%;
-	height: 300px;
-	/* background-color: darkgreen;*/
+@media (max-width:1500px){
+	.decoration_product_title{
+		top: 2%;
+		left: 15%;
+		/* width: 65px; */
+	}
+	.decoration_product_title img{
+		width: 80%;
+		height: 100%;
+	}
 }
+@media (max-width:1200px){
+	.decoration_product_title{
+		top: 2%;
+		left: 22%;
+		/* width: 65px; */
+	}
+	.decoration_product_title img{
+		width: 80%;
+		height: 100%;
+	}
+}
+
 .more_button{
 	width: 200px;
 	position: absolute;
@@ -769,16 +1024,27 @@ a:hover,a:focus{
 	width: 100%;
 	height: 100%;
 }
-/* ------產品區------ */
-.row{
-	width: 100%;
+@media (max-width:1400px){
+	.more_button{
+		width: 200px;
+		position: absolute;
+		right: 5%;
+		bottom: -70px;
+	}
 }
+
+/* slider設定 */
 .slider_block{
 	width: 84%;
 	/* height: 350px; */
 	height: auto;
 	margin: auto;
 	margin-top: 120px;
+}
+@media (max-width:1400px){
+	.slider_block{
+		margin-top: 90px;
+	}
 }
 .slider_item{
 	width: 30%;
@@ -827,6 +1093,7 @@ a:hover,a:focus{
 	clip-path: polygon(100% 0, 100% 100%, 0 50%);
 
 }
+/* ------產品區------ */
 
 /* 品牌優勢 */
 .advantage_block{
