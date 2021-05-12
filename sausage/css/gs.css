@@ -393,3 +393,36 @@ a:hover,a:focus{
 	height: 100%;
 }
 /* ------產品區------ */
+.slider_block{
+	width: 100%;
+	/* height: 350px; */
+	height: auto;
+	background-color: wheat;
+}
+.slider_item{
+	width: 30%;
+	background-color: white;
+	padding: 10px;
+	margin: 0 10px;
+}
+.slider_item_img{
+	width: 100%;
+	/* height: 250px; */
+}
+.slider_item_img img{
+	width: 100%;
+	height: 100%;
+}
+.product_name{
+	margin: 5px 0;
+}
+.product_price_block{
+	display: flex;
+}
+.product_main_price{
+	margin-right: 10px;
+}
+.product_sub_price{
+	font-size: 12px;
+	text-decoration: line-through;
+}

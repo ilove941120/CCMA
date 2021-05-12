@@ -13,6 +13,7 @@
 
     <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
     <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
+    <script src="js/slick.js"></script>
 </head>
 <body>
     <div class="head_block">
@@ -134,9 +135,101 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="slider_block"></div>
+                <div class="slider_block">
+                    <div class="slider_item">
+                        <div class="slider_item_img">
+                            <img src="test_img/12528489_xxl.jpg" alt="">
+                        </div>
+                        <div class="product_content">
+                            <div class="product_name">黑豬肉香腸</div>
+                            <div class="product_price_block">
+                                <div class="product_main_price">NT$ <span>6000</span></div>
+                                <div class="product_sub_price">原價NT$ <span>6900</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider_item">
+                        <div class="slider_item_img">
+                            <img src="test_img/12528489_xxl.jpg" alt="">
+                        </div>
+                        <div class="product_name">黑豬肉香腸</div>
+                        <div class="product_price_block">
+                            <div class="product_main_price">NT$ <span>6000</span></div>
+                            <div class="product_sub_price">原價NT$ <span>6900</span></div>
+                        </div>
+                    </div>
+                    <div class="slider_item">
+                        <div class="slider_item_img">
+                            <img src="test_img/12528489_xxl.jpg" alt="">
+                        </div>
+                        <div class="product_name">黑豬肉香腸</div>
+                        <div class="product_price_block">
+                            <div class="product_main_price">NT$ <span>6000</span></div>
+                            <div class="product_sub_price">原價NT$ <span>6900</span></div>
+                        </div>
+                    </div>
+                    <div class="slider_item">
+                        <div class="slider_item_img">
+                            <img src="test_img/12528489_xxl.jpg" alt="">
+                        </div>
+                        <div class="product_name">黑豬肉香腸</div>
+                        <div class="product_price_block">
+                            <div class="product_main_price">NT$ <span>6000</span></div>
+                            <div class="product_sub_price">原價NT$ <span>6900</span></div>
+                        </div>
+                    </div>
+                    <div class="slider_item">
+                        <div class="slider_item_img">
+                            <img src="test_img/12528489_xxl.jpg" alt="">
+                        </div>
+                        <div class="product_name">黑豬肉香腸</div>
+                        <div class="product_price_block">
+                            <div class="product_main_price">NT$ <span>6000</span></div>
+                            <div class="product_sub_price">原價NT$ <span>6900</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <script>
+            $('.slider_block').slick({
+            centerMode: true,
+            centerPadding: '0px',
+            slidesToShow: 3,
+            // slidesPerRow:3,
+            responsive: [
+                {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                }
+                },
+                {
+                breakpoint: 480,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+                }
+            ]
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                var product_width = $(".slider_item_img").width()
+                $(".slider_item_img").height(product_width)
+                console.log(product_width)
+
+            })
+            $(window).resize(function(){
+                $(".slider_item_img").height(product_width)
+            })
+        </script>
     </div>
     
 </body>
