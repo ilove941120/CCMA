@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap4.min.css">
+    <link rel="stylesheet" href="css/external_i.css">
+    <link rel="stylesheet" href="css/external_k.css">
+    <link rel="stylesheet" href="css/external_g.css">
+    <link rel="stylesheet" href="css/external_p.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/gs.css">
+
+    <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
+    <script src="js/slick.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+<body>
+    <section>
+        <div class="member_login_page">
+            <div class="member_login_block">
+                <div class="member_login_title_block">
+                    <div class="member_login_chinese_title">忘記密碼</div>
+                    <div class="member_login_english_title">forgot password</div>
+                </div>
+                <div class="form" class="member_login_form">
+                    <div class="member_login_form_item">
+                        <div class="member_login_form_icon"><i class="fai fai-user-circle-o"></i></div>
+                        <input type="text" id="member_phone" name="member_phone" placeholder="請輸入手機">
+                    </div>
+                    <div class="member_login_form_item">
+                        <div class="member_login_form_icon"><i class="fak fa-email"></i></div>
+                        <input type="email" id="member_email" name="member_email" placeholder="請輸入註冊的信箱">
+                    </div>
+                    <div class="member_forget_form_button">
+                        <a href="#" class="register_button">回登入頁面</a>
+                        <a href="#" class="set_up_button">送出</a>
+                    </div>
+                    <script>
+                        $(".member_login_form_item").find("input").click(function(){
+                            $(".member_login_form_icon").removeClass("input_focus")
+                            $(this).siblings(".member_login_form_icon").addClass("input_focus")
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- <div class="box1"></div> -->
+</body>
+</html>

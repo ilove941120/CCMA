@@ -1,0 +1,283 @@
+/* 頁面Banner各頁各自設定 主要設定在headPage */
+.banner{
+    background-image: url(../img/banner_news.jpeg);
+}
+/* 頁面Banner各頁各自設定 */
+.content{
+    background-image: url(../img/bg.jpg);
+    background-repeat: unset;
+    background-size: cover;
+    padding:50px 0;
+    overflow: hidden;
+}
+/* newsContent */
+.newsItemBlock{
+    width: 100%;
+    margin: 50px 0;
+}
+.newsItem{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+}
+.newsItemImg{
+    width: 35%;
+}
+.newsItemImg img{
+    width: 100%;
+}
+.newsItemDate{
+    width: 10%;
+    margin: 0 20px;
+    margin-bottom: 120px;
+    background-color: white;
+    text-align: center;
+    border: 2px solid #626262;
+}
+
+.newsContent{
+    width: 55%;
+}
+.newsItemTitle{
+    font-size: 28px;
+    color: white;
+    margin-bottom: 40px;
+}
+.newsContentRWD{
+    width: 100%;
+    display: none;
+}
+.newsItemTopBlock{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.newsItemDateRWD{
+    /* width: 10%; */
+    height: 50px;
+    padding: 0 5px;
+    margin-right: 10px;
+    /* margin-bottom: 20px; */
+    background-color: white;
+    text-align: center;
+    border: 2px solid #626262;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+.newsItemTitleRWD{
+    font-size: 18px;
+    color: white;
+}
+.newsItemTextRWD{
+    font-size: 14px;
+}
+.newsMoreButton{
+    width: 160px;
+    padding: 5px 0px;
+    background-color: #1E1408;
+    color: white;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bolder;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.newsMoreButton span{
+    padding-left: 20px;
+}
+
+
+@media (max-width:992px){
+    .newsItemDate{
+        width: 15%;
+    }
+    .newsContent{
+        width: 50%;
+    }
+    .newsItemTitle{
+        font-size: 18px;
+    }
+    .newsItemText{
+        font-size: 12px;
+    }
+}
+@media (max-width:768px){
+    .newsItemBlock{
+        padding: 0 20px;
+    }
+    .newsItem{
+        flex-direction: column;
+    }
+    .newsItemImg{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .newsItemDate{
+        display: none;
+    }
+    .newsContent{
+        display: none;
+    }
+    .newsContentRWD{
+        display: block;
+    }
+    .newsMoreButton{
+        margin: unset;
+        margin-left: auto;
+        width: 100px;
+        text-align: right;
+        background-color: unset;
+        font-size: 18px;
+    }
+    
+}
+@media (max-width:576px){
+    .newsItemTitleRWD{
+        font-size: 16px;
+        color: white;
+    }
+    .newsItemTextRWD{
+        font-size: 14px;
+    }
+}
+/* news Content */
+.pagination{
+    width: 200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.page{
+    color: white;
+    font-size: 20px; 
+    font-weight: bolder;
+}
+.page1{
+    color: white;
+}
+.page:hover{
+    text-decoration: underline;
+    color: white;
+}
+
+/* 動畫設定 */
+/* 標題 */
+.titleAnimation1{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+
+}
+.titleAnimation2{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.titleAnimation3{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.titleAnimationRWD1{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+.titleAnimationRWD2{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+.titleAnimationRWD3{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+/* 圖片 */
+
+.imgAnimation1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.imgAnimation2{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.imgAnimation3{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.imgAnimationRWD1{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.imgAnimationRWD2{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+
+.imgAnimationRWD3{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+
+
+
+.leftIn{
+    animation: leftIn 2s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes leftIn{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+.rightIn{
+    animation: rightIn 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+@keyframes rightIn{
+    0%{
+        opacity: 0;
+        right: -500px;
+
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+}
+.centerIn{
+    animation: centerIn 2s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes centerIn{
+    0%{
+        opacity: 0;
+        bottom: -100px;
+
+    }
+    100%{
+        bottom: 0;
+        opacity: 1;
+    }
+}
