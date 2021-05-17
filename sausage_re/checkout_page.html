@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap4.min.css">
+    <link rel="stylesheet" href="css/external_i.css">
+    <link rel="stylesheet" href="css/external_k.css">
+    <link rel="stylesheet" href="css/external_g.css">
+    <link rel="stylesheet" href="css/external_p.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/gs.css">
+
+    <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
+    <script src="js/slick.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+<body>
+    <section>
+        <div class="checkout_page">
+            <div class="container">
+                <div class="checkout_block">
+                    <div class="checkout_side_block">
+                        <div class="checkout_side_item_block">
+                            <div class="checkout_side_item">確認訂單項目</div>
+                        </div>
+                        <div class="checkout_side_item_block">
+                            <div class="checkout_side_line"></div>
+                            <div class="checkout_side_item">收件資料</div>
+                        </div>
+                        <div class="checkout_side_item_block">
+                            <div class="checkout_side_line"></div>
+                            <div class="checkout_side_item">收件資料</div>
+                        </div>
+                    </div>
+                    <div class="checkout_content">
+                        <div class="checkout_content_title">購物清單確認</div>
+                        <div class="shopping_list">
+                            <div class="shopping_list_top">
+                                <div class="list_product">
+                                    <div class="list_product_img">
+                                        <img src="./test_img/12563649_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="list_product_name">商品名稱</div>
+                                    <div class="list_product_quantity">
+                                        <div class="list_product_lower_button"><i class="fak fa-minus-btm"></i></div>
+                                        <input type="text" value="1">
+                                        <div class="list_product_add_button"><i class="fak fa-plus-btm"></i></div>
+                                    </div>
+                                    <div class="list_product_price favourable">NT$<span class="price_total">100</span></div>
+                                    <div class="list_product_unit_price">100</div>
+                                    <div class="list_product_remove"><i class="fak fa-trash-fa"></i></div>
+                                </div>
+                                <div class="list_product">
+                                    <div class="list_product_img">
+                                        <img src="./test_img/12563649_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="list_product_name">商品名稱</div>
+                                    <div class="list_product_quantity">
+                                        <div class="list_product_lower_button"><i class="fak fa-minus-btm"></i></div>
+                                        <input type="text" value="1">
+                                        <div class="list_product_add_button"><i class="fak fa-plus-btm"></i></div>
+                                    </div>
+                                    <div class="list_product_price favourable">NT$<span class="price_total">100</span></div>
+                                    <div class="list_product_unit_price">100</div>
+                                    <div class="list_product_remove"><i class="fak fa-trash-fa"></i></div>
+                                </div>
+                                <div class="list_product">
+                                    <div class="list_product_img">
+                                        <img src="./test_img/12563649_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="list_product_name">商品名稱</div>
+                                    
+                                    <div class="list_product_quantity">
+                                        <div class="list_product_lower_button" ><i class="fak fa-minus-btm"></i></div>
+                                        <input type="text" value="1">
+                                        <div class="list_product_add_button"><i class="fak fa-plus-btm"></i></div>
+                                    </div>
+                                    <div class="list_product_price favourable" >NT$<span class="price_total">100</span></div>
+                                    <div class="list_product_unit_price">100</div>
+                                    <div class="list_product_remove"><i class="fak fa-trash-fa"></i></div>
+                                </div>
+                            </div>
+                            <div class="shopping_list_bottom">
+                                <div class="list_count_block">
+                                    <div class="count_item">
+                                        <div class="cout_item_title">商品金額小計</div>
+                                        <div class="cout_item_content">NT$<span class="list_price_total">3160</span> </div>
+                                    </div>
+                                    <div class="count_item favourable">
+                                        <div class="cout_item_title">優惠折抵(<span class="discount">8.5</span>折)</div>
+                                        <div class="cout_item_content">-NT$<span class="discount_price">50</span></div>
+                                    </div>
+                                    <div class="count_item">
+                                        <div class="cout_item_title">運費</div>
+                                        <div class="cout_item_content">NT$<span class="shipping">50</span></div>
+                                    </div>
+                                    <div class="list_total_amount">
+                                        <div class="list_total_amount_title">總金額</div>
+                                        <div class="list_total_amount_content">NT$<span class="list_last_price">2737</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                var list_product_lower_button =$(".list_product_lower_button")
+                                var list_product_add_button =$(".list_product_add_button")
+
+                                list_product_add_button.click(function(){
+                                    var product_price = $(this).parents(".list_product").find(".list_product_unit_price")
+                                    var price_total =$(this).parents(".list_product").find(".price_total");
+                                    var input_number =$(this).siblings("input")
+                                    var all_item_price=0;
+                                    
+
+
+                                    input_number.val(parseInt(input_number.val()) + 1)
+                                    price_total.text(parseInt(input_number.val()) * parseInt(product_price.text()) );
+
+                                    // 全部商品小計
+                                    $(".price_total").each(function(){
+                                        all_item_price += parseInt($(this).text());
+                                    })
+                                    $(".list_price_total").text(all_item_price)
+
+                                    var discount = (($(".discount").text())/100)
+                                    var discount_price =all_item_price * (discount)
+                                    $(".discount_price").text(parseInt(discount_price))
+                                    // 總價格
+                                    var last_toal = all_item_price - (parseInt($(".discount_price").text())) + (parseInt($(".shipping").text()))
+                                    $(".list_last_price").text(last_toal)
+                                })
+                                list_product_lower_button.click(function(){
+                                    var product_price = $(this).parents(".list_product").find(".list_product_unit_price")
+                                    var price_total =$(this).parents(".list_product").find(".price_total");
+                                    var input_number =$(this).siblings("input")
+                                    var all_item_price=0;
+
+                                    if(input_number.val()>1){
+                                        input_number.val(parseInt(input_number.val()) - 1)
+                                        price_total.text(parseInt(input_number.val()) * parseInt(product_price.text()));
+                                    }
+                                    $(".price_total").each(function(){
+                                        all_item_price += parseInt($(this).text());
+                                    })
+                                    $(".list_price_total").text(all_item_price)
+                                    var last_toal = all_item_price - (parseInt($(".discount_price").text())) + (parseInt($(".shipping").text()))
+                                    $(".list_last_price").text(last_toal)
+
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
+    <!-- <div class="box1"></div> -->
+    
+
+    
+</body>
+</html>
