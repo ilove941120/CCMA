@@ -31,20 +31,20 @@
                     <form action="" class="member_registered_form">
                         <div class="member_registered_form_item">
                             <label for="member_phone">會員帳號</label>
-                            <input type="text" id="member_phone" namw="member_phone">
+                            <input type="text" id="member_phone" name="member_phone">
                         </div>
                         <div class="member_registered_form_item">
                             <label for="member_password">會員密碼</label>
-                            <input type="text" id="member_password" namw="member_password">
+                            <input type="text" id="member_password" name="member_password">
                         </div>
                         <div class="member_registered_form_item">
                             <label for="member_password_same">確認密碼</label>
-                            <input type="text" id="member_password_same" namw="member_password_same">
+                            <input type="text" id="member_password_same" name="member_password_same">
                         </div>
                         <div class="member_registered_form_row">
                             <div class="member_registered_form_item_name">
                                 <label for="member_name">姓名</label>
-                                <input type="text" id="member_name" namw="member_name">
+                                <input type="text" id="member_name" name="member_name">
                             </div>
                             <div class="member_registered_form_item_gender">
                                 <div class="radio_item"><input type="radio" name="member_gender" id="member_gender" value="male">先生</div>
@@ -54,26 +54,26 @@
                         <div class="member_registered_form_row">
                             <div class="member_registered_form_item_50">
                                 <label for="member_company">公司</label>
-                                <input type="text" id="member_company" namw="member_company">
+                                <input type="text" id="member_company" name="member_company">
                             </div>
                             <div class="member_registered_form_item_50">
                                 <label for="member_post">職稱</label>
-                                <input type="text" id="member_post" namw="member_post">
+                                <input type="text" id="member_post" name="member_post">
                             </div>
                         </div>
                         <div class="member_registered_form_row">
                             <div class="member_registered_form_item_50">
                                 <label for="member_contact_phone">電話</label>
-                                <input type="text" id="member_contact_phone" namw="member_contact_phone">
+                                <input type="text" id="member_contact_phone" name="member_contact_phone">
                             </div>
                             <div class="member_registered_form_item_50">
                                 <label for="member_fax">傳真</label>
-                                <input type="text" id="member_fax" namw="member_fax">
+                                <input type="text" id="member_fax" name="member_fax">
                             </div>
                         </div>
                         <div class="member_registered_form_item">
                             <label for="member_email">E-mail</label>
-                            <input type="email" id="member_email" namw="member_email">
+                            <input type="email" id="member_email" name="member_email">
                         </div>
                         <label for="member_introducer">介紹</label>
                         <div class="member_registered_form_row">
@@ -82,7 +82,7 @@
                                     <div class="radio_item"><input type="radio" name="member_introducer" id="member_introducer_false">無</div>
                                     <div class="radio_item"><input type="radio" name="member_introducer" id="member_introducer_true">有</div>
                                 </div>
-                                <input type="text" id="member_introducer" namw="member_introducer">
+                                <input type="text" id="member_introducer" name="member_introducer">
                             </div>
                         </div>
                         <label for="member_phone">地址</label>
@@ -106,7 +106,7 @@
                                         <option value="">北屯</option>
                                     </select>
                                 </div>
-                                <input type="text" id="member_address" namw="member_address" placeholder="請輸入街/巷/弄/號/樓...">
+                                <input type="text" id="member_address" name="member_address" placeholder="請輸入街/巷/弄/號/樓...">
 
                             </div>
                         </div>
@@ -120,6 +120,25 @@
                             <a href="#" class="member_registered_sent_button">確認註冊</a>
                         </div>
                     </form>
+                    <script>
+                        var phoneCheck = /^[0][9]\d{8}$/
+                        var passwordCheck = /^[0][9]\d{4}$/;
+                        // 點擊驗證表單
+                        $(".set_up_button").click(function(){
+                            if($("#member_phone").val() =="" || phoneCheck.test($("#member_phone").val()) == false){
+                                alert("請輸入手機,不可以空白或格式錯誤")
+                                return false;
+                            }
+                            if($("#member_password").val() =="" || passwordCheck.test($("#member_password").val()) == false){
+                                alert("請輸入密碼,不可以空白或格式錯誤")
+                                return false;
+                            }
+                            
+                            else {
+                                $(".member_login_form").submit();
+                            }
+                        })
+                    </script>
                 </div>
         </div>
     </section>

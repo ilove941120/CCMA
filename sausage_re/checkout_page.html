@@ -109,6 +109,21 @@
                             <script>
                                 var list_product_lower_button =$(".list_product_lower_button")
                                 var list_product_add_button =$(".list_product_add_button")
+                                var list_product_remove =$(".list_product_remove i")
+
+                                $(document).ready(function(){
+                                    var product_price = $(this).parents(".list_product").find(".list_product_unit_price")
+                                    var price_total =$(this).parents(".list_product").find(".price_total");
+                                    var input_number =$(this).siblings("input")
+                                    var all_item_price=0;
+
+                                    $(".price_total").each(function(){
+                                        all_item_price += parseInt($(this).text());
+                                    })
+                                    $(".list_price_total").text(all_item_price)
+                                    var last_toal = all_item_price - (parseInt($(".discount_price").text())) + (parseInt($(".shipping").text()))
+                                    $(".list_last_price").text(last_toal)
+                                })
 
                                 list_product_add_button.click(function(){
                                     var product_price = $(this).parents(".list_product").find(".list_product_unit_price")
@@ -152,12 +167,52 @@
                                     $(".list_last_price").text(last_toal)
 
                                 })
+                                list_product_remove.click(function(){
+                                    var all_item_price=0;
+
+                                    $(this).parents(".list_product").remove()
+                                    $(".price_total").each(function(){
+                                        all_item_price += parseInt($(this).text());
+                                    })
+                                    $(".list_price_total").text(all_item_price)
+                                    var last_toal = all_item_price - (parseInt($(".discount_price").text())) + (parseInt($(".shipping").text()))
+                                    $(".list_last_price").text(last_toal)
+                                })
                             </script>
                         </div>
+                        <form action="" class="addressee_form">
+                            <div class="addressee_form_title">收件資訊</div>
+                            <div class="addressee_form_item_block">
+                                <div class="addressee_form_item_title">*收件人姓名</div>
+                                <input type="text" placeholder="請輸入你的姓名">
+                            </div>
+                            <div class="addressee_form_item_block">
+                                <div class="addressee_form_item_title">*手機號碼</div>
+                                <input type="text" placeholder="請輸入你的姓名">
+                            </div>
+                            <div class="addressee_form_item_block">
+                                <div class="addressee_form_item_title">*收件地址</div>
+                                <div class="select_block">
+                                    <select name="" id="" >
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <input type="text">
+                            </div>
+
+                        </form>
+
                     </div>
+                    
                 </div>
             </div>
+            <div class="desk_checkout_page">
+                <div class="desk_baceground_buttom"></div>
+            </div>
         </div>
+        
         
     </section>
     

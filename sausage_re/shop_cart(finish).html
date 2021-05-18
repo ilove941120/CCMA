@@ -90,6 +90,9 @@
             $(".close_button").click(function(){
                 $(".side_shop_cart").hide()
             })
+            $(".shop_cart_item_delete").click(function(){
+                $(this).parents(".shop_cart_item").remove()
+            })
         </script>
         <script>
             $(document).ready(function(){
@@ -103,6 +106,5 @@
         </script>
     </section>
     
-    <!-- <div class="box1"></div> -->
 </body>
 </html>
