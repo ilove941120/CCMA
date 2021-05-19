@@ -326,6 +326,7 @@ a:hover,a:focus{
     position: relative;
     overflow: hidden;
     height: 400px; 
+	z-index: -1;
 }
 @media (max-width:1200px){
 	.foot{
@@ -1023,6 +1024,11 @@ a:hover,a:focus{
 	background-color: #BC1F21;
 	color: white;
 }
+@media (max-width:992px){
+	.sort_item{
+		padding-left: 10px;
+	}
+}
 @media (max-width:768px){
 	.sort_item{
 		width: 30%;
@@ -1170,7 +1176,6 @@ a:hover,a:focus{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	/* background-color: rgba(100, 148, 237, 0.493); */
 	top: 0;
 	left: 0;
 	z-index: -5;
@@ -1412,6 +1417,30 @@ a:hover,a:focus{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+}
+@media (max-width:1400px){
+	.product_in_page_content{
+		margin-top: 100px;
+	}
+}
+@media (max-width:768px){
+	.product_in_page_content{
+		margin-top: 0px;
+	}
+}
+.product_in_sort_block{
+	width: 17%;
+	margin-top: 100px;
+}
+@media (max-width:768px){
+	.product_in_sort_block{
+		width: 100%;
+		display: flex;
+		align-items: center;
+		margin-bottom: 30px;
+		position: relative;
+		margin-top: 0px;
+	}
 }
 .product_thing{
 	width: 75%;
@@ -1695,15 +1724,15 @@ a:hover,a:focus{
 .product_thimg_description_content{
 	padding: 20px;
 	margin-bottom: 20px;
-	height: 760px;
+	min-height: 760px;
 
 }
-/* 問題768的時候是手機畫面嗎 */
-@media (max-width:768px){
+@media (max-width:1200px){
 	.product_thimg_description_content{
-		height: auto;
+		min-height: 500px;
 	}
 }
+
 .back_buttom{
 	width: 120px;
 	background-color: black;
@@ -1712,6 +1741,181 @@ a:hover,a:focus{
 	padding: 10px 0;
 	margin: auto;
 }
+@media (max-width:768px){
+	.back_buttom{
+		margin-bottom: 100px;
+	}
+}
+
+/* 產品內頁背景 */
+.desk_product_in_bottom{
+	position: absolute;
+	top: 1%;
+	right: -53%;
+	/* right: -500px; */
+}
+@media (max-width:1700px){
+	.desk_product_in_bottom{
+		top: 5%;
+		right: -53%;
+	}
+}
+
+@media (max-width:1400px){
+	.desk_product_in_bottom{
+		top: 10%;
+		right: -70%;
+	}
+}
+@media (max-width:1200px){
+	.desk_product_in_bottom{
+		top: 10%;
+		right: -65%;
+	}
+}
+@media (max-width:992px){
+	.desk_product_in_bottom{
+		top: 10%;
+		right: -105%;
+	}
+}
+.desk_product_in_grass{
+	position: absolute;
+	top: 10%;
+	left: 7%;
+	z-index: -1;
+}
+@media (max-width:1400px){
+	.desk_product_in_grass{
+		position: absolute;
+		top: 5%;
+		left: 20%;
+	}
+}
+@media (max-width:1400px){
+	.desk_product_in_grass{
+		position: absolute;
+		top: 2%;
+		left: 30%;
+	}
+}
+.desk_product_in_grass img{
+	width: 100%;
+	height: 100%;
+}
+
+
+.desk_product_in_grass img{
+	width: 100%;
+	height: 100%;
+}
+.desk_product_in_spoon{
+	position: absolute;
+	top: 45%;
+	left: -2.5%;
+	z-index: -1;
+}
+.desk_product_in_spoon img{
+	width: 100%;
+	height: 100%;
+}
+.desk_product_in_fork{
+	position: absolute;
+	top: 35%;
+	left: 0%;
+	z-index: -1;
+}
+.desk_product_in_fork img{
+	width: 100%;
+	height: 100%;
+}
+@media (max-width:1700px){
+	.desk_product_in_spoon{
+		display: none;
+	}
+	.desk_product_in_fork{
+		display: none;
+	}
+}
+.desk_product_in_fork_RWD{
+	position: absolute;	
+	bottom: 4%;
+	left: 22%;
+	width: 120px;
+	display: none;
+}
+@media (max-width:1700px){
+	.desk_product_in_fork_RWD{
+		display: block;
+	}
+}
+.desk_product_in_fork_RWD img{
+	width: 100%;
+	height: 100%;
+}
+
+@media (max-width:1200px){
+	.desk_product_in_fork_RWD{
+		bottom: 4.5%;
+		left: 28%;
+		width: 100px;
+	}
+}
+@media (max-width:992px){
+	.desk_product_in_fork_RWD{
+		bottom: 3%;
+		left: 24%;
+		width: 100px;
+	}
+}
+.desk_product_page_knife_RWD{
+	position: absolute;
+	bottom: 7%;
+	left: 31%;
+	width: 170px;
+	display: none;
+}
+.desk_product_page_knife_RWD img{
+	width: 100%;
+	height: 100%;
+}
+@media (max-width:1700px){
+	.desk_product_page_knife_RWD{
+		display: block;
+	}
+}
+@media (max-width:1200px){
+	.desk_product_page_knife_RWD{
+		bottom: 6%;
+		left: 40%;
+		width: 150px;
+	}
+}
+@media (max-width:992px){
+	.desk_product_page_knife_RWD{
+		bottom: 5.5%;
+		left: 35%;
+		width: 150px;
+	}
+}
+.desk_product_basket{
+	position: absolute;
+	top: 20%;
+	left: -5%;
+	z-index: -2;
+}
+@media (max-width:1700px){
+	.desk_product_basket{
+		top: 30%;
+		left: -5%;
+	}
+}
+@media (max-width:1500px){
+	.desk_product_basket{
+		display: none;
+	}
+}
+
 /* ---------側邊購物車----------- */
 .side_cart_button{
 	width: 40px;
@@ -1895,14 +2099,12 @@ a:hover,a:focus{
 .form_style{
 	width: 500px;
 	margin: auto;
-	background-color: white;
 	overflow: hidden;
 }
 @media (max-width:576px){
 	.form_style{
 		width: 300px;
 		margin: auto;
-		background-color: white;
 		overflow: hidden;
 	}
 }
@@ -1911,7 +2113,6 @@ a:hover,a:focus{
 	display: flex;
 	align-items: flex-start;
 	border-bottom: 1px solid black;
-	background-color: white;
 	margin-bottom: 20px;
 }
 .contact_form_item input{
@@ -1919,6 +2120,7 @@ a:hover,a:focus{
 	width: 100%;
 	padding-left: 10px;
 	margin-bottom: 5px;
+	background-color: transparent;
 	
 }
 .contact_form_textarea{
@@ -1926,7 +2128,6 @@ a:hover,a:focus{
 	display: flex;
 	flex-direction: column;
 	border-bottom: 1px solid black;
-	background-color: white;
 	margin-bottom: 20px;
 }
 .label_style{
@@ -1937,6 +2138,8 @@ a:hover,a:focus{
 }
 .contact_form_textarea textarea{
 	border: 0;
+	background-color: transparent;
+
 }
 
 .contact_form_bottom{
@@ -1971,10 +2174,102 @@ a:hover,a:focus{
 
 	}
 }
+.contact_news_RWD{
+	width: 500px;
+	margin: auto;
+	display: none;
+	margin-bottom: 50px;
+	padding: 10px 0;
+	border-bottom: 10px solid black;
+}
+@media (max-width:768px){
+	.contact_news_RWD{
+		display: block;
+	}
+}
+@media (max-width:576px){
+	.contact_news_RWD{
+		width: 300px;
+		margin: auto;
+	}
+}
+.contact_news_item_RWD{
+	display: flex;
+	margin-bottom: 20px;
+}
+.contact_icon_RWD{
+	margin-right: 10px;
+}
+/* 聯絡我們頁面--背景 */
+.desk_contact_page_bottom{
+	position: absolute;
+	top: -20%;
+	left: -15%;
+	/* width: 110%; */
+	width: 2050px;
+}
+.desk_contact_page_bottom img{
+	width: 100%;
+	height: 100%;
+}
+@media (max-width:1700px){
+	.desk_contact_page_bottom{
+		left: -30%;
+
+	}
+}
+@media (max-width:1400px){
+	.desk_contact_page_bottom{
+		left: -55%;
+	}
+}
+@media (max-width:1200px){
+	.desk_contact_page_bottom{
+		left: -80%;
+	}
+}
+@media (max-width:992px){
+	.desk_contact_page_bottom{
+		left: -110%;
+	}
+}
+@media (max-width:880px){
+	.desk_contact_page_bottom{
+		left: -130%;
+	}
+}
+.desk_contact_page_bottom_fork{
+	position: absolute;
+	right: -3%;
+	top: 48%;
+	z-index: -1;
+}
+.desk_contact_page_bottom_fork img{
+	width: 100%;
+	height: 100%;
+}
+.desk_contact_page_bottom_spoon{
+	position: absolute;
+	right: 0;
+	top: 54%;
+	z-index: -1;
+
+}
+.desk_contact_page_bottom_spoon img{
+	width: 100%;
+	height: 100%;
+}
 /* ---------聯絡我們頁面----------- */
 /* ---------結帳頁面----------- */
 .checkout_page{
 	position: relative;
+	margin-top: 80px;
+}
+@media (max-width:1200px){
+	.checkout_page{
+		position: relative;
+		margin-top: 00px;
+	}
 }
 .checkout_block{
 	width: 100%;
@@ -1986,6 +2281,11 @@ a:hover,a:focus{
 	flex-direction: column;
 	align-items: center;
 }
+@media (max-width:992px){
+	.checkout_side_block{
+		display: none;
+	}
+}
 
 .checkout_side_item_block{
 	display: flex;
@@ -1993,10 +2293,34 @@ a:hover,a:focus{
 	align-items: center;
 	justify-content: center;
 }
-.checkout_side_line{
+
+
+.checkout_side_line610{
 	width: 1px;
-	height: 200px;
 	background-color: black;
+	height: 0;
+	transition: 2s;
+}
+.add_height610{
+	height: 610px;
+}
+.checkout_side_line640{
+	width: 1px;
+	height: 0px;
+	background-color: black;
+	transition: 1s;
+}
+.add_height640{
+	height: 640px;
+}
+.checkout_side_line120{
+	width: 1px;
+	height: 0px;
+	background-color: black;
+	transition: 2s;
+}
+.add_height120{
+	height: 140px;
 }
 .checkout_side_item{
 	display: flex;
@@ -2006,10 +2330,20 @@ a:hover,a:focus{
 	height: 150px;
 	border: 4px dashed black;
 	border-radius: 50%;
+	/* transition: 1s; */
+}
+.active_side_item{
+	background-color: black;
+	color: white;
 }
 .checkout_content{
 	width: 75%;
 	margin-left: auto;
+}
+@media (max-width:992px){
+	.checkout_content{
+		width: 100%;
+	}
 }
 .checkout_content_title{
 	font-size: 32px;
@@ -2023,6 +2357,7 @@ a:hover,a:focus{
 	border-radius: 10px;
 	border: 1px solid black;
 	background-color: white;
+	margin-bottom: 50px;
 }
 .shopping_list_top{
 	width: 100%;
@@ -2045,7 +2380,11 @@ a:hover,a:focus{
 	justify-content: center;
 	align-items: center;
 }
-
+@media (max-width:576px){
+	.list_product_img{
+		display: none;
+	}
+}
 .list_product_img img{
 	width: 80%;
 	height: 100%;
@@ -2056,6 +2395,16 @@ a:hover,a:focus{
 	padding: 0 10px;
 	font-size: 16px;
 }
+@media (max-width:768px){
+	.list_product_name{
+		font-size: 12px;
+	}
+}
+@media (max-width:576px){
+	.list_product_name{
+		width: 35%;
+	}
+}
 .list_product_quantity{
 	width: 15%;
 	display: flex;
@@ -2063,12 +2412,28 @@ a:hover,a:focus{
 	background-color: white;
 	padding: 0 2px;
 }
+@media (max-width:768px){
+	.list_product_quantity{
+		width: 20%;
+	}
+}
+@media (max-width:576px){
+	.list_product_quantity{
+		width: 30%;
+		font-size: 12px;
+	}
+}
 .list_product_lower_button,.list_product_add_button{
 	/* width: 20%; */
 	display: flex;
 	align-items: center;
 	padding: 3px;
 	font-size: 14px;
+}
+@media (max-width:768px){
+	.list_product_lower_button,.list_product_add_button{
+		font-size: 12px;
+	}
 }
 .list_product_quantity input{
 	width: 60%;
@@ -2087,6 +2452,18 @@ a:hover,a:focus{
 	justify-content: center;
 	font-size: 32px;
 }
+@media (max-width:768px){
+	.list_product_price{
+		width: 30%;
+		font-size: 16px;
+	}
+}
+@media (max-width:576px){
+	.list_product_price{
+		width: 30%;
+		font-size: 12px;
+	}
+}
 .list_product_unit_price{
 	display: none;
 }
@@ -2097,6 +2474,14 @@ a:hover,a:focus{
 	justify-content: center;
 	font-size: 32px;
 
+}
+.list_product_remove:hover{
+	color: #BC1F21;
+}
+@media (max-width:768px){
+	.list_product_remove{
+		font-size: 16px;
+	}
 }
 
 .shopping_list_bottom{
@@ -2111,6 +2496,11 @@ a:hover,a:focus{
 .list_count_block{
 	width: 45%;
 	margin-left: auto;
+}
+@media (max-width:768px){
+	.list_count_block{
+		width: 100%;
+	}
 }
 .count_item{
 	display: flex;
@@ -2127,22 +2517,31 @@ a:hover,a:focus{
 	display: flex;
 	padding-top: 30px;
 	border-top: 2px solid black;
+	justify-content: space-between;
 }
 .list_total_amount_title{
 	display: flex;
 	align-items: flex-end;
-	width: 50%;
 }
 .list_total_amount_content{
-	width: 50%;
 	font-size: 32px;
 	text-align: right;
 	color: #D90808;
 }
+@media (max-width:768px){
+	.list_total_amount_content{
+		font-size: 24px;
+	}
+}
 .favourable{
 	color: #D90808;
 }
-.addressee_form{
+.addressee_block{
+	display: none;
+}
+.addressee_form_title{
+	font-size: 32px;
+	margin-bottom: 20px;
 }
 
 /* 結帳背景 */
@@ -2151,15 +2550,166 @@ a:hover,a:focus{
 	height: 100%;
 	position: absolute;
 	top: 0;
-	z-index: -1;
+	z-index: -3;
+	overflow: hidden;
 }
 .desk_baceground_buttom{
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	background-image: url(../img/deck3_1.png);
-	top: 0;
+	bottom: 0%;
 	background-repeat: no-repeat;
+	background-position: bottom 0 left 5%;
+	background-size: 145%;
+}
+.addressee_form_item_block{
+	margin-bottom: 20px;
+}
+.addressee_form_item_block input{
+	width: 100%;
+}
+.addressee_form_item_block textarea{
+	width: 100%;
+}
+.invoice_block{
+	/* min-height: 200px; */
+	margin-bottom: 50px;
+}
+.invoice_block{
+	display: none;
+}
+.invoice_title{
+	font-size: 32px;
+	margin-bottom: 20px;
+}
+.invoice_item_block{
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+}
+@media (max-width:1200px){
+	.invoice_item_block{
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.invoice_item{
+		margin-bottom: 10px;
+	}
+}
+.invoice_item{
+	margin-right: 20px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+.invoice_item_text{
+	margin-right: 10px;
+}
+@media (max-width:768px){
+	.invoice_item{
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+}
+.invoice_item_checkbox{
+	margin-right: 10px;
+}
+@media (max-width:1200px){
+	.invoice_item_input{
+		width: 270px;
+	}
+}
+@media (max-width:768px){
+	.invoice_item_input{
+		margin-left: 00px;
+		width: 100%;
+	}
+}
+.pay_method{
+	display: none;
+}
+.pay_method_title{
+	font-size: 32px;
+	margin-bottom: 20px;
+}
+.pay_item_block{
+	display: flex;
+	flex-direction: column;
+}
+.pay_item_block select{
+	width: 50%;
+}
+@media (max-width:768px){
+	.pay_item_block select{
+		width: 100%;
+	}
+}
+.next_button1{
+	width: 400px;
+	height: 70px;
+	background-color: #343535;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 50px;
+}
+.next_button2{
+	width: 400px;
+	height: 70px;
+	background-color: #343535;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 50px;
+}
+.next_button3{
+	width: 400px;
+	height: 70px;
+	background-color: #343535;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+.remove{
+	visibility: hidden;
+}
+@media (max-width:768px){
+	.remove{
+		display: none;
+	}
+}
+.checkout_form_sent_block{
+	margin-top: 100px;
+	display: none;
+}
+.checkout_sent_button{
+	width: 400px;
+	height: 70px;
+	background-color: #343535;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+@media (max-width:768px){
+	.checkout_sent_button,.next_button1,.next_button2,.next_button3{
+		width: 300px;
+	}
 }
 /* ---------結帳頁面----------- */
 
@@ -2501,6 +3051,11 @@ a:hover,a:focus{
 		width: 100%;
 	}
 }
+@media (max-width:576px){
+	.member_registered_block{
+		margin-bottom: 50px;
+	}
+}
 .member_registered_title_block{
 	margin-bottom: 40px;
 	width: 100%;
@@ -2520,7 +3075,7 @@ a:hover,a:focus{
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 .member_registered_form_item input{
 	border: 0;
@@ -2532,6 +3087,8 @@ a:hover,a:focus{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 30px;
+
 }
 @media (max-width:768px){
 	.member_registered_form_row{
@@ -2541,7 +3098,6 @@ a:hover,a:focus{
 .member_registered_form_item_name{
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 50px;
 	width: 70%;
 }
 .member_registered_form_item_name input{
@@ -2559,7 +3115,6 @@ a:hover,a:focus{
 .member_registered_form_item_gender{
 	display: flex;
 	align-items: flex-end;
-	margin-bottom: 50px;
 	width: 30%;
 	justify-content: center;
 }
@@ -2577,7 +3132,6 @@ a:hover,a:focus{
 .member_registered_form_item_50{
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 50px;
 	width: 47%;
 }
 @media (max-width:768px){
@@ -2596,7 +3150,6 @@ a:hover,a:focus{
 	width: 100%;
 	justify-content: space-between;
 	align-items: flex-end;
-	margin-bottom: 50px;
 }
 .radio_block{
 	width: 20%;
@@ -2612,17 +3165,23 @@ a:hover,a:focus{
 }
 .member_registered_form_item_address{
 	width: 100%;
-	margin-bottom: 50px;
 }
 .select_block{
 	display: flex;
 	margin-bottom: 10px;
 }
+.select_block input{
+	width: 80px;
+	text-align: center;
+	margin-right: 10px;
+	border: 1px solid #00000066;
+}
 .select_block select{
 	margin-right: 10px;
 	border: 0;
-	border-bottom: 1px solid black;
+	border: 1px solid #00000066;
 	background-color: transparent;
+	margin-right: 10px;
 
 }
 .member_registered_form_item_address input{
@@ -2668,10 +3227,63 @@ a:hover,a:focus{
 /* 會員註冊--背景 */
 .desk_member_register_bottom{
 	position: absolute;
-	left: -30%;
-	top: -10%;
+	left: -26%;
+	top: -25%;
+	height: 130%;
 }
 .desk_member_register_bottom img{
+	width: 100%;
+	height: 100%;
+	/* transform: rotate(-65deg); */
+	/* opacity: 0.2; */
+}
+@media (max-width:992px){
+	.desk_member_register_bottom{
+		height: 115%;
+		left: -30%;
+		top: -10%;
+	}
+}
+.desk_member_register_spoon{
+	position: absolute;
+	bottom: 30%;
+	right:4.5%;
+	z-index: -1;
+}
+.desk_member_register_spoon img{
+	width: 100%;
+	height: 100%;
+}
+@media (max-width:1500px){
+	.desk_member_register_spoon{
+		bottom: 30%;
+		right:2.5%;
+	}
+}
+@media (max-width:992px){
+	.desk_member_register_spoon{
+		bottom: 30%;
+		right:0%;
+	}
+}
+.desk_member_register_fork{
+	position: absolute;
+	bottom: 40%;
+	right:0.6%;
+	z-index: -1;
+}
+.desk_member_register_fork img{
+	width: 100%;
+	height: 100%;
+}
+.desk_member_sausage{
+	position: absolute;
+	top: -130%;
+	right: -40%;
+	width: 50%;
+	width: 100px;
+}
+.desk_member_sausage img{
 	width: 100%;
 	height: 100%;
 }
@@ -2702,7 +3314,9 @@ a:hover,a:focus{
 	top: -20%;
 	left: -22%;
 	width: 2200px;
+	
 }
+
 @media (max-width:1600px){
 	.desk_member_data_bottom{
 		position: absolute;
@@ -2765,8 +3379,8 @@ a:hover,a:focus{
 
 .desk_member_data_spoon{
 	position: absolute;
-	bottom: 35%;
-	right: 6.5%;
+	bottom: 40%;
+	right: 0.5%;
 	z-index: -1;
 }
 .desk_member_data_spoon img{
@@ -2775,9 +3389,10 @@ a:hover,a:focus{
 }
 @media (max-width:1600px){
 	.desk_member_data_spoon{
-		bottom: 27%;
-		right: 6.5%;
+		bottom: 1.5%;
+		right: 30%;
 		z-index: -1;
+		transform: rotate(45deg);
 	}
 }
 @media (max-width:1400px){
@@ -2788,7 +3403,7 @@ a:hover,a:focus{
 .desk_member_data_fork{
 	position: absolute;
 	bottom: 50%;
-	right: 2%;
+	right: -3%;
 	z-index: -1;
 }
 .desk_member_data_fork img{
@@ -2797,8 +3412,9 @@ a:hover,a:focus{
 }
 @media (max-width:1600px){
 	.desk_member_data_fork{
-		bottom: 37%;
-		right: 2%;
+		bottom: 7%;
+		right:20%;
+		transform: rotate(40deg);
 	}
 }
 @media (max-width:1400px){
@@ -2854,11 +3470,12 @@ a:hover,a:focus{
 .member_password_update_block{
 	width: 100%;
 	display: flex;
-	min-height: 600px;
+	
 }
 @media (max-width:768px){
 	.member_password_update_block{
 		flex-direction: column;
+		min-height: 600px;
 	}
 }
 .member_password_update_content_block{
