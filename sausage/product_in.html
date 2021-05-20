@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap4.min.css">
+    <link rel="stylesheet" href="css/external_i.css">
+    <link rel="stylesheet" href="css/external_k.css">
+    <link rel="stylesheet" href="css/external_g.css">
+    <link rel="stylesheet" href="css/external_p.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/gs.css">
+
+    <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
+    <script src="js/slick.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+<body>
+    <div class="head">
+        <div class="head_block">
+            <div class="menu_bar">
+                <div class="head_search">
+                    <div class="head_search_icon_block"><i class="fap fa-search-btb"></i></div>
+                    <input type="text" placeholder="尋找產品">
+                </div>
+                <div class="menu_item">產品專區</div>
+                <div class="menu_item">聯絡我們</div>
+                <div class="menu_item">會員中心</div>
+                <div class="menu_line"><i class="fap fa-line02"></i></div>
+                <div class="menu_group_RWD"><i class="fap fa-bars"></i></div>
+            </div>
+        </div>
+        <div class="desk_head_block">
+            <img src="img/head_background.png" alt="">
+            <div class="desk_head_logo">
+                <img src="img/logo1.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="desk_page_block">
+        <div class="desk_page_background">
+            <img src="img/black_head_01.png" alt="">
+            <div class="des_page_item">
+                <img src="img/product_title_1.png" alt="">
+            </div>
+        </div>
+        <div class="des_page_item_RWD">
+            <img src="img/product_title_1.png" alt="">
+        </div>
+    </div>
+    <!-- 側邊購物車 -->
+    <section>
+        <div class="side_cart_button">
+            <div class="side_item">
+                <i class="fak fak-shopping-cart-typcn"></i>
+                <div class="quantity">(<span>5</span>)</div>
+            </div>
+            <div class="divider"></div>
+            <div class="side_item">
+                <i class="fak fa-heart-fi"></i>
+                <div class="quantity">(<span>5</span>)</div>
+            </div>
+            <div class="divider"></div>
+            <div class="side_item">
+                <i class="fak fak-clock-btm"></i>
+                <div class="record">瀏覽紀錄</div>
+            </div>
+        </div>
+        
+        <div class="side_shop_cart">
+            <div class="shop_cart_head">
+                <i class="fap fa-chevron-left"></i>
+                瀏覽紀錄(<span>4</span>)
+                <div class="close_button">	
+                    <i class="fak fa-cross"></i>
+                </div>
+            </div>
+            <div class="shop_cart_content">
+                <div class="shop_cart_item">
+                    <div class="checkbox">
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="shop_cart_item_img">
+                        <img src="img/test1.png" alt="">
+                    </div>
+                    <div class="shop_cart_item_content">
+                        <div class="shop_cart_item_name">商品名稱商品名稱商品名稱商</div>
+                        <div class="shop_cart_item_price">NT$ <span>6000</span></div>
+                    </div>
+                    <div class="shop_cart_item_delete"><i class="fak fa-trash-fa"></i></div>
+                </div>
+                <div class="shop_cart_item">
+                    <div class="checkbox">
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="shop_cart_item_img">
+                        <img src="img/test1.png" alt="">
+                    </div>
+                    <div class="shop_cart_item_content">
+                        <div class="shop_cart_item_name">商品名稱</div>
+                        <div class="shop_cart_item_price">NT$ <span>6000</span></div>
+                    </div>
+                    <div class="shop_cart_item_delete"><i class="fak fa-trash-fa"></i></div>
+                </div>
+                
+            </div>
+            <div class="shop_cart_foot">
+                <div class="delete_button">刪除</div>
+                <div class="join_button">加入購物車</div>
+            </div>
+        </div>
+        <script>
+            $(".side_cart_button").click(function(){
+                $(".side_shop_cart").slideToggle()
+                var product_width = $(".shop_cart_item_img").width()
+                $(".shop_cart_item_img").height(product_width)
+            })
+            $(".close_button").click(function(){
+                $(".side_shop_cart").hide()
+            })
+        </script>
+        <script>
+            $(document).ready(function(){
+                var product_width = $(".shop_cart_item_img").width()
+                $(".shop_cart_item_img").height(product_width)
+            })
+            $(window).resize(function(){
+                var product_width = $(".shop_cart_item_img").width()
+                $(".shop_cart_item_img").height(product_width)
+            })
+        </script>
+    </section>
+    <!-- 頁面主內容 -->
+    <section>
+        <div class="product_in_page">
+            <div class="container">
+                <div class="product_in_page_content">
+                    <div class="product_in_sort_block">
+                        <div class="sort_title">
+                            <div class="chinese_title">產品專區</div>
+                            <div class="english_title">product zone</div>
+                        </div>
+                        <div class="deck_line"></div>
+                        <div class="sort_item_block">
+                            <a href="#" class="sort_item">
+                                原嘗系列
+                            </a>
+                            <a href="#" class="sort_item">
+                                竹居系列
+                            </a>
+                            <a href="#" class="sort_item">
+                                饌糧系列
+                            </a>
+                        </div>
+                        <div class="sort_item_block_RWD">選擇系列</div>
+                        <div class="sort_item_group_RWD">
+                            <a href="https://www.youtube.com/premium" class="sort_item_RWD">
+                                原嘗系列
+                            </a>
+                            <a href="#" class="sort_item_RWD">
+                                竹居系列
+                            </a>
+                            <a href="#" class="sort_item_RWD">
+                                饌糧系列
+                            </a>
+                        </div>
+                        <script>
+                            $(".sort_item_block_RWD").click(function(){
+                                $(".sort_item_group_RWD").slideToggle()
+                            })
+                        </script>
+                    </div>
+                    <div class="product_thing">
+                        <div class="product_thing_top">
+                            <div class="product_thing_img_block">
+                                <div class="product_thing_big_img">
+                                    <div class="product_thing_big_img_item">
+                                        <img src="img/test1.png" alt="">
+                                    </div>
+                                    <div class="product_thing_big_img_item">
+                                        <img src="test_img/12563649_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="product_thing_big_img_item">
+                                        <img src="test_img/12528489_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="product_thing_big_img_item">
+                                        <img src="img/test1.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="product_thing_slider">
+                                    <div class="product_thing_slider_item">
+                                        <img src="img/test1.png" alt="">
+                                    </div>
+                                    <div class="product_thing_slider_item">
+                                        <img src="test_img/12563649_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="product_thing_slider_item">
+                                        <img src="test_img/12528489_xxl.jpg" alt="">
+                                    </div>
+                                    <div class="product_thing_slider_item">
+                                        <img src="img/test1.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $('.product_thing_big_img').slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows:false,
+                                    fade: true,
+                                    asNavFor: '.product_thing_slider'
+                                    });
+                                    $('.product_thing_slider').slick({
+                                    centerPadding:"0px",
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                    asNavFor: '.product_thing_big_img',
+                                    dots: false,
+                                    centerMode: true,
+                                    focusOnSelect: true
+                                });
+                                $(document).ready(function(){
+                                    var product_width = $(".product_thing_big_img_item").width()
+                                    $(".product_thing_big_img_item").height(product_width)
+                                    var product_width = $(".product_thing_slider_item").width()
+                                    $(".product_thing_slider_item").height(product_width)
+                                })
+                                $(window).resize(function(){
+                                    var product_width = $(".product_thing_big_img_item").width()
+                                    $(".product_thing_big_img_item").height(product_width)
+                                    var product_width = $(".product_thing_slider_item").width()
+                                    $(".product_thing_slider_item").height(product_width)
+                                })
+                            </script>
+                            <div class="product_thing_content_block">
+                                <div class="product_thing_name">
+                                    <div class="icon_love">
+                                        <i class="fak fa-heart-outline no_love"></i>
+                                        <i class="fak fa-heart-fi add_love"></i>
+                                    </div>
+                                    商品名稱</div>
+                                <div class="produc_thing_price">
+                                    <div class="special_price">NT$ <span>6000</span></div>
+                                    <div class="original_price">NT$ <span>6900</span></div>
+                                
+                                </div>
+                                <div class="product_thing_summary">
+                                    編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器編輯器
+                                </div>
+                                <form action="" class="product_thing_form">
+                                    <div class="product_thing_form_item">
+                                        <label for="">規格</label>
+                                        <select name="" id="">
+                                            <option value="">請選擇規格</option>
+                                            <option value="">xl</option>
+                                            <option value="">ml</option>
+                                        </select>
+                                    </div>
+                                    <div class="product_thing_form_item">
+                                        <label for="">數量</label>
+                                        <div class="amount_block">
+                                            <div class="lesson">
+                                                <i class="fak fa-minus-btm"></i>
+                                            </div>
+                                            <input type="text">
+                                            <div class="add">
+                                                <i class="fak fa-plus-btm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product_thing_button">
+                                        <a href="#" class="sent_shop_cart_button">加入購物車</a>
+                                        <a href="#" class="snet_buy_button">立即購買</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="product_thing_bottom">
+                            <div class="product_thimg_description">
+                                <div class="product_thimg_description_title">商品描述</div>
+                                <div class="product_thimg_description_content">
+                                    ※商品描述與商品規格區為自由編輯器，可自由上圖+輸入文字等。
+                                    <br>
+                                    ※商品描述與商品規格區為自由編輯器，可自由上圖+輸入文字等。
+                                    <br>
+                                    ※商品描述與商品規格區為自由編輯器，可自由上圖+輸入文字等。
+                                    <br>
+                                    <br>
+                                    <img style="width: 100%;" src="img/test1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="back_buttom">回上頁</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desk_product_page">
+            <div class="desk_product_in_bottom">
+                <img src="img/desk_product_in_bottom.png" alt="">
+                <div class="desk_product_in_grass">
+                    <img src="img/desk_product_in_grass.png" alt="">
+                </div>
+                <div class="desk_product_in_spoon">
+                    <img src="img/Spoon1.png" alt="">
+                </div>
+                <div class="desk_product_in_fork">
+                    <img src="img/fork2.png" alt="">
+                </div>
+                
+            </div>
+            <div class="desk_product_page_knife_RWD">
+                <img src="img/knife.png" alt="">
+            </div>
+            <div class="desk_product_in_fork_RWD">
+                <img src="img/fork.png" alt="">
+            </div>
+            <div class="desk_product_basket">
+                <img src="img/basket.png" alt="">
+            </div>
+        </div>
+        <div class="desk_product_page_RWD">
+            <div class="desk_product_page_flower1_RWD">
+                <img src="img/flower.png" alt="">
+            </div>
+            <div class="desk_product_page_basket_RWD">
+                <img src="img/basket.png" alt="">
+            </div>
+        </div>
+    </section>
+    <div class="foot">
+        <div class="foot_block">
+            <div class="foot_top">
+                <div class="foot_item_group">
+                    <div class="foot_top_item">服務條款</div>
+                    <div class="foot_top_item">購物須知</div>
+                    <div class="foot_top_item">隱私權聲明</div>
+                    <div class="foot_top_item"><i class="fap fa-line02"></i></div>
+                </div>
+            </div>
+            <div class="foot_bottom">
+                Copyright © 2021 青粮秫 all rights reserved.網站設計-橘野數位設計
+            </div>
+        </div>
+        <div class="foot_RWD">
+            <div class="foot_bottom_RWD">
+                <div class="foot_bottom_item_RWD">服務條款</div>
+                <div class="foot_bottom_item_RWD">購物須知</div>
+                <div class="foot_bottom_item_RWD">隱私權聲明</div>
+                <div class="foot_bottom_item_RWD"><i class="fap fa-line02"></i></div>
+            </div>
+            <div class="foot_top_RWD">
+                <div class="copyright">Copyright © 2021 青粮秫 all rights reserved.</div>
+                <div class="web_make">網站設計-橘野數位設計</div>
+            </div>
+            
+        </div>
+        <div class="desk_foot">
+            <div class="desk_foot_bottom">
+                <img src="img/foot.png" alt="">
+            </div>
+            
+        </div>
+        <div class="desk_foot_after">
+            <div class="foot_flower">
+                <img src="img/flower.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
