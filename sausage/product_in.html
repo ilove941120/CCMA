@@ -42,17 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="desk_page_block">
-        <div class="desk_page_background">
-            <img src="img/black_head_01.png" alt="">
-            <div class="des_page_item">
-                <img src="img/product_title_1.png" alt="">
-            </div>
-        </div>
-        <div class="des_page_item_RWD">
-            <img src="img/product_title_1.png" alt="">
-        </div>
-    </div>
+    
     <!-- 側邊購物車 -->
     <section>
         <div class="side_cart_button">
@@ -137,6 +127,17 @@
     </section>
     <!-- 頁面主內容 -->
     <section>
+        <div class="desk_page_block">
+            <div class="desk_page_background">
+                <img src="img/black_head_01.png" alt="">
+                <div class="des_page_item">
+                    <img src="img/product_title_1.png" alt="">
+                </div>
+            </div>
+            <div class="des_page_item_RWD">
+                <img src="img/product_title_1.png" alt="">
+            </div>
+        </div>
         <div class="product_in_page">
             <div class="container">
                 <div class="product_in_page_content">
@@ -267,12 +268,25 @@
                                             <div class="lesson">
                                                 <i class="fak fa-minus-btm"></i>
                                             </div>
-                                            <input type="text">
+                                            <input type="text" class="amount" value="1" readonly="readonly">
                                             <div class="add">
                                                 <i class="fak fa-plus-btm"></i>
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                        $(".amount")
+                                        $(".lesson").click(function(){
+                                            var input_number =$(this).siblings("input")
+                                            if(input_number.val()>1){
+                                            input_number.val(parseInt(input_number.val()) - 1)
+                                            }
+                                        })
+                                        $(".add").click(function(){
+                                            var input_number =$(this).siblings("input")
+                                            input_number.val(parseInt(input_number.val()) + 1)
+                                        })
+                                    </script>
                                     <div class="product_thing_button">
                                         <a href="#" class="sent_shop_cart_button">加入購物車</a>
                                         <a href="#" class="snet_buy_button">立即購買</a>
