@@ -1613,6 +1613,7 @@ a:hover,a:focus{
 	text-align: center;
 	margin: auto;
 	margin-top: 70px;
+	cursor: pointer;
 }
 /* ---------產品專區頁----------- */
 .product_page{
@@ -2495,6 +2496,7 @@ a:hover,a:focus{
 	text-align: center;
 	padding: 10px 0;
 	margin: auto;
+	display: block;
 }
 @media (max-width:768px){
 	.back_buttom{
@@ -3694,7 +3696,7 @@ a:hover,a:focus{
 	color: black;
 }
 .forget_password:hover{
-	color: black;
+	color: #BC1F21;
 }
 .member_login_form_button{
 	width: 90%;
@@ -4034,6 +4036,7 @@ a:hover,a:focus{
 @media (max-width:768px){
 	.member_registered_form_item_gender{
 		width: 100%;
+		/* justify-content: unset; */
 	}
 }
 .radio_item{
@@ -4219,6 +4222,12 @@ a:hover,a:focus{
 	border: 0;
 	background-color: transparent;
 
+}
+@media (max-width:768px){
+	.member_data_form_item_name{
+		margin-bottom: 20px;
+		width: 100%;
+	}
 }
 /* 會員資料--背景圖片 */
 .desk_member_data_bottom{
@@ -4710,6 +4719,11 @@ a:hover,a:focus{
 	display: flex;
 	margin-top: 120px;
 }
+@media (max-width:1200px){
+	.member_order_inquiry_in_block{
+		margin-top: 0;
+	}
+}
 @media (max-width:768px){
 	.member_order_inquiry_in_block{
 		flex-direction: column;
@@ -4748,6 +4762,11 @@ a:hover,a:focus{
 	background-color: white;
 
 }
+@media (max-width:576px){
+	.inquiry_in_top_content{
+		flex-direction: column;
+	}
+}
 .inquiry_in_top_content_left,.inquiry_in_top_content_right{
 	width: 50%;
 	padding: 0px 20px;
@@ -4758,8 +4777,19 @@ a:hover,a:focus{
 		padding: 0px 10px;
 	}
 }
+@media (max-width:768px){
+	.inquiry_in_top_content_left,.inquiry_in_top_content_right{
+		width: 100%;
+	}
+}
 .inquiry_in_top_content_left{
 	border-right: 1px solid #00000066;
+}
+@media (max-width:576px){
+	.inquiry_in_top_content_left{
+		border-right: 0;
+		border-bottom: 1px solid #00000066;
+	}
 }
 .contentleft_title{
 	font-size: 16px;
