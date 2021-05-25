@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/slick-theme.css">
+    <link rel="stylesheet" href="../css/slick.css">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: royalblue;
+        }
+        .slickBlockImg{
+            width: 100%;
+            padding: 50px;
+            margin: auto;
+        }
+        .slickImgItem{
+            width: 100%;
+            /* height: 500px; */
+            height: 80vw;
+            background-color: chocolate;
+        }
+        .slickImg{
+            width: 100%;
+            height: 100%;
+        }
+        .slickImgItem img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slickBlockText{
+            width: 100%;
+            height: 100px;
+            padding: 50px;
+            padding-top:0 ;
+            margin: auto;
+        }
+        .slickBlockTextItem{
+            width: 100%;
+            min-height: 100px;
+            padding: 20px;
+            background-color: cadetblue;
+        }
+        .slickBlockTextIn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .slick-prev{
+            left: 40%;
+        }
+        .slick-next{
+            right: 40%;
+        }
+        .slick-prev, .slick-next{
+            top: 95%;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="slickBlockImg">
+        <div class="slickImgItem">
+            <div class="slickImg">
+                <img src="../img/banner_about.jpeg" alt="">
+            </div>
+        </div>
+        <div class="slickImgItem">
+            <div class="slickImg">
+                <img src="../img/banner_contact.png" alt="">
+            </div>
+        </div>
+        <div class="slickImgItem">
+            <div class="slickImg">
+                <img src="../img/banner_index.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="slickBlockText">
+        <div class="slickBlockTextItem">
+            <div class="slickBlockTextIn">
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c1</div>
+        </div>
+        <div class="slickBlockTextItem">
+            <div class="slickBlockTextIn">2</div>
+
+        </div>
+        <div class="slickBlockTextItem">
+            <div class="slickBlockTextIn">2cac4sac4sac4a4c1c4da1c8da1c
+                2cac4sac4sac4a4c1c4da1c8da1c2cac4sac4sac4a4c1c4da1c8da1c2cac4sac4sac4a4c1c4da1c8da1c2cac4sac4sac4a4c1c4da1c8da1c2cac4sac4sac4a4c1c4da1c8da1c
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/slick.js"></script>
+<script>
+    
+ $('.slickBlockImg').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  fade: true,
+  asNavFor: '.slickBlockText'
+});
+$('.slickBlockText').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  asNavFor: '.slickBlockImg',
+  arrows: false,
+  dots: false,
+  centerMode: false,
+  focusOnSelect: true
+});
+	
+</script>
+</html>

@@ -1,0 +1,813 @@
+/* 品牌故事 */
+.content{
+    background-image: url(../img/bg.jpg);
+    background-repeat: unset;
+    background-size: cover;
+    padding:50px 0;
+    overflow: hidden;
+
+}
+.storyBlock{
+    margin-bottom: 50px;
+    position: relative;
+
+}
+.storyTitle{
+    border-left: 5px solid white;
+    padding-left: 5px;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: white;
+}
+.storyRWDTitle{
+    border-left: 5px solid white;
+    padding-left: 5px;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: white;
+    display: none;
+}
+.storyContent{
+    display: flex;
+    justify-content: space-between;
+}
+.storyImg{
+    width: 45%;
+}
+.storyImg img{
+    width: 100%;
+}
+.storyText{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.storyMain{
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+.storySub{
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 40px;
+}
+.storyRWDSub{
+    font-size: 16px;
+    letter-spacing: 2px;
+    display: none;
+}
+.moreButton{
+    width: 160px;
+    padding: 5px 0px;
+    background-color: #1E1408;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bolder;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.moreButton span{
+    padding-left: 20px;
+}
+@media (max-width:1200px){
+    .storySub{
+        font-size: 12px;
+        letter-spacing: 2px;
+        line-height: 25px;
+
+    }
+}
+@media (max-width:997px){
+    .footIconBar i{
+        font-size: 24px;
+    
+    }
+    .storyMain{
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-weight: bolder;
+        margin-bottom: 10px;
+    }
+    .storySub{
+        font-size: 12px;
+        letter-spacing: 2px;
+        line-height: 20px;
+
+    }
+    .moreButton{
+        font-size: 14px;
+        padding: 5px 0;
+    }
+}
+@media (max-width:768px){
+    .storyBlock{
+        padding: 0 20px;
+    }
+    .storyTitle{
+        display: none;
+    }
+    .storyRWDTitle{
+        display: block;
+    }
+    .storyContent{
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    .storyImg{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .storyText{
+        width: 100%;
+    }
+    .storyMain{
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+    .moreButton{
+        width: unset;
+        background-color: unset;
+        font-size: 18px;
+    }
+    .moreButton span{
+        font-size: 14px;
+        padding-left: 10px;
+    }
+    .storySub{
+        display: none;
+    }
+    .storyRWDSub{
+        display: block;
+        font-size: 14px;
+    }
+    
+}
+@media (max-width:576px){
+    
+}
+@media (max-width:376px){
+    
+}
+
+/* 品牌故事 */
+
+
+
+/* Good HOT POT  */
+
+.hotProductBlock{
+    width: 100%;
+}
+@media (max-width:768px){
+    .hotProductBlock{
+        padding: 50px 20px;
+    }
+}
+.hotProductTitle{
+    border-left: 5px solid white;
+    padding-left: 5px;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: white;
+}
+.hotProductTitleRWD{
+    border-left: 5px solid white;
+    padding-left: 5px;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: white;
+    display: none;
+}
+@media (max-width:768px){
+    .hotProductTitle{
+        display: none;
+    }
+    .hotProductTitleRWD{
+        display: block;
+    }
+}
+/* 輪播圖 */
+.swiperBlock{
+    display: block;
+}
+
+@media (max-width:768px){
+    .swiperBlock{
+        display: none;
+    }
+}
+
+/* swiper網頁版 */
+.swiper-container1 {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    overflow: hidden;
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    border-radius:5% ;
+    opacity: 0.7;
+
+  }
+  .swiper-container1 .swiper-wrapper .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 80px;
+  }
+  .swiper-slide-active{
+      opacity: 1;
+      margin-top: 30px;
+  }
+  
+  .swiper-container2 {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    overflow: hidden;
+  }
+
+  .swiperContentTitle{
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+  .swiperContentText{
+      text-align: center;
+  }
+  .poductMoreButton{
+      width: 140px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      margin: auto;
+      padding: 5px;
+      border-radius: 5px;
+      margin-bottom: 50px;
+  }
+  .poductMoreButton span{
+      padding-left: 10px;
+  }
+
+
+/* slick手機板輪播 */
+.slickSliderRWD{
+    width: 100%;
+    /* height: 100vh; */
+    display: none;
+}
+@media (max-width:768px){
+    .slickSliderRWD{
+        display: block;
+    }
+}
+.slickBlockImg{
+    width: 100%;
+    padding: 50px;
+    margin: auto;
+}
+.slickImgItem{
+    width: 100%;
+    height: 50vw;
+    background-color: chocolate;
+}
+.slickImg{
+    width: 100%;
+    height: 100%;
+}
+.slickImgItem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slickBlockText{
+    width: 100%;
+    padding: 50px;
+    padding-top:0 ;
+    margin: auto;
+
+}
+.slickBlockTextItem{
+    width: 100%;
+    min-height: 100px;
+    padding: 20px;
+
+}
+.slickBlockTextIn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.slick-prev, .slick-next{
+    top: 95%;
+    content: "";
+    border-radius: 50%;
+}
+.slick-prev{
+    width: 40px;
+    height: 40px;
+    z-index: 20;
+    left:35%;
+    background-image: url(../img/left.png);
+    background-size: cover;
+    
+}
+.slick-prev:before{
+    content: "";
+}
+.slick-next{
+    width: 40px;
+    height: 40px;
+    z-index: 20;
+    right:35%;
+    background-image: url(../img/right.png);
+    background-size: cover;
+
+}
+.slick-next:before{
+    content: "";
+}
+.slick-prev:hover,.slick-prev:focus{
+    background-image: url(../img/left.png);
+    background-size: cover;
+}
+.slick-next:hover, .slick-next:focus{
+    background-image: url(../img/right.png);
+    background-size: cover;
+}
+.contentTitleRWD{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+.contentTextRWD{
+    text-align: center;
+    line-height: 30px;
+}
+.poductMoreButtonRWD{
+    width: 75px;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+    margin-top: 20px;
+}
+.poductMoreButtonRWD span{
+    padding-left: 10px;
+}
+
+/* Good HOT POT  */
+
+
+/* news BigImg */
+.newsBlock{
+    width: 150%;
+
+}
+.newsBigImg{
+    width: 100%;
+    height: 20vw;
+    background-image: url(../img/banner_news.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.newsTitle{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    color: white;
+}
+.newsBlockRWD{
+    width: 100%;
+    display: none;
+}
+.newsBigImgRWD{
+    width: 100%;
+    height: 40vw;
+    background-image: url(../img/banner_news.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.newsTitleRWD{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    color: white;
+}
+@media (max-width:768px){
+    .newsBlock{
+        display: none;
+    }
+    .newsBlockRWD{
+        display: block;
+    }
+}
+/* newsBigImg */
+/* newsContent */
+.newsItemBlock{
+    width: 100%;
+    margin: 50px 0;
+}
+.newsItem{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+}
+.newsItemImg{
+    width: 35%;
+}
+.newsItemImg img{
+    width: 100%;
+}
+.newsItemDate{
+    width: 10%;
+    margin: 0 20px;
+    margin-bottom: 120px;
+    background-color: white;
+    text-align: center;
+    border: 2px solid #626262;
+}
+
+.newsContent{
+    width: 55%;
+}
+.newsItemTitle{
+    font-size: 28px;
+    color: white;
+    margin-bottom: 40px;
+}
+.newsContentRWD{
+    width: 100%;
+    display: none;
+}
+.newsItemTopBlock{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.newsItemDateRWD{
+    /* width: 10%; */
+    height: 50px;
+    padding: 0 5px;
+    margin-right: 10px;
+    /* margin-bottom: 20px; */
+    background-color: white;
+    text-align: center;
+    border: 2px solid #626262;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+.newsItemTitleRWD{
+    font-size: 18px;
+    color: white;
+}
+.newsItemTextRWD{
+    font-size: 14px;
+}
+.newsMoreButton{
+    width: 160px;
+    padding: 5px 0px;
+    background-color: #1E1408;
+    color: white;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bolder;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.newsMoreButton span{
+    padding-left: 20px;
+}
+.newsMoreButtonRWD{
+    padding: 5px 0px;
+    color: white;
+    border-radius: 10px;
+    font-weight: bolder;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 100px;
+    text-align: right;
+    font-size: 18px;
+}
+.newsMoreButtonRWD span{
+    padding-left: 20px;
+}
+
+
+@media (max-width:992px){
+    .newsItemDate{
+        width: 15%;
+    }
+    .newsContent{
+        width: 50%;
+    }
+    .newsItemTitle{
+        font-size: 18px;
+    }
+    .newsItemText{
+        font-size: 12px;
+    }
+}
+@media (max-width:768px){
+    .newsItemBlock{
+        padding: 0 20px;
+    }
+    .newsItem{
+        flex-direction: column;
+    }
+    .newsItemImg{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .newsItemDate{
+        display: none;
+    }
+    .newsContent{
+        display: none;
+    }
+    .newsContentRWD{
+        display: block;
+    }
+    .newsMoreButton{
+        display: none;
+    }
+    .newsMoreButtonRWD{
+        display: flex;
+    }
+    
+}
+@media (max-width:576px){
+    .newsItemTitleRWD{
+        font-size: 16px;
+        color: white;
+    }
+    .newsItemTextRWD{
+        font-size: 14px;
+    }
+}
+/* news Content */
+
+
+/* 標題動畫 */
+.titleAnimation1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+
+}
+.titleAnimation2{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.titleAnimation3{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.titleAnimation4{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+/* RWD */
+.titleAnimationRWD1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.titleAnimationRWD2{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.titleAnimationRWD3{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+.titleAnimationRWD4{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+/* 圖片 */
+
+.imgAnimation1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.imgAnimation2{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.imgAnimation3{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+/* RWD */
+.imgAnimationRWD1{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.imgAnimationRWD2{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+
+.imgAnimationRWD3{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+
+/* 按鈕 */
+.buttonAnimation1{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.buttonAnimation2{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+.buttonAnimation3{
+    position: relative;
+    bottom: -100px;
+    opacity: 0;
+}
+.buttonAnimationRWD1{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+.buttonAnimationRWD2{
+    position: relative;
+    right: -500px;
+    opacity: 0;
+}
+
+
+.leftIn{
+    animation: leftIn 2s 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes leftIn{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+.leftIn1s{
+    animation: leftIn1s 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+
+@keyframes leftIn1s{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+.leftIn1s{
+    animation: leftIn1s 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+
+@keyframes leftIn1s{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+.leftIn2s{
+    animation: leftIn2s 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+@keyframes leftIn2s{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+
+
+.rightIn{
+    animation: rightIn 1s 1;
+    animation-fill-mode: forwards;
+
+}
+@keyframes rightIn{
+    0%{
+        opacity: 0;
+        right: -500px;
+
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+}
+.rightIn1_5s{
+    animation: rightIn1_5s 1s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1.5s;
+
+}
+@keyframes rightIn1_5s{
+    0%{
+        opacity: 0;
+        right: -500px;
+
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+}
+
+.centerIn{
+    animation: centerIn 1s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes centerIn{
+    0%{
+        opacity: 0;
+        bottom: -100px;
+
+    }
+    100%{
+        bottom: 0;
+        opacity: 1;
+    }
+}
+/* 標題動畫 */
