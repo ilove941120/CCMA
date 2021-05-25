@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/external_p.css">
     <link rel="stylesheet" href="css/slick-theme.css">
     <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/gs_re.css">
+    <link rel="stylesheet" href="css/gs.css">
 
     <script language="javascript" src="js/jquery-1.12.3.min.js"></script>
     <script language="javascript" src="js/preload/jquery.preload.min.js"></script>
@@ -212,7 +212,7 @@
         
     </div>
     <div class="about_block">
-        <!-- <div class="about_content">
+        <div class="about_content_RWD">
             <div class="about_title">
                 <img src="img/about.png" alt="">
             </div>
@@ -245,7 +245,11 @@
                 <br>
                 並以傳統為底蘊、用專業知識為輔，開創新的製程
             </div>
-        </div> -->
+        </div>
+        <div class="desk_about_RWD">
+            <img class="desk_slogan" src="img/slogan.png" alt="">
+        </div>
+
         <div class="desk_about">
             <div class="desk_about_bottom">
                 <div class="about_content">
@@ -425,11 +429,23 @@
                 <img class="desk_advantage_bottom" src="img/advantage_backgroud.png" alt="">
                 <img class="desk_advantage_black" src="img/advantage_black.png" alt="">
                 <img class="desk_advantage" src="img/advantage.png" alt="">
+                <img class="desk_advantage_flower" src="img/flower.png" alt="">
+                <img class="desk_advantage_onion" src="img/onion.png" alt="">
+                <img class="desk_advantage_taro" src="img/taro.png" alt="">
             </div>
         </div>
         <div class="desk_last_block_after">
             <img class="desk_last_contack_bottom" src="img/desk_contack_bottom.png" alt="">
             <img class="shop_decoration1"  src="img/shop_decoration.png" alt="">
+            <div class="desk_last_contact_phone">
+                <div class="phone_icon"><i class="fak fa-phone-in-talk"></i></div>
+                <div class="contact_phone_text">0937656788</div>
+            </div>
+            <div class="desk_last_contact_address">
+                <div class="address_icon"><i class="fai fa-pl1"></i></div>
+                <div class="contact_adress_text">台北市大安區復興南路二段
+                    一五一巷八號五樓之三</div>
+            </div>
         </div>
         <div class="advantage_block">
             <div class="container">
@@ -471,35 +487,35 @@
                                             <i class="fap fa-user"></i>
                                             姓名
                                         </div>
-                                        <input class="input_style" type="text">
+                                        <input class="input_style" type="text" name="visitor_name" id="visitor_name">
                                     </div>
                                     <div class="form_item">
                                         <div class="form_icon_block">	
                                             <i class="fap fa-phone-bts"></i>
                                             手機
                                         </div>
-                                        <input class="input_style" type="text">
+                                        <input class="input_style" type="text" name="visitor_phone" id="visitor_phone">
                                     </div>
                                     <div class="form_item">
                                         <div class="form_icon_block">	
                                             <i class="fap fa-line02"></i>
                                             Line ID
                                         </div>
-                                        <input class="input_style" type="text">
+                                        <input class="input_style" type="text" name="visitor_line" id="visitor_line">
                                     </div>
                                     <div class="form_item">
                                         <div class="form_icon_block">	
                                             <i class="fag fa-flag"></i>
                                             詢問產品
                                         </div>
-                                        <input class="input_style" type="text">
+                                        <input class="input_style" type="text" name="ask_product" id="ask_product">
                                     </div>
                                 </div>
                                 <div class="form_textarea_block">
                                     
                                     <label for=""><i class="fap fa-question"></i>詢問內容</label>
     
-                                    <textarea  name="" id="" class="textarea_style" cols="30" rows="10"></textarea>
+                                    <textarea  name="ask_content" id="ask_content" class="textarea_style" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="form_bottom">
@@ -514,15 +530,43 @@
                             
                             
                         </form>
+                        <script>
+                            var chineseNameCheck = /^[\u4E00-\u9FA5]+$/;
+                            var phoneCheck = /^[0][9]\d{8}$/
+                            var emailCheck = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                            // 點擊驗證表單
+                            $(".sent_button").click(function(){
+                                if($("#visitor_name").val() =="" || chineseNameCheck.test($("#visitor_name").val()) == false){
+                                    alert("請輸入中文姓名")
+                                    return false;
+                                }
+                                if($("#visitor_phone").val() =="" || phoneCheck.test($("#visitor_phone").val()) == false){
+                                    alert("請輸入手機,不可以空白或格式錯誤")
+                                    return false;
+                                }
+                                if($("#visitor_line").val() ==""){
+                                    alert("請輸入lineID,不可以空白或格式錯誤")
+                                    return false;
+                                }
+                                if($("#ask_product").val() ==""){
+                                    alert("請輸入詢問產品,不可以空白")
+                                    return false;
+                                }
+                                if(!$.trim($("#ask_content").val())){
+                                    alert("請輸入詢問內容,不可以空白")
+                                    return false;
+                                }
+                                else {
+                                    $(".form_style").submit();
+                                }
+                            })
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
         
     </div>
-    <div class="box1"></div>
-
-    
     <div class="foot">
         <div class="foot_block">
             <div class="foot_top">
@@ -545,6 +589,8 @@
                 <a href="#" class="foot_bottom_item_RWD"><i class="fap fa-line02"></i></a>
             </div>
             <div class="foot_top_RWD">
+                <div class="phone_RWD">電話:0937656788</div>
+                <div class="address_RWD">地址:台北市大安區復興南路二段一五一巷八號五樓之三</div>
                 <div class="copyright">Copyright © 2021 青粮秫 all rights reserved.</div>
                 <div class="web_make">網站設計-橘野數位設計</div>
             </div>

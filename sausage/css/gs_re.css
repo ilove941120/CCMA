@@ -430,12 +430,22 @@ a:hover,a:focus{
 	text-align: center;
 	padding: 10px 0;
 }
+@media (max-width:576px){
+	.foot_top_RWD{
+        font-size: 12px;
+    }
+}
 .foot_bottom_RWD{
 	background-image: url("../img/contact_background.png");
 	display: flex;
     justify-content: center;
 	align-items: center;
 	padding-top: 10px;
+}
+@media (max-width:576px){
+	.foot_bottom_RWD{
+        font-size: 12px;
+    }
 }
 .foot_bottom_item_RWD{
 	margin: 0 10px;
@@ -1374,16 +1384,26 @@ a:hover,a:focus{
 	position: absolute;
 	overflow: hidden;
 	z-index: -1;
-	background-color: rgba(165, 42, 42, 0.548);
 }
 @media (max-width:1400px){
 	.desk_last_block{
 		background-color: rgb(255, 255, 255);
 	}
 }
+@media (max-width:992px){
+	.desk_last_block{
+		background-color: rgb(255, 255, 255);
+		height: 140%;
+	}
+}
 @media (max-width:768px){
 	.desk_last_block{
 		height: 135%;
+	}
+}
+@media (max-width:576px){
+	.desk_last_block{
+		height: 130%;
 	}
 }
 .desk_advantage_bottom{
@@ -1429,24 +1449,174 @@ a:hover,a:focus{
 }
 /* 首頁聯絡我們背景 */
 .desk_last_block_after{
-	width: 100%;
-	height: 145%;
+	width: 800px;
+	height: 900px;
 	position: absolute;
+	bottom: -45%;
+	left: -5%;
 	overflow: hidden;
 	z-index: 1;
 	background-color: rgba(42, 54, 165, 0.548);
 	pointer-events: none;
 }
+@media (max-width:1700px){
+	.desk_last_block_after{
+		left: -20%;
+	}
+}
+@media (max-width:1400px){
+	.desk_last_block_after{
+		left: -35%;
+	}
+}
+@media (max-width:1200px){
+	.desk_last_block_after{
+		left: -35%;
+	}
+}
+@media (max-width:992px){
+	.desk_last_block_after{
+		bottom: -38%;
+		left: -45%;
+	}
+}
+@media (max-width:768px){
+	.desk_last_block_after{
+		bottom: -40%;
+		left: -50%;
+		height: 550px;
+	}
+}
+@media (max-width:768px){
+	.desk_last_block_after{
+		display: none;
+	}
+}
 .desk_last_contack_bottom{
 	position: absolute;
 	bottom: 0;
-	left: -15%;
+	left: -20%;
 	z-index: 2;
+}
+@media (max-width:1400px){
+	.desk_last_contack_bottom{
+		bottom: -10%;
+	}
+}
+@media (max-width:1200px){
+	.desk_last_contack_bottom{
+		bottom: -5%;
+		left: -30%;
+	}
+}
+@media (max-width:992px){
+	.desk_last_contack_bottom{
+		bottom: 0%;
+		left: -10%;
+		height: 650px;
+	}
 }
 .shop_decoration1{
 	position: absolute;
-	bottom: 0;
-	left: 0%;
+	top: 20%;
+	left: 65%;
+	z-index: 10;
+}
+@media (max-width:1400px){
+	.shop_decoration1{
+		top: 30%;
+		left: 65%;
+	}
+}
+@media (max-width:1200px){
+	.shop_decoration1{
+		top: 25%;
+		left: 55%;
+	}
+}
+@media (max-width:992px){
+	.shop_decoration1{
+		top: 45%;
+		left: 50%;
+		width: 100px;
+	}
+}
+@media (max-width:768px){
+	.shop_decoration1{
+		top: 12%;
+		left: 50%;
+		width: 80px;
+	}
+}
+.desk_last_contact_phone{
+	width: 20px;
+	position: absolute;
+	top: 40%;
+	right: 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 3;
+}
+@media (max-width:1400px){
+	.desk_last_contact_phone{
+		top: 50%;
+	}
+}
+@media (max-width:1200px){
+	.desk_last_contact_phone{
+		top: 45%;
+		right: 30%;
+	}
+}
+@media (max-width:992px){
+	.desk_last_contact_phone{
+		top: 57%;
+		right: 40%;
+	}
+}
+@media (max-width:768px){
+	.desk_last_contact_phone{
+		top: 30%;
+		right: 40%;
+	}
+}
+.desk_last_contact_address{
+	width: 20px;
+	position: absolute;
+	top: 40%;
+	right: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 3;
+
+}
+@media (max-width:1400px){
+	.desk_last_contact_address{
+		top: 50%;
+		right: 30%;
+	}
+}
+@media (max-width:1200px){
+	.desk_last_contact_address{
+		top: 45%;
+		right: 40%;
+	}
+}
+@media (max-width:992px){
+	.desk_last_contact_address{
+		top: 57%;
+		right: 45%;
+	}
+}
+@media (max-width:768px){
+	.desk_last_contact_address{
+		top: 30%;
+		right: 47%;
+	}
 }
 /* 優勢輪播 */
 .advantage_slider{
