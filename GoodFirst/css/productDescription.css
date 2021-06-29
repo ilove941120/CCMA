@@ -1,0 +1,224 @@
+.content{
+    background-image: url(../img/bg.jpg);
+    background-repeat: unset;
+    background-size: cover;
+    padding:50px 0;
+    overflow: hidden;
+}
+.contactTitle{
+    width: 100%;
+    color: white;
+    border-left: 5px solid white;
+    font-size: 36px;
+    font-weight: bolder;
+    padding-left: 10px;
+    margin-bottom: 50px;
+    
+}
+.contactTitleRWD{
+    width: 100%;
+    color: white;
+    border-left: 5px solid white;
+    font-size: 36px;
+    padding-left: 10px;
+    line-height: 25px;
+    font-size: 25px;
+    margin-bottom: 50px;
+    font-weight: bolder;
+    display: none;
+}
+
+@media (max-width:768px){
+    .content{
+        padding: 50px 20px;
+    }
+    .contactTitle{
+        display: none;
+    }
+    .contactTitleRWD{
+        display: block;
+    }
+}
+
+
+/* 動畫 */
+.titleAnimation1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+
+}
+.titleAnimationRWD1{
+    position: relative;
+    left: -500px;
+    opacity: 0;
+}
+.leftIn{
+    animation: leftIn 2s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes leftIn{
+    0%{
+        opacity: 0;
+        left: -500px;
+
+    }
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+}
+.rightIn{
+    animation: rightIn 2s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+@keyframes rightIn{
+    0%{
+        opacity: 0;
+        right: -500px;
+
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+}
+.centerIn{
+    animation: centerIn 2s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes centerIn{
+    0%{
+        opacity: 0;
+        bottom: -100px;
+
+    }
+    100%{
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+/* 書本效果 */
+
+.demo1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.demo2{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.demo3{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.demo4{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.photo{
+    width: 100%;
+}
+
+@media (max-width:1140px){
+    .demo1{
+        display: none;
+    }
+    .demo2{
+        display: flex;
+    }
+}
+@media (max-width:992px){
+    .demo2{
+        display: none;
+    }
+    .demo3{
+        display: flex;
+    }
+}
+@media (max-width:768px){
+    .demo3{
+        display: none;
+    }
+    .demo4{
+        display: flex;
+    }
+}
+
+.sliderBlock{
+    width: 70%;
+}
+.sliderItem img{
+    width: 100%;
+    height: 100%;
+}
+.slick-prev, .slick-next{
+    content: "";
+    border-radius: 50%;
+}
+.slick-prev{
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+    left:-30%;
+    background-image: url(../img/left.png);
+    background-size: cover;
+    
+}
+.slick-prev:before{
+    content: "";
+}
+.slick-next{
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+    right:-30%;
+    background-image: url(../img/right.png);
+    background-size: cover;
+
+}
+@media (max-width:576px){
+    .slick-prev{
+        left: -23%;
+    }
+    .slick-next{
+        right: -23%;
+    }
+}
+@media (max-width:376px){
+    .slick-prev{
+        width: 30px;
+        height: 30px;
+        left: -20%;
+    }
+    .slick-next{
+        width: 30px;
+        height: 30px;
+        right: -20%;
+    }
+}
+.slick-next:before{
+    content: "";
+}
+.slick-prev:hover,.slick-prev:focus{
+    background-image: url(../img/left.png);
+    background-size: cover;
+}
+.slick-next:hover, .slick-next:focus{
+    background: none;
+    background-image: url(../img/right.png);
+    background-size: cover;
+}

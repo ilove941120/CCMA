@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mask_block{
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.527);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .number{
+            font-size: 36px;
+        }
+        .button{
+            width: 100px;
+            height: 30px;
+            background-color:red ;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="mask_block">
+        <div class="number">1</div>
+        <div class="button1">按一下</div>
+    </div>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(".button1").click(function(){
+            for(i=0; i<101; i++){
+                setTimeout(function () {
+                    $(".number").text(i);
+                    console.log(i)
+                }, 1000*i);
+            }
+            
+        })
+    </script>
+</body>
+</html>
