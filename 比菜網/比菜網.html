@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./ex.css">
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="webTitleBlock"></div>
+    <div class="mainContent">
+        <div class="sortBar" data-on="0">
+            <div class="sortItem">全部</div>
+            <div class="sortItem">蔬果</div>
+            <div class="sortItem">水果</div>
+            <div class="sortItem">花卉</div>
+        </div>
+        <div class="searchBar">
+            <div class="searchTxt">
+                <span>作物名稱</span>
+            <input class="searchInput" value="鳳梨" type="text" placeholder="請輸入作物名稱">
+            </div>
+            <div class="searchButton">搜尋</div>    
+        </div>
+        <div class="sequenceBar">
+            <div class="searchResult"></div>
+            <select id="sequence">
+                <option value="1">排序篩選</option>
+                <option value="2">依上價排序</option>
+                <option value="3">依中價排序</option>
+                <option value="4">依下價排序</option>
+                <option value="5">依平均價排序</option>
+                <option value="6">依交易量排序</option>
+            </select>
+        </div>
+        <div class="showBlock">
+            <div class="showTitle">
+                <div class="itemName">作物名稱</div>
+                <div class="itemMarkt">市場名稱</div>
+                <div class="itemPriceTop sortStatu" data-sortStatu="0" data-num="0">上價 
+                    <div class="iconBlock">
+                        <i class="fas fa-caret-up"></i>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </div>
+                <div class="itemPriceMiddle sortStatu" data-sortStatu="0" data-num="1">中價
+                    <div class="iconBlock">
+                        <i class="fas fa-caret-up"></i>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </div>
+                <div class="itemPriceDown sortStatu" data-sortStatu="0" data-num="2">下價
+                    <div class="iconBlock">
+                        <i class="fas fa-caret-up"></i>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </div>
+                <div class="itemPriceAverage sortStatu" data-sortStatu="0" data-num="3">平均價
+                    <div class="iconBlock">
+                        <i class="fas fa-caret-up"></i>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </div>
+                <div class="itemPriceTrading sortStatu" data-sortStatu="0" data-num="4">交易量
+                    <div class="iconBlock">
+                        <i class="fas fa-caret-up"></i>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="showDataBlock">
+                <div class="preset">
+                    請輸入並搜尋想比價的作物名稱^＿^
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./ex.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <h1>{{message}}</h1>
+        <input type="button" value="按下去" v-on:click="great">
+        <button v-on:click="great">按下去</button>
+        <p v-if="isLogin">{{login}}</p>
+        <p v-show="isAdmin">{{logout}}</p>
+        <button @click="isAdmin = !isAdmin">點擊切換</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let vue =new Vue({
+            el:"#app",
+            data:{
+                message:"嗨嗨嗨",
+                login:"登入中",
+                logout:"現在是訪客",
+                isAdmin:false,
+                isLogin: true,
+            },
+            
+            methods:{
+                great(){
+                    alert("Vue30天")
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

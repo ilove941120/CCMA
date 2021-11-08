@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+    }
+    .box_out{
+        display: flex;
+        justify-content: space-between;
+        background-color: burlywood;
+    }
+    .boxA{
+        width: 100px;
+        height: 50px;
+        background-color: brown;
+        margin: 0 5px;
+    }
+    .buyIceMoney{
+        font-size: 48px;
+        font-weight: bolder;
+        color: crimson;
+        background-color: blue;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+    .answer{
+        font-size: 72px;
+        font-weight: bolder;
+        color: crimson;
+        background-color: black;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+</style>
+<body>
+    <div class="box_out">
+        <div class="boxA"></div>
+        <div class="boxA"></div>
+        <div class="boxA"></div>
+        <div class="boxA"></div>
+        <div class="boxA"></div>
+    </div>
+    <div class="buyIceMoney"></div>
+    <div class="answer"></div>
+</body>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script>
+
+    let MaryMoney = 200;
+    let iceMoney =25;
+    let buyIceMoney = iceMoney * 7;
+    let buyAfterwallet = MaryMoney - buyIceMoney;
+
+
+    // alert(wallet);
+    $('.buyIceMoney').text(buyIceMoney);
+    $('.answer').text(buyAfterwallet);
+</script>
+</html>

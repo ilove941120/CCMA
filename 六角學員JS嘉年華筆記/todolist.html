@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="box">
+        <h1 class="title" data-content="這是第一個H1" data-num="1">
+            <span>標題內容1</span>
+            <input type="button" value="檢視1" class="view">
+        </h1>
+        <h1 class="title">
+            <span>標題內容2</span>
+            <input type="button" value="檢視2" class="view">
+        </h1>
+        <h1 class="title">
+            <span>標題內容3</span>
+            <input type="button" value="檢視3" class="view">
+        </h1>
+    </div>
+
+    <hr>
+    <!-- 實作toOList  -->
+
+    <div class="toOList">
+        <h1>ToDoList</h1>
+        <input type="text" class="text" placeholder="請輸入內容" value="1">
+        <input type="button" class="save" value="儲存送出">
+        <ul class="list">
+            <!-- <li>代辦事項1<input type="button" class="delete" value="delete"></li>
+            <li>代辦事項2<input type="button" class="delete" value="delete"></li>
+            <li>代辦事項3<input type="button" class="delete" value="delete"></li>
+            <li>${text.value}<input type="button" class="delete" value="delete"></li> -->
+        </ul>
+    </div>
+    <script src="./todoList.js"></script>
+</body>
+</html>

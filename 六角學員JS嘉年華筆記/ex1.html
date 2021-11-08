@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <!-- <script>
+        let myName ="Tom";
+        let myAge =11;
+        let a = `我的名字是${myName},我今年${myAge}歲`;
+        // console.log(a);
+
+
+        let aCard = "1";
+        let bCard = 2;
+        // console.log(parseInt(aCard)+bCard)
+        console.log(typeof NaN)
+    </script> -->
+
+    <!-- <script>
+        let sex ="male";
+        let cm =88
+        if(sex == "male"){
+            if(cm>90){
+            console.log(`男生體型過胖`)
+        }else{
+            console.log(`男生體型正常`)
+        }
+        }
+        else if("woman"){
+            if(cm>80){
+               console.log(`女生體型過胖`)
+            }
+            else{
+                console.log(`女生體型正常`)
+            }
+        }
+    </script> -->
+
+    <!-- <script>
+        let aGuestDegree = 38
+
+        if(aGuestDegree >=37.5){
+            console.log("顯示不得進入")
+        }
+        
+
+        let tomScore ="成績及格"
+        if(tomScore =="成績及格"){
+            console.log("成績及格")
+        }
+        else if(tomScore=="成績不及格"){
+            console.log("成績不及格")
+        }
+
+        let tedScore =1;
+        if(tedScore >=80){
+            console.log("優秀")
+        }else if(tedScore >=60 && tedScore<=79){
+            console.log("普通")
+        }else if(tedScore<=59){
+            console.log("不及格")
+        }
+    </script> -->
+
+
+    <!-- 物件 -->
+    <!-- <script>
+        let home = {
+            myFather:"Ted",
+            myMother:"Kiki",
+            dogs:6,
+            isWakeUp:false
+        }
+        // console.log(home.myFather)
+
+
+        // 新增物件資料
+        let tedHome = {};
+        tedHome.fatherName = "Peter";
+        tedHome.motherName = "Mary";
+        tedHome.dogs = 2;
+        console.log(tedHome)
+
+        // 修改
+        tedHome.fatherName = "Peter1"
+        console.log(tedHome.fatherName)
+        // 刪除
+        // delete tedHome.motherName
+        // console.log(tedHome)
+        // console.log(tedHome.motherName)
+
+        // 另一種讀取物件屬性方法
+        console.log(tedHome.motherName)
+        console.log(tedHome['motherName'])
+        let a = 'motherName';
+        console.log(tedHome[a])
+
+
+        let exHome = {
+        "001" : "hello word"
+        };
+        console.log(exHome['001']);
+        // console.log(exHome.001);
+    </script> -->
+
+    <!-- 陣列物件運用 -->
+    <!-- <script>
+        
+        // let school = [
+        //     {
+        //         schoolName:"逢甲大學",
+        //         schoolArea:"西屯",
+        //         schoolStudent:1000,
+        //         schoolStudentYear:30
+        //     },
+        //     {
+        //         schoolName:"靜宜大學",
+        //         schoolArea:"沙鹿",
+        //         schoolStudent:800,
+        //         schoolStudentYear:20
+        //     }
+        // ]
+
+        // console.log(school[1].schoolStudentYear)
+        // console.log(school[0].schoolStudent)
+
+
+        // 物件包物件
+        // let myHome = {
+        //     myFatherSatus:{
+        //         name:"Mark",
+        //         age:52,
+        //         weight:"78kg"
+        //     },
+        //     myMotherSatus:{
+        //         name:"Mary",
+        //         age:46,
+        //         weight:"53kg"
+        //     }
+        // }
+        // console.log(myHome)
+
+
+        // 函釋 加總工具
+        function add(num1,num2){
+            console.log(`您的數字${num1}+${num2}的總和為${num1+num2}`)
+        }
+        function low(num1,num2){
+            console.log(`您的數字${num1}-${num2}的總和為${num1-num2}`)
+        }
+        function mul(num1,num2){
+            console.log(`您的數字${num1}*${num2}的總和為${num1*num2}`)
+        }
+        function div(num1,num2){
+            console.log(`您的數字${num1}/${num2}的總和為${num1/num2}`)
+        }
+        add(2,5)
+        low(7,1)
+        mul(2,5)
+        div(8,2)
+
+
+        function BMI(myWeight,myHeight){
+            let bmi = (myWeight / ((myHeight/100)**2)).toFixed(1)
+            console.log(`您的體重${myWeight}kg身高${myHeight},BMI等於`+bmi)
+            if(bmi<18.5){
+                return "體重過輕"
+            }
+            else if(bmi<24 && bmi>18.5){
+                return "體重正常";
+            }
+            else if(bmi>24){
+                return "體重過重";
+            }
+            else{
+                return "輸入錯誤"
+            }
+        }
+        myState = BMI(81,176)
+        console.log(myState)
+
+        function myInput(numInput){
+           numInput1 =  numInput%2
+           if(numInput1!=0){
+               return `${numInput}不是偶數`;
+           } 
+           else if(numInput1==0){
+                return `${numInput}是偶數`;
+           }
+           else{
+               return `輸入錯誤`;
+           }
+        }
+        console.log(myInput(24))
+
+
+        // 計算 函示
+        let count = 0
+        function test(){
+            console.log("100")     
+            count+=1
+            return count;     
+        }
+        for(i=0;i<5;i++){
+            console.log(`這是第${test()}次`)
+        }
+        
+        console.log(`總計${count}次`)
+    </script> -->
+    <!-- DOM運用 -->
+    <script>
+        
+    </script>
+</body>
+</html>

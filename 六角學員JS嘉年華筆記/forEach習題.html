@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .filterBlock{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>新增資料</h1>
+    <div class="newData">
+        <input id="inputText" type="text"> 
+        <select name="" id="chargeData">
+            <option value="免費">免費</option>
+            <option value="投幣式">投幣式</option>
+        </select>
+        <button class="sentButton" type="submit">儲存</button>
+    </div>
+    <h1>資料顯示</h1>
+    <div class="filterBlock">
+        <button class="allButton" type="submit" value="全部">全部</button>
+        <button class="freeButton" type="submit" value="免費">免費</button>
+        <button class="payButton" type="submit" value="投幣式">投幣式</button>
+    </div>
+    <div class="dataContent">
+        <ul>
+
+        </ul>
+    </div>
+    
+
+    <script src="./forEachTopic.js"></script>
+</body>
+</html>
