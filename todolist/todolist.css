@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding-bottom  : 50px;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-family: 'Noto Sans TC', sans-serif;
+    min-height: 100vh;
+    background-color: #eee;
+    background-image: linear-gradient(
+    174deg,
+    #ffd370 2%,
+    #ffd370 46%,
+    #ffffff 46%,
+    #ffffff 100%,
+    #e8e8e8 100%
+    );
+}
+
+.titleBlock{
+    font-size: 48px;
+    font-weight: bolder;
+    text-align: center;
+    margin: 20px;
+    margin-top: 50px;
+    letter-spacing: 8.75px;
+
+}
+.addBlock{
+    width: 500px;
+    height: 48px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.addText{
+    width: calc(95% - 40px);
+    height: 40px;
+    margin-right: 24px;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px;  
+}
+.sentButton{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #333333;
+    color: white;
+    font-size: 32px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+.showBlock{
+    width: 500px;
+    min-height: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: auto;
+    position: relative;
+    background-color: white;
+
+}
+.showBar{
+    width: 100%;
+    height: 51.5px;
+    display: flex;
+    cursor: pointer;
+
+}
+.showTitle{
+    width: 33.3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #EFEFEF;
+}
+.showContent{
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    
+}
+.showItem{
+    display: flex;
+    min-height: 40px;
+    margin-bottom: 16px;
+}
+.deleteButton{
+    margin-left: auto;
+    display: none;
+}
+.showItem:hover .deleteButton{
+    display: block;
+}
+.showItemText{
+    border-bottom: 1px solid #EFEFEF;
+    font-size: 16px;
+    letter-spacing: 0.62px;
+    width: 392px;
+}
+.textStatu{
+    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+    width: 85%;
+    word-break: break-all;
+    padding-bottom: 20px;
+}
+.showFooter{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.active{
+    color: rgba(51, 51, 51, 0.3);
+    text-decoration:line-through;
+}
+.activeBar{
+    border-bottom: 1px solid black;
+}
+.waitThing{
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 3px;    
+    margin-right: 10px;
+}
+.finishThing{
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(46% 76%, 100% 3%, 50% 100%, 0% 50%);
+    background-color: #FFD370;
+    margin: 3px;
+    margin-right: 10px;
+}
