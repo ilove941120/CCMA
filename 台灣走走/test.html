@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .app{
+            width: 100px;
+            height: 500px;
+            background-color: crimson;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box img{
+            width: 100%;
+        }
+        .box img:hover{
+            width: 120%;
+            transition: 1s;
+
+        }
+        .box:hover .box img{
+            width: 90%;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    
+    <ul class="app"></ul>
+    <div class="box">
+        <img src="https://www.dramaqueen.com.tw/images/news/202001301042319061ce08d7f5a0ec99c0287a8a15e01c6ba2.jpg" alt="">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // const app = document.querySelector(".app")
+        // axios.get("https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=30&$format=JSON")
+        
+        // .then(function(response){
+        //     const thisData = response.data;
+        //     let str =""
+        //     let n1 =0;
+        //     thisData.some(function(item){
+        //         if(item.Picture.PictureUrl1){
+        //             str += `<img src="${item.Picture.PictureUrl1}" alt="">`
+        //             n1+=1
+        //             console.log(n1)
+        //         }
+        //         return n1==4
+        //     })
+        //     app.innerHTML = str    
+        // });
+        
+        
+
+
+    </script>
+</body>
+</html>
