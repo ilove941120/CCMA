@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>原始字串:"{{message}}"</p>
+        <p>反向字串:"{{reverseMessage()}}"</p>
+        <br>
+        <p>計算屬性:"{{time1}}"</p>
+        <p>methods屬性:"{{time2()}}"</p>
+        <div class="box1">
+            <h1>匯率</h1>
+            請輸入台幣金額:<input v-model="price" type="text" />
+            <br>
+            美元:{{price/30}} <br>
+            歐元:{{price/40}} <br>
+            日元:{{price/25}} <br>
+            台幣:{{price*1}}
+        </div>
+        <div class="box2">
+            <h1>迴圈列表</h1>
+            <ul v-for="item in color" :key="item.id">
+                <li>{{ item }}</li>
+            </ul>
+            <br>
+            <ul v-for="item in home" :key="item.id" v-on:click="myFa(item.father)">
+                <li>{{ item.father }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="todolist">
+        <h1>ToDoList</h1>
+        <h2>輸入代辦事項</h2>
+        <input v-model="newTodo" type="text" @keyup.enter='addTodo(newTodo)' />
+        <h2>代辦事項列表</h2>
+        <ul >
+            <li v-for="todo in todolist">
+                {{todo.content}} - <span v-on:click="finishButton()">{{todo.completed}}</span> - <a href="" @click.prevent="removeTodo(todo)">刪除</a></li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                message:"你好這世界",
+                message1:"hello word",
+                price:"100",
+                color:["blur","red","black"],
+                home:[
+                    {father:"Tom"},
+                    {father:"Alex"},
+                    {father:"Tim"},
+                    {father:"Rain"},
+                ]
+            },
+            computed:{
+                time1:function(){
+                    return (new Date()).toLocaleTimeString()
+                }
+            },
+            methods: {
+                reverseMessage:function(){
+                    return this.message.split('').reverse().join('')
+                },
+                time2:function(){
+                    return (new Date()).toLocaleTimeString()
+                },
+                myFa:function(father){
+                    alert(father)
+                }
+            },
+        })
+        // this 是什麼? 
+        // 當下執行的最外層
+        new Vue({
+            el:".todolist",
+            data:{
+                todolist:[],
+                newTodo:''
+            },
+            methods: {
+                addTodo:function(todo){
+                    this.todolist.push({content:todo,completed:"未完成"})
+                },
+                removeTodo:function(todo){
+                    this.todolist.splice(this.todolist.indexOf(todo),1)
+                },
+                finishButton:function(completed){
+                    completed:"完成"
+                }
+            },
+        })
+    </script>
+</body>
+</html>

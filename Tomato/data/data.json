@@ -1,0 +1,40 @@
+[
+    {
+        "seq": 1,
+        "taskName": "看書",
+        "hour": 0,
+        "minute": 25,
+        "second": 0,
+        "hourRe": 0,
+        "minuteRe": 5,
+        "secondRe": 0,
+        "activeNumSet": 2,
+        "taskStatus": false
+    },
+    {
+        "seq": 2,
+        "taskName": "測試",
+        "hour": 0,
+        "minute": 0,
+        "second": 5,
+        "hourRe": 0,
+        "minuteRe": 0,
+        "secondRe": 4,
+        "activeNumSet": 3,
+        "taskStatus": false
+    }
+    ,
+    {
+        "seq": 3,
+        "taskName": "運動",
+        "hour": 0,
+        "minute": 1,
+        "second": 0,
+        "hourRe": 0,
+        "minuteRe": 1,
+        "secondRe": 30,
+        "activeNumSet": 5,
+        "taskStatus": false
+    }
+]
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <app></app>
+    </div>
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const student = Vue.extend({
+            template:`
+                <div>
+                    <ul>
+                        <li v-for="item in classA">學生名稱:{{item.name}}---學生班級:{{item.studentClass}}</li>
+                        <hr>
+                        <li v-for="item in classB">學生名稱:{{item.name}}---學生班級:{{item.studentClass}}</li>
+
+                    </ul>
+                </div>
+            `,
+            data(){
+                return{
+                    classA:[
+                        {
+                            name:"陳大天",
+                            studentClass:"六年甲班"
+                        },
+                        {
+                            name:"大中天",
+                            studentClass:"六年甲班"
+                        }
+                    ],
+                    classB:[
+                        {
+                            name:"張忠義",
+                            studentClass:"六年乙班"
+                        },
+                        {
+                            name:"黃美珍",
+                            studentClass:"六年乙班"
+                        }
+                    ]
+                    
+                }
+            }
+        })
+        const school = Vue.extend({
+            template:`
+                <div>
+                    <h1>學校名稱:{{name}}</h1>
+                    <h1>學校地址:{{address}}</h1>
+                    <hr>
+                    <student></student>
+                </div> 
+            `,
+            data(){
+                return {
+                    name:"村上國小",
+                    address:"彰化大村"
+                }
+            },
+            components:{
+                student
+            }
+        })
+        const app = Vue.extend({
+            template:`
+                
+                <div>
+                    <school></school>
+                    <school></school>
+                </div>
+            `,
+            components:{
+                school
+            }
+
+        })
+        new Vue({
+            el:"#root",
+            components:{
+                app
+            }
+        })
+    </script>
+
+</body>
+</html>

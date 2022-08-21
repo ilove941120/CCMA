@@ -135,3 +135,6 @@ dataRanderBlock.addEventListener("click",function(e){
     // if(e.target.)
     console.log(e)
 })
+
+
+string str ="";

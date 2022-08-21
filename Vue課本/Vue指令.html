@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        body{
+            box-sizing: border-box;
+            background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);
+            margin: 20px;
+        }
+        .bigBox{
+            border-radius: 10px;
+            padding: 20px;
+            padding-bottom: 5px;
+            background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+            margin-bottom: 20px;
+        }
+        .box1{
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-image: linear-gradient(to right, #accbee 0%, #e7f0fd 100%);
+        }
+        
+        .box1 h2 span{
+            font-size: 16px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        .example{
+            background-color: rgba(255, 255, 255, 0.74);
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        .briefly{
+            color: red;
+        }
+        .colorGroup{
+            width: 300px;
+            display: flex;
+        }
+        .red{
+            height: 25px;
+            margin-right: 20px;
+            background-color: black;
+            padding: 5px;
+            border: 3px solid black;
+            font-weight: bolder;
+            color: white;
+            cursor: pointer;
+        }
+        .red:hover{
+            background-color: red;
+            transition: 0.5s;
+        }
+        .blue{
+            height: 25px;
+            background-color: black;
+            padding: 5px;
+            border: 3px solid black;
+            font-weight: bolder;
+            color: white;
+            cursor: pointer;
+        }
+        .blue:hover{
+            background-color: blue;
+            transition: 0.5s;
+        }
+        .answer{
+            color: red;
+            font-size: 24px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <h1>{{message}}</h1>
+            <!-- v-bind指令 -->
+        <div class="box1">
+            <h2>v-bind指令 <br> <span class="briefly" v-html="content.vBind"></span></h2>
+            <div class="example">
+                <!-- v-bind正常寫法 -->
+                效果1正常寫法：<a v-bind:href="url">點擊</a>
+                <br>
+                <!-- v-bind縮寫 -->
+                效果2簡寫寫法：<a :href="url1">GOOGLE</a>
+            </div>
+        </div>
+        <!-- v-model指令 -->
+        <div class="box1">
+            <h2>v-model指令 <br> <span class="briefly" v-html="content.vModel"></span></h2>
+            <div class="example">
+                您的身高多少呢? <input type="text" v-model="information.myHeight">
+                <br>
+                您的身高為 {{information.myHeight}}cm
+            </div>
+            <div class="example">
+                <div>
+                    <input type="radio" name="season" id="spring" v-model="season" value="春天">
+                    <label for="spring">春天</label>
+                    <input type="radio" name="season" id="summer" v-model="season" value="夏天">
+                    <label for="summer">夏天</label>
+                    <input type="radio" name="season" id="fall" v-model="season" value="秋天">
+                    <label for="fall">秋天</label>
+                    <input type="radio" name="season" id="winner" v-model="season" value="冬天">
+                    <label for="winner">冬天</label>
+                </div>
+                <div>現在是{{season}}</div>
+            </div>
+        </div>
+        <!-- v-for指令 -->
+        <div class="box1">
+            <h2>v-for指令 <br> <span class="briefly" v-html="content.vFor"></span></h2>
+            <div class="example">
+                <ul>
+                家庭成員
+                <li v-for="item in Family">{{item.member}} : {{item.name}}</li>
+            </ul>
+            </div>
+            
+        </div>
+        <!-- v-on指令 -->
+        <div class="box1">
+            <h2>v-on指令 <br> <span class="briefly" v-html="content.vOn"></span></h2>
+            <div class="example">
+                <div class="colorGroup">
+                    <div class="red" v-on:click="show1">正常寫法</div>
+                    <div class="blue"@click="show2">簡寫</div>
+                </div>
+            </div>
+        </div>
+        <!-- v-html指令 -->
+        <div class="box1">
+            <h2>v-html指令 <br> <span class="briefly" v-html="content.vHtml"></span></h2>
+            <div class="example">
+                <div v-html="hello"></div>
+            </div>
+        </div>
+        <!-- v-text指令 -->
+        <div class="box1">
+            <h2>v-text指令 <br> <span class="briefly" v-html="content.vText"></span></h2>
+            <div class="example">
+                <div v-text='"今年是"+year+"年"+month+"月"'></div>
+                <div v-text="redEnvelope"></div>
+            </div>
+            
+        </div>
+        <!-- v-cloak指令 -->
+        <div class="box1">
+            <h2>v-cloak指令 <br> <span class="briefly" v-html="content.vCloak"></span></h2>
+            <div class="example">
+                <div>可以按ctrl+shift+R 觀看效果 ,會發現 只會出現效果1,Vue載入完畢才會出現效果2</div><br>
+                <div>效果1沒有v-cloak：{{message}}</div>
+                <div v-cloak>效果2有v-cloak：{{message}}</div>
+            </div>
+            
+        </div>
+        <!-- v-pre指令 -->
+        <div class="box1">
+            <h2>v-pre指令 <br> <span class="briefly" v-html="content.vPre"></span></h2>
+            <div class="example">
+                <span>效果1沒有v-pre：{{message}}</span><br>
+                <span v-pre>效果2有v-pre：{{message}}</span>
+            </div>
+            <div class="example">
+                可以按ctrl+shift+R 觀看效果<br>
+                <span v-pre>效果1：不用vue編譯</span><br>
+                <span>效果2：{{testBlock.n1}}</span>
+            </div>
+        </div>
+        <!-- v-once指令 -->
+        <div class="box1">
+            <h2>v-once指令 <br> <span class="briefly" v-html="content.vOnce"></span></h2>
+            <div class="example">
+                <span v-once>初始化的值是{{n}}</span><br>
+                <span>當前的值是{{n}}</span><br>
+                <input type="button" value="點我+1" @click='add1'>
+            </div>
+        </div>
+        <!-- 條件指令 -->
+        <div class="bigBox">
+            <h2>條件指令</h2>
+            <!-- v-if指令 -->
+            <div class="box1">
+                <h2>v-if指令 <br> <span class="briefly" v-html="content.vIf"></span></h2>
+                <div class="example">
+                    <div v-if="3>2">如果3>2 = YES!</div>
+                    <div v-if="2>3">如果2>3 = NO!</div>
+                    <div v-if="information.myAge >= 20"> {{information.myAge}}成年人了</div>
+                    <div v-if='information.name.indexOf("Ted")>=0'>我的名字:{{information.name}}</div>
+                </div>
+            </div>
+            <!-- v-else指令 -->
+            <div class="box1">
+                <h2>v-else指令 <br> <span class="briefly" v-html="content.vElse"></span></h2>
+                <div class="example">
+                    <label for="sunny">晴天</label><input type="radio" name="weather" id="sunny" value="晴天" v-model="weather">
+                    <label for="rain">雨天</label><input type="radio" name="weather" id="rain" value="雨天" v-model="weather">
+                    <div v-if="weather ==  '雨天'">今天天氣是{{weather}}</div>
+                    <div v-else="weather">今天天氣是{{weather}}</div>
+                </div>
+            </div>
+            <!-- v-else-if指令 -->
+            <div class="box1">
+                <h2>v-else-if指令 <br> <span class="briefly" v-html="content.vElseIf"></span></h2>
+                <div class="example">
+                    <div v-if="season ==  '春天'">現在是春天</div>
+                    <div v-else-if="season ==  '夏天'">現在是夏天</div>
+                    <div v-else-if="season ==  '秋天'">現在是秋天</div>
+                    <div v-else="season">現在是冬天</div>
+                </div>
+            </div>
+            <!-- v-show指令 -->
+            <div class="box1">
+                <h2>v-show指令 <br> <span class="briefly" v-html="content.vShow"></span></h2>
+                <div class="example">
+                    <div v-show="3>2">觀看DOM可發現 這裡還有一個隱藏住了,這就是v-show效果</div>
+                    <div v-show="2>3">0</div>
+                </div>
+            </div>
+        </div>
+        <!-- 自定義指令 -->
+        <div class="box1">
+            <h2>自定義指令--局部<br> <span class="briefly"><img v-bind:src="summary.自定義" alt=""></span></h2>
+            <div class="example">
+                <!-- 需求1:定義一個v-big指令,和v-text功能相似,但會把綁定的數值放大10倍 -->
+                <h3>需求1:定義一個v-big指令,和v-text功能相思但會把綁定的數值放大{{testBlock.multiple}}倍</h3>
+                
+                <h4>當前n的值： <span class="answer" v-text="testBlock.n"></span></h4>
+                <h4>綁定放大{{testBlock.multiple}}倍後n的值： <span class="answer" v-big="testBlock.n" ></span></h4>
+                <input type="button" value="點我+1" @click="testadd1">
+                <input type="button" value="歸零" @click=test0>
+                <!-- 需求2:定義一個v-fbind指令,和v-bind功能相似,但可以讓其綁定的input元素默認獲取焦點 -->
+                <h3>需求2:定義一個v-fbind指令,和v-bind功能相似,但可以讓其綁定的input元素默認獲取焦點</h3>
+                輸入n值 <input v-model="testBlock.n" type="text" v-fbind="testBlock.n"/>
+                輸入放大倍數 <input v-model="testBlock.multiple" type="text" />
+                
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:".app",
+            data:{
+                message:"Vue基礎指令",
+                testBlock:{
+                    n1:"需要vue編譯",
+                    n:1,
+                    multiple:10
+                },
+                summary:{
+                    自定義:"./img/自定義指令總結.PNG"
+                },
+                url:"https://www.youtube.com/watch?v=8vobf7pjLlA&list=RDClN61mkP0Rs&index=3",
+                url1:"https://www.google.com.tw/?hl=zh_TW",
+                Family:[
+                    {member:"父親",name:"Tom"},
+                    {member:"母親",name:"Mary"},
+                    {member:"大哥",name:"Jimmy"},
+                    {member:"二姊",name:"Jane"},
+                ],
+                hello:'<h2>新年快到了啦~</h2>',
+                redEnvelope:"紅包拿來!!!!!!",
+                year: new Date().getFullYear(),
+                month: new Date().getMonth()+1,
+                content:{
+                    vBind:"簡述:<br>回應並更新DON,主要用法:綁定屬性,動態更新html元素上的屬性",
+                    vModel:"簡述:<br>資料雙向綁定,用於表單輸入,主要用在input、select、text、checkbox、radio等表單控制選項或是元件創建雙向綁定",
+                    vFor:"簡述:<br>迴圈指令,主要用法:基於資料來源多次繪製元素或是模組",
+                    vOn:"簡述:<br>用於監聽DOM事件,主要用法:綁定事件監聽器,運算是可以是方法名稱或是內聯敘述",
+                    vText:"簡述:<br>主要用法更新元素的textContent",
+                    vCloak:"簡述:<br>不需要運算是,這個指令保持在元素上,直到連結實例結束編譯,主要用法:當cloak和CSS規則([cloak]{display:none}一起用,可以隱藏未編譯<mustache>標籤直到實例完成編譯才顯示)",
+                    vPre:"簡述:<br>不需要運算式,用於跳過元素及子元素編譯過程,加速專案編譯速度<br>1.跳過其所在節點編譯過程<br>2.可以利用這個跳過沒有使用指令語法、沒有使用插值語法的節點，會加快編譯",
+                    vOnce:"簡述:<br> 1.不需要運算式,只繪製元素或元件一次,可用在最佳化更新性能 <br> 2.v-once所在節點在初次動態渲染後,就視為靜態節點,以後數據的改變不會引起v-once所在結構的更新,可用於優化性能",
+                    vIf:"簡述:<br>條件繪製指令,動態增加或是刪除DOM元素,根據運算式的真假判斷是否繪製元素,在切換時元素及他的資料綁定/元件被銷毀並重建",
+                    vElse:"簡述:<br>條件繪製指令,必須與v-if成對使用,v-else必須緊接在v-if 或是 v-else-if之後不然不會被辨識",
+                    vElseIf:"簡述:<br>判斷多層條件",
+                    vShow:"簡述:<br>條件繪製指令,為DOM設定CSS的Style屬性,主要用法切換元素的CSS屬性 display,帶有v-show的元素始終會被繪製並保留在DOM中",
+                    vDirectives:''
+                },
+                
+                information:{
+                    name:"Ted",
+                    myAge:27,
+                    myHeight:176,
+                },
+                weather:"晴天",
+                season:"春天",
+                n:30
+            },
+            methods: {
+                show1:function(){
+                    alert(1)
+                },
+                show2:function(){
+                    alert(2)
+                },
+                add1:function(){
+                    this.n++
+                },
+                testadd1:function(){
+                    this.testBlock.n++
+                },
+                test0:function(){
+                    this.testBlock.n=0
+                }
+            },
+            // 局部註冊只作用在局部,預設只會在當前頁面的Vue實例生效 directive + s = directives 是局部註冊
+            directives:{
+                big(element,binding,vnode){
+                    var multiple = vnode.context.testBlock.multiple
+                    element.innerText = binding.value*multiple
+                },
+                fbind:{
+                    bind(element,binding){
+                        element.value = binding.value
+                    },
+                    inserted(element,binding){
+                        element.focus()
+                    },
+                    update(element,binding) {
+                        element.value = binding.value
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

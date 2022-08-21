@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        現在時間:{{now}}秒，全國平均BMI為{{BMI}}
+        <div>
+            A的BMI：<input type="text" v-model="a">
+        </div>
+        <div>
+            B的BMI：<input type="text" v-model="b">
+        </div>
+        <ul>
+            <li>誰的體脂肪比較重? {{whoWeight}}</li>
+            <li>A跟全國平均BMI差多少? {{judgeA}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:".app",
+            data:{
+                a:0,
+                b:0,
+                BMI:20,
+            },
+            computed:{
+                whoWeight:function(){
+                    if(this.a>this.b){
+                        return "A比較重"
+                    }
+                    else if(this.a<this.b){
+                        return "B比較重"
+                    }
+                    else{
+                        return "一樣重"
+                    }
+                },
+                judgeA:function(){
+                    return this.a-this.BMI
+                },
+                now:function(){
+                    let total=this.a+this.b
+                    var d= new Date();
+                    return d.getSeconds()
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
