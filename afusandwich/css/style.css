@@ -37,62 +37,38 @@ body {
 }
 
 .setion1 {
+  position: relative;
   width: 100%;
-  height: 68vh;
-  background-image: url(../img/setion1.png);
+  padding: 60px 0 100px 0;
+  background-image: url(../img/熱總匯餐點照片.webp);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-@media (max-width: 1366px) {
-  .setion1 {
-    height: 45vh;
-  }
-}
-@media (max-width: 1280px) {
-  .setion1 {
-    height: 85vh;
-  }
-}
-@media (max-width: 768px) {
-  .setion1 {
-    height: 50vh;
-  }
-}
 .setion1 .contentMain {
+  position: relative;
+  z-index: 99;
   width: 100%;
   height: 100%;
-  background-color: #694434;
   opacity: 0.8;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.setion1 .contentMain .title {
-  width: 100%;
-  font-size: 44px;
-  font-weight: bolder;
-  text-align: center;
-  letter-spacing: 2px;
-  color: aliceblue;
-  margin-top: 20px;
-}
 .setion1 .contentMain .photo {
-  width: 10%;
-  margin-top: 50px;
+  width: 130px;
+  height: 170px;
 }
 .setion1 .contentMain .photo img {
   width: 100%;
 }
-@media (max-width: 1280px) {
-  .setion1 .contentMain .photo {
-    width: 15%;
-  }
-}
-@media (max-width: 768px) {
-  .setion1 .contentMain .photo {
-    width: 35%;
-  }
+.setion1 .contentMain .title {
+  width: 100%;
+  font-size: 32px;
+  font-weight: bolder;
+  text-align: center;
+  letter-spacing: 2px;
+  color: aliceblue;
 }
 .setion1 .contentMain .itemBar {
   width: 100%;
@@ -101,8 +77,8 @@ body {
   margin-top: 30px;
 }
 .setion1 .contentMain .itemBar .item {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border: 2px solid aliceblue;
   border-radius: 50%;
   margin: 0 10px;
@@ -116,7 +92,7 @@ body {
 }
 .setion1 .contentMain .itemBar i {
   color: aliceblue;
-  font-size: 22px;
+  font-size: 20px;
 }
 .setion1 .contentMain .itemBar .line {
   color: #694434 !important;
@@ -127,6 +103,14 @@ body {
 .setion1 .contentMain .itemBar .line:hover {
   background-color: #694434;
   color: #F3D9BA !important;
+}
+.setion1 .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(105, 68, 52, 0.862745098);
+  top: 0;
+  z-index: 0;
 }
 
 .setion2 {
@@ -176,6 +160,11 @@ body {
   .setion2 .content {
     width: 100%;
   }
+}
+.setion2 .content .item {
+  position: relative;
+  overflow: hidden;
+  /* 以防元素移動時超出容器 */
 }
 .setion2 .content .item .itemTitle {
   font-size: 30px;
@@ -347,7 +336,6 @@ body {
 .setion5 .innerLayer1 .content .card .year {
   width: 25%;
   border-radius: 15px 0 0 15px;
-  background-image: url(../img/2023參與簡單生活節03.jpg);
   background-size: cover;
 }
 @media (max-width: 768px) {
@@ -375,6 +363,18 @@ body {
     height: 150px;
     border-radius: 15px 15px 0 0;
   }
+}
+.setion5 .innerLayer1 .content .card .yearbackground1 {
+  background-image: url(../img/section05-01.webp);
+}
+.setion5 .innerLayer1 .content .card .yearbackground2 {
+  background-image: url(../img/section05-02.webp);
+}
+.setion5 .innerLayer1 .content .card .yearbackground3 {
+  background-image: url(../img/section05-03.webp);
+}
+.setion5 .innerLayer1 .content .card .yearbackground4 {
+  background-image: url(../img/section05-04.webp);
 }
 .setion5 .innerLayer1 .content .card .cardContent {
   width: 75%;
@@ -628,24 +628,22 @@ body {
 .setion8 .innerLayer1 .slider {
   width: 30%;
   height: 400px;
-  background-color: red;
 }
 @media (max-width: 1280px) {
   .setion8 .innerLayer1 .slider {
     width: 30%;
     height: 320px;
-    background-color: red;
   }
 }
 @media (max-width: 768px) {
   .setion8 .innerLayer1 .slider {
     width: 100%;
     height: 400px;
-    background-color: red;
   }
 }
 .setion8 .innerLayer1 .slider .swiper-wrapper .swiper-slide img {
   width: 100%;
+  height: 100%;
 }
 
 .setion9 {
@@ -728,6 +726,7 @@ body {
 @media (max-width: 768px) {
   .setion10 .innerLayer1 .itemBar {
     flex-direction: column;
+    align-items: center;
   }
 }
 .setion10 .innerLayer1 .itemBar .item {
@@ -872,9 +871,19 @@ body {
   border-bottom: 1px solid black;
 }
 .footer .innerLayer1 .footerBar .item {
+  display: block;
+  color: black;
   margin: 20px 15px;
   font-size: 12px;
   letter-spacing: 2px;
+}
+.footer .innerLayer1 .footerBar .item:hover {
+  color: #b7b7b7;
+}
+@media (max-width: 768px) {
+  .footer .innerLayer1 .footerBar .item {
+    margin: 20px 10px;
+  }
 }
 .footer .innerLayer1 .authorizeBar {
   width: 100%;
@@ -918,7 +927,8 @@ body {
   top: 0;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.7215686275);
-  overflow-y: auto; /* 允許垂直滾動 */
+  overflow-y: auto;
+  /* 允許垂直滾動 */
 }
 .menuDows .menu {
   position: absolute;
@@ -953,32 +963,40 @@ body {
 }
 
 .Animation1 {
-  position: relative;
-  left: -100px;
+  transform: translateX(0px);
+  /* 初始位置在右側 */
   opacity: 0;
+  /* 初始透明度為0，如果需要可以調整 */
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .Animation2 {
-  position: relative;
-  right: -100px;
+  transform: translateX(0px);
+  /* 初始位置在右側 */
   opacity: 0;
+  /* 初始透明度為0，如果需要可以調整 */
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .Animation3 {
-  position: relative;
-  left: -100px;
+  transform: translateX(0px);
+  /* 初始位置在右側 */
   opacity: 0;
+  /* 初始透明度為0，如果需要可以調整 */
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .Animation4 {
-  position: relative;
-  right: -100px;
+  transform: translateX(0px);
+  /* 初始位置在右側 */
   opacity: 0;
+  /* 初始透明度為0，如果需要可以調整 */
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .Animation5 {
   position: relative;
-  bottom: -100px;
+  bottom: -20px;
   opacity: 0;
 }
 
@@ -991,7 +1009,7 @@ body {
 
 @-webkit-keyframes leftIn {
   0% {
-    left: -100px;
+    left: -50px;
     opacity: 0;
   }
   100% {
@@ -1002,7 +1020,7 @@ body {
 
 @keyframes leftIn {
   0% {
-    left: -100px;
+    left: -50px;
     opacity: 0;
   }
   100% {
@@ -1019,7 +1037,7 @@ body {
 
 @-webkit-keyframes rightIn {
   0% {
-    right: -100px;
+    right: -50px;
     opacity: 0;
   }
   100% {
@@ -1030,7 +1048,7 @@ body {
 
 @keyframes rightIn {
   0% {
-    right: -100px;
+    right: -50px;
     opacity: 0;
   }
   100% {
@@ -1081,4 +1099,4 @@ body {
   100% {
     top: -5px;
   }
-}/*# sourceMappingURL=test.css.map */
+}/*# sourceMappingURL=style.css.map */
