@@ -1,0 +1,38 @@
+--庫別資料表
+CREATE TABLE Inventory (
+    InventoryId INT AUTO_INCREMENT PRIMARY KEY,              --Id
+    InventoryNo VARCHAR(30) NOT NULL,                        --庫別編號
+    InventoryName VARCHAR(30) NOT NULL,                      --庫別名字
+    InventorySpec VARCHAR(100) NOT NULL,                     --庫別描述
+    CreatDay TIMESTAMP DEFAULT CURRENT_TIMESTAMP           --創建日
+);
+--單位資料表
+CREATE TABLE Unit (
+    UnitNoId INT AUTO_INCREMENT PRIMARY KEY,               --Id
+    UnitNo VARCHAR(30) NOT NULL,                           --單位編號
+    UnitName VARCHAR(30)  NULL,                            --單位名字
+    UnitSpec VARCHAR(100)  NULL,                           --單位描述
+    Status VARCHAR(1)  NULL DEFAULT 'A',                   --狀態 // A:啟用 S:停用
+    CreatDay TIMESTAMP DEFAULT CURRENT_TIMESTAMP           --創建日
+);
+--品號資料表
+CREATE TABLE MtlItem (
+    MtlItemId INT AUTO_INCREMENT PRIMARY KEY,              --Id
+    MtlItemNo VARCHAR(30) NOT NULL,                        --品號編號
+    MtlItemName VARCHAR(30) NOT NULL,                      --品號名字
+    MtlItemSpec VARCHAR(100) NOT NULL,                     --品號描述
+    Quantity INT DEFAULT 0 NULL,                           --庫存數量
+    InventoryAmount DECIMAL(15, 2) DEFAULT 0 NULL,         --庫存金額
+    CreatDay TIMESTAMP DEFAULT CURRENT_TIMESTAMP           --創建日
+);
+--品號交易資料表
+CREATE TABLE MtlItemTransaction (
+    MtId INT AUTO_INCREMENT PRIMARY KEY,                    --Id
+    TransactionDate TIMESTAMP NOT NULL,                     --交易日   
+    TransactionType VARCHAR(1) NOT NULL,                    --交易類型 B:採購,S:銷售
+    MtlItemId INT NOT NULL,                                 --品號
+    Quantity INT NOT NULL,                                  --交易數量
+    Price DECIMAL(15, 2) NOT NULL,                          --交易單價
+    Amount DECIMAL(15, 2) NOT NULL,                         --交易總金額
+    CreatDay TIMESTAMP DEFAULT CURRENT_TIMESTAMP            --創建日
+);

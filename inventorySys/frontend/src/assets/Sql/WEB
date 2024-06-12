@@ -1,0 +1,196 @@
+--官網公司資料表 WEB_CompanyWeb
+CREATE TABLE WEB_CompanyWeb (
+    CwId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CompnayId               INT                 NOT NULL,                                   --公司
+    WebNo                   VARCHAR(10)         NOT NULL,                                   --網站代號
+    WebName                 VARCHAR(100)        NOT NULL,                                   --網站名字
+    WebDesc                 VARCHAR(100)            NULL,                                   --網站描述
+    Status                  VARCHAR(1)          NOT NULL DEFAULT 'S',                       --網站狀態
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--官網公司圖片庫資料表 WEB_CompanyPhoto
+CREATE TABLE WEB_CompanyPhoto (
+    CpId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CompanyId               INT                 NOT NULL,                                   --公司官網Id
+    PhotoName               VARCHAR(100)        NOT NULL,                                   --圖片名字
+    PhotoDesc               VARCHAR(100)            NULL,                                   --圖片描述
+    PhotoHref               longtext            NOT NULL,                                   --圖片Href
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--陳英渝立委官網資料表 WEB_CyyIndexContent (需要紀錄log)
+CREATE TABLE WEB_CyyIndexContent (
+    CiContentId             INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    Version                 VARCHAR(4)          NOT NULL,                                   --版本
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    BannerPhotoId           INT                 NOT NULL,                                   --Banner圖片
+    AboutText               VARCHAR(300)        NOT NULL,                                   --About文案
+    AboutPhotoId            INT                 NOT NULL,                                   --About圖片
+    ShopText                VARCHAR(100)        NOT NULL,                                   --Shop文案
+    FootTitle               VARCHAR(30)         NOT NULL,                                   --Foot標題
+    ContactAddress          VARCHAR(30)         NOT NULL,                                   --聯絡地址
+    ContactPhone            VARCHAR(30)         NOT NULL,                                   --聯絡電話
+    ContactEmail            VARCHAR(30)         NOT NULL,                                   --聯絡信箱
+    CopyrightNotice         VARCHAR(30)         NOT NULL,                                   --版權聲明
+    WebPhotoId              INT                     NULL,                                   --網站頭貼
+    LINE                    VARCHAR(100)            NULL,                                   --LINE      
+    Instagram               VARCHAR(100)            NULL,                                   --Instagram 
+    FaceBook                VARCHAR(100)            NULL,                                   --FaceBook  
+    YouTube                 VARCHAR(100)            NULL,                                   --YouTube  
+    Status                  VARCHAR(1)          NOT NULL DEFAULT 'S',                       --狀態
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--陳英渝立委活動資料表 WEB_CyyEvent
+CREATE TABLE WEB_CyyEvent (
+    CeId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    EventName               VARCHAR(300)        NOT NULL,                                   --活動名稱
+    EventText               VARCHAR(1000)       NOT NULL,                                   --活動文案
+    EventDate               TIMESTAMP           NOT NULL,                                   --活動日期
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--陳英渝立委活動照片群集資料表 WEB_CyyEvent
+CREATE TABLE WEB_CyyEventPhoto (
+    CePhotoId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CeId                    INT                 NOT NULL,                                   --公司活動Id
+    PhotoId                 Id                      NULL,                                   --活動照片
+    MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片
+    PageSetting             VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否為頁面照片
+    GroupSetting            VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否納入照片輪播
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--陳英渝立委議題資料表 WEB_CyyIssues
+CREATE TABLE WEB_WEB_CyyIssues (
+    CiId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    IssuesName              VARCHAR(300)        NOT NULL,                                   --議題名稱
+    IssuesText              VARCHAR(1000)       NOT NULL,                                   --議題文案
+    IssuesDate              TIMESTAMP           NOT NULL,                                   --議題日期
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委議題照片群集資料表 WEB_CyyIssuesPhoto
+CREATE TABLE WEB_CyyIssuesPhoto (
+    CiPhotoId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CiId                    INT                 NOT NULL,                                   --公司議題Id
+    PhotoId                 INT                     NULL,                                   --議題照片
+    MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委產品資料表 WEB_CyyProduct (需要紀錄log,當金額有異動須要做等候確認判定,商品上架中需要提示)
+CREATE TABLE WEB_CyyProduct (
+    CpdId                   INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    MtlItemId               INT                 NOT NULL,                                   --品號
+    ProductName             VARCHAR(1000)       NOT NULL,                                   --產品名稱
+    ProductText             VARCHAR(1000)       NOT NULL,                                   --產品文案
+    ProductAmount           VARCHAR(1000)       NOT NULL,                                   --產品金額
+    GroupSetting            VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否納入輪播
+    Status                  VARCHAR(1)          NOT NULL DEFAULT 'S',                       --狀態
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委產品照片群集資料表 WEB_CyyProductPhoto
+CREATE TABLE WEB_CyyProductPhoto (
+    CpdPhotoId              INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CpdId                   INT                 NOT NULL,                                   --公司產品Id
+    PhotoId                 INT                     NULL,                                   --產品照片
+    MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委贊助頁面資料表 WEB_CyyDonate
+CREATE TABLE WEB_CyyDonate (
+    CdId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    PhotoId                 INT                     NULL,                                   --議題照片
+    Slogan                  VARCHAR(50)         NOT NULL,                                   --捐款口號
+    DonateText              VARCHAR(1000)       NOT NULL,                                   --文案
+    RegulationsText         VARCHAR(1000)       NOT NULL,                                   --法規文案
+    Amount1                 float               NOT NULL,                                   --金額1
+    Amount2                 float               NOT NULL,                                   --金額2
+    Amount3                 float               NOT NULL,                                   --金額3
+    Amount4                 float               NOT NULL,                                   --金額4
+    Amount5                 float               NOT NULL,                                   --金額5
+    Amount6                 float               NOT NULL,                                   --金額6
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委議常見問題資料表 WEB_CyyQuestion
+CREATE TABLE WEB_CyyQuestion (
+    CqId                    INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    Question                VARCHAR(50)         NOT NULL,                                   --問題
+    Answer                  VARCHAR(300)        NOT NULL,                                   --回答
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委民眾服務表單資料表 WEB_CyyServicesForm
+CREATE TABLE WEB_CyyServicesForm (
+    CsFormId                INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CwId                    INT                 NOT NULL,                                   --公司官網Id
+    MemberId                INT                     NULL,                                   --會員Id
+    ContactPerson           VARCHAR(10)         NOT NULL,                                   --聯絡人
+    ContactPhone            VARCHAR(10)         NOT NULL,                                   --聯絡人電話
+    ContactEmail            VARCHAR(30)         NOT NULL,                                   --聯絡人信箱
+    Remark                  VARCHAR(500)        NOT NULL,                                   --聯絡人留言
+    FormStatus              VARCHAR(1)          NOT NULL,                                   --表單狀態 S:送出,R:已讀,P:處理中,F:結案  
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委表單對談資料表 WEB_CyySfDetail
+CREATE TABLE WEB_CyySfDetail (
+    CsfDetailId             INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CsFormId                INT                 NOT NULL,                                   --表單Id
+    PersonType              VARCHAR(1)          NOT NULL,                                   --B:公司,C:會員
+    UserId                  INT                 NOT NULL,                                   --對談者
+    ContactText             VARCHAR(500)        NOT NULL,                                   --內容
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--陳英渝立委對談附圖資料表 WEB_CyySfDetailPhoto
+CREATE TABLE WEB_CyySfDetailPhoto (
+    CsfdPhoneId             INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CsfDetailId             INT                 NOT NULL,                                   --表單對談Id
+    PhotoId                 INT                     NULL,                                   --照片
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);

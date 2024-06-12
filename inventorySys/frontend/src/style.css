@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: unset !important;
+  color: black;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica", "Noto Sans TC", "Arial", "sans-serif";
+}
+
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,95 @@
+BAS:系統
+--公司資料表 BAS_Company 
+CREATE TABLE BAS_Company  (
+    CompanyId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CompanyNo               VARCHAR(10)         NOT NULL,                                   --公司代碼
+    CompanyName             VARCHAR(30)         NOT NULL,                                   --公司名字
+    CompanyDesc             VARCHAR(100)            NULL,                                   --公司描述
+    Status                  VARCHAR(1)              NULL DEFAULT 'A',                       --狀態 // A:啟用 S:停用
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--開發者資料表 BAS_DevelopUser 
+CREATE TABLE BAS_DevelopUser  (
+    DevelopUserId           INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    DevelopUserNo           VARCHAR(10)         NOT NULL,                                   --公司代碼
+    DevelopUserName         VARCHAR(30)         NOT NULL,                                   --公司名字
+    DevelopUserDesc         VARCHAR(100)            NULL,                                   --公司描述
+    Status                  VARCHAR(1)              NULL DEFAULT 'A',                       --狀態 // A:啟用 S:停用
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--系統資料表 BAS_System
+CREATE TABLE BAS_System  (
+    SystemId                INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    SystemNo                VARCHAR(30)         NOT NULL,                                   --系統編號
+    SystemName              VARCHAR(30)         NOT NULL,                                   --系統名字
+    SystemDesc              VARCHAR(100)            NULL,                                   --系統描述
+    IconStyle               VARCHAR(100)            NULL,                                   --Icon圖示
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+
+--模組資料表 BAS_Modal
+CREATE TABLE BAS_Modal (
+    ModalId                 INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    ModalNo                 VARCHAR(30)         NOT NULL,                                   --模組編號
+    ModalName               VARCHAR(30)         NOT NULL,                                   --模組名字
+    ModalDesc               VARCHAR(100)            NULL,                                   --模組描述
+    IconStyle               VARCHAR(100)            NULL,                                   --Icon圖示
+    SystemId                INT                 NOT NULL,                                   --系統Id
+    CompanyId               INT                     NULL,                                   --公司別
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--組件資料表 BAS_Component
+CREATE TABLE BAS_Component (
+    ComponentId             INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    ComponentNo             VARCHAR(30)         NOT NULL,                                   --組件編號
+    ComponentName           VARCHAR(30)         NOT NULL,                                   --組件名字
+    ComponentDesc           VARCHAR(100)            NULL,                                   --組件描述
+    ModalId                 INT                 NOT NULL,                                   --模組Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--類別資料表 BAS_Type
+CREATE TABLE BAS_Type (
+    TypeId                  INT          AUTO_INCREMENT PRIMARY KEY,                        --Id
+    TypeNo                  VARCHAR(30)         NOT NULL,                                   --類別編號
+    TypeName                VARCHAR(30)         NOT NULL,                                   --類別名字
+    TypeDesc                VARCHAR(100)            NULL,                                   --類別描述
+    UseFrom                 VARCHAR(100)        NOT NULL,                                   --用途來源
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--狀態資料表 BAS_Status
+CREATE TABLE BAS_Status (
+    StatusId                INT          AUTO_INCREMENT PRIMARY KEY,                        --Id
+    StatusNo                VARCHAR(30)         NOT NULL,                                   --狀態編號
+    StatusName              VARCHAR(30)         NOT NULL,                                   --狀態名字
+    StatusDesc              VARCHAR(100)            NULL,                                   --狀態描述
+    UseFrom                 VARCHAR(100)        NOT NULL,                                   --用途來源
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+

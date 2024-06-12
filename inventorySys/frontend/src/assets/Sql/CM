@@ -1,0 +1,134 @@
+CM:公司營運
+
+--公司詳細資料表 CM_CompanyDate 
+CREATE TABLE CM_CompanyDate  (
+    CpDateId                INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    CompanyFullName         VARCHAR(100)            NULL,                                   --公司全名
+    CompanyName             VARCHAR(100)            NULL,                                   --公司簡稱
+    CompanyPerson           VARCHAR(100)            NULL,                                   --負責人
+    Phone                   VARCHAR(10)             NULL,                                   --公司電話
+    TaxID                   VARCHAR(8)              NULL,                                   --統一編號
+    AssetAmount             DECIMAL(15,2)       NOT NULL DEFAULT 0,                         --資產金額
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--部門資料表 CM_Department 
+CREATE TABLE CM_Department  (
+    DepartmentId            INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    DepartmentNo            VARCHAR(10)         NOT NULL,                                   --部門代碼
+    DepartmentName          VARCHAR(30)         NOT NULL,                                   --部門名字
+    DepartmentDesc          VARCHAR(30)             NULL,                                   --部門描述
+    PersonnelExpenses       DECIMAL(15, 2)          NULL DEFAULT 0,                         --人事費用
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+--人員資料表 CM_Staff 
+CREATE TABLE CM_Staff  (
+    StaffId                  INT                 AUTO_INCREMENT PRIMARY KEY,                --Id
+    StaffNo                  VARCHAR(10)         NOT NULL,                                  --人員代碼
+    StaffName                VARCHAR(30)         NOT NULL,                                  --人員名字
+    StaffDesc                VARCHAR(30)             NULL,                                  --人員描述
+    PassWord                 VARCHAR(20)             NULL,                                  --登入密碼
+    Position                 VARCHAR(30)             NULL,                                  --職位
+    JoiningDate              TIMESTAMP           NOT NULL,                                  --加入日
+    ResignationDate          TIMESTAMP           NOT NULL,                                  --離職日
+    Status                   VARCHAR(1)              NULL DEFAULT 'A',                      --狀態 // A:啟用 S:停用
+    DepartmentId               INT                 NOT NULL,                                --部門Id
+    CreatDate                TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,       --創建日
+    UpdateDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,       --更新日
+    CreateUserId             INT                 NOT NULL DEFAULT -1,                       --創建者
+    UpdateUserId             INT                     NULL DEFAULT -1                        --更新者
+);
+
+--使用者詳細資料表 CM_StaffDate 
+CREATE TABLE CM_StaffDate  (
+    StDateId                INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    StaffId                 INT                 NOT NULL,                                   --人員Id
+    Address                 VARCHAR(10)             NULL,                                   --住址
+    Phone                   VARCHAR(30)             NULL,                                   --電話
+    Mobile                  VARCHAR(30)             NULL,                                   --手機
+    Email                   VARCHAR(30)             NULL,                                   --信箱
+    Birthday                VARCHAR(30)             NULL,                                   --生日
+    Education               VARCHAR(30)             NULL,                                   --學歷
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+
+--庫別資料表 CM_Warehouse 
+CREATE TABLE CM_Warehouse  (
+    WarehouseId             INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    WarehouseNo             VARCHAR(10)         NOT NULL,                                   --庫別代碼
+    WarehouseName           VARCHAR(100)        NOT NULL,                                   --庫別名字
+    WarehouseDesc           VARCHAR(100)            NULL,                                   --庫別描述
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--單位資料表 CM_Unit 
+CREATE TABLE CM_Unit  (
+    UnitId                  INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    UnitNo                  VARCHAR(10)         NOT NULL,                                   --單位代碼
+    UnitName                VARCHAR(100)        NOT NULL,                                   --單位名字
+    UnitDesc                VARCHAR(100)            NULL,                                   --單位描述
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--品號資料表 CM_MtlItem 
+CREATE TABLE CM_MtlItem  (
+    MtlItemId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    MtlItemNo               VARCHAR(10)         NOT NULL,                                   --品號代碼
+    MtlItemName             VARCHAR(100)        NOT NULL,                                   --品號名字
+    MtlItemDesc             VARCHAR(100)            NULL,                                   --品號描述
+    InventoryQuantity       INT                     NULL DEFAULT 0,                         --庫存數量
+    InventoryAmount         DECIMAL(15,2)           NULL DEFAULT 0,                         --庫存金額
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+--品號資料表 CM_MtlItem 
+CREATE TABLE CM_MtlItem  (
+    MtlItemId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    MtlItemNo               VARCHAR(10)         NOT NULL,                                   --品號代碼
+    MtlItemName             VARCHAR(100)        NOT NULL,                                   --品號名字
+    MtlItemDesc             VARCHAR(100)            NULL,                                   --品號描述
+    InventoryQuantity       INT                     NULL DEFAULT 0,                         --庫存數量
+    InventoryAmount         DECIMAL(15,2)           NULL DEFAULT 0,                         --庫存金額
+    CompanyId               INT                 NOT NULL,                                   --公司Id
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
+
+
+--品號資料表 CM_CyyImg 
+CREATE TABLE CM_CyyImg  (
+    CyyImgId                INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
+    href                    VARCHAR(MAX)        NOT NULL,                                   --品號代碼
+    ImgName                 VARCHAR(100)        NOT NULL,                                   --品號名字
+    ImgSpec                 VARCHAR(100)            NULL,                                   --品號描述
+    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
+    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
+    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
+    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
+);
