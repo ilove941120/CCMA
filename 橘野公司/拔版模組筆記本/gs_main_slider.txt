@@ -1,3 +1,0 @@
-gs_main_slider //主輪播
-gs_main_slider_0001 丐幫滷味 首頁 主輪播
-gs_main_slider_0002 恩典水電材料有限公司 首頁 主輪播

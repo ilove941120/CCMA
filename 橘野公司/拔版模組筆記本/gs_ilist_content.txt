@@ -1,2 +1,0 @@
-gs_ilist_content //列表內容頁面
-gs_ilist_content_0001 丐幫滷味 最新消息 列表內容頁面

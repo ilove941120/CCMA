@@ -1,3 +1,0 @@
-gs_contact //聯絡我們
-gs_contact_0001 丐幫滷味 聯絡我們
-gs_contact_0002	恩典水電材料有限公司 聯絡我們
