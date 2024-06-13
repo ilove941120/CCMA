@@ -183,7 +183,6 @@ import axios from 'axios'
 //#endregion
 
 //#region web官網
-
     //#region WEB_CompanyWeb 官網圖片資料庫
     const GetCompanyWeb  = (req) => {
         return axios.post(`/api/web/GetCompanyWeb `, req)
@@ -213,7 +212,42 @@ import axios from 'axios'
         return axios.post(`/api/web/DeleteCompanyPhoto`, req)
     }
     //#endregion oms營運管理系統
-//#endregion oms營運管理系統
+
+    
+//#endregion 
+
+//#region Cyy官網編輯器
+    //#region Banner
+    const UpdateCyyBanner = (req) => {
+        return axios.post(`/api/sys/UpdateCyyBanner`, req)
+    }
+    //#endregion 
+
+    //#region About
+    const UpdateCyyAbout = (req) => {
+        return axios.post(`/api/sys/UpdateCyyAbout`, req)
+    }
+    //#endregion 
+
+    //#region Product
+    const UpdateCyyProduct = (req) => {
+        return axios.post(`/api/sys/UpdateCyyProduct`, req)
+    }
+    //#endregion 
+
+    //#region Serve
+    const UpdateCyyServe = (req) => {
+        return axios.post(`/api/sys/UpdateCyyServe`, req)
+    }
+    //#endregion 
+
+    //#region Footer
+    const UpdateCyyFooter = (req) => {
+        return axios.post(`/api/sys/UpdateCyyFooter`, req)
+    }
+    //#endregion 
+//#endregion 
+
 
 //#region web官網
 const GetImg = (req) => {
@@ -236,6 +270,8 @@ const DeletImg = (req) => {
     }
 //#endregion
 
+//#region 
+//#endregion 
 
 export {
     GetLogin,
@@ -252,9 +288,10 @@ export {
     GetUnit, AddUnit, UpdateUnit, DeleteUnit,
     GetMtlItem, AddMtlItem, UpdateMtlItem, DeleteMtlItem,
 
-    GetCompanyWeb , AddCompanyWeb , UpdateCompanyWeb , DeleteCompanyWeb ,
+    GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
-
+    UpdateCyyBanner, UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
+    
     GetMenuModal,
     GetTransaction, AddTransaction,
     GetImg,AddImg,DeletImg
