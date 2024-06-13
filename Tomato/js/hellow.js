@@ -1,1 +1,0 @@
-console.log("歡迎使用Node.js")
