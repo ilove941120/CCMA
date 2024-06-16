@@ -17,7 +17,7 @@ const sentObj = defineProps({
 //#endregion
 const form = reactive({})
 const methodName = ref('')
-
+const returnButtonShow = ref(sentObj.sent.returnButtonShow)
 //#region 根據父層資料判斷 該頁面要進行動作
 switch (sentObj.sent.action) {
     case "read":
@@ -112,7 +112,7 @@ for (var i = 0; i < itemGroupLength; i++) {
 //#region 儲存表單資料
 const Save = async () => {
     const methodFunc = await getMethod(methodName.value)
-    form.id = sentObj.sent.pageId
+    form.Id = sentObj.sent.pageId
     if (methodFunc && typeof methodFunc === 'function') {
         try {
             const result = await methodFunc(form)
@@ -154,6 +154,8 @@ const Return = () => {
 }
 
 const icon = ref(`<i class="fa-brands fa-facebook"></i>`)
+
+
 </script>
 
 <template>
@@ -184,7 +186,7 @@ const icon = ref(`<i class="fa-brands fa-facebook"></i>`)
             </div>
         </div>
         <div class="formFooter">
-            <button @click="Return()">返回</button>
+            <button v-if="returnButtonShow" @click="Return()">返回</button>
             <button @click="Save()" v-if="!inputStatus">儲存</button>
         </div>
     </div>

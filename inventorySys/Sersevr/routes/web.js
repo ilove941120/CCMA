@@ -91,250 +91,250 @@
 
     //#region Web
         //#region  CompanyPhoto相關 查看,新增,修改,刪除
-                //#region 查看
-                router.post('/GetCompanyPhoto', (req, res) => {
-                    try{
-                        //#region 宣告前端參數
-                        if(!basic(req,res)) return
-                        const {CpId, PhotoNo, PhotoName,ShowNum,Index} = req.body;
-                        let conditions = []; //條件查詢容器
-                        let params = []; //參數容器
+            //#region 查看
+            router.post('/GetCompanyPhoto', (req, res) => {
+                try{
+                    //#region 宣告前端參數
+                    if(!basic(req,res)) return
+                    const {CpId, PhotoNo, PhotoName,ShowNum,Index} = req.body;
+                    let conditions = []; //條件查詢容器
+                    let params = []; //參數容器
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 基本查詢
+                        var baseQuery = `SELECT b.Total
+                                            ,a.* 
+                                            FROM WEB_CompanyPhoto a
+                                            JOIN (
+                                                SELECT COUNT('CpId') Total FROM WEB_CompanyPhoto 
+                                            ) b
+                                            WHERE 1=1`
                         //#endregion 
 
-                        //#region 開始後端交易
-                        var connection = CreateDBConnection()
-                        connection.beginTransaction(async (transactionError) => {
-                            if(transactionError) {
-                                console.error("開啟後端交易失敗:", transactionError);
-                                return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                            }
+                        //#region 條件
+                        // if (currentCompany > 0) {
+                        //     conditions.push("a.CompnayId = ?");
+                        //     params.push(currentCompany);
+                        // }
+                        if (CpId > 0) {
+                            conditions.push("a.CpId = ?");
+                            params.push(CpId);
+                        }
+                        if (PhotoNo) {
+                            conditions.push("a.PhotoNo LIKE ?");
+                            params.push('%' + PhotoNo + '%');
+                        }
+                        if (PhotoName) {
+                            conditions.push("a.PhotoName LIKE ?");
+                            params.push('%' + PhotoName + '%');
+                        }
+                        let sql = baseQuery;
+                        if (conditions.length) {
+                            sql += " AND " + conditions.join(" AND ");
+                        }
+                        //#endregion 
 
-                            //#region 基本查詢
-                            var baseQuery = `SELECT b.Total
-                                                ,a.* 
-                                                FROM WEB_CompanyPhoto a
-                                                JOIN (
-                                                    SELECT COUNT('CpId') Total FROM WEB_CompanyPhoto 
-                                                ) b
-                                                WHERE 1=1`
-                            //#endregion 
+                        //#region 列表顯示設定
+                        sql += ` ORDER BY 'a.CpId'`
+                        if(ShowNum >0 && Index >=0){
+                            sql += " LIMIT ? OFFSET ?";
+                            params.push(ShowNum);
+                            params.push(Index);
+                        }
+                        //#endregion 
 
-                            //#region 條件
-                            // if (currentCompany > 0) {
-                            //     conditions.push("a.CompnayId = ?");
-                            //     params.push(currentCompany);
-                            // }
-                            if (CpId > 0) {
-                                conditions.push("a.CpId = ?");
-                                params.push(CpId);
+                        //#region 執行
+                        connection.query(sql, params, (err, rows) => {
+                            if (!err) { 
+                                SendSuccess(res,"",rows)
+                            } else {
+                                SendError(res, err) 
                             }
-                            if (PhotoNo) {
-                                conditions.push("a.PhotoNo LIKE ?");
-                                params.push('%' + PhotoNo + '%');
-                            }
-                            if (PhotoName) {
-                                conditions.push("a.PhotoName LIKE ?");
-                                params.push('%' + PhotoName + '%');
-                            }
-                            let sql = baseQuery;
-                            if (conditions.length) {
-                                sql += " AND " + conditions.join(" AND ");
-                            }
-                            //#endregion 
-
-                            //#region 列表顯示設定
-                            sql += ` ORDER BY 'a.CpId'`
-                            if(ShowNum >0 && Index >=0){
-                                sql += " LIMIT ? OFFSET ?";
-                                params.push(ShowNum);
-                                params.push(Index);
-                            }
-                            //#endregion 
-
-                            //#region 執行
-                            connection.query(sql, params, (err, rows) => {
-                                if (!err) { 
-                                    SendSuccess(res,"",rows)
-                                } else {
-                                    SendError(res, err) 
-                                }
-                            });
-                            //#endregion 
                         });
                         //#endregion 
-                    }
-                    catch(queryError){
-                        console.error("Query Error:", queryError.message);
-                        res.status(400).send({ status: 'error', msg:queryError.message });
-                    }
-                });
-                //#endregion 
-                
-                //#region 新增
-                router.post('/AddCompanyPhoto', (req, res) => {
-                    try{
-                        //#region 參數宣告+資料庫連接
-                        var connection = CreateDBConnection()
-                        basic(req,res)
-                        const {PhotoName, PhotoDesc, PhotoHref} = req.body;
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+            
+            //#region 新增
+            router.post('/AddCompanyPhoto', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {PhotoName, PhotoDesc, PhotoHref} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
+                    if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
+                    if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
+                    if (PhotoHref.length <= 0) throw new Error('【圖片連結】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
                         //#endregion 
 
-                        //#region 參數檢查
-                        if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
-                        if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
-                        if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
-                        if (PhotoHref.length <= 0) throw new Error('【圖片連結】不可以為空')
+                        //#region 異動段
+                        var sql = `INSERT INTO WEB_CompanyPhoto 
+                                    (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                    VALUES
+                                    (? ,? ,? ,?
+                                        ,? ,? ,? ,?)`;
+                        const query = util.promisify(connection.query).bind(connection);
+                        await query(sql, [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                        ,currentTime,currentTime,currentUser,currentUser]);
                         //#endregion 
 
-                        //#region 開始後端交易
-                        connection.beginTransaction(async (transactionError) => {
-                            if(transactionError) {
-                                console.error("開啟後端交易失敗:", transactionError);
-                                return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                            }
-
-                            //#region 檢查段
-                            //#endregion 
-
-                            //#region 異動段
-                            var sql = `INSERT INTO WEB_CompanyPhoto 
-                                        (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
-                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                                        VALUES
-                                        (? ,? ,? ,?
-                                            ,? ,? ,? ,?)`;
-                            const query = util.promisify(connection.query).bind(connection);
-                            await query(sql, [currentCompany, PhotoName, PhotoDesc, PhotoHref
-                                            ,currentTime,currentTime,currentUser,currentUser]);
-                            //#endregion 
-
-                            //#region 获取最新插入的ID
-                            var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                            const result = await query(GetInsertedId);
-                            //#endregion 
-
-                            //#region commit段
-                            CommitRun("add",connection,res,result)
-                            //#endregion 
-                        });
-                        //#endregion 
-                    }
-                    catch(queryError){
-                        console.error("Query Error:", queryError.message);
-                        res.status(400).send({ status: 'error', msg:queryError.message });
-                    }
-                });
-                //#endregion 
-
-                //#region 更新
-                router.post('/UpdateCompanyPhoto', (req, res) => {
-                    try{
-                        //#region 宣告前端參數
-                        var connection = CreateDBConnection()
-                        basic(req)
-                        const {CpId,PhotoName, PhotoDesc} = req.body;
+                        //#region 获取最新插入的ID
+                        var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                        const result = await query(GetInsertedId);
                         //#endregion 
 
-                        //#region 參數檢查
-                        if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
-                        if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
-                        if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
+                        //#region commit段
+                        CommitRun("add",connection,res,result)
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+            //#region 更新
+            router.post('/UpdateCompanyPhoto', (req, res) => {
+                try{
+                    //#region 宣告前端參數
+                    var connection = CreateDBConnection()
+                    basic(req)
+                    const {CpId,PhotoName, PhotoDesc} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
+                    if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
+                    if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+                        //#region 檢查段
+                        var checkSql = `SELECT CpId
+                                        FROM WEB_CompanyPhoto
+                                        WHERE 1=1
+                                        AND CpId = ?
+                                        LIMIT 1`
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CpId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【圖片不存在】,請重新確認');
                         //#endregion 
 
-                        //#region 開始後端交易
-                        connection.beginTransaction(async (transactionError) => {
-                            if(transactionError) {
-                                console.error("開啟後端交易失敗:", transactionError);
-                                return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                            }
-                            //#region 檢查段
-                            var checkSql = `SELECT CpId
+                        //#region 異動段
+                        var sql = `UPDATE WEB_CompanyPhoto set 
+                                    PhotoName = ?
+                                    ,PhotoDesc = ?
+                                    ,UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    WHERE 1=1
+                                    AND CpId = ?
+                                    `
+                        const query = util.promisify(connection.query).bind(connection);
+                        await query(sql, [PhotoName, PhotoDesc, currentTime,currentUser, CpId]);
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+
+            //#region 刪除
+            router.post('/DeleteCompanyPhoto', (req, res) => {
+                try{
+                    //#region 宣告前端參數
+                    var connection = CreateDBConnection()
+                    basic(req)
+                    const {CpId} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CpId <= 0) throw new Error('【圖片圖片】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+                        //#region 檢查段
+                        var checkSql = `SELECT CpId
                                             FROM WEB_CompanyPhoto
                                             WHERE 1=1
                                             AND CpId = ?
                                             LIMIT 1`
-                            const checkQuery = util.promisify(connection.query).bind(connection);
-                            const resultCheck = await checkQuery(checkSql, [CpId]);
-                            if (resultCheck.length <= 0) return SendError(res,'【圖片不存在】,請重新確認');
-                            //#endregion 
-
-                            //#region 異動段
-                            var sql = `UPDATE WEB_CompanyPhoto set 
-                                        PhotoName = ?
-                                        ,PhotoDesc = ?
-                                        ,UpdateDate = ?
-                                        ,UpdateUserId = ?
-                                        WHERE 1=1
-                                        AND CpId = ?
-                                        `
-                            const query = util.promisify(connection.query).bind(connection);
-                            await query(sql, [PhotoName, PhotoDesc, currentTime,currentUser, CpId]);
-                            //#endregion 
-
-                            //#region commit段
-                            CommitRun("update",connection,res,"")
-                            //#endregion 
-                        });
-                        //#endregion 
-                    }
-                    catch(queryError){
-                        console.error("Query Error:", queryError.message);
-                        res.status(400).send({ status: 'error', msg:queryError.message });
-                    }
-                })
-                //#endregion 
-
-                //#region 刪除
-                router.post('/DeleteCompanyPhoto', (req, res) => {
-                    try{
-                        //#region 宣告前端參數
-                        var connection = CreateDBConnection()
-                        basic(req)
-                        const {CpId} = req.body;
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CpId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【圖片圖片】,請重新確認');
                         //#endregion 
 
-                        //#region 參數檢查
-                        if (CpId <= 0) throw new Error('【圖片圖片】不可以為空')
+                        //#region 異動段
+                        var sql = `DELETE FROM WEB_CompanyPhoto 
+                                    WHERE 1=1
+                                    AND CpId = ? `
+                        const query = util.promisify(connection.query).bind(connection);
+                        await query(sql, [CpId]);
                         //#endregion 
 
-                        //#region 開始後端交易
-                        connection.beginTransaction(async (transactionError) => {
-                            if(transactionError) {
-                                console.error("開啟後端交易失敗:", transactionError);
-                                return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                            }
-                            //#region 檢查段
-                            var checkSql = `SELECT CpId
-                                                FROM WEB_CompanyPhoto
-                                                WHERE 1=1
-                                                AND CpId = ?
-                                                LIMIT 1`
-                            const checkQuery = util.promisify(connection.query).bind(connection);
-                            const resultCheck = await checkQuery(checkSql, [CpId]);
-                            if (resultCheck.length <= 0) return SendError(res,'【圖片圖片】,請重新確認');
-                            //#endregion 
-
-                            //#region 異動段
-                            var sql = `DELETE FROM WEB_CompanyPhoto 
-                                        WHERE 1=1
-                                        AND CpId = ? `
-                            const query = util.promisify(connection.query).bind(connection);
-                            await query(sql, [CpId]);
-                            //#endregion 
-
-                            //#region commit段
-                            CommitRun("delete",connection,res,"")
-                            //#endregion 
-                        });
+                        //#region commit段
+                        CommitRun("delete",connection,res,"")
                         //#endregion 
-                    }
-                    catch(queryError){
-                        console.error("Query Error:", queryError.message);
-                        res.status(400).send({ status: 'error', msg:queryError.message });
-                    }
-                })
-                //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
             //#endregion 
+        //#endregion 
 
         //#region  CompanyWeb相關 查看,新增,修改,刪除
             //#region 查看
@@ -590,6 +590,125 @@
             })
             //#endregion 
         //#endregion 
+
+        //#region  編輯器相關
+            //#region 查看
+            router.post('/GetCyyIndexContent', (req, res) => {
+                try{
+                    //#region 宣告前端參數
+                    if(!basic(req,res)) return
+                    const {CiContentId,CwId} = req.body;
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 基本查詢
+                        var sql = `SELECT a.*
+                                        FROM WEB_CyyIndexContent
+                                        WHERE CiContentId = ?
+                                        AND CwId =?`
+                        const baseQuery = util.promisify(connection.query).bind(connection);
+                        const result = await checkQuery(baseQuery, [CiContentId,CwId]);
+                        if (result.length <= 0) return SendError(res,'【網站不存在】,請重新確認');
+                        SendSuccess(res,"",rows)
+
+                        //#endregion 
+
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+            
+
+
+            //#region 更新Banner
+            router.post('/UpdateCyyWebBanner', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CwId,PhotoName, PhotoDesc, PhotoHref} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                    if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
+                    if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
+                    if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
+                    if (PhotoHref.length <= 0) throw new Error('【圖片連結】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        //#endregion 
+
+                        //#region 異動段
+                        var sql = `INSERT INTO WEB_CompanyPhoto 
+                                    (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                    VALUES
+                                    (? ,? ,? ,?
+                                        ,? ,? ,? ,?)`;
+                        const query = util.promisify(connection.query).bind(connection);
+                        await query(sql, [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                        ,currentTime,currentTime,currentUser,currentUser]);
+                        //#endregion 
+
+                        //#region 获取最新插入的ID
+                        var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                        const result = await query(GetInsertedId);
+                        //#endregion 
+
+                        var CpId = -1;
+                        result.forEach((item)=>{
+                            CpId= item.id
+                        })
+                        //#region 異動段
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     BannerPhotoId = ?
+                                    ,UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query(sql, [CpId,currentTime,currentUser,CwId ]);
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("add",connection,res,result)
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+
+            
+        //#endregion 
+
     //#endregion  
 
     //#region CyyWeb

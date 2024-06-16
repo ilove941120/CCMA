@@ -91,6 +91,18 @@ import axios from 'axios'
     }
     //#endregion
 
+    //#region BAS_Company       --公司相關 查看,新增,修改,刪除
+    const GetCompanyDate = (req) => {
+        return axios.post(`/api/sys/GetCompanyDate`,req)
+    }
+    const UpdateCompanyDate = (req) => {
+        return axios.post(`/api/sys/UpdateCompanyDate`, req)
+    }
+    const DeleteCompanyDate = (req) => {
+        return axios.post(`/api/sys/DeleteCompanyDate`, req)
+    }
+    //#endregion
+
     //#region GetMenuModal      --取得列表模組+組件層
     const GetMenuModal = (req) => {
         return axios.post(`/api/sys/GetMenuModal`,req)
@@ -249,15 +261,18 @@ import axios from 'axios'
 //#endregion 
 
 
-//#region web官網
-const GetImg = (req) => {
-    return axios.post(`/api/sys/GetImg`, req)
+//#region web官網 GetCyyIndexContent
+const GetCyyIndexContent= (req) => {
+    return axios.post(`/api/web/GetCyyIndexContent`, req)
 }
-const AddImg = (req) => {
-    return axios.post(`/api/sys/AddImg`, req)
+const GetCyyWebBanner= (req) => {
+    return axios.post(`/api/web/GetCyyWebBanner`, req)
 }
-const DeletImg = (req) => {
-    return axios.post(`/api/sys/DeletImg`, req)
+const UpdateCyyWebBanner = (req) => {
+    return axios.post(`/api/web/UpdateCyyWebBanner`, req)
+}
+const DeletCyyWebBanner = (req) => {
+    return axios.post(`/api/web/DeletCyyWebBanner`, req)
 }
 //#endregion oms營運管理系統
 
@@ -281,6 +296,7 @@ export {
     GetType, AddType, UpdateType, DeleteType,
     GetStatus, AddStatus, UpdateStatus, DeleteStatus,
     GetCompany, AddCompany, UpdateCompany, DeleteCompany,
+    GetCompanyDate, UpdateCompanyDate, DeleteCompanyDate,
 
     GetDepartment, AddDepartment, UpdateDepartment, DeleteDepartment,
     GetStaff, AddStaff, UpdateStaff, DeleteStaff,
@@ -290,9 +306,10 @@ export {
 
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
-    UpdateCyyBanner, UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
+    GetCyyWebBanner,UpdateCyyWebBanner,DeletCyyWebBanner,
+    GetCyyIndexContent,
+    UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
     
     GetMenuModal,
-    GetTransaction, AddTransaction,
-    GetImg,AddImg,DeletImg
+    GetTransaction, AddTransaction
 }

@@ -14,6 +14,7 @@ const store = useStore();
 const editObj = reactive({
     action: "",
     pageId: -1,
+    returnButtonShow:false,
     api: {
         read: "GetCompany",
         add: "AddCompany",
@@ -58,7 +59,8 @@ const editShow = ref(false)
 const detailShow = reactive(
     {
         value:`companyDetail`,
-        label:`公司詳細資料`
+        label:`公司詳細資料`,
+        CompanyId:-1
     }
 )
 const detailList = reactive([
@@ -78,6 +80,7 @@ function addForm() {
     changePage.value = "返回"
     editObj.action = "add"
     editObj.pageId = -1
+    detailShow.CompanyId = -1
 }
 function readForm(Id) {
     
@@ -85,6 +88,7 @@ function readForm(Id) {
     changePage.value = "返回"
     editObj.action = "read"
     editObj.pageId = Id
+    detailShow.CompanyId = Id
 }
 function editForm(Id) {
     
@@ -92,12 +96,14 @@ function editForm(Id) {
     changePage.value = "返回"
     editObj.action = "edit"
     editObj.pageId = Id
+    detailShow.CompanyId = Id
 }
 function CloseForm() {
     editShow.value = false
     changePage.value = "新增"
     editObj.action = ""
     editObj.pageId = -1
+    detailShow.CompanyId = -1
     load()
 }
 //#endregion

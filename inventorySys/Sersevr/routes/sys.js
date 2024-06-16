@@ -279,6 +279,22 @@ var currentCompany = -1
                     //#region 获取最新插入的ID
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
                     const result = await query(GetInsertedId);
+                    var CompanyId = -1;
+                    result.forEach((item)=>{
+                        CompanyId= item.id
+                    })
+                    //#region 異動段
+                    var sql = `INSERT INTO CM_CompanyDate 
+                    (CompanyId
+                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                    VALUES
+                    (?
+                        ,? ,? ,? ,?)`;
+                    const query1 = util.promisify(connection.query).bind(connection);
+                    await query(sql, [CompanyId
+                        ,currentTime,currentTime,currentUser,currentUser]);
+                    //#endregion 
+
                     //#endregion 
 
                     //#region commit段
@@ -411,11 +427,11 @@ var currentCompany = -1
             try{
                 //#region 宣告前端參數
                 if(!basic(req,res)) return
-                const {Id, CompanyDateNo, CompanyDateName,ShowNum,Index} = req.body;
+                const {Id,CompanyId,ShowNum,Index} = req.body;
                 let conditions = []; //條件查詢容器
                 let params = []; //參數容器
                 //#endregion 
-
+                
                 //#region 開始後端交易
                 var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
@@ -426,7 +442,6 @@ var currentCompany = -1
 
                     //#region 基本查詢
                     var baseQuery = `SELECT b.Total
-                                        ,a.CpDateId SelectId ,a.CompanyDateNo SelectNo ,a.CompanyDateName SelectName                 
                                         ,a.* 
                                         FROM CM_CompanyDate a
                                         JOIN (
@@ -440,13 +455,9 @@ var currentCompany = -1
                         conditions.push("a.CpDateId = ?");
                         params.push(Id);
                     }
-                    if (CompanyDateNo) {
-                        conditions.push("a.CompanyDateNo LIKE ?");
-                        params.push('%' + CompanyDateNo + '%');
-                    }
-                    if (CompanyDateName) {
-                        conditions.push("a.CompanyDateName LIKE ?");
-                        params.push('%' + CompanyDateName + '%');
+                    if (CompanyId > 0) {
+                        conditions.push("a.CompanyId = ?");
+                        params.push(CompanyId);
                     }
                     let sql = baseQuery;
                     if (conditions.length) {
@@ -482,77 +493,6 @@ var currentCompany = -1
         });
         //#endregion 
         
-        //#region 新增
-        router.post('/AddCompanyDate', (req, res) => {
-            try{
-                //#region 參數宣告+資料庫連接
-                var connection = CreateDBConnection()
-                basic(req,res)
-                const {CompanyFullName, CompanyName, CompanyPerson, Phone, TaxID} = req.body;
-                //#endregion 
-
-                //#region 參數檢查
-                if (CompanyFullName.length > 100) throw new Error('【公司全名】不可以超過100個字元')
-                if (CompanyFullName.length <= 0) throw new Error('【公司全名】不可以為空')
-                if (CompanyName.length > 100) throw new Error('【公司簡稱】不可以超過100個字元')
-                if (CompanyPerson.length > 100) throw new Error('【負責人】不可以超過100個字元')
-                if (CompanyPerson.length <= 0) throw new Error('【負責人】不可以為空')
-                if (Phone.length > 10) throw new Error('【公司電話】不可以超過100個字元')
-                if (Phone.length <= 0) throw new Error('【公司電話】不可以為空')
-                if (TaxID.length > 8) throw new Error('【統一編號】不可以超過100個字元')
-                if (TaxID.length <= 0) throw new Error('【統一編號】不可以為空')
-                //#endregion 
-
-                //#region 開始後端交易
-                connection.beginTransaction(async (transactionError) => {
-                    if(transactionError) {
-                        console.error("開啟後端交易失敗:", transactionError);
-                        return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                    }
-
-                    //#region 檢查段
-                    //#region 檢查公司代碼是否重複
-                    var checkSql = `SELECT TaxID
-                                    FROM CM_CompanyDate
-                                    WHERE 1=1
-                                    AND TaxID = ?
-                                    LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [TaxID]);
-                    if (resultCheck.length > 0) return SendError(res,'【統一編號】重複,請重新輸入') 
-                    //#endregion 
-                    //#endregion 
-
-                    //#region 異動段
-                    var sql = `INSERT INTO CM_CompanyDate 
-                                (CompanyFullName ,CompanyName ,CompanyPerson ,Phone ,TaxID, AssetAmount, CompanyId
-                                    ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                                VALUES
-                                (? ,? ,? ,? ,? ,? ,?
-                                    ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyFullName, CompanyName, CompanyPerson, Phone, TaxID, 0, currentCompany
-                                    ,currentTime,currentTime,currentUser,currentUser]);
-                    //#endregion 
-
-                    //#region 获取最新插入的ID
-                    var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
-                    //#endregion 
-
-                    //#region commit段
-                    CommitRun("add",connection,res,result)
-                    //#endregion 
-                });
-                //#endregion 
-            }
-            catch(queryError){
-                console.error("Query Error:", queryError.message);
-                res.status(400).send({ status: 'error', msg:queryError.message });
-            }
-        });
-        //#endregion 
-
         //#region 更新
         router.post('/UpdateCompanyDate', (req, res) => {
             try{

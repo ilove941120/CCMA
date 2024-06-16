@@ -1,15 +1,28 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from "vue";
-import { GetCompanyWeb, DeleteCompanyWeb } from ':@/api/index'
+import { GetCompanyDate, DeleteCompanyDate } from ':@/api/index'
 import alert from ':@/components/alert.vue';
 import editView from ':@/components/editView.vue';
 import { useStore } from 'vuex';
 const store = useStore();
 
+//#region 接受父層傳送編輯欄位資訊
+const sentObj = defineProps({
+    sent: {
+        type: Object,
+        default: () => ({
+            value:``,
+            label:``
+        })
+    }
+})
+//#endregion
+const isLoadComplete =ref(false)
 //#region 資料表編輯欄位宣告
 const editObj = reactive({
     action: "edit",
     pageId: -1,
+    returnButtonShow:false,
     api: {
         read: "GetCompanyDate",
         add: "AddCompanyDate",
@@ -56,7 +69,6 @@ const editObj = reactive({
 })
 //#endregion
 
-
 //#region 編輯頁面開啟關閉
 const editShow = ref(false)
 const changePage = ref("新增")
@@ -91,32 +103,47 @@ function Return(){
 }
 //#endregion
 
-//#region 刪除資料
-const Delete = async (CompanyId) => {
-    const obj =reactive({CompanyId:CompanyId})
+//#region 頁面資料仔載入
+const Load = async () => {
     try{
-        const result = (await DeleteCompanyWeb(obj))
-        let status = result.data.status 
-        let msg = result.data.msg 
-        if (status == "success") {
-            store.commit('alertAction', { type: "success", msg: msg })
-            Load()
-        } else {
-            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
-        }
+    const obj =reactive({CompanyId:-1})
+    obj.CompanyId = sentObj.sent.CompanyId
+      const result = (await GetCompanyDate(obj)).data
+      let status = result.status 
+      if (status == "success") {
+        result.data.forEach((item)=>{
+            editObj.pageId = item.CpDateId
+            isLoadComplete.value = true
+        })
+      } else {
+          store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+      }
     }
     catch(err){
+        let status = err.response.data.status
         let errMsg = err.response.data.msg
-        store.commit('alertAction', { type: "fail", msg: errMsg })
+        if(status == "restart"){
+            store.commit('alertAction', { type: "fail", msg: errMsg })
+            sessionStorage.removeItem("user");
+            store.commit('logoutAction', {status:"S"});
+            router.push('/Login');
+        }
     }
 }
+Load()
+
+onMounted(() => {
+    console.log("A1")
+});
 //#endregion
+
+
 
 </script>
 
 <template>
     <alert v-if="$store.state.alertMsg.show == true" :msg="$store.state.alertMsg"></alert>
-    <editView :sent="editObj"></editView>
+    <editView v-if="isLoadComplete" :sent="editObj"></editView>
 </template>
 
 <style scoped>

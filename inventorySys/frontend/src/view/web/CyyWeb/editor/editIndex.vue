@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive,watchEffect,onMounted } from "vue";
 import alert from ':@/components/alert.vue';
-import { GetImg,AddImg,DeletImg,GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto  } from ':@/api/index'
+import { GetCyyWebBanner,UpdateCyyWebBanner,DeleteCompanyDate } from ':@/api/index'
 import { useStore } from 'vuex';
 const store = useStore();
 
@@ -45,7 +45,7 @@ const BannerData = reactive({
 })
 const load = async () => {
     try{
-      const result = (await GetCompanyPhoto()).data
+      const result = (await GetCyyWebBanner()).data
       let status = result.status 
       if (status == "success") {
         if(result.data.length>0){
@@ -87,7 +87,7 @@ const Save = async () => {
             return
         }
         console.log("執行")
-        const result = await AddCompanyPhoto(form)
+        const result = await UpdateCyyWebBanner(form)
         let status = result.data.status 
         let msg = result.data.msg 
         if (status == "success") {
@@ -109,7 +109,7 @@ const Save = async () => {
 //#region 刪除資料
 const Delet = async () => { 
     try{
-        const result = (await DeleteCompanyPhoto(BannerData))
+        const result = (await DeletCyyWebBanner(BannerData))
         let status = result.data.status 
         let msg = result.data.msg 
         if (status == "success") {
