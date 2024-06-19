@@ -38,6 +38,7 @@ CREATE TABLE WEB_CyyIndexContent (
     ContactAddress          VARCHAR(30)         NOT NULL,                                   --聯絡地址
     ContactPhone            VARCHAR(30)         NOT NULL,                                   --聯絡電話
     ContactEmail            VARCHAR(30)         NOT NULL,                                   --聯絡信箱
+    ServiceTime             VARCHAR(30)         NOT NULL,                                   --服務時間
     CopyrightNotice         VARCHAR(30)         NOT NULL,                                   --版權聲明
     WebPhotoId              INT                     NULL,                                   --網站頭貼
     LINE                    VARCHAR(100)            NULL,                                   --LINE      

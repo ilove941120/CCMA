@@ -274,6 +274,18 @@ const UpdateCyyWebBanner = (req) => {
 const DeletCyyWebBanner = (req) => {
     return axios.post(`/api/web/DeletCyyWebBanner`, req)
 }
+const UpdateCyyWebAbout = (req) => {
+    return axios.post(`/api/web/UpdateCyyWebAbout`, req)
+}
+const DeletCyyWebAbout = (req) => {
+    return axios.post(`/api/web/DeletCyyWebAbout`, req)
+}
+const UpdateCyyWebFooter = (req) => {
+    return axios.post(`/api/web/UpdateCyyWebFooter`, req)
+}
+const DeletCyyWebFooter = (req) => {
+    return axios.post(`/api/web/DeletCyyWebFooter`, req)
+}
 //#endregion oms營運管理系統
 
 //#region Transaction--交易相關 查看,新增,修改,刪除
@@ -306,7 +318,10 @@ export {
 
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
-    GetCyyWebBanner,UpdateCyyWebBanner,DeletCyyWebBanner,
+    GetCyyWebBanner,
+    UpdateCyyWebBanner,DeletCyyWebBanner,
+    UpdateCyyWebAbout,DeletCyyWebAbout,
+    UpdateCyyWebFooter,DeletCyyWebFooter,
     GetCyyIndexContent,
     UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
     

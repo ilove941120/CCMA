@@ -287,6 +287,7 @@
             //#region 刪除
             router.post('/DeleteCompanyPhoto', (req, res) => {
                 try{
+
                     //#region 宣告前端參數
                     var connection = CreateDBConnection()
                     basic(req)
@@ -610,13 +611,19 @@
 
                         //#region 基本查詢
                         var sql = `SELECT a.*
-                                        FROM WEB_CyyIndexContent
-                                        WHERE CiContentId = ?
-                                        AND CwId =?`
+                                    , b1.PhotoName AS BannerPhotoName ,b1.PhotoHref AS BannerHref
+                                    , b2.PhotoName AS AboutPhotoName ,b2.PhotoHref AS AboutHref
+                                    , b3.PhotoName AS WebPhotoPhotoName ,b3.PhotoHref AS WebPhotoHref
+                                    FROM WEB_CyyIndexContent a
+                                    LEFT JOIN WEB_CompanyPhoto b1 on  b1.CpId = a.BannerPhotoId
+                                    LEFT JOIN WEB_CompanyPhoto b2 on  b2.CpId = a.AboutPhotoId 
+                                    LEFT JOIN WEB_CompanyPhoto b3 on  b3.CpId = a.WebPhotoId 
+                                    WHERE CiContentId = ?
+                                    AND CwId =?`
                         const baseQuery = util.promisify(connection.query).bind(connection);
-                        const result = await checkQuery(baseQuery, [CiContentId,CwId]);
+                        const result = await baseQuery(sql, [CiContentId,CwId]);
                         if (result.length <= 0) return SendError(res,'【網站不存在】,請重新確認');
-                        SendSuccess(res,"",rows)
+                        SendSuccess(res,"",result)
 
                         //#endregion 
 
@@ -629,8 +636,6 @@
                 }
             });
             //#endregion 
-            
-
 
             //#region 更新Banner
             router.post('/UpdateCyyWebBanner', (req, res) => {
@@ -705,8 +710,369 @@
             });
             //#endregion 
 
+            //#region 刪除Banner
+            router.post('/DeletCyyWebBanner', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CiContentId,CwId} = req.body;
+                    //#endregion 
 
-            
+                    //#region 參數檢查
+                    if (CiContentId.length <= 0) throw new Error('【版本資料】不可以為空')
+                    if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        //#endregion 
+                       
+                        //#region 異動段
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     BannerPhotoId = null
+                                    ,UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    WHERE 1=1
+                                    AND CiContentId = ?
+                                    AND CwId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query(sql, [currentTime,currentUser,CiContentId,CwId ]);
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("delete",connection,res,result)
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+            //#region 更新About
+            router.post('/UpdateCyyWebAbout', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CiContentId,CwId,AboutText,PhotoName, PhotoDesc, PhotoHref,textChange,photoChange} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if(textChange){
+                        if (AboutText.length > 300) throw new Error('【關於我】不可以超過300個字元')
+                        if (AboutText.length <= 0) throw new Error('【關於我】不可以為空')
+                    }
+                    if(photoChange){
+                        if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                        if (PhotoName.length > 100) throw new Error('【圖片名字】不可以超過100個字元')
+                        if (PhotoName.length <= 0) throw new Error('【圖片名字】不可以為空')
+                        if (PhotoDesc.length > 100) throw new Error('【圖片描述】不可以超過100個字元')
+                        if (PhotoHref.length <= 0) throw new Error('【圖片連結】不可以為空')
+                    }
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        var checkSql = `SELECT CwId
+                                        FROM WEB_CyyIndexContent
+                                        WHERE 1=1
+                                        AND CwId = ?
+                                        AND CiContentId = ?
+                                        LIMIT 1`
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CwId,CiContentId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【編輯版本不存在】,請重新確認');
+                        //#endregion 
+
+                        //#region 異動段
+                        //#region 新增圖片段
+                        var CpId = -1;
+                        if(photoChange){
+                            var sql = `INSERT INTO WEB_CompanyPhoto 
+                                        (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                        VALUES
+                                        (? ,? ,? ,?
+                                            ,? ,? ,? ,?)`;
+                            const query = util.promisify(connection.query).bind(connection);
+                            await query(sql, [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                            ,currentTime,currentTime,currentUser,currentUser]);
+
+                            //#region 获取最新插入的ID
+                            var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                            const result = await query(GetInsertedId);
+
+                            result.forEach((item)=>{
+                                CpId= item.id
+                            })
+                            //#endregion 
+                        }
+                        //#endregion 
+
+                        //#region 更新About資料
+                        var AboutTextSql = `,AboutText = ?`
+                        var AboutPhotoSql = `,AboutPhotoId = ?`
+                        
+                        let updates = [currentTime,currentUser];
+                        if(textChange){
+                            updates.push(AboutText)
+                        }
+                        if(photoChange){
+                            updates.push(CpId)
+                        }
+                        updates.push(CwId,CiContentId)
+
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    ${textChange == true ? AboutTextSql : ``}
+                                    ${photoChange == true ? AboutPhotoSql : ``}
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    AND CiContentId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query1(sql, updates);
+                        //#endregion 
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+            //#region 刪除About
+            router.post('/DeletCyyWebAbout', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CiContentId,CwId,textChange,photoChange} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CiContentId.length <= 0) throw new Error('【版本資料】不可以為空')
+                    if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        var checkSql = `SELECT CwId
+                                        FROM WEB_CyyIndexContent
+                                        WHERE 1=1
+                                        AND CwId = ?
+                                        AND CiContentId = ?
+                                        LIMIT 1`
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CwId,CiContentId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【編輯版本不存在】,請重新確認');
+                        //#endregion 
+                       
+                        //#region 異動段
+                        var AboutTextSql = `,AboutText = null`
+                        var AboutPhotoSql = `,AboutPhotoId = null`
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    ${textChange == true ? AboutTextSql : ``}
+                                    ${photoChange == true ? AboutPhotoSql : ``}
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    AND CiContentId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query1(sql, [currentTime,currentUser,CwId ,CiContentId]);
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("delete",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+            //#region 更新Footer
+            router.post('/UpdateCyyWebFooter', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CiContentId,CwId,FootTitle,ContactAddress,ContactPhone,ContactEmail,ServiceTime,CopyrightNotice} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CiContentId.length <= 0) throw new Error('【版本資料】不可以為空')
+                    if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                    if (FootTitle.length > 30) throw new Error('【標題】不可以超過30個字元')
+                    if (FootTitle.length <= 0) throw new Error('【標題】不可以為空')
+                    if (ContactAddress.length > 30) throw new Error('【聯絡地址】不可以超過30個字元')
+                    if (ContactAddress.length <= 0) throw new Error('【聯絡地址】不可以為空')
+                    if (ContactPhone.length > 30) throw new Error('【聯絡電話】不可以超過30個字元')
+                    if (ContactPhone.length <= 0) throw new Error('【聯絡電話】不可以為空')
+                    if (ContactEmail.length > 30) throw new Error('【聯絡信箱】不可以超過30個字元')
+                    if (ContactEmail.length <= 0) throw new Error('【聯絡信箱】不可以為空')
+                    if (ServiceTime.length > 30) throw new Error('【服務時間】不可以超過30個字元')
+                    if (ServiceTime.length <= 0) throw new Error('【服務時間】不可以為空')
+                    if (CopyrightNotice.length > 30) throw new Error('【版權聲明】不可以超過30個字元')
+                    if (CopyrightNotice.length <= 0) throw new Error('【版權聲明】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        var checkSql = `SELECT CwId
+                                        FROM WEB_CyyIndexContent
+                                        WHERE 1=1
+                                        AND CwId = ?
+                                        AND CiContentId = ?
+                                        LIMIT 1`
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CwId,CiContentId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【編輯版本不存在】,請重新確認');
+                        //#endregion 
+
+                        //#region 異動段
+                        
+                        //#region 更新footer資料
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     FootTitle = ?
+                                    ,ContactAddress = ?
+                                    ,ContactPhone = ?
+                                    ,ContactEmail = ?
+                                    ,ServiceTime = ?
+                                    ,CopyrightNotice = ?
+                                    ,UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    AND CiContentId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query1(sql, [FootTitle,ContactAddress,ContactPhone,ContactEmail,ServiceTime,CopyrightNotice
+                            ,currentTime,currentUser,CwId,CiContentId]);
+                        //#endregion 
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+            //#region 刪除Footer
+            router.post('/DeletCyyWebFooter', (req, res) => {
+                try{
+                    //#region 參數宣告+資料庫連接
+                    var connection = CreateDBConnection()
+                    basic(req,res)
+                    const {CiContentId,CwId} = req.body;
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CiContentId.length <= 0) throw new Error('【版本資料】不可以為空')
+                    if (CwId.length <= 0) throw new Error('【官網資料】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        var checkSql = `SELECT CwId
+                                        FROM WEB_CyyIndexContent
+                                        WHERE 1=1
+                                        AND CwId = ?
+                                        AND CiContentId = ?
+                                        LIMIT 1`
+                        const checkQuery = util.promisify(connection.query).bind(connection);
+                        const resultCheck = await checkQuery(checkSql, [CwId,CiContentId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【編輯版本不存在】,請重新確認');
+                        //#endregion 
+                       
+                        //#region 異動段
+                        var sql = `UPDATE WEB_CyyIndexContent set 
+                                     FootTitle = null
+                                    ,ContactAddress = null
+                                    ,ContactPhone = null
+                                    ,ContactEmail = null
+                                    ,CopyrightNotice = null
+                                    ,UpdateDate = ?
+                                    ,UpdateUserId = ?
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    AND CiContentId = ?
+                                    `
+                        const query1 = util.promisify(connection.query).bind(connection);
+                        await query1(sql, [currentTime,currentUser,CwId ,CiContentId]);
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("delete",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
+
         //#endregion 
 
     //#endregion  

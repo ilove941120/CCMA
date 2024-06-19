@@ -1,7 +1,11 @@
 <script setup>
 import { ref, reactive,watchEffect,onMounted } from "vue";
 import alert from ':@/components/alert.vue';
-import { GetCyyWebBanner,UpdateCyyWebBanner,DeleteCompanyDate } from ':@/api/index'
+import { GetCyyIndexContent
+    ,UpdateCyyWebBanner,DeletCyyWebBanner
+    ,UpdateCyyWebAbout,DeletCyyWebAbout
+    ,UpdateCyyWebFooter,DeletCyyWebFooter
+ } from ':@/api/index'
 import { useStore } from 'vuex';
 const store = useStore();
 
@@ -14,52 +18,65 @@ const imageData = reactive(
     }
 );
 
-const BannerObj = reactive({
-})
+const footerFields = reactive(
+    [
+      { key: 'FootTitle', label: '官網名稱' },
+      { key: 'ContactAddress', label: '地址' },
+      { key: 'ContactPhone', label: '電話' },
+      { key: 'ContactEmail', label: '信箱' },
+      { key: 'ServiceTime', label: '服務時間' },
+      { key: 'CopyrightNotice', label: '版權聲明' },
+    ]
+)
 
-const form = reactive({
+const IndexData = reactive({
+    CiContentId:1,
     CwId:1,
-    PhotoName:``,
-    PhotoDesc:``,
-    PhotoHref:``
+    Banner: {PhotoName:``,PhotoDesc:``,PhotoHref:``,photoChange:false},
+    About: {AboutText:``,PhotoName:``,PhotoDesc:``,PhotoHref:``,textChange:true,photoChange:false},
+    Web: {PhotoName:``,PhotoDesc:``,PhotoHref:``,photoChange:false},
+    Shop:{ShopText:``},
+    Footer:{FootTitle:``,ContactAddress:``,ContactPhone:``,ContactEmail:``, ServiceTime:``,CopyrightNotice:``}
+})
+var form = reactive({
+    CiContentId:-1,
+    CwId:-1,
 })
 
 
-function previewImage (Input,name){
-    const file = Input.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (a) => 
-    {
-        imageData[name] = a.target.result;
-        form.PhotoName = file.name
-        form.PhotoDesc = name
-        form.PhotoHref = a.target.result;
-    }
-    reader.readAsDataURL(file);
-}
 
 //#region 頁面資料仔載入
 const BannerData = reactive({
 
 })
-const load = async () => {
+const Load = async () => {
     try{
-      const result = (await GetCyyWebBanner()).data
+      const result = (await GetCyyIndexContent(IndexData)).data
       let status = result.status 
       if (status == "success") {
         if(result.data.length>0){
             result.data.forEach((item)=>{
-                BannerData.ImgName = item.ImgName
-                BannerData.ImgSpec = item.ImgSpec
-                BannerData.href = item.href
-                BannerData.Id = item.CyyImgId
+                form.CiContentId = item.CiContentId
+                form.CwId = item.CwId
+                IndexData.Banner.PhotoName = item.BannerPhotoName
+                IndexData.Banner.PhotoHref = item.BannerHref
+                IndexData.About.AboutText = item.AboutText
+                IndexData.About.PhotoName = item.AboutPhotoName
+                IndexData.About.PhotoHref = item.AboutHref
+                
+                IndexData.Footer.FootTitle = item.FootTitle
+                IndexData.Footer.ContactAddress = item.ContactAddress
+                IndexData.Footer.ContactPhone = item.ContactPhone
+                IndexData.Footer.ContactEmail = item.ContactEmail
+                IndexData.Footer.ServiceTime = item.ServiceTime
+                IndexData.Footer.CopyrightNotice = item.CopyrightNotice
+
             })
         }
         else{
-            for (let key in BannerData) {
-                BannerData[key] = '';
-            }
+            // for (let key in BannerData) {
+            //     BannerData[key] = '';
+            // }
             store.commit('alertAction', { type: "fail", msg: 'Banner區尚未有圖片' });
         }
       } else {
@@ -80,22 +97,52 @@ const load = async () => {
 //#endregion
 
 //#region 儲存表單資料
-const Save = async () => {
+const Save = async (type) => {
     try {
-        if(!!!form.PhotoHref){
-            store.commit('alertAction', { type: "fail", msg: '目前未上傳圖片' });
-            return
+        var result 
+        switch(type){
+            case "Banner":
+                if(!IndexData.Banner.photoChange){
+                    store.commit('alertAction', { type: "fail", msg: '目前圖片未更換' });
+                    return
+                }
+                if(!!!IndexData.Banner.PhotoHref){
+                    store.commit('alertAction', { type: "fail", msg: '目前未上傳圖片' });
+                    return
+                }
+                form.PhotoName = IndexData.Banner.PhotoName;
+                form.PhotoDesc = IndexData.Banner.PhotoDesc;
+                form.PhotoHref = IndexData.Banner.PhotoHref;
+                result = await UpdateCyyWebBanner(form);
+                break;
+            case "About":
+                form.AboutText = IndexData.About.AboutText;
+                form.PhotoName = IndexData.About.PhotoName;
+                form.PhotoDesc = IndexData.About.PhotoDesc;
+                form.PhotoHref = IndexData.About.PhotoHref;
+                form.textChange = IndexData.About.textChange;
+                form.photoChange = IndexData.About.photoChange;
+                result = await UpdateCyyWebAbout(form);
+                break;
+            case "Web":
+                break;
+            case "Footer":
+                const { FootTitle, ContactAddress, ContactPhone, ContactEmail,ServiceTime, CopyrightNotice } = IndexData.Footer;
+                form.FootTitle = FootTitle;
+                form.ContactAddress = ContactAddress;
+                form.ContactPhone = ContactPhone;
+                form.ContactEmail = ContactEmail;
+                form.ServiceTime = ServiceTime;
+                form.CopyrightNotice = CopyrightNotice;
+                result = await UpdateCyyWebFooter(form);
+                break;
         }
-        console.log("執行")
-        const result = await UpdateCyyWebBanner(form)
+        
         let status = result.data.status 
         let msg = result.data.msg 
         if (status == "success") {
             store.commit('alertAction', { type: "success", msg: msg })
-            load()
-            // for (let key in form) {
-            //     form[key] = '';
-            // }
+            Load()
         } else {
             store.commit('alertAction', { type: "fail", msg: '異常問題,新增失敗' });
         }
@@ -107,14 +154,27 @@ const Save = async () => {
 //#endregion
 
 //#region 刪除資料
-const Delet = async () => { 
+const Delet = async (type) => { 
     try{
-        const result = (await DeletCyyWebBanner(BannerData))
+        var result 
+        switch(type){
+            case "Banner":
+                result = (await DeletCyyWebBanner(form))
+                break;
+            case "About":
+                result = (await DeletCyyWebAbout(form))
+                break;
+            case "Web":
+                break;
+            case "Footer":
+                result = (await DeletCyyWebFooter(form))
+                break;
+        }
         let status = result.data.status 
         let msg = result.data.msg 
         if (status == "success") {
             store.commit('alertAction', { type: "success", msg: msg })
-            load()
+            Load()
         } else {
             store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
         }
@@ -126,6 +186,39 @@ const Delet = async () => {
 }
 //#endregion
 
+//#region 選取照片
+const Change = (type) =>{
+    switch(type){
+        case "Banner":
+            BannerInput.value.click()
+            break;
+        case "About":
+            AboutInput.value.click()
+            break;
+        case "Web":
+            break;
+    }
+}
+
+const previewImage = (Input,name) =>{
+    const file = Input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (a) => 
+    {
+        IndexData[name].PhotoHref = a.target.result;
+        IndexData[name].PhotoName = file.name;
+        IndexData[name].PhotoDesc = name;
+        IndexData[name].photoChange = true
+    }
+    reader.readAsDataURL(file);
+}
+//#endregion
+
+
+onMounted(() => {
+    Load()
+});
 
 </script>
 
@@ -142,24 +235,28 @@ const Delet = async () => {
         <div class="area">
             <h4>首頁-Banner區塊</h4>
             <div class="photoBlock">
-                <img v-if="!!BannerData.href" :src="BannerData.href" :alt="BannerData.ImgSpec" />
-                選取圖片
-                <img v-if="imageData.BannerInput" :src="imageData.BannerInput" alt="Preview" />
-                <input type="file" ref="BannerInput" @change="previewImage(BannerInput,'BannerInput')" />
+                <img v-if="!!IndexData.Banner.PhotoHref" :src="IndexData.Banner.PhotoHref" :alt="IndexData.Banner.PhotoName" />
+                <input type="file" ref="BannerInput" @change="previewImage(BannerInput,'Banner')" style="display: none;"/>
             </div>
-            <button @click="Delet">刪除</button>
-            <button @click="load">讀取</button>
-            <button @click="Save">儲存</button>
+            <div class="buttonBar">
+                <button @click="Save('Banner')">儲存</button>
+                <button @click="Change('Banner')">更換</button>
+                <button @click="Delet('Banner')">清除</button>
+            </div>
         </div>
         <div class="area">
             <h4>首頁-關於我區塊</h4>
             <label for="">內容</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea name="" id="" cols="30" rows="10" v-model="IndexData.About.AboutText">{{ IndexData.About.AboutText }}</textarea>
             <div class="photoBlock">
-                <img v-if="imageData.AboutInput" :src="imageData.AboutInput" alt="Preview" />
-                <input type="file" ref="AboutInput" @change="previewImage(AboutInput,'AboutInput')" />
+                <img v-if="!!IndexData.About.PhotoHref" :src="IndexData.About.PhotoHref" :alt="IndexData.About.PhotoName" />
+                <input type="file" ref="AboutInput" @change="previewImage(AboutInput,'About')" style="display: none;"/>
             </div>
-            <button>儲存</button>
+            <div class="buttonBar">
+                <button @click="Save('About')">儲存</button>
+                <button @click="Change('About')">更換</button>
+                <button @click="Delet('About')">清除</button>
+            </div>
         </div>
         <div class="area">
             <h4>首頁-渝渝小物區塊</h4>
@@ -173,22 +270,17 @@ const Delet = async () => {
             <label for="">內容</label>
             <textarea name="" id="" cols="30" rows="10"></textarea>
             <button>儲存</button>
-        </div>
+        </div>  
         <div class="area">
             <h4>首頁-Footer區塊</h4>
-            <label for="">官網名稱</label>
-            <input type="text">
-            <label for="">地址</label>
-            <input type="text">
-            <label for="">電話</label>
-            <input type="text">
-            <label for="">信箱</label>
-            <input type="text">
-            <label for="">服務時間</label>
-            <input type="text">
-            <label for="">版權聲明</label>
-            <input type="text">
-            <button>儲存</button>
+            <div class="footerFields" v-for="field in footerFields" :key="field.key">
+                <label>{{ field.label }}</label>
+                <input type="text" v-model="IndexData.Footer[field.key]">
+            </div>
+            <div class="buttonBar">
+                <button @click="Save('Footer')">儲存</button>
+                <button @click="Delet('Footer')">清除</button>
+            </div>
         </div>
     </div>
 </template>
@@ -217,9 +309,12 @@ const Delet = async () => {
         display: flex;
         flex-direction: column;
     }
+    .buttonBar{
+        display: flex;
+        flex-direction: row-reverse;
+    }
     button{
-        display: inline-block;
-        margin-left: auto;
+        margin-left: 10px;
         margin-top: 30px;
         padding: 8px 30px;
         border-radius: 4px;
@@ -274,5 +369,9 @@ const Delet = async () => {
         padding: 10px;
         border-radius: 5px;
         border: 1px solid rgb(180, 180, 180);
+    }
+    .footerFields{
+        display: flex;
+        flex-direction: column;
     }
 </style>
