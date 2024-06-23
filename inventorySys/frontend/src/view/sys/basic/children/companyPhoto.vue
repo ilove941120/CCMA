@@ -238,6 +238,17 @@ const Save = async () => {
     padding: 20px 10px;
     margin: 10px;
 }
+@media (max-width: 1280px){
+    .card{
+        width: 30%;
+    }
+}
+@media (max-width: 768px){
+    .card{
+        width: 100%;
+        margin: 10px;
+    }
+}
 .card>span{
     text-align: center;
     padding: 5px;
@@ -268,15 +279,20 @@ const Save = async () => {
     background-color: #000000b0;
 }
 .inStyle{
-    width: 50%;
+    width: 70%;
     margin: auto;
-    height: 65vh;
+    height: 400px;
     padding: 20px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }   
+@media (max-width: 768px){
+    .inStyle{
+        height: 300px;
+    }
+}
 .contentBody{
     width: 100%;
     margin-bottom: 20px;
@@ -297,6 +313,12 @@ const Save = async () => {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px;
+}
+@media (max-width: 768px){
+    .photo{
+        height: 200px;
+    }
 }
 .photo:hover{
     background-color: #aedb847a;

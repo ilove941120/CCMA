@@ -75,33 +75,30 @@ const components = {
 }
 const changePage = ref("新增")
 function addForm() {
-    
-    editShow.value = true
     changePage.value = "返回"
     editObj.action = "add"
+    editShow.value = true
     editObj.pageId = -1
     detailShow.CompanyId = -1
 }
 function readForm(Id) {
-    
-    editShow.value = true
     changePage.value = "返回"
     editObj.action = "read"
+    editShow.value = true
     editObj.pageId = Id
     detailShow.CompanyId = Id
 }
 function editForm(Id) {
-    
-    editShow.value = true
     changePage.value = "返回"
     editObj.action = "edit"
+    editShow.value = true
     editObj.pageId = Id
     detailShow.CompanyId = Id
 }
 function CloseForm() {
-    editShow.value = false
     changePage.value = "新增"
     editObj.action = ""
+    editShow.value = false
     editObj.pageId = -1
     detailShow.CompanyId = -1
     load()
@@ -142,6 +139,24 @@ const hoverRow = (status, itemId) => {
 //#endregion
 
 //#region 頁面資料仔載入
+
+//#region 列表欄位宣告
+const tableHead = reactive([
+    {
+        name:`#`,
+    },
+    {
+        name:`公司代號`,
+    },
+    {
+        name:`公司名稱`,
+    },
+    {
+        name:`操作`,
+    }
+])
+//#endregion
+
 const tableData = ref([])
 const load = async () => {
     try{
@@ -179,6 +194,7 @@ const ReturnPage = (data) => {
     load()
 }
 //#endregion
+
 //#region Detail頁切換
 function DetailChange(item) {
     detailShow.value = item.value
@@ -186,10 +202,7 @@ function DetailChange(item) {
 }
 //#endregion
 
-
 const currentComponent = computed(() => components[detailShow.value])
-
-
 
 load()
 
@@ -206,22 +219,31 @@ load()
         </div>
     </div>
     <div class="content" v-if="editShow == false">
-        <table>
-            <tr>
-                <th style="width: 5%;">#</th>
-                <th style="width: 30%;">公司代號</th>
-                <th style="width: 30%;">公司名稱</th>
-                <th style="width: 35%;">操作</th>
+        <table >
+            <tr class="tableHead">
+                <th  v-for="(item,index) in tableHead" :style="item.style">{{ item.name}}</th>
             </tr>
-            <tr v-for="(item, index) in tableData" :key="item.MtlItemNo" @mouseover="hoverRow(true, item.CompanyId)"
+            <tr class="tableItem" v-for="(item, index) in tableData" :key="item.MtlItemNo" @mouseover="hoverRow(true, item.CompanyId)"
                 @mouseout="hoverRow(false, item.CompanyId)">
-                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }" style="">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }" style="width: 15%;text-align: center;">{{ item.CompanyNo }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }" style="width: 15%;text-align: center;">{{ item.CompanyName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }" style="width: 20%;text-align: right;">
-                    <button @click="readForm(item.CompanyId)">查看</button>
-                    <button @click="editForm(item.CompanyId)">修改</button>
-                    <button @click="deleteCompany(item.CompanyId)">刪除</button>
+                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">#</div>
+                    <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">公司名稱</div>
+                    <div class="coulumValue">{{ item.CompanyNo }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">公司名稱</div>
+                    <div class="coulumValue">{{ item.CompanyName }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">操作</div>
+                    <div class="coulumValue">
+                        <button @click="readForm(item.CompanyId)">查看</button>
+                        <button @click="editForm(item.CompanyId)">修改</button>
+                        <button @click="deleteCompany(item.CompanyId)">刪除</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -253,6 +275,36 @@ h2 {
     box-shadow: 0 1px 3px 0px rgba(115, 108, 203, 0.23);
     border-radius: 4px;
     margin: 10px 0;
+}
+.tableItem>td,.tableHead>th{
+    text-align: center;
+}
+.tableItem>td>.coulumName{
+    display: none;
+}
+@media (max-width: 768px) {
+    .tableHead{
+        display: none;
+    }
+    .tableItem{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .tableItem>td{
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .tableItem>td>.coulumName{
+        display: block;
+        width: 30%;
+    }
+    .tableItem>td>.coulumValue{
+        width: 70%;
+        text-align: left;
+    }
 }
 
 .titleBar {

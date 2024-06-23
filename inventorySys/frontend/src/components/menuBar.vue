@@ -205,14 +205,17 @@ watch(() => store.state.menuInfo.ComponentId, (newValue, oldValue) => {
 
 <template>
   <div class="menu" v-if="sentObj.sent">
-    <div class="selectItem"  @click="selectOpen" ><span v-html="selectedValue.icon" style="margin-right: 10px;"></span> {{ selectedValue.label }}</div>
-    <ul v-show="isOpen === true">
-      <li v-for="option in OptionData.value" :key="option.value" @click="selectOption(option)"
-        :style="{ 'display': option.show == false ? 'none' : 'block' }">
-        <span v-html="option.icon" style="margin-right: 10px;"></span>
-        {{ option.label }}
-      </li>
-    </ul>
+    <div class="selectItem"  @click="selectOpen" >
+      <span v-html="selectedValue.icon" style="margin-right: 10px;"></span> {{ selectedValue.label }}
+      <ul v-show="isOpen === true">
+        <li v-for="option in OptionData.value" :key="option.value" @click="selectOption(option)"
+          :style="{ 'display': option.show == false ? 'none' : 'block' }">
+          <span v-html="option.icon" style="margin-right: 10px;"></span>
+          {{ option.label }}
+        </li>
+      </ul>
+    </div>
+    
     <div v-for="(value, key) in ComponentData" @click="ComponentShow(key)">
       <div class="Modal">
         <span v-html="ModalData[key].IconStyle" style="margin-right:10px;"></span>
@@ -231,8 +234,22 @@ watch(() => store.state.menuInfo.ComponentId, (newValue, oldValue) => {
   width: 25%;
   background-color: #285943;
   position: relative;
+  overflow: auto;
 }
+@media (max-width: 1280px){
+  .menu{
+    width: 45%;
 
+  }
+}
+@media (max-width: 768px){
+  .menu{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+  }
+}
 .menyA{
   transform: rotate(90deg);
   transition-duration:0.5s;
@@ -286,16 +303,17 @@ watch(() => store.state.menuInfo.ComponentId, (newValue, oldValue) => {
   font-weight: bolder;
   font-size: 20px;
   color: #3a5134;
+  position: relative;
 }
 
 ul {
-  width: 90%;
+  width: 100%;
   padding: 0;
   position: absolute;
   z-index: 99;
   background-color: #C0ECD2;
-  top: 60px;
-  left: 5%;
+  top: 56px;
+  left: 0px;
   border: 1px solid rgb(180, 180, 180);
   border-radius: 0 0 5px 5px;
   cursor: pointer;

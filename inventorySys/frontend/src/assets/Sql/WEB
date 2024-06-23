@@ -108,8 +108,8 @@ CREATE TABLE WEB_CyyProduct (
     CwId                    INT                 NOT NULL,                                   --公司官網Id
     MtlItemId               INT                 NOT NULL,                                   --品號
     ProductName             VARCHAR(1000)       NOT NULL,                                   --產品名稱
-    ProductText             VARCHAR(1000)       NOT NULL,                                   --產品文案
-    ProductAmount           VARCHAR(1000)       NOT NULL,                                   --產品金額
+    ProductText             VARCHAR(1000)           NULL,                                   --產品文案
+    ProductAmount           DECIMAL(15,2)       NOT NULL DEFAULT 0,                         --產品金額
     GroupSetting            VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否納入輪播
     Status                  VARCHAR(1)          NOT NULL DEFAULT 'S',                       --狀態
     CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
@@ -122,7 +122,7 @@ CREATE TABLE WEB_CyyProductPhoto (
     CpdPhotoId              INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
     CpdId                   INT                 NOT NULL,                                   --公司產品Id
     PhotoId                 INT                     NULL,                                   --產品照片
-    MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片
+    MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片(Y/N)
     CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
     UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
     CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者

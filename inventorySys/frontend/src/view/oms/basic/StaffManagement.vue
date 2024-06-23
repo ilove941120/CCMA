@@ -9,7 +9,7 @@ const store = useStore();
 
 //#region 資料表編輯欄位宣告
 const editObj = reactive({
-    action: "read",
+    action: "",
     pageId: -1,
     api: {
         read: "GetStaff",
@@ -79,6 +79,9 @@ const editObj = reactive({
 
 //#region 頁面比數顯示,當前第幾頁
 const pageObj = reactive({
+    PageNo:"StaffManagement",
+    StaffNo: "",
+    StaffName: "",
     ShowNum: 10,
     Index: 0,
     TatolNum: 0
@@ -88,40 +91,51 @@ const pageObj = reactive({
 //#region 編輯頁面開啟關閉
 const editShow = ref(false)
 const changePage = ref("新增")
-function addForm() {
-    editShow.value = true
+function AddForm() {
     changePage.value = "返回"
-    editObj.action = "edit"
+    editObj.action = "add"
+    editShow.value = true
     editObj.pageId = -1
 }
-function readForm(Id) {
-    editShow.value = true
+function ReadForm(Id) {
     changePage.value = "返回"
     editObj.action = "read"
+    editShow.value = true
     editObj.pageId = Id
 }
-function editForm(Id) {
-    editShow.value = true
+function EditForm(Id) {
     changePage.value = "返回"
     editObj.action = "edit"
+    editShow.value = true
     editObj.pageId = Id
 }
 function CloseForm() {
-    editShow.value = false
     changePage.value = "新增"
-    load()
+    editObj.action = ""
+    editShow.value = false
+    editObj.pageId = -1
+    LoadData()
 }
 //#endregion
 
 //#region 刪除資料
-const deleteStaff = async (StaffId) => {
-    DeleteStaff(StaffId).then(res => {
-        if (res.status == 200) {
-            store.commit('alertAction', { type: "success", msg: "執行成功" });
-            load()
+const DeleteData = async (StaffId) => {
+    const obj =reactive({StaffId:StaffId})
+    try{
+        const result = (await DeleteStaff(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadData()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
         }
-    })
-
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
 }
 //#endregion
 
@@ -138,11 +152,61 @@ const hoverRow = (status, itemId) => {
 //#endregion
 
 //#region 頁面資料仔載入
+//#region 列表欄位宣告
+const tableHead = reactive([
+    {
+        name:`#`,
+    },
+    {
+        name:`人員代號`,
+    },
+    {
+        name:`人員名稱`,
+    },
+    {
+        name:`部門`,
+    },
+    {
+        name:`人員職稱`,
+    },
+    {
+        name:`就職日`,
+    },
+    {
+        name:`離職日`,
+    },
+    {
+        name:`狀態`,
+    },
+    {
+        name:`操作`,
+    }
+])
+//#endregion
+
 const tableData = ref([])
-const load = async () => {
-    let data = (await GetStaff(pageObj)).data
-    pageObj.TatolNum = data[0].Total
-    tableData.value = data
+const LoadData = async () => {
+    try{
+      const result = (await GetStaff(pageObj)).data
+      let status = result.status 
+      if (status == "success") {
+        pageObj.TatolNum = result.data[0].Total
+        tableData.value = result.data;
+        store.commit('menuChang',pageObj.PageNo);
+      } else {
+          store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+      }
+    }
+    catch(err){
+        let status = err.response.data.status
+        let errMsg = err.response.data.msg
+        if(status == "restart"){
+            store.commit('alertAction', { type: "fail", msg: errMsg })
+            sessionStorage.removeItem("user");
+            store.commit('logoutAction', {status:"S"});
+            router.push('/Login');
+        }
+    }
 }
 //#endregion
 
@@ -154,11 +218,11 @@ const ReturnPage = (data) => {
     else {
         pageObj.Index = pageObj.ShowNum * (data - 1)
     }
-    load()
+    LoadData()
 }
 //#endregion
 
-load()
+LoadData()
 
 </script>
 
@@ -167,7 +231,7 @@ load()
     <div class="navBar">
         <h2>人員管理</h2>
         <div class="buttonBar">
-            <button @click="!editShow ? addForm() : CloseForm()">
+            <button @click="!editShow ? AddForm() : CloseForm()">
                 {{ changePage }}
             </button>
         </div>
@@ -175,31 +239,49 @@ load()
     <editView v-if="editShow == true" :sent="editObj"></editView>
     <div class="content" v-if="editShow == false">
         <table>
-            <tr>
-                <th style="width:  5%;">#</th>
-                <th style="width: 10%;">人員代號</th>
-                <th style="width: 15%;">人員名稱</th>
-                <th style="width: 10%;">部門</th>
-                <th style="width: 10%;">人員職稱</th>
-                <th style="width: 10%;">就職日</th>
-                <th style="width: 10%;">離職日</th>
-                <th style="width: 10%;">狀態</th>
-                <th style="width: 15%;">操作</th>
-            </tr>
-            <tr v-for="(item, index) in tableData" :key="item.MtlItemNo" @mouseover="hoverRow(true, item.StaffId)"
-                @mouseout="hoverRow(false, item.StaffId)">
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width:  5%;text-align: center;">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.StaffNo }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 15%;text-align: center;">{{ item.StaffName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.DepartmentName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.Position }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.JoiningDate }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.ResignationDate }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 10%;text-align: center;">{{ item.StatusName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.StaffId ? '#C8EBFA' : '' }" style="width: 15%;text-align: right;">
-                    <button @click="readForm(item.StaffId)">查看</button>
-                    <button @click="editForm(item.StaffId)">修改</button>
-                    <button @click="deleteStaff(item.StaffId)">刪除</button>
+            <tr class="tableHead">
+    <th  v-for="(item,index) in tableHead" :style="item.style">{{ item.name}}</th>
+</tr>
+<tr class="tableItem" v-for="(item, index) in tableData" :key="item.UnitId" @mouseover="hoverRow(true, item.UnitId)" @mouseout="hoverRow(false, item.UnitId)">
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">#</div>
+                    <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">人員代號</div>
+                    <div class="coulumValue">{{ item.StaffNo }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">人員名稱</div>
+                    <div class="coulumValue">{{ item.StaffName }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">部門</div>
+                    <div class="coulumValue">{{item.DepartmentName}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">人員職稱</div>
+                    <div class="coulumValue">{{item.Position}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">就職日</div>
+                    <div class="coulumValue">{{item.JoiningDate}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">離職日</div>
+                    <div class="coulumValue">{{item.ResignationDate}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">狀態</div>
+                    <div class="coulumValue">{{item.StatusName}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.UnitId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">操作</div>
+                    <div class="coulumValue">
+                        <button @click="ReadForm(item.UnitId)">查看</button>
+                        <button @click="EditForm(item.UnitId)">修改</button>
+                        <button @click="DeleteData(item.UnitId)">刪除</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -224,7 +306,36 @@ h2 {
     padding: 20px;
     box-shadow: 0 1px 3px 0px rgba(115, 108, 203, 0.23);
 }
-
+.tableItem>td,.tableHead>th{
+    text-align: center;
+}
+.tableItem>td>.coulumName{
+    display: none;
+}
+@media (max-width: 768px) {
+    .tableHead{
+        display: none;
+    }
+    .tableItem{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .tableItem>td{
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .tableItem>td>.coulumName{
+        display: block;
+        width: 30%;
+    }
+    .tableItem>td>.coulumValue{
+        width: 70%;
+        text-align: left;
+    }
+}
 .titleBar {
     margin: auto;
 }

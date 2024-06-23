@@ -163,7 +163,7 @@ const icon = ref(`<i class="fa-brands fa-facebook"></i>`)
     <div class="content">
         <div class="form">
             <div v-for="(value, key) in sentObj.sent.itemGroup" :key="key">
-                <div class="row">
+                <div class="localRow">
                     <label for="">{{ value.inputName }}</label>
                     <input v-if="value.inputType == 'text'" type="text" :placeholder="'請輸入' + value.inputName"
                         v-model="form[key]" :disabled="inputStatus ? inputStatus : value.disabled">
@@ -172,7 +172,8 @@ const icon = ref(`<i class="fa-brands fa-facebook"></i>`)
                     <selectModel v-else-if="value.inputType == 'select'"
                         :sent="{ type: value.selectType, 
                                  action:sentObj.sent.action,
-                                 dataFrom: value.selectData, 
+                                 api: value.api, 
+                                 UseFrom: value.useFrom, 
                                  disabled: value.disabled, 
                                  datakey: key, 
                                  dataValue: form[key],
@@ -205,13 +206,13 @@ h2 {
     box-shadow: 0 1px 3px 0px rgba(115, 108, 203, 0.23);
 }
 
-.row {
+.localRow {
     padding: 10px 0;
     display: flex;
     flex-direction: column;
 }
 
-.row label {
+.localRow label {
     margin-right: 20px;
     margin-bottom: 10px;
 }

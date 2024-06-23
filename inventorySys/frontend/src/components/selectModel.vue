@@ -1,6 +1,5 @@
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue';
-import { GetType, GetMtlItem, GetSystem, GetModal, GetDepartment, GetStatus } from ':@/api/index'
 import { useStore } from 'vuex';
 const store = useStore();
 // 控制輸入框欄位可否輸入 閱讀頁:true,編輯頁:採用其欄位設定值決定
@@ -13,7 +12,8 @@ const sentObj = defineProps({
         default: () => ({
             type: "normal",
             action:"",
-            dataFrom: "",
+            api: "",
+            useFrom: "",
             disabled: false,
             datakey: "",
             dataValue: "",
@@ -28,8 +28,6 @@ watch(()=>sentObj.sent.parentLayerId, (newData) => {
     Load()
 })
 if(sentObj.sent.action != "add"){
-    console.log("ADD")
-    
     watch(() => sentObj.sent.dataValue, (newVal) => {
         Load()
     })
@@ -51,7 +49,7 @@ async function getMethod(name) {
 //#endregion
 
 async function Load()  {
-    const inputData = sentObj.sent.dataFrom
+    const inputData = sentObj.sent.api
     const methodFunc = await getMethod(inputData)
     if (methodFunc && typeof methodFunc === 'function') {
         try {
@@ -85,6 +83,7 @@ async function Load()  {
                 result = await methodFunc(ParentForm)
             }
             else{
+                console.log("A")
                 result = await methodFunc(sentObj.sent)
             }
 
@@ -94,7 +93,7 @@ async function Load()  {
                 selectedValue.label = "請選擇"
                 result.data.data.forEach((item) => {
                     if(action == "read" || action == "edit"){
-                        if(dataValue == item.SelectId){
+                        if(dataValue == item.SelectId || dataValue == item.SelectNo){
                             selectedValue.label = item.SelectName
                         }
                     }
@@ -241,7 +240,7 @@ ul {
     position: absolute;
     z-index: 99;
     background-color: rgb(255, 255, 255);
-    top: 20px;
+    top: 40px;
     border: 1px solid rgb(180, 180, 180);
     border-radius: 0 0 5px 5px;
 }

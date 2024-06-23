@@ -119,6 +119,23 @@ const hoverRow = (status, itemId) => {
 //#endregion
 
 //#region 頁面資料仔載入
+//#region 列表欄位宣告
+const tableHead = reactive([
+    {
+        name:`#`,
+    },
+    {
+        name:`官網代號`,
+    },
+    {
+        name:`官網名稱`,
+    },
+    {
+        name:`操作`,
+    }
+])
+//#endregion
+
 const tableData = ref([])
 const Load = async () => {
     try{
@@ -172,21 +189,30 @@ onMounted(() => {
             <div class="col" style="display: flex;justify-content: flex-end;"><button class="addButton" @click="AddForm()"><i class="fa-solid fa-plus"></i>{{ changePage }}</button></div>
         </div>
         <table>
-            <tr>
-                <th style="width: 5%;">#</th>
-                <th style="width: 30%;">官網代號</th>
-                <th style="width: 30%;">官網名稱</th>
-                <th style="width: 35%;">操作</th>
+            <tr class="tableHead">
+                <th  v-for="(item,index) in tableHead" :style="item.style">{{ item.name}}</th>
             </tr>
-            <tr v-for="(item, index) in tableData" :key="item.CwId" @mouseover="hoverRow(true, item.CwId)"
+            <tr class="tableItem" v-for="(item, index) in tableData" :key="item.CwId" @mouseover="hoverRow(true, item.CwId)"
                 @mouseout="hoverRow(false, item.CwId)">
-                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }" style="">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }" style="width: 15%;text-align: center;">{{ item.WebNo }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }" style="width: 15%;text-align: center;">{{ item.WebName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }" style="width: 20%;text-align: right;">
-                    <button @click="ReadForm(item.CwId)">查看</button>
-                    <button @click="EditForm(item.CwId)">修改</button>
-                    <button @click="Delete(item.CwId)">刪除</button>
+                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">#</div>
+                    <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">官網代號</div>
+                    <div class="coulumValue">{{ item.WebNo }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">官網名稱</div>
+                    <div class="coulumValue">{{ item.WebName }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.CwId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">操作</div>
+                    <div class="coulumValue">
+                        <button @click="ReadForm(item.CwId)">查看</button>
+                        <button @click="EditForm(item.CwId)">修改</button>
+                        <button @click="Delete(item.CwId)">刪除</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -215,7 +241,36 @@ h2 {
     border-radius: 4px;
     margin: 10px 0;
 }
-
+.tableItem>td,.tableHead>th{
+    text-align: center;
+}
+.tableItem>td>.coulumName{
+    display: none;
+}
+@media (max-width: 768px) {
+    .tableHead{
+        display: none;
+    }
+    .tableItem{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .tableItem>td{
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .tableItem>td>.coulumName{
+        display: block;
+        width: 30%;
+    }
+    .tableItem>td>.coulumValue{
+        width: 70%;
+        text-align: left;
+    }
+}
 .titleBar {
     margin: auto;
 }

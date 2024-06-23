@@ -98,21 +98,10 @@ CREATE TABLE CM_MtlItem  (
     MtlItemDesc             VARCHAR(100)            NULL,                                   --品號描述
     InventoryQuantity       INT                     NULL DEFAULT 0,                         --庫存數量
     InventoryAmount         DECIMAL(15,2)           NULL DEFAULT 0,                         --庫存金額
-    CompanyId               INT                 NOT NULL,                                   --公司Id
-    CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
-    UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
-    CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
-    UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
-);
-
---品號資料表 CM_MtlItem 
-CREATE TABLE CM_MtlItem  (
-    MtlItemId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
-    MtlItemNo               VARCHAR(10)         NOT NULL,                                   --品號代碼
-    MtlItemName             VARCHAR(100)        NOT NULL,                                   --品號名字
-    MtlItemDesc             VARCHAR(100)            NULL,                                   --品號描述
-    InventoryQuantity       INT                     NULL DEFAULT 0,                         --庫存數量
-    InventoryAmount         DECIMAL(15,2)           NULL DEFAULT 0,                         --庫存金額
+    InventoryWarehouseId    INT                 NOT NULL,                                   --庫別
+    InventoryUnitId         INT                 NOT NULL,                                   --庫存單位
+    Attributes              VARCHAR(1)          NOT NULL,                                   --屬性 M:製造件,採購件
+    Status                  VARCHAR(1)              NULL DEFAULT 'S',                       --狀態 // A:啟用 S:停用
     CompanyId               INT                 NOT NULL,                                   --公司Id
     CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
     UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日

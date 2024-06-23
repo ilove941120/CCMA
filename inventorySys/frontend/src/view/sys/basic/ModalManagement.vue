@@ -9,7 +9,7 @@ const store = useStore();
 
 //#region 資料表編輯欄位宣告
 const editObj = reactive({
-    action: "read",
+    action: "",
     pageId: -1,
     api: {
         read: "GetModal",
@@ -69,33 +69,36 @@ const pageObj = reactive({
 //#region 編輯頁面開啟關閉
 const editShow = ref(false)
 const changePage = ref("新增")
-function addForm() {
-    editShow.value = true
+function AddForm() {
     changePage.value = "返回"
     editObj.action = "add"
+    editShow.value = true
     editObj.pageId = -1
 }
-function readForm(Id) {
-    editShow.value = true
+function ReadForm(Id) {
     changePage.value = "返回"
     editObj.action = "read"
+    editShow.value = true
     editObj.pageId = Id
 }
-function editForm(Id) {
-    editShow.value = true
+function EditForm(Id) {
     changePage.value = "返回"
     editObj.action = "edit"
+    editShow.value = true
     editObj.pageId = Id
 }
 function CloseForm() {
-    editShow.value = false
     changePage.value = "新增"
-    load()
+    editObj.action = ""
+    editShow.value = false
+    editObj.pageId = -1
+    LoadData()
 }
 //#endregion
 
+
 //#region 刪除資料
-const deleteModal = async (ModalId) => {
+const DeleteData = async (ModalId) => {
     const obj =reactive({ModalId:ModalId})
     try{
         const result = (await DeleteModal(obj))
@@ -103,7 +106,7 @@ const deleteModal = async (ModalId) => {
         let msg = result.data.msg 
         if (status == "success") {
             store.commit('alertAction', { type: "success", msg: msg })
-            load()
+            LoadData()
         } else {
             store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
         }
@@ -128,8 +131,31 @@ const hoverRow = (status, itemId) => {
 //#endregion
 
 //#region 頁面資料仔載入
+//#region 列表欄位宣告
+const tableHead = reactive([
+    {
+        name:`#`,
+    },
+    {
+        name:`所屬系統`,
+    },
+    {
+        name:`模組代號`,
+    },
+    {
+        name:`模組名稱`,
+    },
+    {
+        name:`Icon圖示`,
+    },
+    {
+        name:`操作`,
+    }
+])
+//#endregion
+
 const tableData = ref([])
-const load = async () => {
+const LoadData = async () => {
     try{
       const result = (await GetModal(pageObj)).data
       let status = result.status 
@@ -162,11 +188,11 @@ const ReturnPage = (data) => {
     else {
         pageObj.Index = pageObj.ShowNum * (data - 1)
     }
-    load()
+    LoadData()
 }
 //#endregion
 
-load()
+LoadData()
 
 </script>
 
@@ -175,7 +201,7 @@ load()
     <div class="navBar">
         <h2>模組管理</h2>
         <div class="buttonBar">
-            <button @click="!editShow ? addForm() : CloseForm()">
+            <button @click="!editShow ? AddForm() : CloseForm()">
                 {{ changePage }}
             </button>
         </div>
@@ -183,25 +209,37 @@ load()
     <editView v-if="editShow == true" :sent="editObj"></editView>
     <div class="content" v-if="editShow == false">
         <table>
-            <tr>
-                <th style="width: 5%;">#</th>
-                <th style="width: 20%;">所屬系統</th>
-                <th style="width: 20%;">模組代號</th>
-                <th style="width: 20%;">模組名稱</th>
-                <th style="width: 20%;">Icon圖示</th>
-                <th style="width: 15%;">操作</th>
-            </tr>
-            <tr v-for="(item, index) in tableData" :key="item.MtlItemNo" @mouseover="hoverRow(true, item.ModalId)"
-                @mouseout="hoverRow(false, item.ModalId)">
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width:  5%;text-align: center;">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width: 20%;text-align: center;">{{ item.SystemName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width: 20%;text-align: center;">{{ item.ModalNo }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width: 20%;text-align: center;">{{ item.ModalName }}</td>
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width: 20%;text-align: center;" v-html="item.IconStyle"></td>
-                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }" style="width: 15%;text-align: right;">
-                    <button @click="readForm(item.ModalId)">查看</button>
-                    <button @click="editForm(item.ModalId)">修改</button>
-                    <button @click="deleteModal(item.ModalId)">刪除</button>
+            <tr class="tableHead">
+    <th  v-for="(item,index) in tableHead" :style="item.style">{{ item.name}}</th>
+</tr>
+<tr class="tableItem" v-for="(item, index) in tableData" :key="item.ModalId" @mouseover="hoverRow(true, item.ModalId)" @mouseout="hoverRow(false, item.ModalId)">
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">#</div>
+                    <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">所屬系統</div>
+                    <div class="coulumValue">{{ item.SystemName }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">模組代號</div>
+                    <div class="coulumValue">{{ item.ModalNo }}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">模組名稱</div>
+                    <div class="coulumValue">{{item.ModalName}}</div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">Icon圖示</div>
+                    <div class="coulumValue" v-html="item.IconStyle"></div>
+                </td>
+                <td :style="{ backgroundColor: highlightedRow === item.ModalId ? '#C8EBFA' : '' }">
+                    <div class="coulumName">操作</div>
+                    <div class="coulumValue">
+                        <button @click="ReadForm(item.ModalId)">查看</button>
+                        <button @click="EditForm(item.ModalId)">修改</button>
+                        <button @click="DeleteData(item.ModalId)">刪除</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -226,7 +264,36 @@ h2 {
     padding: 20px;
     box-shadow: 0 1px 3px 0px rgba(115, 108, 203, 0.23);
 }
-
+.tableItem>td,.tableHead>th{
+    text-align: center;
+}
+.tableItem>td>.coulumName{
+    display: none;
+}
+@media (max-width: 768px) {
+    .tableHead{
+        display: none;
+    }
+    .tableItem{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .tableItem>td{
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .tableItem>td>.coulumName{
+        display: block;
+        width: 30%;
+    }
+    .tableItem>td>.coulumValue{
+        width: 70%;
+        text-align: left;
+    }
+}
 .titleBar {
     margin: auto;
 }

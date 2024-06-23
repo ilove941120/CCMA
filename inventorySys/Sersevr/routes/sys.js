@@ -6,8 +6,7 @@ var mysql = require('mysql');
 var currentTime = "";
 var currentUser = -1
 var currentCompany = -1
-
-
+let query
 
 //#region 公用程式
     //#region 開啟連線
@@ -20,7 +19,7 @@ var currentCompany = -1
             }
             console.log('connected as id ' + connection.threadId);
         });
-        
+        query = util.promisify(connection.query).bind(connection);
         return connection;
     }
     //#endregion 
@@ -110,6 +109,10 @@ var currentCompany = -1
                     console.error("開啟後端交易失敗:", transactionError);
                     return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                 }
+                var StaffIdBase = -1;
+                var StaffNoBase = "";
+                var StaffNameBase = "";
+                var CompanyIdBase = -1;
 
                 //#region 檢查段
                 var checkSql = `SELECT a.StaffId,a.StaffNo,a.StaffName
@@ -121,19 +124,19 @@ var currentCompany = -1
                                 AND PassWord = ?
                                 LIMIT 1
                                 `
-                var checkQuery = util.promisify(connection.query).bind(connection);
-                var resultCheck = await checkQuery(checkSql, [StaffNo,PassWord]);
-                if (resultCheck.length <= 0) return SendError(res,'【使用者不存在】,請重新確認');
-                var StaffIdBase = -1;
-                var StaffNoBase = "";
-                var StaffNameBase = "";
-                var CompanyIdBase = -1;
-                resultCheck.forEach(row => {
-                    StaffIdBase = row.StaffId
-                    StaffNoBase = row.StaffNo
-                    StaffNameBase = row.StaffName
-                    CompanyIdBase = row.CompanyId
-                });
+                try {
+                    var resultCheck = await query(checkSql, [StaffNo,PassWord]);
+                    if (resultCheck.length <= 0) return SendError(res,'【使用者不存在】,請重新確認');
+                    resultCheck.forEach(row => {
+                        StaffIdBase = row.StaffId
+                        StaffNoBase = row.StaffNo
+                        StaffNameBase = row.StaffName
+                        CompanyIdBase = row.CompanyId
+                    });
+                } 
+                catch(err) {
+                    return SendError(res,err.message) 
+                }
                 //#endregion 
                 
                 //#region commit段
@@ -154,8 +157,9 @@ var currentCompany = -1
         //#region 查看
         router.post('/GetCompany', (req, res) => {
             try{
-                //#region 宣告前端參數
                 if(!basic(req,res)) return
+
+                //#region 宣告前端參數
                 const {Id, CompanyNo, CompanyName,ShowNum,Index} = req.body;
                 let conditions = []; //條件查詢容器
                 let params = []; //參數容器
@@ -209,13 +213,13 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                 });
                 //#endregion 
@@ -230,9 +234,9 @@ var currentCompany = -1
         //#region 新增
         router.post('/AddCompany', (req, res) => {
             try{
+                if(!basic(req,res)) return
+
                 //#region 參數宣告+資料庫連接
-                var connection = CreateDBConnection()
-                basic(req,res)
                 const {CompanyNo, CompanyName, CompanyDesc} = req.body;
                 //#endregion 
 
@@ -245,6 +249,7 @@ var currentCompany = -1
                 //#endregion 
 
                 //#region 開始後端交易
+                var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -253,46 +258,65 @@ var currentCompany = -1
 
                     //#region 檢查段
                     //#region 檢查公司代碼是否重複
-                    var checkSql = `SELECT CompanyNo
+                    let checkSql = `SELECT CompanyNo
                                     FROM BAS_Company
                                     WHERE 1=1
                                     AND CompanyNo = ?
                                     LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [CompanyNo]);
-                    if (resultCheck.length > 0) return SendError(res,'【公司代碼】重複,請重新輸入') 
+                    try {
+                        const resultCheck = await query(checkSql, [CompanyNo]);
+                        if (resultCheck.length > 0) return SendError(res,'【公司代碼】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
                     //#region 異動段
-                    var sql = `INSERT INTO BAS_Company 
+                    let sql = `INSERT INTO BAS_Company 
                                 (CompanyNo ,CompanyName ,CompanyDesc
                                     ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
                                 VALUES
                                 (? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyNo, CompanyName, CompanyDesc
-                                    ,currentTime,currentTime,currentUser,currentUser]);
+                    try {
+                        await query(sql, [CompanyNo, CompanyName, CompanyDesc
+                            ,currentTime,currentTime,currentUser,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
-                    var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
-                    var CompanyId = -1;
-                    result.forEach((item)=>{
-                        CompanyId= item.id
-                    })
-                    //#region 異動段
-                    var sql = `INSERT INTO CM_CompanyDate 
-                    (CompanyId
-                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                    VALUES
-                    (?
-                        ,? ,? ,? ,?)`;
-                    const query1 = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyId
-                        ,currentTime,currentTime,currentUser,currentUser]);
+                    let result
+                    let CompanyId = -1;
+                    let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                    try {
+                        result = await query(GetInsertedId);
+                        result.forEach((item)=>{
+                            CompanyId= item.id
+                        })
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    
+                    //#region 子資料表新增
+                        sql = `INSERT INTO CM_CompanyDate 
+                                (CompanyId
+                                    ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                VALUES
+                                (?
+                                    ,? ,? ,? ,?)`;
+                    try {
+                        await query(sql, [CompanyId
+                            ,currentTime,currentTime,currentUser,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#endregion 
@@ -313,9 +337,9 @@ var currentCompany = -1
         //#region 更新
         router.post('/UpdateCompany', (req, res) => {
             try{
+                if(!basic(req,res)) return
+
                 //#region 宣告前端參數
-                var connection = CreateDBConnection()
-                basic(req)
                 const {Id, CompanyName, CompanyDesc} = req.body;
                 //#endregion 
 
@@ -327,20 +351,26 @@ var currentCompany = -1
                 //#endregion 
 
                 //#region 開始後端交易
+                var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
+
                     //#region 檢查段
                     var checkSql = `SELECT CompanyId
                                         FROM BAS_Company
                                         WHERE 1=1
                                         AND CompanyId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
@@ -352,8 +382,12 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND CompanyId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyName, CompanyDesc, currentTime,currentUser, Id]);
+                    try {
+                        await query(sql, [CompanyName, CompanyDesc, currentTime,currentUser, Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -372,9 +406,9 @@ var currentCompany = -1
         //#region 刪除
         router.post('/DeleteCompany', (req, res) => {
             try{
+                if(!basic(req,res)) return
+
                 //#region 宣告前端參數
-                var connection = CreateDBConnection()
-                basic(req)
                 const {CompanyId} = req.body;
                 //#endregion 
 
@@ -383,6 +417,7 @@ var currentCompany = -1
                 //#endregion 
 
                 //#region 開始後端交易
+                var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -394,17 +429,25 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND CompanyId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [CompanyId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [CompanyId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_Company 
                                 WHERE 1=1
                                 AND CompanyId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyId]);
+                    try {
+                        await query(sql, [CompanyId]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -419,14 +462,16 @@ var currentCompany = -1
             }
         })
         //#endregion 
+    
     //#endregion 
 
     //#region  CompanyDate相關 查看,新增,修改,刪除
         //#region 查看
         router.post('/GetCompanyDate', (req, res) => {
             try{
-                //#region 宣告前端參數
                 if(!basic(req,res)) return
+
+                //#region 宣告前端參數
                 const {Id,CompanyId,ShowNum,Index} = req.body;
                 let conditions = []; //條件查詢容器
                 let params = []; //參數容器
@@ -475,13 +520,13 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                 });
                 //#endregion 
@@ -496,9 +541,9 @@ var currentCompany = -1
         //#region 更新
         router.post('/UpdateCompanyDate', (req, res) => {
             try{
+                if(!basic(req,res)) return
+
                 //#region 宣告前端參數
-                var connection = CreateDBConnection()
-                basic(req)
                 const {Id, CompanyFullName, CompanyName, CompanyPerson, Phone, TaxID} = req.body;
                 //#endregion 
 
@@ -516,6 +561,7 @@ var currentCompany = -1
                 //#endregion 
 
                 //#region 開始後端交易
+                var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -527,9 +573,14 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND CpDateId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【公司資料不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【公司資料不存在】,請重新確認');
+                        
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
@@ -544,8 +595,13 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND CpDateId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CompanyFullName, CompanyName, CompanyPerson,Phone,TaxID, currentTime, currentUser, Id]);
+                    try {
+                        await query(sql, [CompanyFullName, CompanyName, CompanyPerson,Phone,TaxID, currentTime, currentUser, Id]);
+
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -564,9 +620,9 @@ var currentCompany = -1
         //#region 刪除
         router.post('/DeleteCompanyDate', (req, res) => {
             try{
+                if(!basic(req,res)) return
+                
                 //#region 宣告前端參數
-                var connection = CreateDBConnection()
-                basic(req)
                 const {CpDateId} = req.body;
                 //#endregion 
 
@@ -575,6 +631,7 @@ var currentCompany = -1
                 //#endregion 
 
                 //#region 開始後端交易
+                var connection = CreateDBConnection()
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -586,17 +643,26 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND CpDateId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [CpDateId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [CpDateId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM CM_CompanyDate 
                                 WHERE 1=1
                                 AND CpDateId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [CpDateId]);
+                    try {
+                        await query(sql, [CpDateId]);
+    
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -673,14 +739,14 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
-                    //#endregion 
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    //#endregion  
                 });
                 //#endregion 
             }
@@ -723,9 +789,13 @@ var currentCompany = -1
                                     WHERE 1=1
                                     AND SystemNo = ?
                                     LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [SystemNo]);
-                    if (resultCheck.length > 0) return SendError(res,'【系統代碼】重複,請重新輸入') 
+                    try {
+                        const resultCheck = await query(checkSql, [SystemNo]);
+                        if (resultCheck.length > 0) return SendError(res,'【系統代碼】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
@@ -736,14 +806,24 @@ var currentCompany = -1
                                 VALUES
                                 (? ,? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [SystemNo, SystemName, SystemDesc ,IconStyle
-                                    ,currentTime,currentTime,currentUser,currentUser]);
+                    try {
+                        await query(sql, [SystemNo, SystemName, SystemDesc ,IconStyle
+                            ,currentTime,currentTime,currentUser,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
+                    let result
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
+                    try {
+                        result = await query(GetInsertedId);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -788,9 +868,13 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND SystemId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
@@ -803,8 +887,12 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND SystemId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [SystemName ,SystemDesc ,IconStyle ,currentTime ,currentUser ,Id]);
+                    try {
+                        await query(sql, [SystemName ,SystemDesc ,IconStyle ,currentTime ,currentUser ,Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -846,17 +934,25 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND SystemId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [SystemId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [SystemId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_System 
                                 WHERE 1=1
                                 AND SystemId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [SystemId]);
+                    try {
+                        await query(sql, [SystemId]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -939,14 +1035,14 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
-                    //#endregion 
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    //#endregion  
                 });
                 //#endregion 
             }
@@ -985,14 +1081,19 @@ var currentCompany = -1
 
                     //#region 檢查段
                     //#region 檢查系統是否存在
+                    var resultCheck
                     var checkSql = `SELECT SystemId
                                     FROM BAS_System
                                     WHERE 1=1
                                     AND SystemId = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [SystemId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    try {
+                        resultCheck = await query(checkSql, [SystemId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 檢查系統+模組代碼是否重複
@@ -1002,9 +1103,13 @@ var currentCompany = -1
                                     AND ModalNo = ?
                                     AND SystemId = ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [ModalNo,SystemId]);
-                    if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                    try {
+                        resultCheck = await query(checkSql, [ModalNo,SystemId]);
+                        if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
@@ -1015,14 +1120,24 @@ var currentCompany = -1
                                 VALUES
                                 (? ,? ,? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ModalNo, ModalName, ModalDesc ,IconStyle ,SystemId
-                                    ,currentTime,currentTime,currentUser,currentUser]);
+                    try {
+                        await query(sql, [ModalNo, ModalName, ModalDesc ,IconStyle ,SystemId
+                            ,currentTime,currentTime,currentUser,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
+                    let result
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
+                    try {
+                        result = await query(GetInsertedId);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1063,6 +1178,7 @@ var currentCompany = -1
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
                     //#region 檢查段
+                    var resultCheck
                     //#region 檢查模組是否存在
                     var ModalNo = "";
                     var checkSql = `SELECT ModalNo
@@ -1070,13 +1186,17 @@ var currentCompany = -1
                                     WHERE 1=1
                                     AND ModalId = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
-                    resultCheck.forEach((item)=>{
-                        ModalNo = item.ModalNo;
-                    })
                     
+                    try {
+                        resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                        resultCheck.forEach((item)=>{
+                            ModalNo = item.ModalNo;
+                        })
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 檢查系統+模組代碼是否重複
@@ -1087,9 +1207,13 @@ var currentCompany = -1
                                     AND SystemId = ?
                                     AND ModalId != ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [ModalNo,SystemId,Id]);
-                    if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                    try {
+                        resultCheck = await query(checkSql, [ModalNo,SystemId,Id]);
+                        if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#endregion 
@@ -1105,8 +1229,12 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND ModalId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ModalName ,ModalDesc ,IconStyle ,SystemId ,currentTime ,currentUser ,Id]);
+                    try {
+                        await query(sql, [ModalName ,ModalDesc ,IconStyle ,SystemId ,currentTime ,currentUser ,Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1148,17 +1276,26 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND ModalId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [ModalId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [ModalId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_Modal 
                                 WHERE 1=1
                                 AND ModalId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ModalId]);
+                    try {
+                        await query(sql, [ModalId]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1173,6 +1310,7 @@ var currentCompany = -1
             }
         })
         //#endregion 
+    
     //#endregion 
 
     //#region  Component相關 查看,新增,修改,刪除
@@ -1247,14 +1385,14 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
-                    //#endregion 
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    //#endregion  
                 });
                 //#endregion 
             }
@@ -1292,15 +1430,20 @@ var currentCompany = -1
                     }
 
                     //#region 檢查段
+                    var resultCheck
                     //#region 檢查模組是否存在
                     var checkSql = `SELECT ModalId
                                     FROM BAS_Modal
                                     WHERE 1=1
                                     AND ModalId = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [ModalId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                    try {
+                        resultCheck = await query(checkSql, [ModalId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 檢查模組+組件代碼是否重複
@@ -1310,9 +1453,14 @@ var currentCompany = -1
                                     AND ComponentNo = ?
                                     AND ModalId = ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [ComponentNo,ModalId]);
-                    if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                    try {
+                        resultCheck = await query(checkSql, [ComponentNo,ModalId]);
+                        if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                        
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
@@ -1323,14 +1471,24 @@ var currentCompany = -1
                                 VALUES
                                 (? ,? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ComponentNo, ComponentName, ComponentDesc ,ModalId
-                                    ,currentTime,currentTime,currentUser,currentUser]);
+                    try {
+                        await query(sql, [ComponentNo, ComponentName, ComponentDesc ,ModalId
+                            ,currentTime,currentTime,currentUser,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
+                    let result
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
+                    try {
+                        result = await query(GetInsertedId);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1373,15 +1531,20 @@ var currentCompany = -1
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
                     //#region 檢查段
+                    var resultCheck 
                     //#region 檢查組件是否存在
                     var checkSql = `SELECT ComponentNo
                                     FROM BAS_Component
                                     WHERE 1=1
                                     AND ComponentId = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                    try {
+                        resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 檢查模組+組件代碼是否重複
@@ -1392,9 +1555,13 @@ var currentCompany = -1
                                     AND ModalId = ?
                                     AND ComponentId != ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [ComponentNo,ModalId,Id]);
-                    if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                    try {
+                        resultCheck = await query(checkSql, [ComponentNo,ModalId,Id]);
+                        if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#endregion 
@@ -1410,8 +1577,12 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND ComponentId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ComponentNo, ComponentName ,ComponentDesc ,ModalId ,currentTime ,currentUser ,Id]);
+                    try {
+                        await query(sql, [ComponentNo, ComponentName ,ComponentDesc ,ModalId ,currentTime ,currentUser ,Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1447,23 +1618,34 @@ var currentCompany = -1
                         console.error("開啟後端交易失敗:", transactionError);
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
+
                     //#region 檢查段
                     var checkSql = `SELECT ComponentId
                                         FROM BAS_Component
                                         WHERE 1=1
                                         AND ComponentId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [ComponentId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                    
+                    try {
+                        const resultCheck = await query(checkSql, [ComponentId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_Component 
                                 WHERE 1=1
                                 AND ComponentId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [ComponentId]);
+                    try {
+                        await query(sql, [ComponentId]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1478,6 +1660,7 @@ var currentCompany = -1
             }
         })
         //#endregion 
+    
     //#endregion 
 
     //#region  Type相關 查看,新增,修改,刪除
@@ -1544,14 +1727,14 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
-                    //#endregion 
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    //#endregion  
                 });
                 //#endregion 
             }
@@ -1597,9 +1780,13 @@ var currentCompany = -1
                                     AND UseFrom = ?
                                     AND TypeNo = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [UseFrom ,TypeNo]);
-                    if (resultCheck.length > 0) return SendError(res,'【類別代碼】重複,請重新輸入') 
+                    try {
+                        var resultCheck = await query(checkSql, [UseFrom ,TypeNo]);
+                        if (resultCheck.length > 0) return SendError(res,'【類別代碼】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
@@ -1610,14 +1797,24 @@ var currentCompany = -1
                                 VALUES
                                 (? ,? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [TypeNo, TypeName, TypeDesc ,UseFrom
-                                        ,currentTime ,currentTime ,currentUser ,currentUser]);
+                    try {
+                        await query(sql, [TypeNo, TypeName, TypeDesc ,UseFrom
+                            ,currentTime ,currentTime ,currentUser ,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
+                    let result
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
+                    try {
+                        result = await query(GetInsertedId);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1661,15 +1858,20 @@ var currentCompany = -1
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
                     //#region 檢查段
+                    var resultCheck
                     var checkSql = `SELECT TypeNo
                                         FROM BAS_Type
                                         WHERE 1=1
                                         AND TypeId = ?
                                         LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
-
+                    
+                    try {
+                        resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#region 檢查類別代碼是否重複
                     checkSql = `SELECT TypeNo
                                     FROM BAS_Type
@@ -1678,9 +1880,13 @@ var currentCompany = -1
                                     AND TypeNo = ?
                                     AND TypeId != ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [UseFrom ,TypeNo ,Id]);
-                    if (resultCheck.length > 0) return SendError(res,'【類別代碼 + 用途來源】重複,請重新輸入') 
+                    try {
+                        resultCheck = await query(checkSql, [UseFrom ,TypeNo ,Id]);
+                        if (resultCheck.length > 0) return SendError(res,'【類別代碼 + 用途來源】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion
                     
                     //#endregion 
@@ -1696,9 +1902,13 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND TypeId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [TypeNo ,TypeName ,TypeDesc ,UseFrom
-                                        ,currentTime ,currentUser ,Id]);
+                    try {
+                        await query(sql, [TypeNo ,TypeName ,TypeDesc ,UseFrom
+                            ,currentTime ,currentUser ,Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1736,21 +1946,30 @@ var currentCompany = -1
                     }
                     //#region 檢查段
                     var checkSql = `SELECT TypeId
-                                        FROM BAS_Type
-                                        WHERE 1=1
-                                        AND TypeId = ?
-                                        LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [TypeId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
+                                    FROM BAS_Type
+                                    WHERE 1=1
+                                    AND TypeId = ?
+                                    LIMIT 1`
+                    try {
+                        const resultCheck = await query(checkSql, [TypeId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_Type 
                                 WHERE 1=1
                                 AND TypeId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [TypeId]);
+                    try {
+                        await query(sql, [TypeId]);
+
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1831,14 +2050,14 @@ var currentCompany = -1
                     //#endregion 
 
                     //#region 執行
-                    connection.query(sql, params, (err, rows) => {
-                        if (!err) { 
-                            SendSuccess(res,"",rows)
-                        } else {
-                            SendError(res, err) 
-                        }
-                    });
-                    //#endregion 
+                    try {
+                        const result = await query(sql, params);
+                        SendSuccess(res,"",result)
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
+                    //#endregion  
                 });
                 //#endregion 
             }
@@ -1884,9 +2103,13 @@ var currentCompany = -1
                                     AND UseFrom = ?
                                     AND StatusNo = ?
                                     LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [UseFrom ,StatusNo]);
-                    if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                    try {
+                        var resultCheck = await query(checkSql, [UseFrom ,StatusNo]);
+                        if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
                     //#endregion 
 
@@ -1897,14 +2120,24 @@ var currentCompany = -1
                                 VALUES
                                 (? ,? ,? ,?
                                     ,? ,? ,? ,?)`;
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [StatusNo, StatusName, StatusDesc ,UseFrom
-                                        ,currentTime ,currentTime ,currentUser ,currentUser]);
+                    try {
+                        await query(sql, [StatusNo, StatusName, StatusDesc ,UseFrom
+                            ,currentTime ,currentTime ,currentUser ,currentUser]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 获取最新插入的ID
+                    let result
                     var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                    const result = await query(GetInsertedId);
+                    try {
+                        result = await query(GetInsertedId);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -1948,15 +2181,20 @@ var currentCompany = -1
                         return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                     }
                     //#region 檢查段
+                    var resultCheck
                     var checkSql = `SELECT StatusNo
                                         FROM BAS_Status
                                         WHERE 1=1
                                         AND StatusId = ?
                                         LIMIT 1`
-                    var checkQuery = util.promisify(connection.query).bind(connection);
-                    var resultCheck = await checkQuery(checkSql, [Id]);
-                    if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
-
+                    
+                    try {
+                        resultCheck = await query(checkSql, [Id]);
+                        if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#region 檢查狀態代碼是否重複
                     checkSql = `SELECT StatusNo
                                     FROM BAS_Status
@@ -1965,9 +2203,13 @@ var currentCompany = -1
                                     AND StatusNo = ?
                                     AND StatusId != ?
                                     LIMIT 1`
-                    checkQuery = util.promisify(connection.query).bind(connection);
-                    resultCheck = await checkQuery(checkSql, [UseFrom ,StatusNo ,Id]);
-                    if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                    try {
+                        resultCheck = await query(checkSql, [UseFrom ,StatusNo ,Id]);
+                        if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion
                     
                     //#endregion 
@@ -1983,9 +2225,13 @@ var currentCompany = -1
                                 WHERE 1=1
                                 AND StatusId = ?
                                 `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [StatusNo ,StatusName ,StatusDesc ,UseFrom
-                                        ,currentTime ,currentUser ,Id]);
+                    try {
+                        await query(sql, [StatusNo ,StatusName ,StatusDesc ,UseFrom
+                            ,currentTime ,currentUser ,Id]);
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -2027,17 +2273,27 @@ var currentCompany = -1
                                         WHERE 1=1
                                         AND StatusId = ?
                                         LIMIT 1`
-                    const checkQuery = util.promisify(connection.query).bind(connection);
-                    const resultCheck = await checkQuery(checkSql, [StatusId]);
-                    if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
+                    try {
+                        const resultCheck = await query(checkSql, [StatusId]);
+                        if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
+                        
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region 異動段
                     var sql = `DELETE FROM BAS_Status 
                                 WHERE 1=1
                                 AND StatusId = ? `
-                    const query = util.promisify(connection.query).bind(connection);
-                    await query(sql, [StatusId]);
+                    try {
+                        await query(sql, [StatusId]);
+
+                    } 
+                    catch(err) {
+                        return SendError(res,err.message) 
+                    }
                     //#endregion 
 
                     //#region commit段
@@ -2093,6 +2349,16 @@ var currentCompany = -1
                 }
                 //#endregion 
 
+                // //#region 執行
+                // try {
+                //     const result = await query(sql, params);
+                //     SendSuccess(res,"",result)
+                // } 
+                // catch(err) {
+                //     return SendError(res,err.message) 
+                // }
+                // //#endregion 
+
                 //#region 執行
                 connection.query(sql, params, (err, rows) => {
                     if (!err) { 
@@ -2101,169 +2367,6 @@ var currentCompany = -1
                         res.send(err);
                     }
                 });
-                //#endregion 
-            });
-            //#endregion 
-        }
-        catch(queryError){
-            console.error("Query Error:", queryError.message);
-            res.status(400).send({ status: 'error', msg:queryError.message });
-        }
-    });
-    //#endregion 
-
-//#endregion 
-
-//#region 圖片運用
-    //#region 取得圖片
-    router.post('/GetImg', (req, res) => {
-        try{
-            if(!basic(req,res)) return
-            
-            //#region 宣告前端參數
-            const {Id} = req.body;
-            let conditions = []; //條件查詢容器
-            let params = []; //參數容器
-            //#endregion 
-
-            //#region 開始後端交易
-            var connection = CreateDBConnection()
-            connection.beginTransaction(async (transactionError) => {
-                if(transactionError) {
-                    console.error("開啟後端交易失敗:", transactionError);
-                    return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                }
-
-                //#region 基本查詢
-                var baseQuery = `SELECT a.* 
-                                    FROM CM_CyyImg a
-                                    WHERE 1=1
-                                    ORDER BY a.CyyImgId DESC LIMIT 1`
-                //#endregion 
-
-                //#region 條件
-                
-                let sql = baseQuery;
-                
-                //#endregion 
-
-                //#region 列表顯示設定
-                //#endregion 
-
-                //#region 執行
-                connection.query(sql, params, (err, rows) => {
-                    if (!err) { 
-                        SendSuccess(res,"",rows)
-                    } else {
-                        SendError(res, err) 
-                    }
-                });
-                //#endregion 
-            });
-            //#endregion 
-        }
-        catch(queryError){
-            console.error("Query Error:", queryError.message);
-            res.status(400).send({ status: 'error', msg:queryError.message });
-        }
-    });
-    //#endregion 
-
-    //#region 上傳圖片
-    router.post('/AddImg', (req, res) => {
-        try{
-            if(!basic(req,res)) return
-
-            //#region 參數宣告+資料庫連接
-            const {href ,ImgName ,ImgSpec} = req.body;
-            //#endregion 
-            // let newImg = new ImageModel({ data: href}); // 建立新Image模型
-        
-            //#region 參數檢查
-            //#endregion 
-
-            //#region 開始後端交易
-            var connection = CreateDBConnection()
-            connection.beginTransaction(async (transactionError) => {
-                if(transactionError) {
-                    console.error("開啟後端交易失敗:", transactionError);
-                    return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                }
-
-                //#region 檢查段
-                //#endregion 
-
-                //#region 異動段
-                var sql = `INSERT INTO CM_CyyImg 
-                            (href ,ImgName ,ImgSpec
-                                ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                            VALUES
-                            (? ,? ,? 
-                                ,? ,? ,? ,?)`;
-                const query = util.promisify(connection.query).bind(connection);
-                await query(sql, [href, ImgName, ImgSpec
-                                ,currentTime,currentTime,currentUser,currentUser]);
-                //#endregion 
-
-                //#region 获取最新插入的ID
-                var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                const result = await query(GetInsertedId);
-                //#endregion 
-
-                //#region commit段
-                CommitRun("add",connection,res,result)
-                //#endregion 
-            });
-            //#endregion 
-        }
-        catch(queryError){
-            console.error("Query Error:", queryError.message);
-            res.status(400).send({ status: 'error', msg:queryError.message });
-        }
-    });
-    //#endregion 
-
-    //#region 刪除圖片
-    router.post('/DeletImg', (req, res) => {
-        try{
-            if(!basic(req,res)) return
-
-            //#region 宣告前端參數
-            const {Id} = req.body;
-            //#endregion 
-          
-            //#region 參數檢查
-            if (Id <= 0) throw new Error('【圖片】不可以為空')
-            //#endregion 
-
-            //#region 開始後端交易
-            var connection = CreateDBConnection()
-            connection.beginTransaction(async (transactionError) => {
-                if(transactionError) {
-                    console.error("開啟後端交易失敗:", transactionError);
-                    return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
-                }
-                //#region 檢查段
-                var checkSql = `SELECT CyyImgId
-                                    FROM CM_CyyImg
-                                    WHERE 1=1
-                                    AND CyyImgId = ?
-                                    LIMIT 1`
-                const checkQuery = util.promisify(connection.query).bind(connection);
-                const resultCheck = await checkQuery(checkSql, [Id]);
-                if (resultCheck.length <= 0) return SendError(res,'【圖片不存在】,請重新確認');
-                //#endregion 
-
-                //#region 異動段
-                var sql = `DELETE FROM CM_CyyImg 
-                            WHERE 1=1
-                            AND CyyImgId = ? `
-                const query = util.promisify(connection.query).bind(connection);
-                await query(sql, [Id]);
-                //#endregion 
-
-                //#region commit段
-                CommitRun("delete",connection,res,"")
                 //#endregion 
             });
             //#endregion 

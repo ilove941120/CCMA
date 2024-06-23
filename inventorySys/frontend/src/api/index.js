@@ -91,7 +91,7 @@ import axios from 'axios'
     }
     //#endregion
 
-    //#region BAS_Company       --公司相關 查看,新增,修改,刪除
+    //#region BAS_CompanyDate   --公司相關 查看,新增,修改,刪除
     const GetCompanyDate = (req) => {
         return axios.post(`/api/sys/GetCompanyDate`,req)
     }
@@ -119,61 +119,61 @@ import axios from 'axios'
 //#region oms營運管理系統
     //#region BAS_Department    --部門相關 查看,新增,修改,刪除
     const GetDepartment = (req) => {
-        return axios.post(`/api/GetDepartment`,req)
+        return axios.post(`/api/oms/GetDepartment`,req)
     }
     const AddDepartment = (req) => {
-        return axios.post(`/api/AddDepartment`, req)
+        return axios.post(`/api/oms/AddDepartment`, req)
     }
     const UpdateDepartment = (req) => {
-        return axios.post(`/api/UpdateDepartment`, req)
+        return axios.post(`/api/oms/UpdateDepartment`, req)
     }
-    const DeleteDepartment = (DepartmentId) => {
-        return axios.post(`/api/DeleteDepartment?DepartmentId=${DepartmentId}`)
+    const DeleteDepartment = (req) => {
+        return axios.post(`/api/oms/DeleteDepartment`, req)
     }
     //#endregion
 
     //#region BAS_Staff         --人員相關 查看,新增,修改,刪除
     const GetStaff = (req) => {
-        return axios.post(`/api/GetStaff`,req)
+        return axios.post(`/api/oms/GetStaff`,req)
     }
     const AddStaff = (req) => {
-        return axios.post(`/api/AddStaff`, req)
+        return axios.post(`/api/oms/AddStaff`, req)
     }
     const UpdateStaff = (req) => {
-        return axios.post(`/api/UpdateStaff`, req)
+        return axios.post(`/api/oms/UpdateStaff`, req)
     }
-    const DeleteStaff = (StaffId) => {
-        return axios.post(`/api/DeleteStaff?StaffId=${StaffId}`)
+    const DeleteStaff = (req) => {
+        return axios.post(`/api/oms/DeleteStaff`, req)
     }
     //#endregion
 
     //#region Warehouse         --庫別相關 查看,新增,修改,刪除
     const GetWarehouse = (req) => {
-        return axios.post(`/api/GetWarehouse`,req)
+        return axios.post(`/api/oms/GetWarehouse`,req)
     }
     const AddWarehouse = (req) => {
-        return axios.post(`/api/AddWarehouse`, req)
+        return axios.post(`/api/oms/AddWarehouse`, req)
     }
     const UpdateWarehouse = (req) => {
-        return axios.post(`/api/UpdateWarehouse`, req)
+        return axios.post(`/api/oms/UpdateWarehouse`, req)
     }
-    const DeleteWarehouse = (WarehouseId) => {
-        return axios.post(`/api/DeleteWarehouse?WarehouseId=${WarehouseId}`)
+    const DeleteWarehouse = (req) => {
+        return axios.post(`/api/oms/DeleteWarehouse`, req)
     }
     //#endregion
 
     //#region Unit              --單位相關 查看,新增,修改,刪除
     const GetUnit = (req) => {
-        return axios.post(`/api/GetUnit`, req)
+        return axios.post(`/api/oms/GetUnit`, req)
     }
     const AddUnit = (req) => {
-        return axios.post(`/api/AddUnit`, req)
+        return axios.post(`/api/oms/AddUnit`, req)
     }
     const UpdateUnit = (req) => {
-        return axios.post(`/api/UpdateUnit`, req)
+        return axios.post(`/api/oms/UpdateUnit`, req)
     }
-    const DeleteUnit = (UnitId) => {
-        return axios.post(`/api/DeleteUnit?UnitId=${UnitId}`)
+    const DeleteUnit = (req) => {
+        return axios.post(`/api/oms/DeleteUnit`, req)
     }
     //#endregion
 
@@ -186,6 +186,9 @@ import axios from 'axios'
     }
     const UpdateMtlItem = (req) => {
         return axios.post(`/api/oms/UpdateMtlItem`, req)
+    }
+    const UpdateMtlItemStatus = (req) => {
+        return axios.post(`/api/oms/UpdateMtlItemStatus`, req)
     }
     const DeleteMtlItem = (req) => {
         return axios.post(`/api/oms/DeleteMtlItem`, req)
@@ -260,7 +263,6 @@ import axios from 'axios'
     //#endregion 
 //#endregion 
 
-
 //#region web官網 GetCyyIndexContent
 const GetCyyIndexContent= (req) => {
     return axios.post(`/api/web/GetCyyIndexContent`, req)
@@ -285,6 +287,9 @@ const UpdateCyyWebFooter = (req) => {
 }
 const DeletCyyWebFooter = (req) => {
     return axios.post(`/api/web/DeletCyyWebFooter`, req)
+}
+const AddCyyProduct = (req) => {
+    return axios.post(`/api/web/AddCyyProduct`, req)
 }
 //#endregion oms營運管理系統
 
@@ -314,7 +319,7 @@ export {
     GetStaff, AddStaff, UpdateStaff, DeleteStaff,
     GetWarehouse, AddWarehouse, UpdateWarehouse, DeleteWarehouse,
     GetUnit, AddUnit, UpdateUnit, DeleteUnit,
-    GetMtlItem, AddMtlItem, UpdateMtlItem, DeleteMtlItem,
+    GetMtlItem, AddMtlItem, UpdateMtlItem, UpdateMtlItemStatus, DeleteMtlItem,
 
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
@@ -324,6 +329,7 @@ export {
     UpdateCyyWebFooter,DeletCyyWebFooter,
     GetCyyIndexContent,
     UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
+    AddCyyProduct,
     
     GetMenuModal,
     GetTransaction, AddTransaction

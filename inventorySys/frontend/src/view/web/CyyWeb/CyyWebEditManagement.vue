@@ -12,13 +12,13 @@ const contentData = reactive([
      blockName:`官網資訊`,
     },
     {id:1,
-     blockName:`活動新增`,
+     blockName:`活動列表`,
     },
     {id:2,
-     blockName:`議題新增`,
+     blockName:`議題列表`,
     },
     {id:3,
-     blockName:`產品新增`,
+     blockName:`產品列表`,
     },
 ])
 

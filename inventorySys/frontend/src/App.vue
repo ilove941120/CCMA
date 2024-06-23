@@ -107,7 +107,7 @@ if(sessionText != null){
   <div v-if="logInStatus === 'A' && Location === 'Sys'">
     <div class="WebTitle">
       <button class="menuButton" @click="menuChange"><i class="fa-solid fa-bars"></i> </button>
-      <h1>客戶公司管理應用程序</h1>
+      <h1>公司營運系統</h1>
       <div class="InfoStatus">
         <span>{{ store.state.loginInfo.userName }}</span>
         <i class="fa-regular fa-circle-user" @click="OpenInfo()"></i>
@@ -133,7 +133,11 @@ if(sessionText != null){
 
 <style scoped>
   .WebTitle{
-    background-color: unset;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+    background-color: #FFFFFF;
     color: #3a5134;
     margin: 0 auto;
     padding: 10px 20px;
@@ -174,6 +178,7 @@ if(sessionText != null){
     background-color: #EAEEF3;
     min-height: 100vh;
     width: 100%;
+    margin-top: 66px;
     display: flex;
   }
   .webContent{
