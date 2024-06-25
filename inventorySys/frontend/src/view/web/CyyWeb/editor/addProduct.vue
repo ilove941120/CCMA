@@ -1,7 +1,8 @@
 <script setup>
 import { ref, reactive,watchEffect } from "vue";
-import { GetMtlItem, AddCyyProduct} from ':@/api/index'
+import { GetMtlItem, GetCyyProduct, AddCyyProduct, UpdateCyyProduct, DeleteCyyProduct, GetCompanyPhoto} from ':@/api/index'
 import pageBar from ':@/components/pageBar.vue';
+import alert from ':@/components/alert.vue';
 import { useStore } from 'vuex';
 const store = useStore();
 
@@ -18,94 +19,47 @@ function ReadForm(Id) {
     editShow.value = true
     editObj.pageId = Id
 }
-function EditForm(Id) {
+async function EditForm(Id) {
     changePage.value = "返回"
-    editObj.action = "edit"
     editShow.value = true
-    editObj.pageId = Id
+    pageObj.Id = Id
+    await LoadData()
+    tableData.value.forEach((item)=>{
+        formData.CwId = item.CwId
+        formData.MtlItemId =  item.MtlItemId
+        formData.ProductName = item.ProductName
+        formData.ProductAmount = item.ProductAmount
+        formData.ProductText = item.ProductText
+        formData.GroupSetting = item.GroupSetting
+        formData.CpId = item.CpId
+        formData.PhotoName = item.PhotoName
+        formData.PhotoDesc = item.PhotoDesc
+        formData.PhotoHref = item.PhotoHref
+    })
 }
 function CloseForm() {
     changePage.value = "新增"
     editShow.value = false
+    pageObj.Id = -1
+    resetFormData()
+    LoadData()
 }
 //#endregion
 
-const tableData = reactive([
-    {
-        Id:1,
-        ProductName:`環保餐具`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:2,
-        ProductName:`環保杯`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:3,
-        ProductName:`環保袋`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:4,
-        ProductName:`環保餐具`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:5,
-        ProductName:`環保杯`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:6,
-        ProductName:`環保袋`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:7,
-        ProductName:`環保餐具`,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:8,
-        ProductName:`環保杯`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    },
-    {
-        Id:9,
-        ProductName:`環保袋`,
-        ProductAmount:1000,
-        ProductPhoto:`https://s3-alpha-sig.figma.com/img/f5e0/4c4d/1cd35a4276d01f6dd5010f1fdfc23849?Expires=1719792000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VDk9iFiPcswp3q7b~LUIOh29i1hVrSRVE-BMcQlAGlbTTSP7Mq-deLlLsmzTnQLf1jEM1OafWiNr1REi1HPLiFyPaMxWB0dEE9E1OAXpzUhESeBfykL9J4k6BBezDmjfdbtB-4cA9TKeBeAvt5KPNoB6FxSlXfTN0UDqXCOPHpcmgU0sJC6tnYZ2qUiT9uQRfNCeWqgo5XkxGcnAB4McSMbjblEAf2GfuynNQCxRrRWxtSKdfZtiP6FpfCBu~u1wiYcMx7y2gU8oQirJuIgPWM45R8I2NDRa9LdJppW7kEh42G-INA8nyyyPDHZAAUTb7nPWP00LivvjXvUd4SM43g__`
-    }
-])
-
-//#region 表單資料相關
+//#region 圖片選擇
 const photoInput = ref(null);
-const formData = reactive({
-    CwId:1,
-    MtlItemId:-1,
-    ProductName:``,
-    ProductAmount:``,
-    ProductText:``,
-    GroupSetting:false,
-    PhotoName:``,
-    PhotoDesc:``,
-    PhotoHref:``
-})
 const FileClick = (event) => {
-    // 当点击目标不是 input 元素时，触发 input 的点击事件
-    if (event.target !== photoInput.value) {
-        photoInput.value.click();
+    if(formData.MtlItemId <=0){
+        store.commit('alertAction', { type: "fail", msg: '請先選擇品號' });
+        return
     }
+    photoInput.value.click();
+
+    // 当点击目标不是 input 元素时，触发 input 的点击事件
+    // if (event.target !== photoInput.value) {
+    // }
 }
-function LocalPhoto (){
+const LocalPhoto = () =>{
     const file = photoInput.value.files[0];
     if (!file) return;
     const reader = new FileReader();
@@ -116,12 +70,12 @@ function LocalPhoto (){
     }
     reader.readAsDataURL(file);
 }
-
 //#endregion
 
 //#region 彈窗相關
 const popViewShow = reactive({
     show:false,
+    popViewTitle:``,
     nowView:``
 })
 const popMtlItemList = reactive([
@@ -144,6 +98,29 @@ const popMtlItemList = reactive([
         name:`操作`,
     }
 ])
+const OpenPopView = (view) =>{
+    switch(view){
+        case "MtlItem":
+            popViewShow.popViewTitle = `查看品號相關資料`
+            break
+        case "Photo":
+            if(formData.MtlItemId <=0){
+                store.commit('alertAction', { type: "fail", msg: '請先選擇品號' });
+                return
+            }
+            popViewShow.popViewTitle = `查看公司圖片庫`
+            break
+    }
+    popViewShow.show = true
+    popViewShow.nowView = view
+    LoadPopViewData(view)
+
+}
+const ClosePopView = (view) =>{
+    popViewShow.show = false
+    popViewShow.popViewTitle = ''
+    popViewShow.nowView = ''
+}
 const MtlItemObj = reactive({
     MtlItemNo: "",
     MtlItemName: "",
@@ -151,14 +128,123 @@ const MtlItemObj = reactive({
     Index: 0,
     TatolNum: 0
 })
-const MtlItemTableData = ref([])
-const LoadMtlItemData = async () => {
+const PhotoObj = reactive({
+    MtlItemNo: "",
+    MtlItemName: "",
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0
+})
+const PopViewData = ref([])
+
+const LoadPopViewData = async (view) => {
     try{
-      const result = (await GetMtlItem(MtlItemObj)).data
+        let result
+        let status
+        switch(view){
+            case "MtlItem":
+                result = (await GetMtlItem(MtlItemObj)).data
+                status = result.status 
+                if (status == "success") {
+                    MtlItemObj.TatolNum = result.data[0].Total
+                    PopViewData.value = result.data;
+                } else {
+                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                }
+                break;
+            case "Photo":
+                result = (await GetCompanyPhoto(PhotoObj)).data
+                status = result.status 
+                if (status == "success") {
+                    PhotoObj.TatolNum = result.data[0].Total
+                    PopViewData.value = result.data;
+                } else {
+                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                }
+                break;
+        }
+    }
+    catch(err){
+        let status = err.response.data.status
+        let errMsg = err.response.data.msg
+        if(status == "restart"){
+            store.commit('alertAction', { type: "fail", msg: errMsg })
+            sessionStorage.removeItem("user");
+            store.commit('logoutAction', {status:"S"});
+            router.push('/Login');
+        }
+    }
+}
+
+
+
+const SelectItem = (MtlItemId,MtlItemName)=>{
+    formData.MtlItemId = MtlItemId
+    formData.ProductName = MtlItemName
+    ClosePopView()
+}
+const SelectPhoto = (CpId,PhotoName,PhotoDesc,PhotoHref)=>{
+    formData.CpId = CpId
+    formData.PhotoName = PhotoName
+    formData.PhotoDesc = PhotoDesc
+    formData.PhotoHref = PhotoHref
+    ClosePopView()
+}
+const ClearPhoto = ()=>{
+    formData.CpId = -1
+    formData.PhotoName = ``
+    formData.PhotoDesc = ``
+    formData.PhotoHref = ``
+}
+
+//#region 品號視窗頁面切換
+const ReturnMtlItemPage = (data) => {
+    if (data == 1) {
+        MtlItemObj.Index = 0
+    }
+    else {
+        MtlItemObj.Index = MtlItemObj.ShowNum * (data - 1)
+    }
+    LoadMtlItemData()
+}
+//#endregion
+
+//#region 圖片庫視窗頁面切換
+const ReturnPhotoPage = (data) => {
+    if (data == 1) {
+        PhotoObj.Index = 0
+    }
+    else {
+        PhotoObj.Index = PhotoObj.ShowNum * (data - 1)
+    }
+    LoadPopViewData('Photo')
+}
+//#endregion
+
+//#endregion
+
+//#region 頁面筆數顯示,當前第幾頁
+const pageObj = reactive({
+    PageNo:"addProduct",
+    Id: -1,
+    MtlItemId: -1,
+    ProductName: "",
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0
+})
+//#endregion
+
+//#region 頁面資料載入
+const tableData = ref([])
+const LoadData = async () => {
+    try{
+      const result = (await GetCyyProduct(pageObj)).data
       let status = result.status 
       if (status == "success") {
-        MtlItemObj.TatolNum = result.data[0].Total
-        MtlItemTableData.value = result.data;
+        pageObj.TatolNum = result.data[0].Total
+        tableData.value = result.data;
+        store.commit('menuChang',pageObj.PageNo);
       } else {
           store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
       }
@@ -174,42 +260,43 @@ const LoadMtlItemData = async () => {
         }
     }
 }
-const OpenPopView = (view) =>{
-    popViewShow.show = true
-
-    switch(view){
-        case "MtlItem":
-            popViewShow.nowView = view
-            break
-    }
-    LoadMtlItemData()
-}
-const ClosePopView = (view) =>{
-    popViewShow.show = false
-    switch(view){
-        case "MtlItem":
-            popViewShow.nowView = ''
-            break
-    }
-}
-//#region 頁面切換
-const ReturnPage = (data) => {
-    if (data == 1) {
-        MtlItemObj.Index = 0
-    }
-    else {
-        MtlItemObj.Index = MtlItemObj.ShowNum * (data - 1)
-    }
-    LoadMtlItemData()
-}
+LoadData()
 //#endregion
 
-const SelectItem = (MtlItemId,MtlItemName)=>{
-    formData.MtlItemId = MtlItemId
-    formData.ProductName = MtlItemName
-    ClosePopView('MtlItem')
-}
+//#region 重製表單
+const createFormData = () => {
+    return {
+        CwId: 1,
+        MtlItemId: -1,
+        ProductName: '',
+        ProductAmount: '',
+        ProductText: '',
+        GroupSetting: false,
+        photoChange: false,
+        CpId:-1,
+        PhotoName: '',
+        PhotoDesc: '',
+        PhotoHref: '',
+    }
+};
+
+let formData = reactive(createFormData());
+
+const resetFormData = () => {
+    formData.CwId = 1
+    formData.MtlItemId = -1
+    formData.ProductName = ''
+    formData.ProductAmount = ''
+    formData.ProductText = ''
+    formData.GroupSetting = false
+    formData.photoChange = false
+    formData.CpId = -1
+    formData.PhotoName = ''
+    formData.PhotoDesc = ''
+    formData.PhotoHref = ''
+};
 //#endregion
+
 
 //#region 儲存表單資料
 const Save = async (type) => {
@@ -236,9 +323,32 @@ const Save = async (type) => {
 }
 //#endregion
 
+//#region 刪除資料
+const DeleteData = async (CpdId) => {
+    const obj =reactive({CpdId:CpdId})
+    try{
+        const result = (await DeleteCyyProduct(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadData()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
+
 </script>
 
 <template>
+    <alert v-if="$store.state.alertMsg.show == true" :msg="$store.state.alertMsg"></alert>
     <div class="head">
         <div class="col">
             <button class="button search" v-if="!editShow">搜尋</button>
@@ -253,11 +363,14 @@ const Save = async (type) => {
     <div class="body">
         <div class="list" v-if="editShow == false">
             <div class="table">
-                <div class="card" v-for="item in tableData" :key="Id">
-                    <img :src="item.ProductPhoto" alt="">
+                <div class="card" v-for="item in tableData" :key="item.CpdId">
+                    <img :src="item.PhotoHref" :alt="item.PhotoName">
                     <div class="cardTitle">{{ item.ProductName }}</div>
                     <div class="cardSubtitle">${{ item.ProductAmount }}</div>
-                    <button class="deletCard" @click="Delete(item.CpId)"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="hoverBlock">
+                        <button class="button safe" @click="EditForm(item.CpdId)">修改</button>
+                        <button class="button clear" @click="DeleteData(item.CpdId)">刪除</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -265,8 +378,13 @@ const Save = async (type) => {
             <form action="">
                 <div class="localRow">
                     <label for="ProductPhoto">產品圖片</label>
-                    <div class="photoBlock" @click="FileClick">
-                        <span v-if="!formData.PhotoHref"><i  class="fa-solid fa-plus"></i>選擇圖片</span>
+                    <div class="photoBlock">
+                        <button v-if="!formData.PhotoHref" class="button add" @click="OpenPopView('Photo')">選擇圖片</button>
+                        <button v-if="!formData.PhotoHref" class="button add" @click="FileClick">新增圖片</button>
+                        <button v-if="formData.PhotoHref" class="button clear " @click="ClearPhoto">重置</button>
+
+                        <!-- <span v-if="!formData.PhotoHref"><i  class="fa-solid fa-plus"></i>選擇圖片</span> -->
+                        <!-- <span v-if="!formData.PhotoHref"><i  class="fa-solid fa-plus"></i>新增圖片</span> -->
                         <img v-if="formData.PhotoHref" :src="formData.PhotoHref" alt="Preview" />
                         <input type="file" ref="photoInput" style="display: none;" @change="LocalPhoto()"/>
                     </div>
@@ -288,23 +406,25 @@ const Save = async (type) => {
                 </div>
                 
             </form>
+            <div class="food">
+                <div class="col">
+                </div>
+                <div class="col rightStyle">
+                    <button class="button clear" @click="resetFormData">清空</button>
+                    <button class="button safe" @click="Save()">儲存</button>
+                </div>
+            </div>
         </div>
     </div>
-   <div class="food">
-        <div class="col">
-        </div>
-        <div class="col rightStyle">
-            <button class="button clear">清空</button>
-            <button class="button safe" @click="Save()">儲存</button>
-        </div>
-   </div>
+    <div class="food">
+    </div>
    <div class="popView" v-if="popViewShow.show == true">
-    <div class="viewMtlItem" v-if="popViewShow.nowView == 'MtlItem'">
+    <div class="viewMtlItem" >
         <div class="viewHead">
-            <h4>查看品號相關資料</h4>
+            <h4>{{popViewShow.popViewTitle}}</h4>
             <button class="viewClose" @click="ClosePopView('MtlItem')"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="viewBody">
+        <div class="viewBody" v-if="popViewShow.nowView == 'MtlItem'">
             <div class="searchBlock">
                 <input type="text" class="inputStyle" placeholder="請輸入品號" v-model="MtlItemObj.MtlItemNo">
                 <input type="text" class="inputStyle" placeholder="請輸入品名" v-model="MtlItemObj.MtlItemName" style="margin-left: 10px;">
@@ -313,7 +433,7 @@ const Save = async (type) => {
                 <tr class="tableHead">
                     <th  v-for="(item,index) in popMtlItemList">{{ item.name}}</th>
                 </tr>
-                <tr class="tableItem" v-for="(item, index) in MtlItemTableData" :key="item.MtlItemId" @mouseover="hoverRow(true, item.MtlItemId)" @mouseout="hoverRow(false, item.MtlItemId)">
+                <tr class="tableItem" v-for="(item, index) in PopViewData" :key="item.MtlItemId" @mouseover="hoverRow(true, item.MtlItemId)" @mouseout="hoverRow(false, item.MtlItemId)">
                     <td :style="{ backgroundColor: highlightedRow === item.MtlItemId ? '#C8EBFA' : '' }">
                         <div class="coulumName">#</div>
                         <div class="coulumValue">{{ MtlItemObj.Index > 0 ? index + MtlItemObj.Index + 1 : index + 1 }}</div>
@@ -343,8 +463,16 @@ const Save = async (type) => {
                 </tr>
             </table>
         </div>
+        <div class="viewBody" v-if="popViewShow.nowView == 'Photo'"> 
+            <div class="table">
+                <div class="card" v-for="item in PopViewData" @click="SelectPhoto(item.CpId,item.PhotoName,item.PhotoDesc,item.PhotoHref)">
+                    <img :src="item.PhotoHref" alt="">
+                </div>
+            </div>
+        </div>
         <div class="viewFooter">
-            <pageBar :sent="MtlItemObj" @change="ReturnPage"></pageBar>
+            <pageBar v-if="popViewShow.nowView == 'MtlItem'" :sent="MtlItemObj" @change="ReturnMtlItemPage"></pageBar>
+            <pageBar v-if="popViewShow.nowView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
         </div>
     </div>
    </div>
@@ -425,6 +553,22 @@ const Save = async (type) => {
 .deletCard:hover{
     color: red;
 }
+.hoverBlock{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000f273e;
+}
+.card:hover .hoverBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .localRow{
     margin-bottom: 20px;
     display: flex;
@@ -438,6 +582,7 @@ const Save = async (type) => {
     border: 1px solid #00000033;
 }
 .photoBlock{
+    position: relative;
     width: 100%;
     height: 300px;
     margin: auto;
@@ -457,6 +602,11 @@ const Save = async (type) => {
 .photoBlock:hover{
     background-color: #aedb847a;
 }
+.photoBlock .clear{
+    position: absolute;
+    bottom: 0px;
+    right:  0px;
+}
 .photoBlock>img{
     height: 100%;
     object-fit: contain;
@@ -475,7 +625,7 @@ const Save = async (type) => {
 }
 .viewMtlItem{
     width: 80%;
-    margin-bottom: 100px;
+    margin-bottom: 0px;
     border-radius: 5px;
     background-color: #FFFFFF;
     overflow: auto;

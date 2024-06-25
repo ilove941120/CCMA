@@ -80,17 +80,6 @@ const editObj = reactive({
 })
 //#endregion
 
-//#region 頁面比數顯示,當前第幾頁
-const pageObj = reactive({
-    PageNo:"MtlItemManagement",
-    MtlItemNo: "",
-    MtlItemName: "",
-    ShowNum: 10,
-    Index: 0,
-    TatolNum: 0
-})
-//#endregion
-
 //#region 編輯頁面開啟關閉
 const editShow = ref(false)
 const changePage = ref("新增")
@@ -175,7 +164,6 @@ const hoverRow = (status, itemId) => {
 }
 //#endregion
 
-//#region 頁面資料仔載入
 //#region 列表欄位宣告
 const tableHead = reactive([
     {
@@ -199,6 +187,18 @@ const tableHead = reactive([
 ])
 //#endregion
 
+//#region 頁面比數顯示,當前第幾頁
+const pageObj = reactive({
+    PageNo:"MtlItemManagement",
+    MtlItemNo: "",
+    MtlItemName: "",
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0
+})
+//#endregion
+
+//#region 頁面資料仔載入
 const tableData = ref([])
 const LoadData = async () => {
     try{

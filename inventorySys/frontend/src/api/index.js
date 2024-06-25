@@ -244,12 +244,6 @@ import axios from 'axios'
     }
     //#endregion 
 
-    //#region Product
-    const UpdateCyyProduct = (req) => {
-        return axios.post(`/api/sys/UpdateCyyProduct`, req)
-    }
-    //#endregion 
-
     //#region Serve
     const UpdateCyyServe = (req) => {
         return axios.post(`/api/sys/UpdateCyyServe`, req)
@@ -264,11 +258,9 @@ import axios from 'axios'
 //#endregion 
 
 //#region web官網 GetCyyIndexContent
+//#region 官網編輯器
 const GetCyyIndexContent= (req) => {
     return axios.post(`/api/web/GetCyyIndexContent`, req)
-}
-const GetCyyWebBanner= (req) => {
-    return axios.post(`/api/web/GetCyyWebBanner`, req)
 }
 const UpdateCyyWebBanner = (req) => {
     return axios.post(`/api/web/UpdateCyyWebBanner`, req)
@@ -288,10 +280,24 @@ const UpdateCyyWebFooter = (req) => {
 const DeletCyyWebFooter = (req) => {
     return axios.post(`/api/web/DeletCyyWebFooter`, req)
 }
+//#endregion 
+
+//#region 官網產品
+const GetCyyProduct = (req) => {
+    return axios.post(`/api/web/GetCyyProduct`, req)
+}
 const AddCyyProduct = (req) => {
     return axios.post(`/api/web/AddCyyProduct`, req)
 }
-//#endregion oms營運管理系統
+const UpdateCyyProduct = (req) => {
+    return axios.post(`/api/web/UpdateCyyProduct`, req)
+}
+const DeleteCyyProduct = (req) => {
+    return axios.post(`/api/web/DeleteCyyProduct`, req)
+}
+//#endregion
+
+//#endregion 
 
 //#region Transaction--交易相關 查看,新增,修改,刪除
     const GetTransaction = (MtlItemId) => {
@@ -323,14 +329,14 @@ export {
 
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
-    GetCyyWebBanner,
+
+    GetCyyIndexContent,
     UpdateCyyWebBanner,DeletCyyWebBanner,
     UpdateCyyWebAbout,DeletCyyWebAbout,
     UpdateCyyWebFooter,DeletCyyWebFooter,
-    GetCyyIndexContent,
-    UpdateCyyAbout, UpdateCyyProduct, UpdateCyyServe, UpdateCyyFooter,
-    AddCyyProduct,
-    
+    UpdateCyyAbout, UpdateCyyServe, UpdateCyyFooter,
+    GetCyyProduct, AddCyyProduct, UpdateCyyProduct, DeleteCyyProduct,
+
     GetMenuModal,
     GetTransaction, AddTransaction
 }
