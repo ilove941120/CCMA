@@ -2058,10 +2058,11 @@
                                                     ,UpdateDate = ?
                                                     ,UpdateUserId = ?
                                                     WHERE 1=1
+                                                    AND CpdId = ?
                                                     AND PhotoId = ?
                                                     `
                                             try {
-                                                params = [currentTime,currentUser, CpId]
+                                                params = [currentTime,currentUser, Id, CpId]
                                                 await query(sql, params);
                                             } 
                                             catch(err) {
@@ -2085,10 +2086,11 @@
                                         ,UpdateDate = ?
                                         ,UpdateUserId = ?
                                         WHERE 1=1
-                                        AND CpdPhotoId = ?
+                                        AND CpdId = ?
+                                        AND PhotoId = ?
                                         `
                                 try {
-                                    params = [currentTime,currentUser, MainPhotoId]
+                                    params = [currentTime,currentUser, Id, MainPhotoId]
                                     await query(sql, params);
                                 } 
                                 catch(err) {
@@ -2113,10 +2115,11 @@
                                 }
                                 //#region 取得最新插入的ID
                                 let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                                let NewId = -1
                                 try {
                                     result = await query(GetInsertedId);
                                         result.forEach((item)=>{
-                                        CpId = item.id
+                                        NewId = item.id
                                     })
                                 } 
                                 catch(err) {
@@ -2133,7 +2136,7 @@
                                         (? ,? ,?
                                             ,? ,? ,? ,?)`;
                                 try {
-                                    params = [Id, CpId, 'Y'
+                                    params = [Id, NewId, 'Y'
                                         ,currentTime,currentTime,currentUser,currentUser]
                                     await query(sql, params);
                                 } 
