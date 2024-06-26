@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive,watchEffect } from "vue";
-import { GetMtlItem, GetCyyProduct, AddCyyProduct, UpdateCyyProduct, DeleteCyyProduct, GetCompanyPhoto} from ':@/api/index'
+import { GetMtlItem, GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct, GetCompanyPhoto} from ':@/api/index'
 import pageBar from ':@/components/pageBar.vue';
 import alert from ':@/components/alert.vue';
 import { useStore } from 'vuex';
@@ -22,8 +22,8 @@ function ReadForm(Id) {
 async function EditForm(Id) {
     changePage.value = "返回"
     editShow.value = true
-    pageObj.Id = Id
-    await LoadData()
+    formData.Id = Id
+    await LoadData('Edit')
     tableData.value.forEach((item)=>{
         formData.CwId = item.CwId
         formData.MtlItemId =  item.MtlItemId
@@ -40,7 +40,6 @@ async function EditForm(Id) {
 function CloseForm() {
     changePage.value = "新增"
     editShow.value = false
-    pageObj.Id = -1
     resetFormData()
     LoadData()
 }
@@ -67,6 +66,7 @@ const LocalPhoto = () =>{
     {
         formData.PhotoName = file.name
         formData.PhotoHref = a.target.result;
+        formData.photoChange = true
     }
     reader.readAsDataURL(file);
 }
@@ -188,6 +188,7 @@ const SelectPhoto = (CpId,PhotoName,PhotoDesc,PhotoHref)=>{
     formData.PhotoName = PhotoName
     formData.PhotoDesc = PhotoDesc
     formData.PhotoHref = PhotoHref
+    formData.photoChange = true
     ClosePopView()
 }
 const ClearPhoto = ()=>{
@@ -226,7 +227,6 @@ const ReturnPhotoPage = (data) => {
 //#region 頁面筆數顯示,當前第幾頁
 const pageObj = reactive({
     PageNo:"addProduct",
-    Id: -1,
     MtlItemId: -1,
     ProductName: "",
     ShowNum: 10,
@@ -237,17 +237,18 @@ const pageObj = reactive({
 
 //#region 頁面資料載入
 const tableData = ref([])
-const LoadData = async () => {
+const LoadData = async (type) => {
     try{
-      const result = (await GetCyyProduct(pageObj)).data
-      let status = result.status 
-      if (status == "success") {
-        pageObj.TatolNum = result.data[0].Total
-        tableData.value = result.data;
-        store.commit('menuChang',pageObj.PageNo);
-      } else {
-          store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
-      }
+        let result = await GetCyyProduct(type === 'Edit' ? formData : pageObj);
+        result = result.data
+        let status = result.status 
+        if (status == "success") {
+            pageObj.TatolNum = result.data[0].Total
+            tableData.value = result.data;
+            store.commit('menuChang',pageObj.PageNo);
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
     }
     catch(err){
         let status = err.response.data.status
@@ -266,6 +267,7 @@ LoadData()
 //#region 重製表單
 const createFormData = () => {
     return {
+        Id:-1,
         CwId: 1,
         MtlItemId: -1,
         ProductName: '',
@@ -283,6 +285,7 @@ const createFormData = () => {
 let formData = reactive(createFormData());
 
 const resetFormData = () => {
+    formData.Id = -1
     formData.CwId = 1
     formData.MtlItemId = -1
     formData.ProductName = ''
@@ -297,7 +300,6 @@ const resetFormData = () => {
 };
 //#endregion
 
-
 //#region 儲存表單資料
 const Save = async (type) => {
     try {
@@ -306,7 +308,12 @@ const Save = async (type) => {
             store.commit('alertAction', { type: "fail", msg: '目前未上傳圖片' });
             return
         }
-        result = await AddCyyProduct(formData);
+        if(formData.Id<=0){
+            result = await AddCyyProduct(formData);
+        }
+        else{
+            result = await UpdateCyyProduct(formData);
+        }
         
         let status = result.data.status 
         let msg = result.data.msg 
@@ -328,6 +335,27 @@ const DeleteData = async (CpdId) => {
     const obj =reactive({CpdId:CpdId})
     try{
         const result = (await DeleteCyyProduct(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadData()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
+//#region 狀態切換
+const UpdateStatus = async (CpdId) => {
+    const obj =reactive({CpdId:CpdId})
+    try{
+        const result = (await UpdateCyyProductStatus(obj))
         let status = result.data.status 
         let msg = result.data.msg 
         if (status == "success") {
@@ -368,7 +396,8 @@ const DeleteData = async (CpdId) => {
                     <div class="cardTitle">{{ item.ProductName }}</div>
                     <div class="cardSubtitle">${{ item.ProductAmount }}</div>
                     <div class="hoverBlock">
-                        <button class="button safe" @click="EditForm(item.CpdId)">修改</button>
+                        <button class="button safe" @click="UpdateStatus(item.CpdId)">{{item.Status == `S` ? `啟用`:`停用`}}</button>
+                        <button class="button info" @click="EditForm(item.CpdId)">修改</button>
                         <button class="button clear" @click="DeleteData(item.CpdId)">刪除</button>
                     </div>
                 </div>

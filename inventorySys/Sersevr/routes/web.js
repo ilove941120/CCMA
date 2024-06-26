@@ -1863,8 +1863,8 @@
                     if(!basic(req,res)) return
 
                     //#region 參數宣告+資料庫連接
-                    const {Id,CwId, MtlItemId, ProductName, ProductText, ProductAmount, GroupSetting
-                        ,PhotoName ,PhotoDesc, PhotoHref, photoChange} = req.body;
+                    const {Id, CwId, MtlItemId, ProductName, ProductText, ProductAmount, GroupSetting
+                        ,photoChange ,CpId ,PhotoName ,PhotoDesc, PhotoHref} = req.body;
                     let checkSql
                     let sql
                     let resultCheck
@@ -1876,11 +1876,13 @@
                     if (CwId <= 0) throw new Error('【官網】不可以為空'); 
                     if (MtlItemId <= 0) throw new Error('【品號】不可以為空'); 
 
-                    if (ProductName.length > 1000) throw new Error('【產品名稱】不可以超過1000個字元')
-                    if (ProductName.length <= 0) throw new Error('【產品名稱】不可以為空'); 
-                    if (ProductText.length > 1000) throw new Error('【產品文案】不可以超過1000個字元')
-                    if (ProductText.length <= 0) throw new Error('【產品文案】不可以為空')
-                    if (ProductAmount < 0) throw new Error('【產品金額】不可以為負')
+                    if(CpId<=0){
+                        if (ProductName.length > 1000) throw new Error('【產品名稱】不可以超過1000個字元')
+                        if (ProductName.length <= 0) throw new Error('【產品名稱】不可以為空'); 
+                        if (ProductText.length > 1000) throw new Error('【產品文案】不可以超過1000個字元')
+                        if (ProductText.length <= 0) throw new Error('【產品文案】不可以為空')
+                        if (ProductAmount < 0) throw new Error('【產品金額】不可以為負')
+                    }
                     //#endregion 
 
                     //#region 開始後端交易
@@ -1892,6 +1894,30 @@
                         }
 
                         //#region 檢查段
+                        //#region 產品是否存在
+                        let MainPhotoId = -1;
+                        checkSql = `SELECT a.CpdId,a.Status
+                                    ,a1.PhotoId
+                                    FROM WEB_CyyProduct a
+                                    INNER JOIN WEB_CyyProductPhoto a1 on a.CpdId = a1.CpdId
+                                    WHERE 1=1
+                                    AND a.CpdId = ?
+                                    AND a1.MainSeting = 'Y'
+                                    LIMIT 1`
+                        try {
+                            params = [Id]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【產品】不存在,請重新確認') 
+                            resultCheck.forEach((item)=>{
+                                if(item.Status != "S")  return SendError(res,'【產品】目前處於啟用中,請先停用才能異動') 
+                                MainPhotoId = item.PhotoId
+                            })
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
                         //#region 官網是否存在
                         checkSql = `SELECT CwId
                                     FROM WEB_CompanyWeb
@@ -1927,14 +1953,32 @@
                             return SendError(res,err.message) 
                         }
                         //#endregion 
+                        
+                        //#region 檢核圖片是否存在
+                        if(CpId>0){
+                            checkSql = `SELECT CpId
+                                        FROM WEB_CompanyPhoto
+                                        WHERE 1=1
+                                        AND CpId = ?
+                                        LIMIT 1`
+                            try {
+                                params = [CpId]
+                                resultCheck = await query(checkSql, params);
+                                if (resultCheck.length <= 0) return SendError(res,'【圖片】不存在,請重新確認') 
+                            } 
+                            catch(err) {
+                                return SendError(res,err.message) 
+                            }
+                        }
+                        //#endregion 
                         //#endregion 
 
                         //#region 異動段
 
                         //#region 更新
                         sql = `UPDATE WEB_CyyProduct set 
-                                ${MtlItemStatus != "A" ? `MtlItemId = ?`: `` }
-                                ,ProductName = ?
+                                ${MtlItemStatus != "A" ? `MtlItemId = ?,`: `` }
+                                 ProductName = ?
                                 ,ProductText = ?
                                 ,ProductAmount = ?
                                 ,GroupSetting = ?
@@ -1955,57 +1999,242 @@
                             return SendError(res,err.message) 
                         }
                         //#endregion 
-
+                        
+                        //#region 判斷圖片是否有異動
                         if(photoChange){
-                            //#region 產品圖片新增
-                            let CpId
-                            sql = `INSERT INTO WEB_CompanyPhoto 
-                                    (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
-                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                                    VALUES
-                                    (? ,? ,? ,?
-                                        ,? ,? ,? ,?)`;
-                            try {
-                                params = [currentCompany, PhotoName, PhotoDesc, PhotoHref
-                                    ,currentTime,currentTime,currentUser,currentUser]
-                                await query(sql, params);
-                            } 
-                            catch(err) {
-                                return SendError(res,err.message) 
-                            }
-                            //#region 取得最新插入的ID
-                            let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                            try {
-                                result = await query(GetInsertedId);
-                                result.forEach((item)=>{
-                                    CpId = item.id
-                                })
-                            } 
-                            catch(err) {
-                                return SendError(res,err.message) 
-                            }
-                            //#endregion 
+                            if(CpId>0){
+                                if(MainPhotoId != CpId){
+                                    //await updateMainSetting(currentTime, currentUser, MainPhotoId, connection);
+                                    //#region 更新-將原圖片取消主圖片
+                                    sql = `UPDATE WEB_CyyProductPhoto set 
+                                            MainSeting = 'N'
+                                            ,UpdateDate = ?
+                                            ,UpdateUserId = ?
+                                            WHERE 1=1
+                                            AND CpdId = ?
+                                            AND PhotoId = ?
+                                            `
+                                    try {
+                                        params = [currentTime,currentUser, Id, MainPhotoId]
+                                        await query(sql, params);
+                                    } 
+                                    catch(err) {
+                                        return SendError(res,err.message) 
+                                    }
+                                    //#endregion 
 
-                            //#endregion 
+                                    //#region 判斷圖片是否存在產品資料庫
+                                    checkSql = `SELECT PhotoId
+                                                FROM WEB_CyyProductPhoto
+                                                WHERE 1=1
+                                                AND CpdId = ?
+                                                AND PhotoId = ?
+                                                LIMIT 1`
+                                    try {
+                                        params = [Id,CpId]
+                                        resultCheck = await query(checkSql, params);
+                                        if (resultCheck.length <= 0) {
+                                            //#region 產品圖片群集新增
+                                            sql = `INSERT INTO WEB_CyyProductPhoto 
+                                                    (CpdId ,PhotoId ,MainSeting
+                                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                                    VALUES
+                                                    (? ,? ,?
+                                                        ,? ,? ,? ,?)`;
+                                            try {
+                                                params = [Id, CpId, 'Y'
+                                                    ,currentTime,currentTime,currentUser,currentUser]
+                                                await query(sql, params);
+                                            } 
+                                            catch(err) {
+                                                return SendError(res,err.message) 
+                                            }
+                                            //#endregion 
+                                        } 
+                                        else{
+                                            //#region 更新-將選擇圖片設定主圖片
+                                            sql = `UPDATE WEB_CyyProductPhoto set 
+                                                    MainSeting = 'Y'
+                                                    ,UpdateDate = ?
+                                                    ,UpdateUserId = ?
+                                                    WHERE 1=1
+                                                    AND PhotoId = ?
+                                                    `
+                                            try {
+                                                params = [currentTime,currentUser, CpId]
+                                                await query(sql, params);
+                                            } 
+                                            catch(err) {
+                                                return SendError(res,err.message) 
+                                            }
+                                            //#endregion 
 
-                            //#region 產品圖片群集新增
-                            sql = `INSERT INTO WEB_CyyProductPhoto 
-                                    (CpdId ,PhotoId ,MainSeting
-                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
-                                    VALUES
-                                    (? ,? ,?
-                                        ,? ,? ,? ,?)`;
-                            try {
-                                params = [Id, CpId, 'Y'
-                                    ,currentTime,currentTime,currentUser,currentUser]
-                                await query(sql, params);
-                            } 
-                            catch(err) {
-                                return SendError(res,err.message) 
+                                        }
+                                    } 
+                                    catch(err) {
+                                        return SendError(res,err.message) 
+                                    }
+                                    //#endregion 
+
+                                }
                             }
-                            //#endregion 
+                            else{
+                                //#region 更新-將原圖片取消主圖片
+                                sql = `UPDATE WEB_CyyProductPhoto set 
+                                         MainSeting = 'N'
+                                        ,UpdateDate = ?
+                                        ,UpdateUserId = ?
+                                        WHERE 1=1
+                                        AND CpdPhotoId = ?
+                                        `
+                                try {
+                                    params = [currentTime,currentUser, MainPhotoId]
+                                    await query(sql, params);
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+
+                                //#region 產品圖片新增
+                                sql = `INSERT INTO WEB_CompanyPhoto 
+                                        (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                        VALUES
+                                        (? ,? ,? ,?
+                                            ,? ,? ,? ,?)`;
+                                try {
+                                    params = [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                    ,currentTime,currentTime,currentUser,currentUser]
+                                    await query(sql, params);
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#region 取得最新插入的ID
+                                let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                                try {
+                                    result = await query(GetInsertedId);
+                                        result.forEach((item)=>{
+                                        CpId = item.id
+                                    })
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+                                //#endregion 
+
+                                //#region 產品圖片群集新增
+                                sql = `INSERT INTO WEB_CyyProductPhoto 
+                                        (CpdId ,PhotoId ,MainSeting
+                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                        VALUES
+                                        (? ,? ,?
+                                            ,? ,? ,? ,?)`;
+                                try {
+                                    params = [Id, CpId, 'Y'
+                                        ,currentTime,currentTime,currentUser,currentUser]
+                                    await query(sql, params);
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+
+                            }
+                        }
+                        //#endregion 
+
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+
+            //#region 更新狀態
+            router.post('/UpdateCyyProductStatus', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
+                    const {CpdId} = req.body;
+                    let sql
+                    let checkSql
+                    let resultCheck
+                    let params
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CpdId <= 0) throw new Error('【產品】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                         }
 
+                        //#region 檢查段
+                        let Status
+                        checkSql = `SELECT CpdId,Status
+                                    FROM WEB_CyyProduct
+                                    WHERE 1=1
+                                    AND CpdId = ?
+                                    LIMIT 1`
+                        try {
+                            params = [CpdId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【品號】不存在,請重新確認');
+                            resultCheck.forEach((item)=>{
+                                Status = item.Status
+                            })
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region 品號狀態走向
+                        switch(Status)
+                        {
+                            case "A":
+                                Status = "S";
+                                break;
+                            case "S":
+                                Status = "A";
+                                break;
+                        }
+                        //#endregion 
+
+                        //#region 異動段
+                        sql = `UPDATE WEB_CyyProduct set 
+                                Status = ?
+                                ,UpdateDate = ?
+                                ,UpdateUserId = ?
+                                WHERE 1=1
+                                AND CpdId = ?
+                                `
+                        try {
+                            params = [Status
+                            , currentTime,currentUser, CpdId]
+
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
                         //#endregion 
 
                         //#region commit段
@@ -2046,7 +2275,7 @@
                             return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                         }
                         //#region 檢查段
-                        checkSql = `SELECT CpdId
+                        checkSql = `SELECT CpdId,Status
                                     FROM WEB_CyyProduct
                                     WHERE 1=1
                                     AND CpdId = ?
@@ -2055,6 +2284,9 @@
                             params = [CpdId]
                             resultCheck = await query(checkSql, params);
                             if (resultCheck.length <= 0) return SendError(res,'【產品】不存在,請重新確認');
+                            resultCheck.forEach((item)=>{
+                                if(item.Status == "A") return SendError(res,'【產品】已經啟用不可以刪除,請採用停用方式');
+                            })
                         } 
                         catch(err) {
                             return SendError(res,err.message) 
@@ -2062,6 +2294,17 @@
                         //#endregion 
 
                         //#region 異動段
+                        sql = `DELETE FROM WEB_CyyProductPhoto 
+                                WHERE 1=1
+                                AND CpdId = ? `
+                        try {
+                            params = [CpdId]
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+
                         sql = `DELETE FROM WEB_CyyProduct 
                                 WHERE 1=1
                                 AND CpdId = ? `
@@ -2087,6 +2330,24 @@
             })
             //#endregion 
             
+            //#region 取消主圖片設定
+            async function updateMainSetting(currentTime, currentUser, MainPhotoId, connection) {
+                const sql = `UPDATE WEB_CyyProductPhoto set 
+                             MainSeting = 'N'
+                             ,UpdateDate = ?
+                             ,UpdateUserId = ?
+                             WHERE 1=1
+                             AND CpdPhotoId = ?`;
+            
+                try {
+                    const params = [currentTime, currentUser, MainPhotoId];
+                    await connection.query(sql, params);
+                } catch(err) {
+                    throw err;  // 抛出错误，让调用者处理
+                }
+            }
+            //#endregion 
+
         //#endregion 
 
     //#endregion  

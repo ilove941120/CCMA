@@ -292,6 +292,9 @@ const AddCyyProduct = (req) => {
 const UpdateCyyProduct = (req) => {
     return axios.post(`/api/web/UpdateCyyProduct`, req)
 }
+const UpdateCyyProductStatus = (req) => {
+    return axios.post(`/api/web/UpdateCyyProductStatus`, req)
+}
 const DeleteCyyProduct = (req) => {
     return axios.post(`/api/web/DeleteCyyProduct`, req)
 }
@@ -335,7 +338,7 @@ export {
     UpdateCyyWebAbout,DeletCyyWebAbout,
     UpdateCyyWebFooter,DeletCyyWebFooter,
     UpdateCyyAbout, UpdateCyyServe, UpdateCyyFooter,
-    GetCyyProduct, AddCyyProduct, UpdateCyyProduct, DeleteCyyProduct,
+    GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct,
 
     GetMenuModal,
     GetTransaction, AddTransaction
