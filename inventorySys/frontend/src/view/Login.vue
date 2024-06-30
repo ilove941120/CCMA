@@ -28,7 +28,7 @@ const Login = async () => {
             store.commit('alertAction', { type: "success", msg: msg });
             store.commit('loginAction', {status:"A", user:userNo,userName:userName});
             store.commit('EnterWeb', 'Sys');
-            router.push('/CompanyManagement');
+            router.push('/CyyWebEditManagement');
         } else {
             store.commit('alertAction', { type: "fail", msg: '登入失敗,異常問題' });
         }

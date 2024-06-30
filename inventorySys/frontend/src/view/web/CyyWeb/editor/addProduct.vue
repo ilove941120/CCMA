@@ -1,6 +1,8 @@
 <script setup>
 import { ref, reactive,watchEffect } from "vue";
-import { GetMtlItem, GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct, GetCompanyPhoto} from ':@/api/index'
+import { GetMtlItem, GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct
+    ,GetCyyProductPhoto,UpdateCyyProductPhotoMain,DeleteCyyProductPhoto
+    , GetCompanyPhoto} from ':@/api/index'
 import pageBar from ':@/components/pageBar.vue';
 import alert from ':@/components/alert.vue';
 import { useStore } from 'vuex';
@@ -98,7 +100,7 @@ const popMtlItemList = reactive([
         name:`操作`,
     }
 ])
-const OpenPopView = (view) =>{
+const OpenPopView = (view,CpdId) =>{
     switch(view){
         case "MtlItem":
             popViewShow.popViewTitle = `查看品號相關資料`
@@ -110,11 +112,13 @@ const OpenPopView = (view) =>{
             }
             popViewShow.popViewTitle = `查看公司圖片庫`
             break
+        case "ProductPhoto":
+            popViewShow.popViewTitle = `查看產品圖片庫`
+            break
     }
     popViewShow.show = true
     popViewShow.nowView = view
-    LoadPopViewData(view)
-
+    LoadPopViewData(view,CpdId)
 }
 const ClosePopView = (view) =>{
     popViewShow.show = false
@@ -135,9 +139,15 @@ const PhotoObj = reactive({
     Index: 0,
     TatolNum: 0
 })
+const ProductPhotoObj = reactive({
+    CpdId:-1,
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0 
+})
 const PopViewData = ref([])
 
-const LoadPopViewData = async (view) => {
+const LoadPopViewData = async (view,CpdId) => {
     try{
         let result
         let status
@@ -157,6 +167,17 @@ const LoadPopViewData = async (view) => {
                 status = result.status 
                 if (status == "success") {
                     PhotoObj.TatolNum = result.data[0].Total
+                    PopViewData.value = result.data;
+                } else {
+                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                }
+                break;
+            case "ProductPhoto":
+                ProductPhotoObj.CpdId = CpdId
+                result = (await GetCyyProductPhoto(ProductPhotoObj)).data
+                status = result.status 
+                if (status == "success") {
+                    ProductPhotoObj.TatolNum = result.data[0].Total
                     PopViewData.value = result.data;
                 } else {
                     store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
@@ -210,7 +231,7 @@ const ReturnMtlItemPage = (data) => {
 }
 //#endregion
 
-//#region 圖片庫視窗頁面切換
+//#region 公司圖片庫視窗頁面切換
 const ReturnPhotoPage = (data) => {
     if (data == 1) {
         PhotoObj.Index = 0
@@ -219,6 +240,18 @@ const ReturnPhotoPage = (data) => {
         PhotoObj.Index = PhotoObj.ShowNum * (data - 1)
     }
     LoadPopViewData('Photo')
+}
+//#endregion
+
+//#region 產品圖片庫視窗頁面切換
+const ReturnProductPhotoPage = (data) => {
+    if (data == 1) {
+        ProductPhotoObj.Index = 0
+    }
+    else {
+        ProductPhotoObj.Index = ProductPhotoObj.ShowNum * (data - 1)
+    }
+    LoadPopViewData('ProductPhoto',ProductPhotoObj.CpdId)
 }
 //#endregion
 
@@ -372,6 +405,48 @@ const UpdateStatus = async (CpdId) => {
 }
 //#endregion
 
+//#region 產品主圖切換
+const UpdateProductPhotoMain = async (CpdPhotoId) => {
+    const obj =reactive({CpdPhotoId:CpdPhotoId})
+    try{
+        const result = (await UpdateCyyProductPhotoMain(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadPopViewData('ProductPhoto',ProductPhotoObj.CpdId)
+            LoadData()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
+//#region 刪除資料
+const DeleteProductPhoto = async (CpdPhotoId) => {
+    const obj =reactive({CpdPhotoId:CpdPhotoId})
+    try{
+        const result = (await DeleteCyyProductPhoto(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadPopViewData('ProductPhoto',ProductPhotoObj.CpdId)
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
 
 </script>
 
@@ -398,6 +473,7 @@ const UpdateStatus = async (CpdId) => {
                     <div class="hoverBlock">
                         <button class="button safe" @click="UpdateStatus(item.CpdId)">{{item.Status == `S` ? `啟用`:`停用`}}</button>
                         <button class="button info" @click="EditForm(item.CpdId)">修改</button>
+                        <button class="button info" @click="OpenPopView('ProductPhoto',item.CpdId)">圖片</button>
                         <button class="button clear" @click="DeleteData(item.CpdId)">刪除</button>
                     </div>
                 </div>
@@ -411,9 +487,6 @@ const UpdateStatus = async (CpdId) => {
                         <button v-if="!formData.PhotoHref" class="button add" @click="OpenPopView('Photo')">選擇圖片</button>
                         <button v-if="!formData.PhotoHref" class="button add" @click="FileClick">新增圖片</button>
                         <button v-if="formData.PhotoHref" class="button clear " @click="ClearPhoto">重置</button>
-
-                        <!-- <span v-if="!formData.PhotoHref"><i  class="fa-solid fa-plus"></i>選擇圖片</span> -->
-                        <!-- <span v-if="!formData.PhotoHref"><i  class="fa-solid fa-plus"></i>新增圖片</span> -->
                         <img v-if="formData.PhotoHref" :src="formData.PhotoHref" alt="Preview" />
                         <input type="file" ref="photoInput" style="display: none;" @change="LocalPhoto()"/>
                     </div>
@@ -431,7 +504,7 @@ const UpdateStatus = async (CpdId) => {
                     <textarea  name="" id="ProductText" class="textareaStyle" cols="30" rows="10" v-model="formData.ProductText"></textarea>
                 </div>
                 <div class="localRow">
-                    <label for="GroupSetting">是否納入官網輪播 <input id="GroupSetting" type="checkbox" v-model="formData.GroupSetting"></label>
+                    <label for="GroupSetting">是否納入官網輪播 <input id="GroupSetting" type="checkbox" v-model="formData.GroupSetting" :checked="formData.GroupSetting == 1"></label>
                 </div>
                 
             </form>
@@ -448,7 +521,7 @@ const UpdateStatus = async (CpdId) => {
     <div class="food">
     </div>
    <div class="popView" v-if="popViewShow.show == true">
-    <div class="viewMtlItem" >
+    <div class="popViewIn" >
         <div class="viewHead">
             <h4>{{popViewShow.popViewTitle}}</h4>
             <button class="viewClose" @click="ClosePopView('MtlItem')"><i class="fa-solid fa-xmark"></i></button>
@@ -499,9 +572,21 @@ const UpdateStatus = async (CpdId) => {
                 </div>
             </div>
         </div>
+        <div class="viewBody" v-if="popViewShow.nowView == 'ProductPhoto'"> 
+            <div class="table">
+                <div class="card" :class="item.MainSeting == `Y`?`mainPhoto`:``" v-for="item in PopViewData">
+                    <img :src="item.PhotoHref" alt="">
+                    <div class="hoverBlock" v-if="item.MainSeting == `N`">
+                        <button class="button safe"  @click="UpdateProductPhotoMain(item.CpdPhotoId)">主圖片</button>
+                        <button class="button clear" @click="DeleteProductPhoto(item.CpdPhotoId)">刪除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="viewFooter">
             <pageBar v-if="popViewShow.nowView == 'MtlItem'" :sent="MtlItemObj" @change="ReturnMtlItemPage"></pageBar>
             <pageBar v-if="popViewShow.nowView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
+            <pageBar v-if="popViewShow.nowView == 'ProductPhoto'" :sent="ProductPhotoObj" @change="ReturnProductPhotoPage"></pageBar>
         </div>
     </div>
    </div>
@@ -571,6 +656,9 @@ const UpdateStatus = async (CpdId) => {
     font-size: 22px;
     font-weight: bolder;
     color: #d42020;
+}
+.mainPhoto{
+    border: 2px solid #65d47966;
 }
 .deletCard{
     position: absolute;
@@ -652,7 +740,7 @@ const UpdateStatus = async (CpdId) => {
     justify-content: center;
     align-items: center;
 }
-.viewMtlItem{
+.popViewIn{
     width: 80%;
     margin-bottom: 0px;
     border-radius: 5px;

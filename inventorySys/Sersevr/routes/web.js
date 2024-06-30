@@ -642,6 +642,56 @@
             });
             //#endregion 
 
+            //#region 查看產品輪播
+            router.post('/GetCyyIndexProductSiwper', (req, res) => {
+                try{
+                    //#region 宣告前端參數
+                    if(!basic(req,res)) return
+                    const {CwId} = req.body;
+                    let params = [];; //參數容器
+                    let sql; //參數容器
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 基本查詢
+                        sql = `SELECT a.CpdId,a.ProductName,a.ProductAmount
+                                ,a1.PhotoId,a1.MainSeting,a2.PhotoHref,a2.PhotoDesc,a2.PhotoName
+                                FROM web_cyyproduct a
+                                INNER JOIN web_cyyproductphoto a1 on a.CpdId = a1.CpdId
+                                INNER JOIN web_companyphoto a2 on a1.PhotoId = a2.CpId
+                                WHERE 1=1
+                                AND a.CwId = ?
+                                AND a.Status = 'A'
+                                AND a.GroupSetting = '1'
+                                AND a1.MainSeting = 'Y'`
+                        try {
+                            params = [CwId]
+                            const result = await query(sql, params);
+                            SendSuccess(res,"",result)
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+
+                        //#endregion 
+
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
             //#region 更新Banner
             router.post('/UpdateCyyWebBanner', (req, res) => {
                 try{
@@ -933,6 +983,87 @@
                 }
             });
             //#endregion 
+
+            //#region 更新ShopText
+            router.post('/UpdateCyyWebShopText', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 參數宣告+資料庫連接
+                    const {CiContentId,CwId,ShopText,textChange} = req.body;
+                    let checkSql
+                    let sql
+                    let resultCheck
+                    let result
+                    let params
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if(textChange){
+                        if (ShopText.length > 300) throw new Error('【商品店標語】不可以超過300個字元')
+                        if (ShopText.length <= 0) throw new Error('【商品店標語】不可以為空')
+                    }
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        checkSql = `SELECT CwId
+                                    FROM WEB_CyyIndexContent
+                                    WHERE 1=1
+                                    AND CwId = ?
+                                    AND CiContentId = ?
+                                    LIMIT 1`
+                        try {
+                            params = [CwId,CiContentId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【編輯版本不存在】不存在,請重新確認') 
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region 異動段
+                        
+                        //#region 更新About資料
+                        sql = `UPDATE WEB_CyyIndexContent set 
+                                 ShopText = ?
+                                ,UpdateDate = ?
+                                ,UpdateUserId = ?
+                                WHERE 1=1
+                                AND CwId = ?
+                                AND CiContentId = ?
+                            `
+                        try {
+                            params = [ShopText,currentTime,currentUser,CwId,CiContentId]
+                            result = await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+
 
             //#region 更新Footer
             router.post('/UpdateCyyWebFooter', (req, res) => {
@@ -2333,18 +2464,243 @@
             })
             //#endregion 
             
+            //#region 查看產品圖片
+            router.post('/GetCyyProductPhoto', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
+                    const {Id,CpdId,ShowNum,Index} = req.body;
+                    let conditions = []; //條件查詢容器
+                    let params = [];; //參數容器
+                    let sql; //參數容器
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 基本查詢
+                        sql = `SELECT b.Total
+                                ,a.* 
+                                ,a1.CpId,a1.PhotoName,a1.PhotoDesc,a1.PhotoHref
+                                FROM WEB_CyyProductPhoto a
+                                INNER JOIN WEB_CompanyPhoto a1 on a.PhotoId = a1.CpId
+                                JOIN (
+                                    SELECT COUNT('CpdPhotoId') Total 
+                                    FROM WEB_CyyProductPhoto 
+                                    WHERE 1=1
+                                    AND CpdId = ${CpdId}
+                                ) b
+                                WHERE 1=1`
+                        //#endregion 
+
+                        //#region 條件
+                        if (Id > 0) {
+                            conditions.push("a.CpdPhotoId = ?");
+                            params.push(Id);
+                        }
+                        if (CpdId > 0) {
+                            conditions.push("a.CpdId = ?");
+                            params.push(CpdId);
+                        }
+                        if (conditions.length) {
+                            sql += " AND " + conditions.join(" AND ");
+                        }
+                        //#endregion 
+
+                        //#region 列表顯示設定
+                        sql += ` ORDER BY FIELD(a.MainSeting,'Y','N') , 'a.CpdPhotoId'`
+                        if(ShowNum >0 && Index >=0){
+                            sql += " LIMIT ? OFFSET ?";
+                            params.push(ShowNum);
+                            params.push(Index);
+                        }
+                        //#endregion 
+
+                        //#region 執行
+                        try {
+                            const result = await query(sql, params);
+                            SendSuccess(res,"",result)
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+
+            //#region 更新狀態
+            router.post('/UpdateCyyProductPhotoMain', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
+                    const {CpdPhotoId} = req.body;
+                    let sql
+                    let checkSql
+                    let resultCheck
+                    let params
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CpdPhotoId <= 0) throw new Error('【產品圖片】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    var connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        let CpdId
+                        checkSql = `SELECT CpdPhotoId,CpdId,MainSeting
+                                    FROM WEB_CyyProductPhoto
+                                    WHERE 1=1
+                                    AND CpdPhotoId = ?
+                                    LIMIT 1`
+                        try {
+                            params = [CpdPhotoId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【產品圖片】不存在,請重新確認');
+                            resultCheck.forEach((item)=>{
+                                CpdId = item.CpdId
+                            })
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        await updateMainSetting(CpdId)
+
+                        //#region 異動段
+                        sql = `UPDATE WEB_CyyProductPhoto set 
+                                 MainSeting = 'Y'
+                                ,UpdateDate = ?
+                                ,UpdateUserId = ?
+                                WHERE 1=1
+                                AND CpdPhotoId = ?
+                                `
+                        try {
+                            params = [currentTime,currentUser,CpdPhotoId]
+
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("update",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+            
+            //#region 刪除產品圖片
+            router.post('/DeleteCyyProductPhoto', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
+                    const {CpdPhotoId} = req.body;
+                    let checkSql
+                    let sql
+                    let resultCheck
+                    let params
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CpdPhotoId <= 0) throw new Error('【產品圖片】不可以為空')
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    let connection = CreateDBConnection()
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+                        //#region 檢查段
+                        checkSql = `SELECT CpdPhotoId,MainSeting
+                                    FROM WEB_CyyProductPhoto
+                                    WHERE 1=1
+                                    AND CpdPhotoId = ?
+                                    LIMIT 1`
+                        try {
+                            params = [CpdPhotoId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【產品圖片】不存在,請重新確認');
+                            resultCheck.forEach((item)=>{
+                                if(item.MainSeting == "Y") return SendError(res,'【產品圖片】目前為主圖片不可以刪除,請先切換主圖片再刪除');
+                            })
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region 異動段
+                        sql = `DELETE FROM WEB_CyyProductPhoto 
+                                WHERE 1=1
+                                AND CpdPhotoId = ? `
+                        try {
+                            params = [CpdPhotoId]
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region commit段
+                        CommitRun("delete",connection,res,"")
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+            
+
             //#region 取消主圖片設定
-            async function updateMainSetting(currentTime, currentUser, MainPhotoId, connection) {
+            async function updateMainSetting(CpdId) {
                 const sql = `UPDATE WEB_CyyProductPhoto set 
                              MainSeting = 'N'
                              ,UpdateDate = ?
                              ,UpdateUserId = ?
                              WHERE 1=1
-                             AND CpdPhotoId = ?`;
-            
+                             AND CpdId = ?
+                             AND MainSeting = 'Y'`;
                 try {
-                    const params = [currentTime, currentUser, MainPhotoId];
-                    await connection.query(sql, params);
+                    const params = [currentTime, currentUser, CpdId];
+                    await query(sql, params);
                 } catch(err) {
                     throw err;  // 抛出错误，让调用者处理
                 }

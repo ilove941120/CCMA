@@ -262,6 +262,9 @@ import axios from 'axios'
 const GetCyyIndexContent= (req) => {
     return axios.post(`/api/web/GetCyyIndexContent`, req)
 }
+const GetCyyIndexProductSiwper= (req) => {
+    return axios.post(`/api/web/GetCyyIndexProductSiwper`, req)
+}
 const UpdateCyyWebBanner = (req) => {
     return axios.post(`/api/web/UpdateCyyWebBanner`, req)
 }
@@ -279,6 +282,9 @@ const UpdateCyyWebFooter = (req) => {
 }
 const DeletCyyWebFooter = (req) => {
     return axios.post(`/api/web/DeletCyyWebFooter`, req)
+}
+const UpdateCyyWebShopText = (req) => {
+    return axios.post(`/api/web/UpdateCyyWebShopText`, req)
 }
 //#endregion 
 
@@ -298,7 +304,35 @@ const UpdateCyyProductStatus = (req) => {
 const DeleteCyyProduct = (req) => {
     return axios.post(`/api/web/DeleteCyyProduct`, req)
 }
+const GetCyyProductPhoto = (req) => {
+    return axios.post(`/api/web/GetCyyProductPhoto`, req)
+}
+const UpdateCyyProductPhotoMain = (req) => {
+    return axios.post(`/api/web/UpdateCyyProductPhotoMain`, req)
+}
+const DeleteCyyProductPhoto = (req) => {
+    return axios.post(`/api/web/DeleteCyyProductPhoto`, req)
+}
 //#endregion
+
+//#region 官網活動
+const GetCyyEvent = (req) => {
+    return axios.post(`/api/web/GetCyyEvent`, req)
+}
+const AddCyyEvent = (req) => {
+    return axios.post(`/api/web/AddCyyEvent`, req)
+}
+const UpdateCyyEvent = (req) => {
+    return axios.post(`/api/web/UpdateCyyEvent`, req)
+}
+const UpdateCyyEventStatus = (req) => {
+    return axios.post(`/api/web/UpdateCyyEventStatus`, req)
+}
+const DeleteCyyEvent = (req) => {
+    return axios.post(`/api/web/DeleteCyyEvent`, req)
+}
+//#endregion 
+
 
 //#endregion 
 
@@ -332,13 +366,16 @@ export {
 
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
+    GetCyyProductPhoto,UpdateCyyProductPhotoMain,DeleteCyyProductPhoto,
 
-    GetCyyIndexContent,
+    GetCyyIndexContent,GetCyyIndexProductSiwper,
     UpdateCyyWebBanner,DeletCyyWebBanner,
     UpdateCyyWebAbout,DeletCyyWebAbout,
+    UpdateCyyWebShopText,
     UpdateCyyWebFooter,DeletCyyWebFooter,
     UpdateCyyAbout, UpdateCyyServe, UpdateCyyFooter,
     GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct,
+    GetCyyEvent, AddCyyEvent, UpdateCyyEvent, UpdateCyyEventStatus, DeleteCyyEvent,
 
     GetMenuModal,
     GetTransaction, AddTransaction

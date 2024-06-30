@@ -24,7 +24,7 @@ const msgData = defineProps({
         border-radius: 5px;
         padding: 20px ;
         position: fixed;
-        z-index: 999;
+        z-index: 1024;
         top: 20px;
         right: 20px;
         font-size: 18px;

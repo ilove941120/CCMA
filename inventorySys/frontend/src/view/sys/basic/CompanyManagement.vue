@@ -146,10 +146,10 @@ const tableHead = reactive([
         name:`#`,
     },
     {
-        name:`公司代號`,
+        name:`活動日期`,
     },
     {
-        name:`公司名稱`,
+        name:`活動名稱`,
     },
     {
         name:`操作`,
@@ -230,7 +230,7 @@ load()
                     <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
                 </td>
                 <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
-                    <div class="coulumName">公司名稱</div>
+                    <div class="coulumName">公司代號</div>
                     <div class="coulumValue">{{ item.CompanyNo }}</div>
                 </td>
                 <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">

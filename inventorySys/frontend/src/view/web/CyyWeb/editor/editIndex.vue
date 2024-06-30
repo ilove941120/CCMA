@@ -1,13 +1,32 @@
 <script setup>
 import { ref, reactive,watchEffect,onMounted } from "vue";
 import alert from ':@/components/alert.vue';
-import { GetCyyIndexContent
+import { GetCyyIndexContent,GetCyyIndexProductSiwper
     ,UpdateCyyWebBanner,DeletCyyWebBanner
     ,UpdateCyyWebAbout,DeletCyyWebAbout
+    ,UpdateCyyWebShopText
     ,UpdateCyyWebFooter,DeletCyyWebFooter
  } from ':@/api/index'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+
 import { useStore } from 'vuex';
 const store = useStore();
+
+// swiper
+const coverflowEffect = {
+    rotate: 0,
+    stretch: 0,
+    depth: 200,
+    modifier: 1,
+    slideShadows: true,
+  };
+
+const modules = [EffectCoverflow, Pagination];
+const ProductList = reactive([])
 
 const BannerInput = ref(null);
 const AboutInput = ref(null);
@@ -34,6 +53,7 @@ const IndexData = reactive({
     CwId:1,
     Banner: {PhotoName:``,PhotoDesc:``,PhotoHref:``,photoChange:false},
     About: {AboutText:``,PhotoName:``,PhotoDesc:``,PhotoHref:``,textChange:true,photoChange:false},
+    Shop: {ShopText:``,textChange:true},
     Web: {PhotoName:``,PhotoDesc:``,PhotoHref:``,photoChange:false},
     Shop:{ShopText:``},
     Footer:{FootTitle:``,ContactAddress:``,ContactPhone:``,ContactEmail:``, ServiceTime:``,CopyrightNotice:``}
@@ -63,6 +83,7 @@ const Load = async () => {
                 IndexData.About.AboutText = item.AboutText
                 IndexData.About.PhotoName = item.AboutPhotoName
                 IndexData.About.PhotoHref = item.AboutHref
+                IndexData.Shop.ShopText = item.ShopText
                 
                 IndexData.Footer.FootTitle = item.FootTitle
                 IndexData.Footer.ContactAddress = item.ContactAddress
@@ -70,7 +91,7 @@ const Load = async () => {
                 IndexData.Footer.ContactEmail = item.ContactEmail
                 IndexData.Footer.ServiceTime = item.ServiceTime
                 IndexData.Footer.CopyrightNotice = item.CopyrightNotice
-
+                LoadProductSiwper()
             })
         }
         else{
@@ -78,6 +99,34 @@ const Load = async () => {
             //     BannerData[key] = '';
             // }
             store.commit('alertAction', { type: "fail", msg: 'Banner區尚未有圖片' });
+        }
+      } else {
+          store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+      }
+    }
+    catch(err){
+        let status = err.response.data.status
+        let errMsg = err.response.data.msg
+        if(status == "restart"){
+            store.commit('alertAction', { type: "fail", msg: errMsg })
+            sessionStorage.removeItem("user");
+            store.commit('logoutAction', {status:"S"});
+            router.push('/Login');
+        }
+    }
+}
+const LoadProductSiwper = async () => {
+    try{
+      const result = (await GetCyyIndexProductSiwper(IndexData)).data
+      let status = result.status 
+      if (status == "success") {
+        if(result.data.length>0){
+            result.data.forEach((item)=>{
+                ProductList.push(item.PhotoHref)
+            })
+        }
+        else{
+            store.commit('alertAction', { type: "fail", msg: '產品區尚未有產品上架' });
         }
       } else {
           store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
@@ -124,7 +173,10 @@ const Save = async (type) => {
                 form.photoChange = IndexData.About.photoChange;
                 result = await UpdateCyyWebAbout(form);
                 break;
-            case "Web":
+            case "Shop":
+                form.ShopText = IndexData.Shop.ShopText;
+                result = await UpdateCyyWebShopText(form);
+
                 break;
             case "Footer":
                 const { FootTitle, ContactAddress, ContactPhone, ContactEmail,ServiceTime, CopyrightNotice } = IndexData.Footer;
@@ -247,7 +299,7 @@ onMounted(() => {
         <div class="area">
             <h4>首頁-關於我區塊</h4>
             <label for="">內容</label>
-            <textarea name="" id="" cols="30" rows="10" v-model="IndexData.About.AboutText">{{ IndexData.About.AboutText }}</textarea>
+            <textarea name="" id="" cols="30" rows="10" v-model="IndexData.About.AboutText"></textarea>
             <div class="photoBlock">
                 <img v-if="!!IndexData.About.PhotoHref" :src="IndexData.About.PhotoHref" :alt="IndexData.About.PhotoName" />
                 <input type="file" ref="AboutInput" @change="previewImage(AboutInput,'About')" style="display: none;"/>
@@ -261,16 +313,31 @@ onMounted(() => {
         <div class="area">
             <h4>首頁-渝渝小物區塊</h4>
             <label for="">內容</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <div class="productBlock">商品區域</div>
-            <button>儲存</button>
+            <textarea name="" id="" cols="30" rows="10" v-model="IndexData.Shop.ShopText"></textarea>
+            <button @click="Save('Shop')">儲存</button>
+            <swiper
+                effect="coverflow"
+                :grabCursor="true"
+                :centeredSlides="true"
+                slidesPerView="auto"
+                :coverflowEffect="coverflowEffect"
+                :pagination="true"
+                :modules="modules"
+                :initialSlide="1"
+                :spaceBetween="100"
+                class="mySwiper"
+            >
+                <swiper-slide v-for="img in ProductList" :key="img">
+                <img :src="img" />
+                </swiper-slide>
+            </swiper>
         </div>
-        <div class="area">
+        <!-- <div class="area">
             <h4>首頁-民眾服務區塊</h4>
             <label for="">內容</label>
             <textarea name="" id="" cols="30" rows="10"></textarea>
             <button>儲存</button>
-        </div>  
+        </div>   -->
         <div class="area">
             <h4>首頁-Footer區塊</h4>
             <div class="footerFields" v-for="field in footerFields" :key="field.key">
@@ -374,4 +441,28 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
     }
+
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 30%!important;
+  aspect-ratio: 1/1;
+
+  /* height: 300px!important; */
+}
+
+.swiper-slide img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover!important;
+
+}
+
 </style>

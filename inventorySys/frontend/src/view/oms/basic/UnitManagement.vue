@@ -39,17 +39,6 @@ const editObj = reactive({
 })
 //#endregion
 
-//#region 頁面比數顯示,當前第幾頁
-const pageObj = reactive({
-    PageNo:"UnitManagement",
-    UnitNo: "",
-    UnitName: "",
-    ShowNum: 10,
-    Index: 0,
-    TatolNum: 0
-})
-//#endregion
-
 //#region 編輯頁面開啟關閉
 const editShow = ref(false)
 const changePage = ref("新增")
@@ -132,6 +121,17 @@ const tableHead = reactive([
         name:`操作`,
     }
 ])
+//#endregion
+
+//#region 頁面比數顯示,當前第幾頁
+const pageObj = reactive({
+    PageNo:"UnitManagement",
+    UnitNo: "",
+    UnitName: "",
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0
+})
 //#endregion
 
 const tableData = ref([])
