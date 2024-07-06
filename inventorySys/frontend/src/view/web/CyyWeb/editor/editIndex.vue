@@ -12,7 +12,6 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
-
 import { useStore } from 'vuex';
 const store = useStore();
 

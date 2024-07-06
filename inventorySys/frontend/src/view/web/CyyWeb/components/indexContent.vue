@@ -1,7 +1,6 @@
 <script setup>
 import { ref, reactive } from "@vue/reactivity";
 import { useStore } from 'vuex';
-import 'bootstrap/dist/css/bootstrap.css'
 const store = useStore();
 store.commit('EnterWeb', 'Web');
 

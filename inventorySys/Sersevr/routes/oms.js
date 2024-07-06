@@ -7,7 +7,12 @@ var currentTime = "";
 var currentUser = -1
 var currentCompany = -1
 let query
+let action
 
+router.use((req, res, next) => {
+    action = req.url
+    next();
+});
 //#region 公用程式
     //#region 開啟連線
     function CreateDBConnection() {
@@ -17,7 +22,7 @@ let query
                 console.error('error connecting: ' + err.stack);
                 return;
             }
-            console.log('connected as id ' + connection.threadId);
+            console.log(`連線id:${connection.threadId},觸發程式:web${action}`);
         });
         query = util.promisify(connection.query).bind(connection);
         return connection;
@@ -103,7 +108,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -186,7 +191,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -264,7 +269,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -329,7 +334,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -389,7 +394,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -472,7 +477,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -553,7 +558,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -618,7 +623,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -679,7 +684,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -750,7 +755,7 @@ let query
                 if(!basic(req,res)) return
                 
                 //#region 參數宣告+資料庫連接
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 const {MtlItemNo, MtlItemName, MtlItemDesc,InventoryWarehouseId,InventoryUnitId,Attributes} = req.body;
                 let sql
                 let checkSql
@@ -909,7 +914,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1080,7 +1085,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1163,7 +1168,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1228,7 +1233,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1299,7 +1304,7 @@ let query
                 if(!basic(req,res)) return
 
                 //#region 參數宣告+資料庫連接
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 basic(req,res)
                 const {WarehouseNo, WarehouseName, WarehouseDesc} = req.body;
                 //#endregion 
@@ -1385,7 +1390,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1450,7 +1455,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1511,7 +1516,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1594,7 +1599,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1676,7 +1681,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1741,7 +1746,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);

@@ -7,7 +7,12 @@ var currentTime = "";
 var currentUser = -1
 var currentCompany = -1
 let query
+let action
 
+router.use((req, res, next) => {
+    action = req.url
+    next();
+});
 //#region 公用程式
     //#region 開啟連線
     function CreateDBConnection() {
@@ -17,7 +22,7 @@ let query
                 console.error('error connecting: ' + err.stack);
                 return;
             }
-            console.log('connected as id ' + connection.threadId);
+            console.log(`連線id:${connection.threadId},觸發程式:sys${action}`);
         });
         query = util.promisify(connection.query).bind(connection);
         return connection;
@@ -40,14 +45,16 @@ let query
     //#endregion 
 
     //#region 回傳成功
-    function SendSuccess(res,success,result) {
+    function SendSuccess(connection,res,success,result) {
+        connection.end();
         return res.status(200).send({ status: 'success', msg:success, data:result });
-     }
+    }
     //#endregion 
 
     //#region 回傳錯誤
-    function SendError(res,err) {
-         res.status(400).send({ status: 'error', msg:err });
+    function SendError(connection,res,err) {
+        connection.end();
+        res.status(400).send({ status: 'error', msg:err });
     }
     //#endregion 
 
@@ -65,23 +72,25 @@ let query
                 });
             } else {
                 switch(type){
+                    case "get":
+                        SendSuccess(connection,res,"",result);
+                        break;
                     case "read":
-                        SendSuccess(res,"查看成功!!",result);
+                        SendSuccess(connection,res,"查看成功!!",result);
                         break;
                     case "add":
-                        SendSuccess(res,"新增成功!!",result);
+                        SendSuccess(connection,res,"新增成功!!",result);
                         break;
                     case "update":
-                        SendSuccess(res,"更新成功!!","");
+                        SendSuccess(connection,res,"更新成功!!","");
                         break;
                     case "delete":
-                        SendSuccess(res,"刪除成功!!","");
+                        SendSuccess(connection,res,"刪除成功!!","");
                         break;
                     case "Logein":
-                        SendSuccess(res,"登入成功!!",result);
+                        SendSuccess(connection,res,"登入成功!!",result);
                         break;
                 }
-                connection.end();
             }
         });
     }
@@ -103,7 +112,7 @@ let query
             //#endregion 
 
             //#region 開始後端交易
-            var connection = CreateDBConnection()
+            let connection = CreateDBConnection(action)
             connection.beginTransaction(async (transactionError) => {
                 if(transactionError) {
                     console.error("開啟後端交易失敗:", transactionError);
@@ -126,7 +135,7 @@ let query
                                 `
                 try {
                     var resultCheck = await query(checkSql, [StaffNo,PassWord]);
-                    if (resultCheck.length <= 0) return SendError(res,'【使用者不存在】,請重新確認');
+                    if (resultCheck.length <= 0) return SendError(connection,res,'【使用者不存在】,請重新確認');
                     resultCheck.forEach(row => {
                         StaffIdBase = row.StaffId
                         StaffNoBase = row.StaffNo
@@ -135,7 +144,7 @@ let query
                     });
                 } 
                 catch(err) {
-                    return SendError(res,err.message) 
+                    return SendError(connection,res,err.message) 
                 }
                 //#endregion 
                 
@@ -166,7 +175,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -215,12 +224,14 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
+
+                    
                 });
                 //#endregion 
             }
@@ -249,7 +260,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -265,10 +276,10 @@ let query
                                     LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [CompanyNo]);
-                        if (resultCheck.length > 0) return SendError(res,'【公司代碼】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【公司代碼】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -285,7 +296,7 @@ let query
                             ,currentTime,currentTime,currentUser,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -300,7 +311,7 @@ let query
                         })
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     
                     //#region 子資料表新增
@@ -315,7 +326,7 @@ let query
                             ,currentTime,currentTime,currentUser,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -351,7 +362,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -366,10 +377,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【公司不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -386,7 +397,7 @@ let query
                         await query(sql, [CompanyName, CompanyDesc, currentTime,currentUser, Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -417,7 +428,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -431,10 +442,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [CompanyId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【公司不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -446,7 +457,7 @@ let query
                         await query(sql, [CompanyId]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -478,7 +489,7 @@ let query
                 //#endregion 
                 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -522,12 +533,14 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
+
+                    
                 });
                 //#endregion 
             }
@@ -561,7 +574,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -575,11 +588,11 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【公司資料不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【公司資料不存在】,請重新確認');
                         
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -600,7 +613,7 @@ let query
 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -631,7 +644,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -645,10 +658,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [CpDateId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【公司不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【公司不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -661,7 +674,7 @@ let query
     
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -692,7 +705,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -741,12 +754,14 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion  
+
+                   
                 });
                 //#endregion 
             }
@@ -775,7 +790,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -791,10 +806,10 @@ let query
                                     LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [SystemNo]);
-                        if (resultCheck.length > 0) return SendError(res,'【系統代碼】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【系統代碼】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -811,7 +826,7 @@ let query
                             ,currentTime,currentTime,currentUser,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -822,7 +837,7 @@ let query
                         result = await query(GetInsertedId);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -856,7 +871,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -870,10 +885,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【系統不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -891,7 +906,7 @@ let query
                         await query(sql, [SystemName ,SystemDesc ,IconStyle ,currentTime ,currentUser ,Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -922,7 +937,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -936,10 +951,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [SystemId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【系統不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -951,7 +966,7 @@ let query
                         await query(sql, [SystemId]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -982,7 +997,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1037,12 +1052,14 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion  
+
+                    
                 });
                 //#endregion 
             }
@@ -1072,7 +1089,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1089,10 +1106,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [SystemId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【系統不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【系統不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1105,10 +1122,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [ModalNo,SystemId]);
-                        if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                        if (resultCheck.length > 0) return SendError(connection,res,'【系統+模組代碼】重複,請重新輸入');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -1125,7 +1142,7 @@ let query
                             ,currentTime,currentTime,currentUser,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1136,7 +1153,7 @@ let query
                         result = await query(GetInsertedId);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1171,7 +1188,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1189,13 +1206,13 @@ let query
                     
                     try {
                         resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【模組不存在】,請重新確認');
                         resultCheck.forEach((item)=>{
                             ModalNo = item.ModalNo;
                         })
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1209,10 +1226,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [ModalNo,SystemId,Id]);
-                        if (resultCheck.length > 0) return SendError(res,'【系統+模組代碼】重複,請重新輸入');
+                        if (resultCheck.length > 0) return SendError(connection,res,'【系統+模組代碼】重複,請重新輸入');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1233,7 +1250,7 @@ let query
                         await query(sql, [ModalName ,ModalDesc ,IconStyle ,SystemId ,currentTime ,currentUser ,Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1264,7 +1281,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1278,10 +1295,10 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [ModalId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【模組不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     
                     //#endregion 
@@ -1294,7 +1311,7 @@ let query
                         await query(sql, [ModalId]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1320,13 +1337,14 @@ let query
                 if(!basic(req,res)) return
 
                 //#region 宣告前端參數
+                action = "GetComponent"
                 const {Id ,ModalId ,ComponentNo ,ComponentName ,PageNo ,ShowNum ,Index} = req.body;
                 let conditions = []; //條件查詢容器
                 let params = []; //參數容器
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1387,12 +1405,14 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion  
+
+                    
                 });
                 //#endregion 
             }
@@ -1422,7 +1442,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1439,10 +1459,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [ModalId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【模組不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【模組不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1455,11 +1475,11 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [ComponentNo,ModalId]);
-                        if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                        if (resultCheck.length > 0) return SendError(connection,res,'【模組+組件代碼】重複,請重新輸入');
                         
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -1476,7 +1496,7 @@ let query
                             ,currentTime,currentTime,currentUser,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1487,7 +1507,7 @@ let query
                         result = await query(GetInsertedId);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1524,7 +1544,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1540,10 +1560,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【組件不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1557,10 +1577,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [ComponentNo,ModalId,Id]);
-                        if (resultCheck.length > 0) return SendError(res,'【模組+組件代碼】重複,請重新輸入');
+                        if (resultCheck.length > 0) return SendError(connection,res,'【模組+組件代碼】重複,請重新輸入');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1581,7 +1601,7 @@ let query
                         await query(sql, [ComponentNo, ComponentName ,ComponentDesc ,ModalId ,currentTime ,currentUser ,Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1612,7 +1632,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1628,10 +1648,10 @@ let query
                     
                     try {
                         const resultCheck = await query(checkSql, [ComponentId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【組件不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【組件不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     
                     //#endregion 
@@ -1644,7 +1664,7 @@ let query
                         await query(sql, [ComponentId]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1676,7 +1696,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1729,10 +1749,10 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion  
                 });
@@ -1765,7 +1785,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1782,10 +1802,10 @@ let query
                                     LIMIT 1`
                     try {
                         var resultCheck = await query(checkSql, [UseFrom ,TypeNo]);
-                        if (resultCheck.length > 0) return SendError(res,'【類別代碼】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【類別代碼】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -1802,7 +1822,7 @@ let query
                             ,currentTime ,currentTime ,currentUser ,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1813,7 +1833,7 @@ let query
                         result = await query(GetInsertedId);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1851,7 +1871,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1867,10 +1887,10 @@ let query
                     
                     try {
                         resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【類別不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#region 檢查類別代碼是否重複
                     checkSql = `SELECT TypeNo
@@ -1882,10 +1902,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [UseFrom ,TypeNo ,Id]);
-                        if (resultCheck.length > 0) return SendError(res,'【類別代碼 + 用途來源】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【類別代碼 + 用途來源】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion
                     
@@ -1907,7 +1927,7 @@ let query
                             ,currentTime ,currentUser ,Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1938,7 +1958,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -1952,10 +1972,10 @@ let query
                                     LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [TypeId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【類別不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【類別不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1968,7 +1988,7 @@ let query
 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -1999,7 +2019,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -2052,10 +2072,10 @@ let query
                     //#region 執行
                     try {
                         const result = await query(sql, params);
-                        SendSuccess(res,"",result)
+                        SendSuccess(connection,res,"",result)
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion  
                 });
@@ -2088,7 +2108,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -2105,10 +2125,10 @@ let query
                                     LIMIT 1`
                     try {
                         var resultCheck = await query(checkSql, [UseFrom ,StatusNo]);
-                        if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
                     //#endregion 
@@ -2125,7 +2145,7 @@ let query
                             ,currentTime ,currentTime ,currentUser ,currentUser]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -2136,7 +2156,7 @@ let query
                         result = await query(GetInsertedId);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -2174,7 +2194,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -2190,10 +2210,10 @@ let query
                     
                     try {
                         resultCheck = await query(checkSql, [Id]);
-                        if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【狀態不存在】,請重新確認');
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#region 檢查狀態代碼是否重複
                     checkSql = `SELECT StatusNo
@@ -2205,10 +2225,10 @@ let query
                                     LIMIT 1`
                     try {
                         resultCheck = await query(checkSql, [UseFrom ,StatusNo ,Id]);
-                        if (resultCheck.length > 0) return SendError(res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
+                        if (resultCheck.length > 0) return SendError(connection,res,'【狀態代碼 + 用途來源】重複,請重新輸入') 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion
                     
@@ -2230,7 +2250,7 @@ let query
                             ,currentTime ,currentUser ,Id]);
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -2261,7 +2281,7 @@ let query
                 //#endregion 
 
                 //#region 開始後端交易
-                var connection = CreateDBConnection()
+                let connection = CreateDBConnection(action)
                 connection.beginTransaction(async (transactionError) => {
                     if(transactionError) {
                         console.error("開啟後端交易失敗:", transactionError);
@@ -2275,11 +2295,11 @@ let query
                                         LIMIT 1`
                     try {
                         const resultCheck = await query(checkSql, [StatusId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【狀態不存在】,請重新確認');
+                        if (resultCheck.length <= 0) return SendError(connection,res,'【狀態不存在】,請重新確認');
                         
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -2292,7 +2312,7 @@ let query
 
                     } 
                     catch(err) {
-                        return SendError(res,err.message) 
+                        return SendError(connection,res,err.message) 
                     }
                     //#endregion 
 
@@ -2322,7 +2342,7 @@ let query
             //#endregion 
 
             //#region 開始後端交易
-            var connection = CreateDBConnection()
+            let connection = CreateDBConnection(action)
             connection.beginTransaction(async (transactionError) => {
                 if(transactionError) {
                     console.error("開啟後端交易失敗:", transactionError);
@@ -2352,19 +2372,19 @@ let query
                 // //#region 執行
                 // try {
                 //     const result = await query(sql, params);
-                //     SendSuccess(res,"",result)
+                //     SendSuccess(connection,res,"",result)
                 // } 
                 // catch(err) {
-                //     return SendError(res,err.message) 
+                //     return SendError(connection,res,err.message) 
                 // }
                 // //#endregion 
 
                 //#region 執行
                 connection.query(sql, params, (err, rows) => {
                     if (!err) { 
-                        res.send(rows); 
+                        SendSuccess(connection,res,"",rows)
                     } else {
-                        res.send(err);
+                        SendError(connection,res, err) 
                     }
                 });
                 //#endregion 

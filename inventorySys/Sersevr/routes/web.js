@@ -7,17 +7,21 @@
     var currentUser = -1
     var currentCompany = -1
     let query
-
+    let action
+    router.use((req, res, next) => {
+        action = req.url
+        next();
+    });
     //#region 公用程式
         //#region 開啟連線
-        function CreateDBConnection() {
-            var connection = mysql.createConnection(configs.mysql); // 填入你的数据库配置
+        function CreateDBConnection(action) {
+            let connection = mysql.createConnection(configs.mysql); // 填入你的数据库配置
             connection.connect(function(err) {
                 if (err) {
                     console.error('error connecting: ' + err.stack);
                     return;
                 }
-                console.log('connected as id ' + connection.threadId);
+                console.log(`連線id:${connection.threadId},觸發程式:web${action}`);
             });
             query = util.promisify(connection.query).bind(connection);
             
@@ -53,39 +57,75 @@
         //#endregion 
 
         //#region Commit段
-        function CommitRun(type,connection,res,result){
-            connection.commit((commitError) => {
-                if(commitError) {
-                    connection.rollback((rollbackError) => {
-                        if (rollbackError) {
-                            console.error("Rollback Error:", rollbackError);
-                        }
-                        console.error("Commit Error:", commitError);
-                        connection.end();
-                        return res.status(500).send({ msg: 'error', err: 'Commit Error' });
-                    });
-                } else {
-                    switch(type){
-                        case "read":
-                            SendSuccess(res,"查看成功!!",result);
-                            break;
-                        case "add":
-                            SendSuccess(res,"新增成功!!",result);
-                            break;
-                        case "update":
-                            SendSuccess(res,"更新成功!!","");
-                            break;
-                        case "delete":
-                            SendSuccess(res,"刪除成功!!","");
-                            break;
-                        case "Logein":
-                            SendSuccess(res,"登入成功!!",result);
-                            break;
-                    }
-                    connection.end();
+        async function CommitRun(type, connection, res, result) {
+            try {
+                await connection.commit();
+                switch(type){
+                    case "get":
+                        SendSuccess(res, "", result);
+                        break;
+                    case "read":
+                        SendSuccess(res, "查看成功!!", result);
+                        break;
+                    case "add":
+                        SendSuccess(res, "新增成功!!", result);
+                        break;
+                    case "update":
+                        SendSuccess(res, "更新成功!!", "");
+                        break;
+                    case "delete":
+                        SendSuccess(res, "刪除成功!!", "");
+                        break;
+                    case "Logein":
+                        SendSuccess(res, "登入成功!!", result);
+                        break;
                 }
-            });
+            } catch (commitError) {
+                try {
+                    await connection.rollback();
+                } catch (rollbackError) {
+                    console.error("Rollback Error:", rollbackError);
+                }
+                console.error("Commit Error:", commitError);
+                return res.status(500).send({ msg: 'error', err: 'Commit Error' });
+            } finally {
+                connection.end();
+            }
         }
+
+        // function CommitRun(type,connection,res,result){
+        //     connection.commit((commitError) => {
+        //         if(commitError) {
+        //             connection.rollback((rollbackError) => {
+        //                 if (rollbackError) {
+        //                     console.error("Rollback Error:", rollbackError);
+        //                 }
+        //                 console.error("Commit Error:", commitError);
+        //                 connection.end();
+        //                 return res.status(500).send({ msg: 'error', err: 'Commit Error' });
+        //             });
+        //         } else {
+        //             switch(type){
+        //                 case "read":
+        //                     SendSuccess(res,"查看成功!!",result);
+        //                     break;
+        //                 case "add":
+        //                     SendSuccess(res,"新增成功!!",result);
+        //                     break;
+        //                 case "update":
+        //                     SendSuccess(res,"更新成功!!","");
+        //                     break;
+        //                 case "delete":
+        //                     SendSuccess(res,"刪除成功!!","");
+        //                     break;
+        //                 case "Logein":
+        //                     SendSuccess(res,"登入成功!!",result);
+        //                     break;
+        //             }
+        //             connection.end();
+        //         }
+        //     });
+        // }
         //#endregion 
 
     //#endregion 
@@ -95,15 +135,16 @@
             //#region 查看
             router.post('/GetCompanyPhoto', (req, res) => {
                 try{
-                    //#region 宣告前端參數
                     if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
                     const {CpId, PhotoNo, PhotoName,ShowNum,Index} = req.body;
                     let conditions = []; //條件查詢容器
                     let params = []; //參數容器
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -174,9 +215,10 @@
             //#region 新增
             router.post('/AddCompanyPhoto', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
+                    let connection = CreateDBConnection(action)
                     const {PhotoName, PhotoDesc, PhotoHref} = req.body;
                     //#endregion 
 
@@ -230,9 +272,9 @@
             //#region 更新
             router.post('/UpdateCompanyPhoto', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {CpId,PhotoName, PhotoDesc} = req.body;
                     //#endregion 
 
@@ -243,6 +285,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -288,10 +331,9 @@
             //#region 刪除
             router.post('/DeleteCompanyPhoto', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
 
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {CpId} = req.body;
                     //#endregion 
 
@@ -300,6 +342,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -342,15 +385,16 @@
             //#region 查看
             router.post('/GetCompanyWeb', (req, res) => {
                 try{
-                    //#region 宣告前端參數
                     if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
                     const {Id, WebNo, WebName,ShowNum,Index} = req.body;
                     let conditions = []; //條件查詢容器
                     let params = []; //參數容器
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -418,9 +462,9 @@
             //#region 新增
             router.post('/AddCompanyWeb', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {WebNo, WebName, WebDesc} = req.body;
                     //#endregion 
 
@@ -433,6 +477,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -485,9 +530,9 @@
             //#region 更新
             router.post('/UpdateCompanyWeb', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {Id, WebName, WebDesc} = req.body;
                     //#endregion 
 
@@ -499,6 +544,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -544,9 +590,9 @@
             //#region 刪除
             router.post('/DeleteCompanyWeb', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {CwId} = req.body;
                     //#endregion 
 
@@ -555,6 +601,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -601,13 +648,17 @@
             //#region 查看
             router.post('/GetCyyIndexContent', (req, res) => {
                 try{
-                    //#region 宣告前端參數
                     if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
                     const {CiContentId,CwId} = req.body;
+                    let sql
+                    let params
+                    let result
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -615,22 +666,34 @@
                         }
 
                         //#region 基本查詢
-                        var sql = `SELECT a.*
-                                    , b1.PhotoName AS BannerPhotoName ,b1.PhotoHref AS BannerHref
-                                    , b2.PhotoName AS AboutPhotoName ,b2.PhotoHref AS AboutHref
-                                    , b3.PhotoName AS WebPhotoPhotoName ,b3.PhotoHref AS WebPhotoHref
-                                    FROM WEB_CyyIndexContent a
-                                    LEFT JOIN WEB_CompanyPhoto b1 on  b1.CpId = a.BannerPhotoId
-                                    LEFT JOIN WEB_CompanyPhoto b2 on  b2.CpId = a.AboutPhotoId 
-                                    LEFT JOIN WEB_CompanyPhoto b3 on  b3.CpId = a.WebPhotoId 
-                                    WHERE CiContentId = ?
-                                    AND CwId =?`
-                        const baseQuery = util.promisify(connection.query).bind(connection);
-                        const result = await baseQuery(sql, [CiContentId,CwId]);
-                        if (result.length <= 0) return SendError(res,'【網站不存在】,請重新確認');
-                        SendSuccess(res,"",result)
+                        sql = `SELECT a.*
+                                , b1.PhotoName AS BannerPhotoName ,b1.PhotoHref AS BannerHref
+                                , b2.PhotoName AS AboutPhotoName ,b2.PhotoHref AS AboutHref
+                                , b3.PhotoName AS WebPhotoPhotoName ,b3.PhotoHref AS WebPhotoHref
+                                FROM WEB_CyyIndexContent a
+                                LEFT JOIN WEB_CompanyPhoto b1 on  b1.CpId = a.BannerPhotoId
+                                LEFT JOIN WEB_CompanyPhoto b2 on  b2.CpId = a.AboutPhotoId 
+                                LEFT JOIN WEB_CompanyPhoto b3 on  b3.CpId = a.WebPhotoId 
+                                WHERE CiContentId = ?
+                                AND CwId =?`
+                        try {
+                            params = [CiContentId,CwId]
+                            result = await query(sql, params);
+                            if (result.length <= 0) return SendError(res,'【網站不存在】不存在,請重新確認');
+                            result.forEach((item)=>{
+                                if(item.MainSeting == "Y") return SendError(res,'【產品圖片】目前為主圖片不可以刪除,請先切換主圖片再刪除');
+                            })
 
+                            //#region commit段
+                            CommitRun("get",connection,res,result)
+                            //#endregion 
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
                         //#endregion 
+
+                        
 
                     });
                     //#endregion 
@@ -639,21 +702,22 @@
                     console.error("Query Error:", queryError.message);
                     res.status(400).send({ status: 'error', msg:queryError.message });
                 }
+                
             });
             //#endregion 
 
             //#region 查看產品輪播
             router.post('/GetCyyIndexProductSiwper', (req, res) => {
                 try{
-                    //#region 宣告前端參數
                     if(!basic(req,res)) return
+                    //#region 宣告前端參數
                     const {CwId} = req.body;
                     let params = [];; //參數容器
                     let sql; //參數容器
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -674,12 +738,15 @@
                         try {
                             params = [CwId]
                             const result = await query(sql, params);
-                            SendSuccess(res,"",result)
+                            
+                            //#region commit段
+                            CommitRun("get",connection,res,result)
+                            //#endregion 
                         } 
                         catch(err) {
                             return SendError(res,err.message) 
                         }
-
+                        
                         //#endregion 
 
                     });
@@ -695,9 +762,8 @@
             //#region 更新Banner
             router.post('/UpdateCyyWebBanner', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CwId,PhotoName, PhotoDesc, PhotoHref} = req.body;
                     //#endregion 
 
@@ -710,6 +776,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -768,9 +835,8 @@
             //#region 刪除Banner
             router.post('/DeletCyyWebBanner', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CiContentId,CwId} = req.body;
                     //#endregion 
 
@@ -780,6 +846,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -818,9 +885,8 @@
             //#region 更新About
             router.post('/UpdateCyyWebAbout', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CiContentId,CwId,AboutText,PhotoName, PhotoDesc, PhotoHref,textChange,photoChange} = req.body;
                     //#endregion 
 
@@ -839,6 +905,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -925,9 +992,8 @@
             //#region 刪除About
             router.post('/DeletCyyWebAbout', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CiContentId,CwId,textChange,photoChange} = req.body;
                     //#endregion 
 
@@ -937,6 +1003,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1006,7 +1073,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1068,9 +1135,8 @@
             //#region 更新Footer
             router.post('/UpdateCyyWebFooter', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CiContentId,CwId,FootTitle,ContactAddress,ContactPhone,ContactEmail,ServiceTime,CopyrightNotice} = req.body;
                     //#endregion 
 
@@ -1092,6 +1158,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1148,9 +1215,8 @@
             //#region 刪除Footer
             router.post('/DeletCyyWebFooter', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
                     const {CiContentId,CwId} = req.body;
                     //#endregion 
 
@@ -1160,6 +1226,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1214,15 +1281,15 @@
             //#region 查看
             router.post('/GetCyyEvent', (req, res) => {
                 try{
-                    //#region 宣告前端參數
                     if(!basic(req,res)) return
+                    //#region 宣告前端參數
                     const {Id, CwId, EventName, EventDate,ShowNum,Index} = req.body;
                     let conditions = []; //條件查詢容器
                     let params = []; //參數容器
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1232,11 +1299,16 @@
                         //#region 基本查詢
                         var baseQuery = `SELECT b.Total
                                             ,a.* 
+                                            ,DATE_FORMAT(a.EventDate,'%Y-%m-%d') EventDate
+                                            ,a2.PhotoName,a2.PhotoDesc,a2.PhotoHref
                                             FROM WEB_CyyEvent a
+                                            INNER JOIN WEB_CyyEventPhoto a1 on a.CeId = a1.CeId
+                                            INNER JOIN WEB_CompanyPhoto a2 on a1.PhotoId = a2.CpId
                                             JOIN (
                                                 SELECT COUNT('CeId') Total FROM WEB_CyyEvent 
                                             ) b
-                                            WHERE 1=1`
+                                            WHERE 1=1
+                                            AND a1.MainSeting = 'Y'`
                         //#endregion 
 
                         //#region 條件
@@ -1282,17 +1354,24 @@
                 catch(queryError){
                     console.error("Query Error:", queryError.message);
                     res.status(400).send({ status: 'error', msg:queryError.message });
-                }
+                }            
             });
             //#endregion 
             
             //#region 新增
             router.post('/AddCyyEvent', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
-                    basic(req,res)
-                    const {CwId, EventName, EventText, EventDate} = req.body;
+                    const {CwId, EventName, EventText, EventDate
+                        ,CpId ,PhotoName ,PhotoDesc, PhotoHref} = req.body;
+                    
+                    let checkSql
+                    let sql
+                    let resultCheck
+                    let result
+                    let params
                     //#endregion 
 
                     //#region 參數檢查
@@ -1301,9 +1380,15 @@
                     if (EventText.length > 100) throw new Error('【活動文章】不可以超過1000個字元')
                     if (EventText.length <= 0) throw new Error('【活動文章】不可以為空')
                     if (EventDate.length <= 0) throw new Error('【活動日期】不可以為空')
+                    if(CpId<=0){
+                        if (PhotoName.length <= 0) throw new Error('【圖片名稱】不可以為負')
+                        if (PhotoDesc.length <= 0) throw new Error('【圖片描述】不可以為負')
+                        if (PhotoHref.length <= 0) throw new Error('【圖片】不可以為空'); 
+                    }
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1311,35 +1396,125 @@
                         }
 
                         //#region 檢查段
-                        var checkSql = `SELECT CeId
+                        //#region 官網是否存在
+                        checkSql = `SELECT CwId
                                             FROM WEB_CompanyWeb
                                             WHERE 1=1
                                             AND CwId = ?
                                             LIMIT 1`
-                        
-                        const resultCheck = await query(checkSql, [CwId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【網站不存在】,請重新確認');
+                        try {
+                            params = [CwId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【官網】不存在,請重新確認') 
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+
+                        //#region 圖片是否存在
+                        if(CpId>0){
+                            checkSql = `SELECT CpId
+                                        FROM WEB_CompanyPhoto
+                                        WHERE 1=1
+                                        AND CpId = ?
+                                        LIMIT 1`
+                            try {
+                                params = [CpId]
+                                resultCheck = await query(checkSql, params);
+                                if (resultCheck.length <= 0) return SendError(res,'【圖片】不存在,請重新確認') 
+                            } 
+                            catch(err) {
+                                return SendError(res,err.message) 
+                            }
+                        }
+                        //#endregion 
                         //#endregion 
 
                         //#region 異動段
-                        var sql = `INSERT INTO WEB_CyyEvent 
+                        //#region 活動新增
+                        let CeId
+                        sql = `INSERT INTO WEB_CyyEvent 
                                     (CwId,EventName ,EventText ,EventDate
                                         ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
                                     VALUES
                                     (? ,? ,? ,?
                                         ,? ,? ,? ,?)`;
+                        try {
+                            params = [CwId, EventName, EventText, EventDate
+                                ,currentTime,currentTime,currentUser,currentUser]
+                            await query(sql, params);
+
+                            //#region 取得最新插入的ID
+                            let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                            try {
+                                result = await query(GetInsertedId);
+                                result.forEach((item)=>{
+                                    CeId = item.id
+                                })
+                            } 
+                            catch(err) {
+                                return SendError(res,err.message) 
+                            }
+                            //#endregion 
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
                         
-                        await query(sql, [CwId,EventName, EventText, EventDate
-                                        ,currentTime,currentTime,currentUser,currentUser]);
+                        //#region 產品圖片新增
+                        if(CpId <=0){
+                            sql = `INSERT INTO WEB_CompanyPhoto 
+                                    (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                        ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                    VALUES
+                                    (? ,? ,? ,?
+                                        ,? ,? ,? ,?)`;
+                            try {
+                                params = [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                    ,currentTime,currentTime,currentUser,currentUser]
+                                await query(sql, params);
+                                //#region 取得最新插入的ID
+                                let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                                try {
+                                    result = await query(GetInsertedId);
+                                    result.forEach((item)=>{
+                                        CpId = item.id
+                                    })
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+                            } 
+                            catch(err) {
+                                return SendError(res,err.message) 
+                            }
+                        }
+                        //#endregion 
+                        
+                        //#region 產品圖片群集新增
+                        sql = `INSERT INTO WEB_CyyEventPhoto 
+                                (CeId ,PhotoId ,MainSeting
+                                    ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                VALUES
+                                (? ,? ,?
+                                    ,? ,? ,? ,?)`;
+                        try {
+                            params = [CeId, CpId, 'Y'
+                            ,currentTime,currentTime,currentUser,currentUser]
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
                         //#endregion 
 
-                        //#region 获取最新插入的ID
-                        var GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
-                        const result = await query(GetInsertedId);
                         //#endregion 
 
                         //#region commit段
-                        CommitRun("add",connection,res,result)
+                        CommitRun("add",connection,res,CeId)
                         //#endregion 
                     });
                     //#endregion 
@@ -1354,9 +1529,8 @@
             //#region 更新
             router.post('/UpdateCyyEvent', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {Id, EventName, EventText, EventDate} = req.body;
                     //#endregion 
 
@@ -1369,6 +1543,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1415,10 +1590,14 @@
             //#region 刪除
             router.post('/DeleteCyyEvent', (req, res) => {
                 try{
+                    if(!basic(req,res)) return
+
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
-                    basic(req)
                     const {CeId} = req.body;
+                    let checkSql
+                    let sql
+                    let resultCheck
+                    let params
                     //#endregion 
 
                     //#region 參數檢查
@@ -1426,28 +1605,52 @@
                     //#endregion 
 
                     //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
                             return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
                         }
                         //#region 檢查段
-                        var checkSql = `SELECT CeId
-                                            FROM WEB_CyyEvent
-                                            WHERE 1=1
-                                            AND CeId = ?
-                                            LIMIT 1`
-                        
-                        const resultCheck = await query(checkSql, [CeId]);
-                        if (resultCheck.length <= 0) return SendError(res,'【活動不存在】,請重新確認');
+                        checkSql = `SELECT CeId
+                                        FROM WEB_CyyEvent
+                                        WHERE 1=1
+                                        AND CeId = ?
+                                        LIMIT 1`
+                        try {
+                            params = [CeId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【活動】不存在,請重新確認');
+                            // resultCheck.forEach((item)=>{
+                            //     if(item.Status == "A") return SendError(res,'【活動】已經啟用不可以刪除,請採用停用方式');
+                            // })
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
                         //#endregion 
 
                         //#region 異動段
-                        var sql = `DELETE FROM WEB_CyyEvent 
+                        sql = `DELETE FROM WEB_CyyEventPhoto 
+                                WHERE 1=1
+                                AND CeId = ? `
+                        try {
+                            params = [CeId]
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        sql = `DELETE FROM WEB_CyyEvent 
                                     WHERE 1=1
                                     AND CeId = ? `
-                        
-                        await query(sql, [CeId]);
+                        try {
+                            params = [CeId]
+                            await query(sql, params);
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
                         //#endregion 
 
                         //#region commit段
@@ -1462,6 +1665,199 @@
                 }
             })
             //#endregion 
+        
+            //#region 查看活動圖片
+            router.post('/GetCyyEventPhoto', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 宣告前端參數
+                    const {Id,CeId,ShowNum,Index} = req.body;
+                    let conditions = []; //條件查詢容器
+                    let params = [];; //參數容器
+                    let sql; //參數容器
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 基本查詢
+                        sql = `SELECT b.Total
+                                ,a.* 
+                                ,a1.CpId,a1.PhotoName,a1.PhotoDesc,a1.PhotoHref
+                                FROM WEB_CyyEventPhoto a
+                                INNER JOIN WEB_CompanyPhoto a1 on a.PhotoId = a1.CpId
+                                JOIN (
+                                    SELECT COUNT('CePhotoId') Total 
+                                    FROM WEB_CyyEventPhoto 
+                                    WHERE 1=1
+                                    AND CeId = ${CeId}
+                                ) b
+                                WHERE 1=1`
+                        //#endregion 
+
+                        //#region 條件
+                        if (Id > 0) {
+                            conditions.push("a.CePhotoId = ?");
+                            params.push(Id);
+                        }
+                        if (CeId > 0) {
+                            conditions.push("a.CeId = ?");
+                            params.push(CeId);
+                        }
+                        if (conditions.length) {
+                            sql += " AND " + conditions.join(" AND ");
+                        }
+                        //#endregion 
+
+                        //#region 列表顯示設定
+                        sql += ` ORDER BY FIELD(a.MainSeting,'Y','N') , 'a.CePhotoId'`
+                        if(ShowNum >0 && Index >=0){
+                            sql += " LIMIT ? OFFSET ?";
+                            params.push(ShowNum);
+                            params.push(Index);
+                        }
+                        //#endregion 
+
+                        //#region 執行
+                        try {
+                            const result = await query(sql, params);
+                            SendSuccess(res,"",result)
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            })
+            //#endregion 
+
+            //#region 新增活動圖片
+            router.post('/AddCyyEventPhoto', (req, res) => {
+                try{
+                    if(!basic(req,res)) return
+
+                    //#region 參數宣告+資料庫連接
+                    const {CeId, data} = req.body;
+                    let checkSql
+                    let sql
+                    let resultCheck
+                    let result
+                    let params
+                    //#endregion 
+
+                    //#region 參數檢查
+                    if (CeId <= 0) throw new Error('【活動】資料不可為空,請重新確認'); 
+                    if (data.length <= 0) throw new Error('未上傳照片,請重新確認'); 
+                    //#endregion 
+
+                    //#region 開始後端交易
+                    let connection = CreateDBConnection(action)
+                    connection.beginTransaction(async (transactionError) => {
+                        if(transactionError) {
+                            console.error("開啟後端交易失敗:", transactionError);
+                            return res.status(500).send({ msg: 'error', err: '開啟後端交易失敗!!!' });
+                        }
+
+                        //#region 檢查段
+                        //#region 活動是否存在
+                        checkSql = `SELECT CeId
+                                    FROM WEB_CyyEvent
+                                    WHERE 1=1
+                                    AND CeId = ?
+                                    LIMIT 1`
+                        try {
+                            params = [CeId]
+                            resultCheck = await query(checkSql, params);
+                            if (resultCheck.length <= 0) return SendError(res,'【活動】不存在,請重新確認') 
+                        } 
+                        catch(err) {
+                            return SendError(res,err.message) 
+                        }
+                        //#endregion 
+                        //#endregion 
+
+                        //#region 異動段
+                        (async () => {
+
+                            for(let i=0;i<data.length;i++){
+                                let {PhotoName ,PhotoDesc, PhotoHref} = data[i];
+                                let CpId = -1
+
+                                //#region 公司照片新增
+                                sql = `INSERT INTO WEB_CompanyPhoto 
+                                        (CompanyId ,PhotoName ,PhotoDesc ,PhotoHref
+                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                        VALUES
+                                        (? ,? ,? ,?
+                                            ,? ,? ,? ,?)`;
+                                try {
+                                    params = [currentCompany, PhotoName, PhotoDesc, PhotoHref
+                                        ,currentTime,currentTime,currentUser,currentUser]
+                                    await query(sql, params);
+                                    //#region 取得最新插入的ID
+                                    let GetInsertedId = `SELECT LAST_INSERT_ID() as id`;
+                                    try {
+                                        result = await query(GetInsertedId);
+                                        result.forEach((item)=>{
+                                            CpId = item.id
+                                        })
+                                    } 
+                                    catch(err) {
+                                        return SendError(res,err.message) 
+                                    }
+                                    //#endregion 
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+
+                                //#region 活動圖片群集新增
+                                sql = `INSERT INTO WEB_CyyEventPhoto 
+                                        (CeId ,PhotoId ,MainSeting
+                                            ,CreatDate ,UpdateDate ,CreateUserId ,UpdateUserId)
+                                        VALUES
+                                        (? ,? ,?
+                                            ,? ,? ,? ,?)`;
+                                try {
+                                    params = [CeId, CpId, 'N'
+                                    ,currentTime,currentTime,currentUser,currentUser]
+                                    await query(sql, params);
+                                } 
+                                catch(err) {
+                                    return SendError(res,err.message) 
+                                }
+                                //#endregion 
+                            }
+                            //#region commit段
+                            CommitRun("add", connection, res, CeId);
+                            //#endregion 
+                        })();
+                        //#endregion 
+                    });
+                    //#endregion 
+                }
+                catch(queryError){
+                    console.error("Query Error:", queryError.message);
+                    res.status(400).send({ status: 'error', msg:queryError.message });
+                }
+            });
+            //#endregion 
+            
+        
         //#endregion 
 
         //#region  CyyIssues相關 查看,新增,修改,刪除
@@ -1476,7 +1872,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1544,7 +1940,7 @@
             router.post('/AddCyyIssues', (req, res) => {
                 try{
                     //#region 參數宣告+資料庫連接
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     basic(req,res)
                     const {CwId, IssuesName, IssuesText, IssuesDate} = req.body;
                     //#endregion 
@@ -1609,7 +2005,7 @@
             router.post('/UpdateCyyIssues', (req, res) => {
                 try{
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     basic(req)
                     const {Id, IssuesName, IssuesText, IssuesDate} = req.body;
                     //#endregion 
@@ -1670,7 +2066,7 @@
             router.post('/DeleteCyyIssues', (req, res) => {
                 try{
                     //#region 宣告前端參數
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     basic(req)
                     const {CiId} = req.body;
                     //#endregion 
@@ -1732,7 +2128,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -1790,6 +2186,7 @@
                         catch(err) {
                             return SendError(res,err.message) 
                         }
+                        
                         //#endregion 
                     });
                     //#endregion 
@@ -1830,7 +2227,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2017,7 +2414,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2313,7 +2710,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2369,6 +2766,7 @@
                         catch(err) {
                             return SendError(res,err.message) 
                         }
+                        
                         //#endregion 
 
                         //#region commit段
@@ -2402,7 +2800,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    let connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2477,7 +2875,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2530,6 +2928,7 @@
                         catch(err) {
                             return SendError(res,err.message) 
                         }
+                        
                         //#endregion 
                     });
                     //#endregion 
@@ -2559,7 +2958,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    var connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);
@@ -2637,7 +3036,7 @@
                     //#endregion 
 
                     //#region 開始後端交易
-                    let connection = CreateDBConnection()
+                    let connection = CreateDBConnection(action)
                     connection.beginTransaction(async (transactionError) => {
                         if(transactionError) {
                             console.error("開啟後端交易失敗:", transactionError);

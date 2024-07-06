@@ -331,6 +331,18 @@ const UpdateCyyEventStatus = (req) => {
 const DeleteCyyEvent = (req) => {
     return axios.post(`/api/web/DeleteCyyEvent`, req)
 }
+const GetCyyEventPhoto = (req) => {
+    return axios.post(`/api/web/GetCyyEventPhoto`, req)
+}
+const UpdateCyyEventPhotoMain = (req) => {
+    return axios.post(`/api/web/UpdateCyyEventPhotoMain`, req)
+}
+const AddCyyEventPhoto = (req) => {
+    return axios.post(`/api/web/AddCyyEventPhoto`, req)
+}
+const DeleteCyyEventPhoto = (req) => {
+    return axios.post(`/api/web/DeleteCyyEventPhoto`, req)
+}
 //#endregion 
 
 
@@ -367,6 +379,7 @@ export {
     GetCompanyWeb, AddCompanyWeb, UpdateCompanyWeb, DeleteCompanyWeb,
     GetCompanyPhoto, AddCompanyPhoto, UpdateCompanyPhoto, DeleteCompanyPhoto,
     GetCyyProductPhoto,UpdateCyyProductPhotoMain,DeleteCyyProductPhoto,
+    GetCyyEventPhoto,UpdateCyyEventPhotoMain,DeleteCyyEventPhoto,
 
     GetCyyIndexContent,GetCyyIndexProductSiwper,
     UpdateCyyWebBanner,DeletCyyWebBanner,
@@ -376,7 +389,7 @@ export {
     UpdateCyyAbout, UpdateCyyServe, UpdateCyyFooter,
     GetCyyProduct, AddCyyProduct, UpdateCyyProduct, UpdateCyyProductStatus, DeleteCyyProduct,
     GetCyyEvent, AddCyyEvent, UpdateCyyEvent, UpdateCyyEventStatus, DeleteCyyEvent,
-
+    AddCyyEventPhoto,
     GetMenuModal,
     GetTransaction, AddTransaction
 }

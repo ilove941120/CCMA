@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive,watchEffect } from "vue";
-import { GetCyyEvent, AddCyyEvent, UpdateCyyEvent, DeleteCyyEvent ,GetCompanyPhoto} from ':@/api/index'
+import { GetCyyEvent, AddCyyEvent, UpdateCyyEvent, DeleteCyyEvent} from ':@/api/index'
 import alert from ':@/components/alert.vue';
 import pageBar from ':@/components/pageBar.vue';
 import popView from ':@/view/web/CyyWeb/editor/popView.vue';
@@ -14,24 +14,32 @@ function AddForm() {
     changePage.value = "返回"
     editShow.value = true
 }
-function ReadForm(Id) {
+async function ReadForm(Id) {
     changePage.value = "返回"
-    editObj.action = "read"
     editShow.value = true
-    editObj.pageId = Id
+    formData.Id = Id
+    await LoadData()
+    tableData.value.forEach((item)=>{
+        formData.CwId = item.CwId
+        formData.EventName = item.EventName
+        formData.EventText = item.EventText
+        formData.EventDate = item.EventDate
+        formData.CpId = item.CpId
+        formData.PhotoName = item.PhotoName
+        formData.PhotoDesc = item.PhotoDesc
+        formData.PhotoHref = item.PhotoHref
+    })
 }
 async function EditForm(Id) {
     changePage.value = "返回"
     editShow.value = true
     formData.Id = Id
-    await LoadData('Edit')
+    await LoadData()
     tableData.value.forEach((item)=>{
         formData.CwId = item.CwId
-        formData.MtlItemId =  item.MtlItemId
-        formData.ProductName = item.ProductName
-        formData.ProductAmount = item.ProductAmount
-        formData.ProductText = item.ProductText
-        formData.GroupSetting = item.GroupSetting
+        formData.EventName = item.EventName
+        formData.EventText = item.EventText
+        formData.EventDate = item.EventDate
         formData.CpId = item.CpId
         formData.PhotoName = item.PhotoName
         formData.PhotoDesc = item.PhotoDesc
@@ -77,7 +85,7 @@ const pageObj = reactive({
 
 //#region 列表資料取得
 const tableData = ref([])
-const LoadData = async () => {
+const LoadData = async (type) => {
     try{
       const result = (await GetCyyEvent(pageObj)).data
       let status = result.status 
@@ -100,6 +108,7 @@ const LoadData = async () => {
         }
     }
 }
+LoadData()
 //#endregion
 
 //#region 頁面切換
@@ -116,12 +125,11 @@ const ReturnPage = (data) => {
 
 //#endregion
 
-//#region 表單
+//#region 表單相關
 const createFormData = () => {
     return {
         Id:-1,
         CwId: 1,
-        MtlItemId: -1,
         EventName: '',
         EventText: '',
         EventDate: '',
@@ -137,10 +145,9 @@ let formData = reactive(createFormData());
 const resetFormData = () => {
     formData.Id = -1
     formData.CwId = 1
-    formData.MtlItemId = -1
     formData.EventName = ''
     formData.EventText = ''
-    formData.EventDate = ''
+    formData.EventDate = 'YYYY-MM-DD'
     formData.GroupSetting = false
     formData.photoChange = false
     formData.CpId = -1
@@ -148,19 +155,74 @@ const resetFormData = () => {
     formData.PhotoDesc = ''
     formData.PhotoHref = ''
 };
+
+//#region 儲存表單資料
+const Save = async () => {
+    try {
+        let result 
+        if(!!!formData.PhotoHref){
+            store.commit('alertAction', { type: "fail", msg: '目前未上傳圖片' });
+            return
+        }
+        if(formData.Id<=0){
+            result = await AddCyyEvent(formData);
+        }
+        else{
+            result = await UpdateCyyEvent(formData);
+        }
+        
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            // Load()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,新增失敗' });
+        }
+    } catch (error) {
+        let errMsg = error.response.data.msg;
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
 //#endregion
+
+//#endregion
+
+//#region 刪除資料
+const Delete = async (CeId) => {
+    const obj =reactive({CeId:CeId})
+    try{
+        const result = (await DeleteCyyEvent(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadData()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
 
 //#region 彈窗相關
 const OpenPopView = (view,Id) =>{
     popViewObj.show = true
     popViewObj.nowView = view
     popViewObj.Id = Id
+    popViewObj.CwId = formData.CwId
 }
 const popViewObj = reactive({
     show:false,
     popViewTitle:``,
     nowView:``,
-    Id:-1
+    Id:-1,
+    CwId:-1
 })
 const ClearPhoto = ()=>{
     formData.CpId = -1
@@ -168,13 +230,33 @@ const ClearPhoto = ()=>{
     formData.PhotoDesc = ``
     formData.PhotoHref = ``
 }
-//#endregion
 
 //#region 接受彈窗回傳值
 const AcceptPopData = (data) => {
-    console.log(data)
-    // form[data.datakey] = data.returnValue
+    formData.photoChange = true
+    formData.CpId = data.CpId
+    formData.PhotoName = data.PhotoName
+    formData.PhotoDesc = data.PhotoDesc
+    formData.PhotoHref = data.PhotoHref
 }
+//#endregion
+
+
+//#endregion
+
+//#region 功能區
+//#region 滑鼠移動列表項目變色
+const highlightedRow = ref('')
+const hoverRow = (status, itemId) => {
+    if (status) {
+        highlightedRow.value = itemId;
+    }
+    else {
+        highlightedRow.value = null;
+    }
+}
+//#endregion
+
 //#endregion
 
 </script>
@@ -197,26 +279,27 @@ const AcceptPopData = (data) => {
                 <tr class="tableHead">
                     <th  v-for="(item,index) in tableHead" :style="item.style">{{ item.name}}</th>
                 </tr>
-                <tr class="tableItem" v-for="(item, index) in tableData" :key="item.MtlItemNo" @mouseover="hoverRow(true, item.CompanyId)"
-                    @mouseout="hoverRow(false, item.CompanyId)">
-                    <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                <tr class="tableItem" v-for="(item, index) in tableData" :key="item.CeId" @mouseover="hoverRow(true, item.CeId)"
+                    @mouseout="hoverRow(false, item.CeId)">
+                    <td :style="{ backgroundColor: highlightedRow === item.CeId ? '#C8EBFA' : '' }">
                         <div class="coulumName">#</div>
                         <div class="coulumValue">{{ pageObj.Index > 0 ? index + pageObj.Index + 1 : index + 1 }}</div>
                     </td>
-                    <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <td :style="{ backgroundColor: highlightedRow === item.CeId ? '#C8EBFA' : '' }">
                         <div class="coulumName">活動日期</div>
-                        <div class="coulumValue">{{ item.CompanyNo }}</div>
+                        <div class="coulumValue">{{ item.EventDate }}</div>
                     </td>
-                    <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <td :style="{ backgroundColor: highlightedRow === item.CeId ? '#C8EBFA' : '' }">
                         <div class="coulumName">活動名稱</div>
-                        <div class="coulumValue">{{ item.CompanyName }}</div>
+                        <div class="coulumValue">{{ item.EventName }}</div>
                     </td>
-                    <td :style="{ backgroundColor: highlightedRow === item.CompanyId ? '#C8EBFA' : '' }">
+                    <td :style="{ backgroundColor: highlightedRow === item.CeId ? '#C8EBFA' : '' }">
                         <div class="coulumName">操作</div>
                         <div class="coulumValue">
-                            <button @click="readForm(item.CompanyId)">查看</button>
-                            <button @click="editForm(item.CompanyId)">修改</button>
-                            <button @click="deleteCompany(item.CompanyId)">刪除</button>
+                            <button @click="ReadForm(item.CeId)">查看</button>
+                            <button @click="EditForm(item.CeId)">修改</button>
+                            <button @click="Delete(item.CeId)">刪除</button>
+                            <button @click="OpenPopView('EventPhoto',item.CeId)">圖片</button>
                         </div>
                     </td>
                 </tr>
@@ -226,11 +309,9 @@ const AcceptPopData = (data) => {
         <div class="form" v-if="editShow == true">
             <form action="">
                 <div class="localRow">
-                    <label for="ProductPhoto">活動圖片</label>
+                    <label for="ProductPhoto">活動主圖片</label>
                     <div class="photoBlock">
-                        <button v-if="!formData.PhotoHref" class="button add" @click="OpenPopView('MtlItem')">選擇品號</button>
                         <button v-if="!formData.PhotoHref" class="button add" @click="OpenPopView('Photo')">選擇圖片</button>
-                        <button v-if="!formData.PhotoHref" class="button add" @click="OpenPopView('ProductPhoto',18)">選擇產品圖片</button>
                         <button v-if="!formData.PhotoHref" class="button add" @click="FileClick">新增圖片</button>
                         <button v-if="formData.PhotoHref" class="button clear " @click="ClearPhoto">重置</button>
                         <img v-if="formData.PhotoHref" :src="formData.PhotoHref" alt="Preview" />
@@ -243,7 +324,7 @@ const AcceptPopData = (data) => {
                 </div>
                 <div class="localRow">
                     <label for="EventDate">活動日期</label>
-                    <input type="number" id="EventDate" class="inputStyle" v-model="formData.EventDate">
+                    <input type="date" id="EventDate" class="inputStyle" v-model="formData.EventDate">
                 </div>
                 <div class="localRow">
                     <label for="EventText">活動文案</label>
@@ -345,13 +426,13 @@ button {
     border-radius: 5px;
     border: 0;
     box-shadow: 0px 0px 2px 1px #a7afa7;
-    color: #fff;
     letter-spacing: 5px;
     padding: 5px 5px 5px  10px;
 }
 
 button:hover {
     background-color: #fcffce;
+    color: #000f27;
 }
 
 .info{
@@ -359,15 +440,19 @@ button:hover {
 }
 .search{
     background-color: #784fff;
+    color: #fff;
 }
 .add{
     background-color: #4990ff;
+    color: #fff;
 }
 .clear{
     background-color: #d42020;
+    color: #fff;
 }
 .safe{
     background-color: #5bd75f;
+    color: #fff;
 }
 .addButton:hover {
     background-color: #fcffce;

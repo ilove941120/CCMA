@@ -95,6 +95,7 @@ const SysObj = reactive({
 })
 const load = async () => {
   clearMenu()
+  console.log("A")
   let data = (await GetMenuModal(SysObj)).data
   if(data.length>0){
     data.forEach((item) => {

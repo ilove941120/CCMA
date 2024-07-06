@@ -59,17 +59,18 @@ CREATE TABLE WEB_CyyEvent (
     EventName               VARCHAR(300)        NOT NULL,                                   --活動名稱
     EventText               VARCHAR(1000)       NOT NULL,                                   --活動文案
     EventDate               TIMESTAMP           NOT NULL,                                   --活動日期
+    Status                  VARCHAR(1)          NOT NULL DEFAULT 'S',                       --網站狀態
     CreatDate               TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --創建日
     UpdateDate              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ,        --更新日
     CreateUserId            INT                 NOT NULL DEFAULT -1,                        --創建者
     UpdateUserId            INT                     NULL DEFAULT -1                         --更新者
 );
 
---陳英渝立委活動照片群集資料表 WEB_CyyEvent
+--陳英渝立委活動照片群集資料表 WEB_CyyEventPhoto
 CREATE TABLE WEB_CyyEventPhoto (
     CePhotoId               INT                 AUTO_INCREMENT PRIMARY KEY,                 --Id
     CeId                    INT                 NOT NULL,                                   --公司活動Id
-    PhotoId                 Id                      NULL,                                   --活動照片
+    PhotoId                 INT                     NULL,                                   --活動照片
     MainSeting              VARCHAR(1)          NOT NULL,                                   --是否為主要照片
     PageSetting             VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否為頁面照片
     GroupSetting            VARCHAR(1)          NOT NULL DEFAULT 'N',                       --是否納入照片輪播

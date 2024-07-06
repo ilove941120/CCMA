@@ -1,8 +1,14 @@
 <script setup>
 import { ref, reactive,watch } from "vue";
-import { GetMtlItem,GetCompanyPhoto,GetCyyProductPhoto} from ':@/api/index'
+import { GetMtlItem,GetCompanyPhoto,GetCyyProductPhoto,GetCyyEventPhoto
+,AddCyyEventPhoto} from ':@/api/index'
 import alert from ':@/components/alert.vue';
 import pageBar from ':@/components/pageBar.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { useStore } from 'vuex';
 const store = useStore();
 
@@ -16,6 +22,18 @@ const sentObj = defineProps({
 let view
 let show
 let Id
+let CwId
+
+// swiper
+const coverflowEffect = {
+    rotate: 0,
+    stretch: 0,
+    depth: 200,
+    modifier: 1,
+    slideShadows: true,
+  };
+
+const modules = [EffectCoverflow, Pagination];
 //#endregion
 
 //#region 監控視窗開啟
@@ -23,6 +41,7 @@ watch(sentObj.sent, (newValue, oldValue) => {
     view = sentObj.sent.nowView
     show = sentObj.sent.show
     Id = sentObj.sent.Id
+    CwId = sentObj.sent.CwId
     switch(view){
         case "MtlItem":
             popViewObj.popViewTitle = `查看品號相關資料`
@@ -33,10 +52,14 @@ watch(sentObj.sent, (newValue, oldValue) => {
         case "ProductPhoto":
             popViewObj.popViewTitle = `查看產品圖片庫`
             break
+        case "EventPhoto":
+            popViewObj.popViewTitle = `查看活動圖片庫`
+            break
     }
     popViewObj.show = show,
     popViewObj.nowView = view
     popViewObj.Id = Id
+    popViewObj.CwId = CwId
     LoadPopViewData(popViewObj)
 });
 //#endregion
@@ -46,6 +69,8 @@ const popViewObj = reactive({
     show:false,
     popViewTitle:``,
     nowView:``,
+    childrenViewShow:false,
+    childrenView:``,
     Id:-1
 })
 const ClosePopView = (view) =>{
@@ -56,6 +81,7 @@ const ClosePopView = (view) =>{
     sentObj.sent.popViewTitle = ``
     sentObj.sent.show = ``
     sentObj.sent.Id = -1
+    Return()
 }
 const popMtlItemList = reactive([
     {
@@ -99,47 +125,83 @@ const ProductPhotoObj = reactive({
     Index: 0,
     TatolNum: 0 
 })
+const EventPhotoObj = reactive({
+    CeId:-1,
+    ShowNum: 10,
+    Index: 0,
+    TatolNum: 0 
+})
 //#endregion
 
 const PopViewData = ref([])
+const PopChildrenViewData = ref([])
 const LoadPopViewData = async (popViewObj) => {
     try{
         let nowView = popViewObj.nowView
         let viewId = popViewObj.Id
+        let childrenViewShow = popViewObj.childrenViewShow
+        let childrenView = popViewObj.childrenView
         let result
         let status
-        switch(nowView){
-            case "MtlItem":
-                result = (await GetMtlItem(MtlItemObj)).data
-                status = result.status 
-                if (status == "success") {
-                    MtlItemObj.TatolNum = result.data[0].Total
-                    PopViewData.value = result.data;
-                } else {
-                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
-                }
-                break;
-            case "Photo":
-                result = (await GetCompanyPhoto(PhotoObj)).data
-                status = result.status 
-                if (status == "success") {
-                    PhotoObj.TatolNum = result.data[0].Total
-                    PopViewData.value = result.data;    
-                } else {
-                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
-                }
-                break;
-            case "ProductPhoto":
-                ProductPhotoObj.CpdId = viewId
-                result = (await GetCyyProductPhoto(ProductPhotoObj)).data
-                status = result.status 
-                if (status == "success") {
-                    ProductPhotoObj.TatolNum = result.data[0].Total
-                    PopViewData.value = result.data;
-                } else {
-                    store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
-                }
-                break;
+        if(!childrenViewShow){
+            switch(nowView){
+                case "MtlItem":
+                    result = (await GetMtlItem(MtlItemObj)).data
+                    status = result.status 
+                    if (status == "success") {
+                        MtlItemObj.TatolNum = result.data[0].Total
+                        PopViewData.value = result.data;
+                    } else {
+                        store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                    }
+                    break;
+                case "Photo":
+                    result = (await GetCompanyPhoto(PhotoObj)).data
+                    status = result.status 
+                    if (status == "success") {
+                        PhotoObj.TatolNum = result.data[0].Total
+                        PopViewData.value = result.data;    
+                    } else {
+                        store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                    }
+                    break;
+                case "ProductPhoto":
+                    ProductPhotoObj.CpdId = viewId
+                    result = (await GetCyyProductPhoto(ProductPhotoObj)).data
+                    status = result.status 
+                    if (status == "success") {
+                        ProductPhotoObj.TatolNum = result.data[0].Total
+                        PopViewData.value = result.data;
+                    } else {
+                        store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                    }
+                    break;
+                case "EventPhoto":
+                    EventPhotoObj.CeId = viewId
+                    result = (await GetCyyEventPhoto(EventPhotoObj)).data
+                    status = result.status 
+                    if (status == "success") {
+                        EventPhotoObj.TatolNum = result.data[0].Total
+                        PopViewData.value = result.data;
+                    } else {
+                        store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                    }
+                    break;
+            }
+        }
+        else{
+            switch(childrenView){
+                case "Photo":
+                    result = (await GetCompanyPhoto(PhotoObj)).data
+                    status = result.status 
+                    if (status == "success") {
+                        PhotoObj.TatolNum = result.data[0].Total
+                        PopChildrenViewData.value = result.data;    
+                    } else {
+                        store.commit('alertAction', { type: "fail", msg: '異常問題,讀取失敗' });
+                    }
+                    break;
+            }
         }
     }
     catch(err){
@@ -158,13 +220,14 @@ const LoadPopViewData = async (popViewObj) => {
 //#region 頁面切換相關
 //#region 品號視窗頁面切換
 const ReturnMtlItemPage = (data) => {
+    console.log(data)
     if (data == 1) {
         MtlItemObj.Index = 0
     }
     else {
         MtlItemObj.Index = MtlItemObj.ShowNum * (data - 1)
     }
-    LoadPopViewData('MtlItem')
+    LoadPopViewData(popViewObj)
 }
 //#endregion
 
@@ -176,9 +239,11 @@ const ReturnPhotoPage = (data) => {
     else {
         PhotoObj.Index = PhotoObj.ShowNum * (data - 1)
     }
-    LoadPopViewData('Photo')
+    LoadPopViewData(popViewObj)
 }
 //#endregion
+
+
 
 //#region 產品圖片庫視窗頁面切換
 const ReturnProductPhotoPage = (data) => {
@@ -188,14 +253,30 @@ const ReturnProductPhotoPage = (data) => {
     else {
         ProductPhotoObj.Index = ProductPhotoObj.ShowNum * (data - 1)
     }
-    LoadPopViewData('ProductPhoto',ProductPhotoObj.CpdId)
+    LoadPopViewData(popViewObj)
 }
 //#endregion
+
+//#region 活動圖片庫視窗頁面切換
+const ReturnEventPhotoPage = (data) => {
+    if (data == 1) {
+        EventPhotoObj.Index = 0
+    }
+    else {
+        EventPhotoObj.Index = EventPhotoObj.ShowNum * (data - 1)
+    }
+    LoadPopViewData(popViewObj)
+}
+//#endregion
+
 //#endregion
 
 //#region 選擇項目相關
 //#region 品號
 const ChooseMtlItem = (MtlItemId,MtlItemName)=>{
+    for(let key in ChooseData) {
+        delete ChooseData[key];
+    }
     ChooseData.MtlItemId = MtlItemId
     ChooseData.ProductName = MtlItemName
     ClosePopView()
@@ -204,6 +285,9 @@ const ChooseMtlItem = (MtlItemId,MtlItemName)=>{
 
 //#region 公司圖片
 const ChoosePhoto = (CpId,PhotoName,PhotoDesc,PhotoHref)=>{
+    for(let key in ChooseData) {
+        delete ChooseData[key];
+    }
     ChooseData.CpId = CpId
     ChooseData.PhotoName = PhotoName
     ChooseData.PhotoDesc = PhotoDesc
@@ -235,6 +319,82 @@ const hoverRow = (status, itemId) => {
     }
 }
 //#endregion
+
+//#region 圖片選擇
+const EditShow = ref(false)
+const formPhoto = reactive([])
+const photoInput = ref(null);
+const FileClick = (event) => {
+    photoInput.value.click();
+}
+const LocalPhoto = () =>{
+    const files = photoInput.value.files;
+
+    if (!files) return;
+    for(let i=0;i<files.length;i++){
+        let file = files[i];
+        const reader = new FileReader();
+        let obj = {}
+        reader.onload = (a) => 
+        {
+            obj.PhotoName = file.name
+            obj.PhotoHref = a.target.result;
+            formPhoto.push(obj)
+
+        }
+        reader.readAsDataURL(file);
+    }
+    EditShow.value = true
+}
+const ClearPhoto = () =>{
+    formPhoto.splice(0, formPhoto.length);
+}
+//#endregion
+
+//#region 圖片上傳
+const SavePhoto = async () => {
+    try {
+        let result 
+        let obj = reactive({})
+        if(formPhoto.length<=0){
+            store.commit('alertAction', { type: "fail", msg: '目前未選擇圖片' });
+            return
+        }
+        obj.CeId = Id
+        obj.data = formPhoto
+        result = await AddCyyEventPhoto(obj);
+        
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            // Load()
+            Return()
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,新增失敗' });
+        }
+    } catch (error) {
+        let errMsg = error.response.data.msg;
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
+
+const SelectCompanyPhoto = () =>{
+    popViewObj.childrenViewShow = true
+    popViewObj.childrenView = 'Photo' 
+    LoadPopViewData(popViewObj)
+}
+
+const Return = ()=>{
+    EditShow.value = false
+    popViewObj.childrenView = ""
+    popViewObj.childrenViewShow = false
+    LoadPopViewData(popViewObj)
+    formPhoto.splice(0, formPhoto.length);
+}
+
 
 //#endregion
 
@@ -305,10 +465,77 @@ const hoverRow = (status, itemId) => {
                     </div>
                 </div>
             </div>
-            <div class="viewFooter">
-                <pageBar v-if="popViewObj.nowView == 'MtlItem'" :sent="MtlItemObj" @change="ReturnMtlItemPage"></pageBar>
-                <pageBar v-if="popViewObj.nowView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
-                <pageBar v-if="popViewObj.nowView == 'ProductPhoto'" :sent="ProductPhotoObj" @change="ReturnProductPhotoPage"></pageBar>
+            <div class="viewBody" v-if="popViewObj.nowView == 'EventPhoto'"> 
+                <div class="head">
+                    <div class="col">
+                        <button class="button add" @click="FileClick">
+                            新增
+                        </button>
+                        <input type="file" ref="photoInput" style="display: none;" @change="LocalPhoto()" multiple/>
+                    </div>
+                    <div class="col rightStyle">
+                        <button class="button add" @click="SelectCompanyPhoto('photo')" v-if="EditShow == false  && popViewObj.childrenViewShow == false">
+                            公司圖片庫選擇
+                        </button>
+                        <button class="button info" @click="Return" v-if="EditShow == true || popViewObj.childrenViewShow == true" >
+                                    退回
+                        </button>
+                    </div>
+                </div>
+                <div class="table" v-if="EditShow == false">
+                    <div class="card" :class="item.MainSeting == `Y`?`mainPhoto`:``" v-for="item in PopViewData" v-if="popViewObj.childrenViewShow == false">
+                        <img :src="item.PhotoHref" alt="">
+                        <div class="hoverBlock" v-if="item.MainSeting == `N`">
+                            <button class="button safe"  @click="UpdateProductPhotoMain(item.CpdPhotoId)">主圖片</button>
+                            <button class="button clear" @click="DeleteProductPhoto(item.CpdPhotoId)">刪除</button>
+                        </div>
+                    </div>
+                    <div class="card" :class="item.MainSeting == `Y`?`mainPhoto`:``" v-for="item in PopChildrenViewData" v-if="popViewObj.childrenViewShow == true">
+                        <img :src="item.PhotoHref" alt="">
+                        <div class="hoverBlock" v-if="item.MainSeting == `N`">
+                            <button class="button safe"  @click="UpdateProductPhotoMain(item.CpdPhotoId)">主圖片</button>
+                            <button class="button clear" @click="DeleteProductPhoto(item.CpdPhotoId)">刪除</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="addView"  v-if="EditShow == true">
+                    <swiper
+                effect="coverflow"
+                :grabCursor="true"
+                :centeredSlides="true"
+                slidesPerView="auto"
+                :coverflowEffect="coverflowEffect"
+                :pagination="true"
+                :modules="modules"
+                :initialSlide="1"
+                :spaceBetween="100"
+                class="mySwiper"
+            >
+                <swiper-slide v-for="(img,index) in formPhoto" :key="img">
+                <img :src="img.PhotoHref" />
+                </swiper-slide>
+            </swiper>
+                </div>
+                <div class="foot">
+                    <div class="col">
+                    </div>
+                    <div class="col rightStyle">
+                        <button class="button save" @click="SavePhoto" v-if="EditShow == true">
+                            儲存
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="viewFooter" v-if="EditShow == false">
+                <div v-if="popViewObj.childrenViewShow == false">
+                    <pageBar v-if="popViewObj.nowView == 'MtlItem'" :sent="MtlItemObj" @change="ReturnMtlItemPage"></pageBar>
+                    <pageBar v-if="popViewObj.nowView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
+                    <pageBar v-if="popViewObj.nowView == 'ProductPhoto'" :sent="ProductPhotoObj" @change="ReturnProductPhotoPage"></pageBar>
+                    <pageBar v-if="popViewObj.nowView == 'EventPhoto'" :sent="EventPhotoObj" @change="ReturnPhotoPage"></pageBar>
+                </div>
+                <div v-if="popViewObj.childrenViewShow == true">
+                    <pageBar v-if="popViewObj.childrenView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
+                </div>
             </div>
         </div>
    </div>
@@ -371,6 +598,14 @@ const hoverRow = (status, itemId) => {
     margin-top: 5px;
     font-size: 16px;
     border: 1px solid #00000033;
+}
+.head{
+    display: flex;
+    margin: 0px 0;
+}
+.rightStyle{
+    display: flex;
+    justify-content: flex-end;
 }
 /* 卡片格式 */
 .table{
@@ -496,7 +731,31 @@ td {
 .clear{
     background-color: #d42020;
 }
-.safe{
+.save{
     background-color: #5bd75f;
+}
+
+
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 30%!important;
+  aspect-ratio: 1/1;
+
+  /* height: 300px!important; */
+}
+
+.swiper-slide img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover!important;
+
 }
 </style>
