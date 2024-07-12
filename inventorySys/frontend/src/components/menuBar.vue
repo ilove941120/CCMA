@@ -95,10 +95,11 @@ const SysObj = reactive({
 })
 const load = async () => {
   clearMenu()
-  console.log("A")
-  let data = (await GetMenuModal(SysObj)).data
-  if(data.length>0){
-    data.forEach((item) => {
+  const result = (await GetMenuModal(SysObj)).data
+  let status = result.status 
+
+  if (status == "success") {
+    result.data.forEach((item) => {
       if (!ComponentData.hasOwnProperty(`${item.ModalName}`)) {
         ModalData[item.ModalName] = {show:false,IconStyle:item.IconStyle}
         ComponentData[item.ModalName] = { [item.ComponentName]: item.ComponentNo }

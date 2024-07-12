@@ -1,8 +1,8 @@
 <script setup>
 import { ref,reactive,onMounted,onUnmounted } from 'vue';
 import { GetCompanyPhoto, AddCompanyPhoto, DeleteCompanyPhoto } from ':@/api/index'
+import alert from ':@/components/alert.vue';
 import pageBar from ':@/components/pageBar.vue';
-
 import { useStore } from 'vuex';
 const store = useStore();
 //#region 接受父層傳送編輯欄位資訊
@@ -59,6 +59,9 @@ const Load = async () => {
             sessionStorage.removeItem("user");
             store.commit('logoutAction', {status:"S"});
             router.push('/Login');
+        }
+        else{
+            store.commit('alertAction', { type: "fail", msg: errMsg });
         }
     }
 }
@@ -168,6 +171,7 @@ const Save = async () => {
 </script>
 
 <template>
+    <alert v-if="$store.state.alertMsg.show == true" :msg="$store.state.alertMsg"></alert>
    <div class="content">
     <div class="navbar">
         <div class="col"></div>

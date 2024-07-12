@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive,watch } from "vue";
 import { GetMtlItem,GetCompanyPhoto,GetCyyProductPhoto,GetCyyEventPhoto
-,AddCyyEventPhoto} from ':@/api/index'
+,AddCyyEventPhoto,DeleteCyyEventPhoto} from ':@/api/index'
 import alert from ':@/components/alert.vue';
 import pageBar from ':@/components/pageBar.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -193,6 +193,7 @@ const LoadPopViewData = async (popViewObj) => {
             switch(childrenView){
                 case "Photo":
                     result = (await GetCompanyPhoto(PhotoObj)).data
+                    console.log(result)
                     status = result.status 
                     if (status == "success") {
                         PhotoObj.TatolNum = result.data[0].Total
@@ -380,6 +381,28 @@ const SavePhoto = async () => {
 }
 //#endregion
 
+//#region 刪除資料
+const DeleteEventPhoto = async (CePhotoId) => {
+    const obj =reactive({CePhotoId:CePhotoId})
+    try{
+        const result = (await DeleteCyyEventPhoto(obj))
+        let status = result.data.status 
+        let msg = result.data.msg 
+        if (status == "success") {
+            store.commit('alertAction', { type: "success", msg: msg })
+            LoadPopViewData(popViewObj)
+        } else {
+            store.commit('alertAction', { type: "fail", msg: '異常問題,刪除失敗' });
+        }
+    }
+    catch(err){
+        let errMsg = err.response.data.msg
+        store.commit('alertAction', { type: "fail", msg: errMsg })
+    }
+}
+//#endregion
+
+
 
 const SelectCompanyPhoto = () =>{
     popViewObj.childrenViewShow = true
@@ -474,7 +497,7 @@ const Return = ()=>{
                         <input type="file" ref="photoInput" style="display: none;" @change="LocalPhoto()" multiple/>
                     </div>
                     <div class="col rightStyle">
-                        <button class="button add" @click="SelectCompanyPhoto('photo')" v-if="EditShow == false  && popViewObj.childrenViewShow == false">
+                        <button class="button add" @click="SelectCompanyPhoto('Photo')" v-if="EditShow == false  && popViewObj.childrenViewShow == false">
                             公司圖片庫選擇
                         </button>
                         <button class="button info" @click="Return" v-if="EditShow == true || popViewObj.childrenViewShow == true" >
@@ -486,8 +509,8 @@ const Return = ()=>{
                     <div class="card" :class="item.MainSeting == `Y`?`mainPhoto`:``" v-for="item in PopViewData" v-if="popViewObj.childrenViewShow == false">
                         <img :src="item.PhotoHref" alt="">
                         <div class="hoverBlock" v-if="item.MainSeting == `N`">
-                            <button class="button safe"  @click="UpdateProductPhotoMain(item.CpdPhotoId)">主圖片</button>
-                            <button class="button clear" @click="DeleteProductPhoto(item.CpdPhotoId)">刪除</button>
+                            <button class="button info"  @click="UpdateProductPhotoMain(item.CePhotoId)">主圖片</button>
+                            <button class="button clear" @click="DeleteEventPhoto(item.CePhotoId)">刪除</button>
                         </div>
                     </div>
                     <div class="card" :class="item.MainSeting == `Y`?`mainPhoto`:``" v-for="item in PopChildrenViewData" v-if="popViewObj.childrenViewShow == true">
@@ -531,7 +554,7 @@ const Return = ()=>{
                     <pageBar v-if="popViewObj.nowView == 'MtlItem'" :sent="MtlItemObj" @change="ReturnMtlItemPage"></pageBar>
                     <pageBar v-if="popViewObj.nowView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
                     <pageBar v-if="popViewObj.nowView == 'ProductPhoto'" :sent="ProductPhotoObj" @change="ReturnProductPhotoPage"></pageBar>
-                    <pageBar v-if="popViewObj.nowView == 'EventPhoto'" :sent="EventPhotoObj" @change="ReturnPhotoPage"></pageBar>
+                    <pageBar v-if="popViewObj.nowView == 'EventPhoto'" :sent="EventPhotoObj" @change="ReturnEventPhotoPage"></pageBar>
                 </div>
                 <div v-if="popViewObj.childrenViewShow == true">
                     <pageBar v-if="popViewObj.childrenView == 'Photo'" :sent="PhotoObj" @change="ReturnPhotoPage"></pageBar>
@@ -714,6 +737,7 @@ td {
     box-shadow: 0px 0px 2px 1px #a7afa7;
     letter-spacing: 5px;
     color: #f0f8ff;
+    /* color: #000f27; */
 }
 .button:hover {
     background-color: #fcffce;

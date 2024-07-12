@@ -5,8 +5,9 @@ import App from './App.vue'
 import router from './router'; //引入router文件 會自動找尋 index.js
 //Vuex -全局状态管理套件
 import store from './store'
-//ElementPlus -框架套件
 import 'jquery/dist/jquery.min.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js'
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const app = createApp(App);

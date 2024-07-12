@@ -86,8 +86,8 @@ function CloseForm() {
 //#endregion
 
 //#region 刪除資料
-const Delete = async (CompanyId) => {
-    const obj =reactive({CompanyId:CompanyId})
+const Delete = async (CwId) => {
+    const obj =reactive({CwId:CwId})
     try{
         const result = (await DeleteCompanyWeb(obj))
         let status = result.data.status 

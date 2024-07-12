@@ -292,6 +292,9 @@ const LoadData = async (type) => {
             store.commit('logoutAction', {status:"S"});
             router.push('/Login');
         }
+        else{
+            store.commit('alertAction', { type: "fail", msg: errMsg });
+        }
     }
 }
 LoadData()

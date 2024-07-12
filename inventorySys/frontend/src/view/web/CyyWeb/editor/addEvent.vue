@@ -17,7 +17,7 @@ function AddForm() {
 async function ReadForm(Id) {
     changePage.value = "返回"
     editShow.value = true
-    formData.Id = Id
+    pageObj.Id = Id
     await LoadData()
     tableData.value.forEach((item)=>{
         formData.CwId = item.CwId
@@ -33,7 +33,7 @@ async function ReadForm(Id) {
 async function EditForm(Id) {
     changePage.value = "返回"
     editShow.value = true
-    formData.Id = Id
+    pageObj.Id = Id
     await LoadData()
     tableData.value.forEach((item)=>{
         formData.CwId = item.CwId
@@ -49,6 +49,7 @@ async function EditForm(Id) {
 function CloseForm() {
     changePage.value = "新增"
     editShow.value = false
+    pageObj.Id = -1
     resetFormData()
     LoadData()
 }
@@ -75,6 +76,7 @@ const tableHead = reactive([
 
 //#region 頁面比數顯示,當前第幾頁
 const pageObj = reactive({
+    Id:-1,
     EventName: "",
     EventDate: "",
     ShowNum: 10,
